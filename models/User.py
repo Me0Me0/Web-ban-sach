@@ -9,12 +9,11 @@ class BaseModel(Model):
        model_metadata_class = ThreadSafeDatabaseMetadata
 
 class User(BaseModel):
-   id=IntegerField(primary_key=True)
+   id=IntegerField()
    username=CharField()
    password=CharField()
    name=CharField()
    dob= DateTimeField()
-   address=CharField()
    phone=IntegerField()
    email=CharField()
    avt_link=CharField()
