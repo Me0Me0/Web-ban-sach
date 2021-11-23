@@ -1,10 +1,11 @@
-from repositories.IRepository import IRepository
 from models.User import User
+from schemas import schema
 
-class UserRepository(IRepository):
+
+class UserRepository():
 
    @classmethod
-   def getAll(cls):
+   def getAll(cls, skip: int = 0, limit: int = 100):
       records = User.select()
       result = []
       for record in records:
@@ -19,11 +20,12 @@ class UserRepository(IRepository):
             "avt_link": record.avt_link
          } 
          result.append(person)
-      return result
+      #return result
+      return list(User.select().offset(skip).limit(limit))
 
 
    @classmethod
-   def getById(cls, id):
+   def getById(cls, id: int):
 
       for record in User.select().where(User.id==id):
          person = {
@@ -37,25 +39,8 @@ class UserRepository(IRepository):
             "avt_link": record.avt_link
          } 
 
-      return person
-
-
-   @classmethod
-   def getUserNameByPassword(cls,pwd) -> str:
-
-      for record in User.select(User.username).where(User.password==pwd):
-         result = record
-
-      return result.username
-
-
-   @classmethod
-   def getAvatarLink(cls,id) -> str:
-
-      for record in User.select(User.avt_link).where(User.id==id):
-         result = record
-
-      return result.avt_link
+      #return person
+      return User.filter(User.id == id).first()
 
 
    @classmethod
@@ -65,22 +50,3 @@ class UserRepository(IRepository):
          result = record
 
       return result.password
-
-
-   @classmethod
-   def getPasswordByUsername(cls,name) -> str:
-
-      for record in User.select(User.password).where(User.username==name):
-         result = record
-
-      return result.password
-
-
-   @classmethod
-   def getAllPassword(cls):
-      result = []
-
-      for record in User.select(User.password):
-         result.append(record.password)
-
-      return result
