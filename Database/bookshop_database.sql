@@ -21,6 +21,9 @@ SET time_zone = "+00:00";
 -- Cơ sở dữ liệu: `bookshop_database`
 --
 
+CREATE DATABASE `BOOKSTORE`;
+USE `BOOKSTORE`;
+
 -- --------------------------------------------------------
 
 --
@@ -991,6 +994,17 @@ CREATE TABLE `user` (
   `avt_link` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Đang đổ dữ liệu cho bảng `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`, `name`, `dob`, `address`, `phone`, `email`, `avt_link`) VALUES
+(1, 'CatLover_2', '123', 'Nguyễn Văn A', '19/11/1997', 'Hồ Chí Minh', '0367854', 'meowmeow123@gmail.com', ''),
+(2, 'HahaBook', 'abc_3', 'Nguyễn Văn B', '9/10/1986', 'Cần Thơ', '0360974', 'haha2@gmail.com', ''),
+(3, 'TheFlaming', 'xma_@5', 'Trần Xuân C', '28/2/1991', 'Hồ Chí Minh', '0367854', 'CooolGuy77@gmail.com', ''),
+(4, 'BookNeet@8', 'kurumi_kawaii', 'Lê Thanh T', '15/7/2003', 'Đà Nẵng', '0367854', 'kurumi3@gmail.com', ''),
+(5, 'DogLover', 'AmXcDc543', 'Trịnh Đình H', '19/5/2001', 'Hà Nội', '0367854', 'wibuforever534@gmail.com', ''),
+(6, 'Fahahashi', '186', 'Nguyễn Văn K', '10/9/1995', 'Đà Nẵng', '0367854', 'fahahashi@gmail.com', '');
 -- --------------------------------------------------------
 
 --
