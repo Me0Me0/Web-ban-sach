@@ -9,6 +9,9 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.exceptions import HTTPException as StarletteHTTPException
+from fastapi.staticfiles import StaticFiles
+
+
 app = FastAPI()
 
 # CORS
@@ -19,6 +22,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+#static files
+app.mount("/public", StaticFiles(directory="public"))
 
 # include controller
 app.include_router(UserController.router)

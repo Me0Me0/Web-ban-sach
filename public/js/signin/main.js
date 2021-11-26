@@ -14,6 +14,7 @@ if (formLogin.attachEvent) {
 }
 
 function onFormsubmit(e) {
+    e.preventDefault();
     var user = inputUsername.value;
     var pass = inputPassword.value;
 

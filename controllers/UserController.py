@@ -6,12 +6,19 @@ from fastapi.responses import Response
 from configs.constant import DUPLICATION_ERROR
 from schemas import schema
 from fastapi.exceptions import HTTPException
+from fastapi.responses import FileResponse
 
 from services.UserService import UserService
 
 
 class UserController:
     router = APIRouter(prefix='/users')
+
+    @staticmethod
+    @router.get('/signin', response_class=FileResponse)
+    def signup():
+        return "./views/signin/index.html"
+        
 
     @staticmethod
     @router.post('/signup')
