@@ -44,9 +44,21 @@ class UserRepository():
 
 
    @classmethod
-   def getPasswordById(cls,id) -> str:
-
-      for record in User.select(User.password).where(User.id==id):
+   def getByUsername(cls,username) -> str:
+      result = None
+      for record in User.select(User.password).where(User.username==username):
          result = record
 
-      return result.password
+      return result
+
+   
+   @classmethod
+   def create(cls, userDict):
+      try:
+         return User.create(**userDict).id
+      except Exception as e:
+         if e.args[0] == 1062:
+            field = "email"
+            if "user.username" in e.args[1]:
+               field = "username"
+            raise Exception(409, { "field": field })

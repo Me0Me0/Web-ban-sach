@@ -9,13 +9,13 @@ class BaseModel(Model):
        model_metadata_class = ThreadSafeDatabaseMetadata
 
 class User(BaseModel):
-   id=IntegerField()
-   username=CharField()
+   id=AutoField()
+   username=CharField(unique=True)
    password=CharField()
    name=CharField()
    dob= DateTimeField()
    phone=IntegerField()
-   email=CharField()
+   email=CharField(unique=True)
    avt_link=CharField()
 
    class Meta:
