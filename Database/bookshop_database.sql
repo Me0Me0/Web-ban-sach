@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 20, 2021 lúc 09:33 AM
+-- Thời gian đã tạo: Th10 27, 2021 lúc 10:52 AM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 8.0.11
 
@@ -20,9 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `bookshop_database`
 --
-
-CREATE DATABASE `BOOKSTORE`;
-USE `BOOKSTORE`;
 
 -- --------------------------------------------------------
 
@@ -824,7 +821,7 @@ CREATE TABLE `order_detail` (
   `id` int(11) NOT NULL,
   `owner` int(11) NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT 'Quy định đang chờ cửa hàng xác nhận là kí tự ‘1’, đang giao hàng là kí tự ‘2’, đã giao thành công là kí tự ‘3’',
-  `total_cost` float UNSIGNED NOT NULL,
+  `toast_cost` float UNSIGNED NOT NULL,
   `recipient_name` varchar(200) NOT NULL,
   `recipient_phone` int(10) NOT NULL,
   `recipient_address` varchar(200) NOT NULL,
@@ -861,7 +858,7 @@ CREATE TABLE `product` (
   `author` varchar(200) NOT NULL,
   `number_of_pages` int(11) NOT NULL,
   `publishing_year` year(4) NOT NULL,
-  `publisher` varchar(200) NOT NULL,
+  `publishing_company` varchar(200) NOT NULL,
   `cover_image` varchar(200) NOT NULL,
   `store_id` int(11) NOT NULL,
   `quantity` int(10) UNSIGNED NOT NULL,
@@ -988,7 +985,6 @@ CREATE TABLE `user` (
   `password` varchar(200) NOT NULL,
   `name` varchar(200) NOT NULL,
   `dob` date DEFAULT NULL,
-  -- `address` varchar(200) NOT NULL,
   `phone` int(10) DEFAULT NULL,
   `email` varchar(200) NOT NULL,
   `avt_link` varchar(200) DEFAULT NULL
@@ -998,13 +994,9 @@ CREATE TABLE `user` (
 -- Đang đổ dữ liệu cho bảng `user`
 --
 
--- INSERT INTO `user` (`id`, `username`, `password`, `name`, `dob`, `address`, `phone`, `email`, `avt_link`) VALUES
--- (1, 'CatLover_2', '123', 'Nguyễn Văn A', '1997-11-09', '0367854', 'meowmeow123@gmail.com', ''),
--- (2, 'HahaBook', 'abc_3', 'Nguyễn Văn B', '1986-10-19', '0360974', 'haha2@gmail.com', ''),
--- (3, 'TheFlaming', 'xma_@5', 'Trần Xuân C', '1991-02-08', '0367854', 'CooolGuy77@gmail.com', ''),
--- (4, 'BookNeet@8', 'kurumi_kawaii', 'Lê Thanh T', '2003-07-15', '0367854', 'kurumi3@gmail.com', ''),
--- (5, 'DogLover', 'AmXcDc543', 'Trịnh Đình H', '2001-05-19', '0367854', 'wibuforever534@gmail.com', ''),
--- (6, 'Fahahashi', '186', 'Nguyễn Văn K', '1995-09-10', '0367854', 'fahahashi@gmail.com', '');
+INSERT INTO `user` (`id`, `username`, `password`, `name`, `dob`, `phone`, `email`, `avt_link`) VALUES
+(34, 'abc', '$2b$10$hHQ8yk6G9xWrooEXY1/Ax.8eq8HjntmjQ9XruqwnZ/Fm.914bcVae', 'Quan', '1999-12-12', 946591640, 'abc@gmail.com', 'https://i.pinimg.com/736x/21/2d/12/212d12e421963f8a66f95aece1182069.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -12415,7 +12407,8 @@ ALTER TABLE `user`
 --
 ALTER TABLE `ward`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `_province_id` (`_province_id`,`_district_id`);
+  ADD KEY `_province_id` (`_province_id`,`_district_id`),
+  ADD KEY `_district_id` (`_district_id`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -12485,7 +12478,7 @@ ALTER TABLE `store`
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT cho bảng `ward`
@@ -12515,6 +12508,12 @@ ALTER TABLE `cart_product`
 --
 ALTER TABLE `contact`
   ADD CONSTRAINT `contact_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+--
+-- Các ràng buộc cho bảng `district`
+--
+ALTER TABLE `district`
+  ADD CONSTRAINT `district_ibfk_1` FOREIGN KEY (`_province_id`) REFERENCES `province` (`id`);
 
 --
 -- Các ràng buộc cho bảng `order_detail`
@@ -12550,6 +12549,13 @@ ALTER TABLE `product_image`
 --
 ALTER TABLE `store`
   ADD CONSTRAINT `store_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `user` (`id`);
+
+--
+-- Các ràng buộc cho bảng `ward`
+--
+ALTER TABLE `ward`
+  ADD CONSTRAINT `ward_ibfk_1` FOREIGN KEY (`_district_id`) REFERENCES `district` (`id`),
+  ADD CONSTRAINT `ward_ibfk_2` FOREIGN KEY (`_province_id`) REFERENCES `province` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
