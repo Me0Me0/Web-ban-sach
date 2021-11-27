@@ -16,9 +16,13 @@ class UserController:
 
     @staticmethod
     @router.get('/signin', response_class=FileResponse)
-    def signup():
+    def signin():
         return "./views/signin/index.html"
-        
+
+    @staticmethod
+    @router.get('/signup', response_class=FileResponse) 
+    def signup():
+        return "./views/signup/index.html"
 
     @staticmethod
     @router.post('/signup')
