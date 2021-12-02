@@ -1,7 +1,11 @@
 from peewee import *
-from models import BaseModel, User, Province, District, Ward
+from models.BModel import BModel
+from models.User import User
+from models.Province import Province
+from models.District import District
+from models.Ward import Ward
 
-class OrderDetail(BaseModel):
+class OrderDetail(BModel):
    id=IntegerField()
    owner=ForeignKeyField(User, field="id")
 

@@ -1,7 +1,8 @@
 from peewee import *
-from models import BaseModel, User
+from models.BModel import BModel
+from models.User import User
 
-class Contact(BaseModel):
+class Contact(BModel):
    id=AutoField()
    user_id=ForeignKeyField(User, field="id")
    create=DateTimeField()

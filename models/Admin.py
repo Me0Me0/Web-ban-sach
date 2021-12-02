@@ -1,8 +1,8 @@
 from peewee import *
-from models import BaseModel
+from models.BModel import BModel
 
 
-class Admin(BaseModel):
+class Admin(BModel):
    id=AutoField()
    username=CharField(unique=True)
    password=CharField()

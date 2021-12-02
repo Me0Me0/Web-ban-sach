@@ -1,6 +1,9 @@
 from peewee import *
-from models import BaseModel, Cart, Product
-class CartProduct(BaseModel):
+from models.BModel import BModel
+from models.Cart import Cart
+from models.Product import Product
+
+class CartProduct(BModel):
    cart_id=ForeignKeyField(Cart, field="id")
    product_id=ForeignKeyField(Product, field="id")
    quantity=IntegerField(index = True)

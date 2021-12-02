@@ -1,7 +1,8 @@
 from peewee import *
-from models import BaseModel, User
+from models.BModel import BModel
+from models.User import User
 
-class Cart(BaseModel):
+class Cart(BModel):
    id=AutoField()
    owner=ForeignKeyField(User, field="id")
 

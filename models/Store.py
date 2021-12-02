@@ -1,7 +1,8 @@
 from peewee import *
-from models import BaseModel, User
+from models.BModel import BModel
+from models.User import User
 
-class Store(BaseModel):
+class Store(BModel):
     id=AutoField()
     name=CharField()
     owner=ForeignKeyField(User, field="id")

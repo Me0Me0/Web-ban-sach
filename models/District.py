@@ -1,7 +1,7 @@
 from peewee import *
-from models import BaseModel
+from models.BModel import BModel
 
-class District(BaseModel):
+class District(BModel):
    id=AutoField()
    name=CharField()
    prefix=CharField()

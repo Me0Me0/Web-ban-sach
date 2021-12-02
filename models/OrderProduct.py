@@ -1,7 +1,9 @@
 from peewee import *
-from models import BaseModel, OrderDetail, Product
+from models.BModel import BModel
+from models.OrderDetail import OrderDetail
+from models.Product import Product
 
-class OrderProduct(BaseModel):
+class OrderProduct(BModel):
    order_id=ForeignKeyField(OrderDetail, field="id")
    product_id=ForeignKeyField(Product, field="id")
    quantity=IntegerField()

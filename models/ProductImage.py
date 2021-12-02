@@ -1,7 +1,8 @@
 from peewee import *
-from models import BaseModel, Product
+from models.BModel import BModel
+from models.Product import Product
 
-class ProductImage(BaseModel):
+class ProductImage(BModel):
     id=ForeignKeyField(Product, field="id")
     image_link=CharField()
 

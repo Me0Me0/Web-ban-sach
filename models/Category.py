@@ -1,7 +1,7 @@
 from peewee import *
-from models import BaseModel
+from models.BModel import BModel
 
-class Cartegory(BaseModel):
+class Category(BModel):
    id=AutoField()
    name=CharField()
 

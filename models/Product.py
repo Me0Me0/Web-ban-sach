@@ -1,7 +1,9 @@
 from peewee import *
-from models import BaseModel, Category, Store
+from models.BModel import BModel
+from models.Category import Category
+from models.Store import Store
 
-class Product(BaseModel):
+class Product(BModel):
 
     id=AutoField()
     name=CharField()
