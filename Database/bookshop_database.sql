@@ -865,7 +865,7 @@ CREATE TABLE `product` (
   `cover_image` varchar(200) NOT NULL,
   `store_id` int(11) NOT NULL,
   `quantity` int(10) UNSIGNED NOT NULL,
-  `price` int(10) UNSIGNED NOT NULL
+  `price` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
