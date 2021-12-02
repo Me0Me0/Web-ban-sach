@@ -11,32 +11,6 @@ class UserRepository():
 
    @classmethod
    def getById(cls, id: int):
-<<<<<<< Updated upstream
-
-      for record in User.select().where(User.id==id):
-         person = {
-            "id": record.id,
-            "username": record.username,
-            "password": record.password,
-            "name": record.name.encode(),
-            "dob": record.dob,
-            "phone": record.phone,
-            "email": record.email,
-            "avt_link": record.avt_link
-         } 
-
-      #return person
-      return User.filter(User.id == id).first()
-
-
-   @classmethod
-   def getPasswordById(cls,id) -> str:
-
-      for record in User.select(User.password).where(User.id==id):
-         result = record
-
-      return result.password
-=======
       return list(User.select().where(User.id == id))
 
    
@@ -104,5 +78,3 @@ class UserRepository():
 
       update_user.avt_link = link
       return update_user.save()
-
->>>>>>> Stashed changes

@@ -2,7 +2,7 @@ from contextvars import ContextVar
 from fastapi import Depends
 import peewee
 
-DATABASE_NAME = "bookstore"
+DATABASE_NAME = "BOOKSTORE"
 USER_NAME = "root"
 PASSWORD = "Panzer_7"
 HOST = "localhost"
