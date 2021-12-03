@@ -15,6 +15,15 @@ class UserRepository():
 
    
    @classmethod
+   def getByUsername(cls,username) -> str:
+      result = None
+      for record in User.select(User.password).where(User.username==username):
+         result = record
+
+      return result
+
+
+   @classmethod
    def create(cls, userDict):
       try:
          return User.create(**userDict).id
