@@ -11,13 +11,26 @@ class UserRepository():
 
    @classmethod
    def getById(cls, id: int):
-      return list(User.select().where(User.id == id))
+      result = None
+      for record in User.select().where(User.id == id):
+         result = record
 
+      return result
    
+
    @classmethod
    def getByUsername(cls,username) -> str:
       result = None
-      for record in User.select(User.password).where(User.username==username):
+      for record in User.select().where(User.username==username):
+         result = record
+
+      return result
+
+   
+   @classmethod
+   def getByEmail(cls,username) -> str:
+      result = None
+      for record in User.select().where(User.email==email):
          result = record
 
       return result
