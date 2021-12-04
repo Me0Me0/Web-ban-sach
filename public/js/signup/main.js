@@ -12,7 +12,6 @@ var inputPhonenumber = document.getElementById('phone');
 
 var signUpForm = document.getElementById('signupform');
 
-var letters = /^[A-Za-z]+$/;
 var expression = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])/;
 
 if (signUpForm.attachEvent) {
@@ -50,10 +49,6 @@ async function onFormsubmit(e) {
   else if(name==''){
     alert('Vui lòng nhập họ tên');
   }
-  else if(!letters.test(name))
-	{
-		alert('Họ và tên chỉ sử dụng ký tự alphabet');
-	}
   else if(dob==''){
     alert('Vui lòng chọn ngày tháng năm sinh');
   }
@@ -63,9 +58,40 @@ async function onFormsubmit(e) {
   else if(phone==''){
     alert('Vui lòng nhập số điện thoại');
   }
-
-  
-  
+  else
+  {
+    const options = {
+      method: "POST",
+      headers: {
+          "content-type": "application/json"
+      },
+      body: JSON.stringify({
+          username: user,
+          password: pass,
+          name: name,
+          dob: dob,
+          phone: phone,
+          email: email
+      })
+    }
+    fetch("/users/signup", options)
+    .then(data => data.json())
+    .then(data =>  { 
+      console.log(data);
+      if(data.data&&data.data.id)
+      {
+        alert("Tạo tài khoản thành công"); 
+      } 
+      else
+      {
+        alert("Tên tài khoản đã tồn tại, vui lòng thử tên khác");
+      }
+    })
+    .catch((err) => {
+      alert ("Đã xảy ra lỗi, vui lòng thử lại sau");
+      console.error(err);
+    })
+  }
 }
 
 sign_up_btn.addEventListener("click", () => {

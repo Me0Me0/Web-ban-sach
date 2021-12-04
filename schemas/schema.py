@@ -17,7 +17,7 @@ class PeeweeGetterDict(GetterDict):
 
 
 class UserCreate(BaseModel):
-    username: str
+    username: constr(min_length=5)
     password: constr(min_length=8)
     name: str
     dob: date
@@ -39,7 +39,6 @@ class User(BaseModel):
     # address= str
     phone: int
     email: str
-    avt_link: str
     
     class Config:
         orm_mode = True

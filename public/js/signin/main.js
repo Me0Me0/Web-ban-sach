@@ -1,11 +1,7 @@
-﻿var CORRECT_USER = 'user';
-var CORRECT_PASS = 'pass';
-var check = true;
-
-var inputUsername = document.getElementById('loginusername');
+﻿var inputUsername = document.getElementById('loginusername');
 var inputPassword = document.getElementById('loginpassword');
 
-var formLogin = document.getElementById('loginform');
+var formLogin = document.getElementById('signinform');
 
 if (formLogin.attachEvent) {
     formLogin.attachEvent('submit', onFormsubmit);
@@ -18,15 +14,6 @@ async function onFormsubmit(e) {
     var user = inputUsername.value;
     var pass = inputPassword.value;
 
-    if (pass.length < 8) {
-        alert('Mật khẩu phải có ít nhất 8 kí tự');
-    }
-
-    // if (user == CORRECT_USER && pass == CORRECT_PASS) {
-    //     alert('Đăng nhập thành công');
-    // } else {
-    //     alert('Tài khoản hoặc mật khẩu không đúng');
-    // }
     const options = {
         method: "POST",
         headers: {

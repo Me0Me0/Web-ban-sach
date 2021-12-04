@@ -28,7 +28,7 @@ class UserRepository():
 
    
    @classmethod
-   def getByEmail(cls,username) -> str:
+   def getByEmail(cls,email) -> str:
       result = None
       for record in User.select().where(User.email==email):
          result = record
