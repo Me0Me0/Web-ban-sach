@@ -2,8 +2,8 @@
 var CORRECT_PASS = 'pass';
 var check = true;
 
-var inputUsername = document.getElementById('username');
-var inputPassword = document.getElementById('password');
+var inputUsername = document.getElementById('loginusername');
+var inputPassword = document.getElementById('loginpassword');
 
 var formLogin = document.getElementById('loginform');
 
@@ -49,15 +49,4 @@ async function onFormsubmit(e) {
     } else {
         alert('Đã xảy ra lỗi, vui lòng thử lại sau');
     }
-}
-
-function showHidden() {
-    if (check) {
-        inputPassword.type = 'text';
-        check = false;
-    } else {
-        inputPassword.type = 'password';
-        check = true
-    }
-
 }
