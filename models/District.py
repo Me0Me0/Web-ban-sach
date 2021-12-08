@@ -3,9 +3,9 @@ from models.BModel import BModel
 
 class District(BModel):
    id=AutoField()
-   name=CharField()
-   prefix=CharField()
-   province_id=IntegerField(index = True)
+   _name=CharField()
+   _prefix=CharField()
+   _province_id=IntegerField(index = True)
 
 
    class Meta:

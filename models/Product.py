@@ -7,7 +7,7 @@ class Product(BModel):
 
     id=AutoField()
     name=CharField()
-    cate_id=ForeignKeyField(Category, field="id")
+    cate_id=ForeignKeyField(Category)
     rating=FloatField()
     description=TextField()
     detail=TextField()
@@ -16,7 +16,7 @@ class Product(BModel):
     publishing_year=DateField()
     publisher=CharField()
     cover_image=CharField()
-    store_id=ForeignKeyField(Store, field="id")
+    store_id=ForeignKeyField(Store)
     quantity=IntegerField()
     price=FloatField()
 

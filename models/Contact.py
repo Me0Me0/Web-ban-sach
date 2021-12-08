@@ -4,7 +4,7 @@ from models.User import User
 
 class Contact(BModel):
    id=AutoField()
-   user_id=ForeignKeyField(User, field="id")
+   user_id=ForeignKeyField(User)
    create=DateTimeField()
    title=CharField()
    content=TextField()

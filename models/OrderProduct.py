@@ -4,8 +4,8 @@ from models.OrderDetail import OrderDetail
 from models.Product import Product
 
 class OrderProduct(BModel):
-   order_id=ForeignKeyField(OrderDetail, field="id")
-   product_id=ForeignKeyField(Product, field="id")
+   order_id=ForeignKeyField(OrderDetail)
+   product_id=ForeignKeyField(Product)
    quantity=IntegerField()
 
    class Meta:
