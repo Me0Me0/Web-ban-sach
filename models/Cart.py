@@ -4,7 +4,7 @@ from models.User import User
 
 class Cart(BModel):
    id=AutoField()
-   owner=ForeignKeyField(User, field="id")
+   owner_id=ForeignKeyField(User)
 
    class Meta:
       db_table='cart'

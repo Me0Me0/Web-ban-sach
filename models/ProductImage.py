@@ -3,7 +3,7 @@ from models.BModel import BModel
 from models.Product import Product
 
 class ProductImage(BModel):
-    id=ForeignKeyField(Product, field="id")
+    id=ForeignKeyField(Product)
     image_link=CharField()
 
     class Meta:

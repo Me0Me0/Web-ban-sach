@@ -6,8 +6,8 @@ from models.District import District
 from models.Ward import Ward
 
 class OrderDetail(BModel):
-   id=IntegerField()
-   owner=ForeignKeyField(User, field="id")
+   id=AutoField()
+   owner_id=ForeignKeyField(User)
 
    status=IntegerField()
    total_cost=FloatField()
@@ -16,9 +16,9 @@ class OrderDetail(BModel):
    recipient_phone=IntegerField()
    recipient_address=CharField()
    
-   province_id=ForeignKeyField(Province, field="id")
-   district_id=ForeignKeyField(District, field="id")
-   ward_id=ForeignKeyField(Ward, field="id")
+   province_id=ForeignKeyField(Province)
+   district_id=ForeignKeyField(District)
+   ward_id=ForeignKeyField(Ward)
 
 
    class Meta:

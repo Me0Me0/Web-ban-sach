@@ -3,14 +3,14 @@ import jwt
 
 from datetime import datetime
 from repositories.UserRepository import UserRepository
-from schemas import schema
+from schemas import schema, user_schema
 from configs.constant import DEFAULT_AVT, JWT_SECRET
 
 
 class UserService:
 
     @classmethod
-    def signup(cls, payload: schema.UserCreate):
+    def signup(cls, payload: user_schema.UserCreate):
         userDict = payload.__dict__
         userDict['avt_link'] = DEFAULT_AVT
 
@@ -23,7 +23,7 @@ class UserService:
 
 
     @classmethod
-    def signin(cls, payload: schema.UserLogin):
+    def signin(cls, payload: user_schema.UserLogin):
         userDict = payload.__dict__
 
         # check username & password existence

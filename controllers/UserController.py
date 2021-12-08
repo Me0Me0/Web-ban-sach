@@ -4,7 +4,7 @@ from fastapi import APIRouter
 from fastapi.params import Query
 from fastapi.responses import Response
 from configs.constant import DUPLICATION_ERROR
-from schemas import schema
+from schemas import user_schema
 from fastapi.exceptions import HTTPException
 from fastapi.responses import FileResponse
 
@@ -26,7 +26,7 @@ class UserController:
 
     @staticmethod
     @router.post('/signup')
-    def signup(payload: schema.UserCreate):
+    def signup(payload: user_schema.UserCreate):
         try:
             id = UserService.signup(payload)
         except Exception as e:
@@ -42,7 +42,7 @@ class UserController:
 
     @staticmethod
     @router.post('/signin')
-    def signin(payload: schema.UserLogin, response: Response):
+    def signin(payload: user_schema.UserLogin, response: Response):
         token = UserService.signin(payload)
         if not token:
             raise HTTPException(401, detail="Unauthorized")
@@ -55,6 +55,6 @@ class UserController:
         }
 
     @staticmethod
-    @router.get('', response_model=List[schema.User])
+    @router.get('', response_model=List[user_schema.User])
     def getAll(limit: int = Query(10, gt=0), skip: int =Query(0, ge=0)):
         return UserService.getAll(skip, limit)
