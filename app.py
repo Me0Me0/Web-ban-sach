@@ -11,6 +11,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from fastapi.staticfiles import StaticFiles
 
+import sentry_sdk
+from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
 
 
 app = FastAPI()
@@ -23,6 +25,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 #static files
 app.mount("/public", StaticFiles(directory="public"))
@@ -47,3 +50,11 @@ async def http_exception_handler(request, exc):
 # @app.exception_handler(RequestValidationError)
 # async def validation_exception_handler(request, exc):
 #     return PlainTextResponse(str(exc), status_code=400)
+@app.on_event("startup")
+async def startup_event():
+    sentry_sdk.init(
+        dsn=configs.constant.SENTRY_DSN,
+        environment=configs.constant.SENTRY_ENV
+    )
+    app.add_middleware(SentryAsgiMiddleware)
+
