@@ -22,7 +22,6 @@ class UserLogin(BaseModel):
 class User(BaseModel):
     id: int
     username: str
-    password: str
     name: str
     dob: date
     phone: int

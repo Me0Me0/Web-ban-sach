@@ -53,6 +53,10 @@ class UserService:
     def getAll(cls, skip, limit):
         return UserRepository.getAll(skip, limit)
 
+    @classmethod
+    def getById(cls, id):
+        return UserRepository.getById(id)
+
 
     @classmethod
     def forgetPassword(cls, email):
