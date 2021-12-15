@@ -19,6 +19,13 @@ class UserLogin(BaseModel):
     password: constr(min_length=8)
 
 
+class UserUpdate(BaseModel):
+    name: str
+    dob: date
+    phone: int
+    email: EmailStr
+
+
 class User(BaseModel):
     id: int
     username: str

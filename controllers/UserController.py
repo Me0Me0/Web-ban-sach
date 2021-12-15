@@ -5,7 +5,8 @@ from fastapi.params import Depends, Query
 from fastapi.responses import Response
 import configs
 
-from configs.constant import DUPLICATION_ERROR
+from configs.constant import DUPLICATION_ERROR, NOT_FOUND_ERROR
+from configs.dependency import getUser
 from schemas import user_schema
 from fastapi.exceptions import HTTPException
 from fastapi.responses import FileResponse
@@ -16,15 +17,18 @@ from services.UserService import UserService
 class UserController:
     router = APIRouter(prefix='/users')
 
+
     @staticmethod
     @router.get('/signin', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
     def signin():
         return "./views/signin/index.html"
 
+
     @staticmethod
     @router.get('/signup', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)]) 
     def signup():
         return "./views/signup/index.html"
+
 
     @staticmethod
     @router.post('/signup', dependencies=[Depends(configs.db.get_db)])
@@ -42,6 +46,7 @@ class UserController:
             }
         }
 
+
     @staticmethod
     @router.post('/signin', dependencies=[Depends(configs.db.get_db)])
     def signin(payload: user_schema.UserLogin, response: Response):
@@ -56,18 +61,21 @@ class UserController:
             }
         }
 
+
     @staticmethod
     @router.get('', response_model=List[user_schema.User],dependencies=[Depends(configs.db.get_db)])
     def getAll(limit: int = Query(10, gt=0), skip: int =Query(0, ge=0)):
         return UserService.getAll(skip, limit)
 
+
     @staticmethod
     @router.get('/details', response_model=user_schema.User,dependencies=[Depends(configs.db.get_db)])
-    def getDetail():
-        user = UserService.getById(id)
+    def getDetail(currentUser = Depends(getUser)):
+        user = UserService.getById(currentUser['id'])
         if not user:
             raise HTTPException(404, detail="User not found")
         return user
+
 
     @staticmethod
     @router.get('/{id}', response_model=user_schema.User,dependencies=[Depends(configs.db.get_db)])
@@ -76,6 +84,23 @@ class UserController:
         if not user:
             raise HTTPException(404, detail="User not found")
         return user
+
+    
+    @staticmethod
+    @router.put('/details', dependencies=[Depends(configs.db.get_db)])
+    def update(payload: user_schema.UserUpdate, currentUser = Depends(getUser)):
+        try:
+            UserService.update(currentUser['id'], payload)
+        except Exception as e:
+            if e.args[0] == NOT_FOUND_ERROR:
+                raise HTTPException(404, detail=e.args[1])
+            raise Exception(e)
+            
+        return {
+            "data": {
+                "success": True
+            }
+        }
 
 
     

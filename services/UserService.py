@@ -3,7 +3,7 @@ import jwt
 
 from datetime import datetime
 from repositories.UserRepository import UserRepository
-from schemas import schema, user_schema
+from schemas import user_schema
 from configs.constant import DEFAULT_AVT, JWT_SECRET
 
 
@@ -41,42 +41,20 @@ class UserService:
 
         return token
 
-    # @classmethod
-    # def getById(cls, id):
-    #     user = UserRepository.getById(id)
-    #     if not user:
-    #         return None
-    #     else:
-    #         return user
 
     @classmethod
     def getAll(cls, skip, limit):
         return UserRepository.getAll(skip, limit)
 
+
     @classmethod
     def getById(cls, id):
         return UserRepository.getById(id)
 
-
+    
     @classmethod
-    def forgetPassword(cls, email):
-        user = UserRepository.getByEmail(email)
-        if not user:
-            return None
-        
-        # generate jwt token
-        jwtPayload = {
-            "id": user.id,
-            "exp": int(datetime.now().timestamp()) + 24 * 60 * 60
-        }
-        token = jwt.encode(jwtPayload, JWT_SECRET)
-        # Send email
-        return token
+    def update(cls, id, payload):
+        return UserRepository.update(id, payload.__dict__)
 
 
-    @classmethod
-    def resetPassword(cls, token):
-        pass
-
-
-       
+    
