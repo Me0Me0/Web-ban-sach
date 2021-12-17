@@ -38,3 +38,9 @@ class User(BaseModel):
     class Config:
         orm_mode = True
         getter_dict = PeeweeGetterDict
+
+class forgetPassword(BaseModel):
+    username: str
+
+class resetPassword(BaseModel):
+    password: str

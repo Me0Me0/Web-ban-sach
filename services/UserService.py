@@ -56,5 +56,26 @@ class UserService:
     def update(cls, id, payload):
         return UserRepository.update(id, payload.__dict__)
 
+    @classmethod
+    def getByUsername(cls, payload):
+        return UserRepository.getByUsername(payload.username)
 
-    
+    @classmethod
+    def forgetPassword(cls, payload: user_schema.forgetPassword):
+        # check username existence
+        user = UserRepository.getByUsername(payload.username)
+        if not user:
+            return None
+
+        # generate jwt token
+        jwtPayload = {
+            "id": user.id,
+            "exp": int(datetime.now().timestamp()) + 60
+        }
+        token = jwt.encode(jwtPayload, JWT_SECRET)
+        return [user.email,user.name,token]
+
+    @classmethod
+    def resetPassword(cls, token_id, password):
+        user_id = jwt.decode(token_id, JWT_SECRET, algorithms=["HS256"])
+        return UserRepository.updatePassword(user_id['id'], password)
