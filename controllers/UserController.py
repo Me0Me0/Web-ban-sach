@@ -1,4 +1,3 @@
-
 from typing import List
 from fastapi import APIRouter
 from fastapi.params import Depends, Query
@@ -12,7 +11,7 @@ from fastapi.exceptions import HTTPException
 from fastapi.responses import FileResponse
 
 from services.UserService import UserService
-
+from services.EmailService import EmailService
 
 class UserController:
     router = APIRouter(prefix='/users')
@@ -103,6 +102,38 @@ class UserController:
         }
 
 
-    
+    @staticmethod
+    @router.post('/forgot-password')
+    def forgetPassword(payload: user_schema.forgetPassword):
+        try:
+            user_email,user_name,token = UserService.forgetPassword(payload)
+        except Exception as e:
+            if e.args[0] == NOT_FOUND_ERROR:
+                raise HTTPException(404, detail=e.args[1])
+            raise Exception(e)
 
+        response = EmailService.sendEmail(user_email, user_name, token)
 
+        return {
+            "data":{
+                "status_code: " + str(response[0]),
+                "message: " + str(response[1])
+            }
+        }
+        
+
+    @staticmethod
+    @router.post('/forgot-password/{token}')
+    def resetPassword(token: str, payload: user_schema.resetPassword):
+        try:
+            UserService.resetPassword(token, payload.password)
+        except Exception as e:
+            if e.args[0] == NOT_FOUND_ERROR:
+                raise HTTPException(404, detail=e.args[1])
+            raise Exception(e)
+        
+        return {
+            "data": {
+                "success": True
+            }
+        }
