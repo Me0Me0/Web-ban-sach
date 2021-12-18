@@ -126,7 +126,7 @@ class UserController:
     @router.post('/forgot-password/{token}')
     def resetPassword(token: str, payload: user_schema.resetPassword):
         try:
-            UserService.resetPassword(token, payload)
+            UserService.resetPassword(token, payload.password)
         except Exception as e:
             if e.args[0] == NOT_FOUND_ERROR:
                 raise HTTPException(404, detail=e.args[1])
