@@ -1,4 +1,6 @@
 from peewee import *
+from peewee import datetime
+from datetime import timedelta
 from models.Product import Product
 from models.Store import Store
 from models.Category import Category
@@ -11,6 +13,11 @@ class ProductRepository():
    @classmethod
    def getAll(cls, skip: int = 0, limit: int = 100):
       return list(Product.select().offset(skip).limit(limit))
+
+
+   @classmethod
+   def getDeletedProduct(cls, skip: int = 0, limit: int = 100):
+      return list(Product.select().where(Product.deleted_at.is_null(False)).offset(skip).limit(limit))
 
 
    @classmethod
@@ -70,4 +77,20 @@ class ProductRepository():
       except:
          raise Exception(404, { "DELETE ERROR": "Can not find product with given id" })
 
-      return delete_product.delete_instance()
+      delete_product.deleted_at = datetime.datetime.now().date()
+
+      return delete_product.save()
+
+
+   @classmethod
+   def deleteByStoreId(cls, id: int):
+      count = Product.update({Product.deleted_at: datetime.datetime.now().date()}).where(Product.store_id == id).execute()
+      return count
+
+
+   # Delete from DB, only Admin use this method
+   @classmethod
+   def deleteFromDB(cls,max_day: int = 30):
+      query = Product.delete().where(Product.deleted_at <= datetime.datetime.now().date() - timedelta(days=max_day))
+
+      return query.execute()

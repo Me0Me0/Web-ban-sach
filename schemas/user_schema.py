@@ -31,4 +31,18 @@ class User(BaseModel):
     
     class Config:
         orm_mode = True
+<<<<<<< Updated upstream
         getter_dict = PeeweeGetterDict
+=======
+        getter_dict = PeeweeGetterDict
+
+
+class UserDeleted(User):
+    deleted_at: date
+
+class forgetPassword(BaseModel):
+    username: str
+
+class resetPassword(BaseModel):
+    password: str
+>>>>>>> Stashed changes

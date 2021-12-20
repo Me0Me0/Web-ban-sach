@@ -1,5 +1,8 @@
 from peewee import *
+from peewee import datetime
+from datetime import timedelta
 from models.User import User
+from repositories.StoreRepository import StoreRepository
 
 
 class UserRepository():
@@ -7,6 +10,11 @@ class UserRepository():
    @classmethod
    def getAll(cls, skip: int = 0, limit: int = 100):
       return list(User.select().offset(skip).limit(limit))
+
+
+   @classmethod
+   def getDeletedUser(cls, skip: int = 0, limit: int = 100):
+      return list(User.select().where(User.deleted_at.is_null(False)).offset(skip).limit(limit))
 
 
    @classmethod
@@ -48,6 +56,7 @@ class UserRepository():
             raise Exception(409, { "field": field })
 
 
+   # update delete date
    @classmethod
    def deleteById(cls, id: int):
       try:
@@ -55,7 +64,23 @@ class UserRepository():
       except:
          raise Exception(404, { "DELETE ERROR": "Can not find user with given id" })
 
-      return delete_user.delete_instance()
+      if (delete_user.deleted_at != None):
+         return 0
+
+      delete_user.deleted_at = datetime.datetime.now().date()
+      StoreRepository.deleteByUserId(delete_user.id)
+
+      return delete_user.save()
+
+
+   # Delete from DB, only Admin use this method
+   @classmethod
+   def deleteFromDB(cls, max_day: int = 30):
+      StoreRepository.deleteFromDB()
+      query = User.delete().where(User.deleted_at <= datetime.datetime.now().date() - timedelta(days=max_day))
+
+      return query.execute()
+
 
 
    @classmethod

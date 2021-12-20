@@ -10,6 +10,7 @@ class Store(BModel):
     email=CharField()
     rating=FloatField()
     description=TextField()
+    deleted_at=DateField()
 
     class Meta:
        db_table='store'

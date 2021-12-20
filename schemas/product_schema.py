@@ -10,7 +10,7 @@ class Product(BaseModel):
     id: int
     name: str
     cate_id: Category = Field(None)
-    rating: float
+    #rating: float
     description: str
     detail: str
     author: str
