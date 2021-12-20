@@ -6,10 +6,11 @@ class User(BModel):
    username=CharField(unique=True)
    password=CharField()
    name=CharField()
-   dob= DateTimeField()
+   dob= DateField()
    phone=IntegerField()
    email=CharField(unique=True)
    avt_link=CharField()
+   deleted_at= DateField()
 
    class Meta:
       db_table='user'

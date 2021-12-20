@@ -19,6 +19,7 @@ class Product(BModel):
     store_id=ForeignKeyField(Store)
     quantity=IntegerField()
     price=FloatField()
+    deleted_at= DateField()
 
     class Meta:
        db_table='product'
