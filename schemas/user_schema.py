@@ -19,10 +19,16 @@ class UserLogin(BaseModel):
     password: constr(min_length=8)
 
 
+class UserUpdate(BaseModel):
+    name: str
+    dob: date
+    phone: int
+    email: EmailStr
+
+
 class User(BaseModel):
     id: int
     username: str
-    password: str
     name: str
     dob: date
     phone: int
@@ -31,9 +37,6 @@ class User(BaseModel):
     
     class Config:
         orm_mode = True
-<<<<<<< Updated upstream
-        getter_dict = PeeweeGetterDict
-=======
         getter_dict = PeeweeGetterDict
 
 
@@ -45,4 +48,4 @@ class forgetPassword(BaseModel):
 
 class resetPassword(BaseModel):
     password: str
->>>>>>> Stashed changes
+

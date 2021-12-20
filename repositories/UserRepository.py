@@ -95,33 +95,37 @@ class UserRepository():
 
 
    @classmethod
-   def updateUsername(cls, id: int, usrname: str):
+   def update(cls, id: int, userDict):
       try:
          update_user = User.get_by_id(id)
       except:
          raise Exception(404, { "UPDATE ERROR": "Can not find user with given id" })
 
-      update_user.username = usrname
+      update_user.name = userDict["name"]
+      update_user.email = userDict["email"]
+      update_user.dob = userDict["dob"]
+      update_user.phone = userDict["phone"]
+      
       return update_user.save()
 
 
-   @classmethod
-   def updatePhone(cls, id: int, number: int):
-      try:
-         update_user = User.get_by_id(id)
-      except:
-         raise Exception(404, { "UPDATE ERROR": "Can not find user with given id" })
+   # @classmethod
+   # def updatePhone(cls, id: int, number: int):
+   #    try:
+   #       update_user = User.get_by_id(id)
+   #    except:
+   #       raise Exception(404, { "UPDATE ERROR": "Can not find user with given id" })
 
-      update_user.phone = number
-      return update_user.save()
+   #    update_user.phone = number
+   #    return update_user.save()
 
 
-   @classmethod
-   def updateAvatar(cls, id: int, link: str):
-      try:
-         update_user = User.get_by_id(id)
-      except:
-         raise Exception(404, { "UPDATE ERROR": "Can not find user with given id" })
+   # @classmethod
+   # def updateAvatar(cls, id: int, link: str):
+   #    try:
+   #       update_user = User.get_by_id(id)
+   #    except:
+   #       raise Exception(404, { "UPDATE ERROR": "Can not find user with given id" })
 
-      update_user.avt_link = link
-      return update_user.save()
+   #    update_user.avt_link = link
+   #    return update_user.save()
