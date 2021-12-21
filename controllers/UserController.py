@@ -20,13 +20,13 @@ class UserController:
     @staticmethod
     @router.get('/signin', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
     def signin():
-        return "./views/signin/index.html"
+        return "./views/signin/signin.html"
 
 
     @staticmethod
     @router.get('/signup', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)]) 
     def signup():
-        return "./views/signup/index.html"
+        return "./views/signup/signup.html"
 
 
     @staticmethod
