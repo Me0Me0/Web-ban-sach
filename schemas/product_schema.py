@@ -5,7 +5,6 @@ from schemas.store_schema import Store
 from pydantic import BaseModel, Field
 from datetime import date
 
-
 class Product(BaseModel):
     id: int
     name: str
@@ -27,5 +26,38 @@ class Product(BaseModel):
         getter_dict = PeeweeGetterDict
 
 
+class ProductCreate(BaseModel):
+    name: str
+    category: str
+    #cate_id: Category = Field(None)
+    rating: float
+    description: str
+    detail: str
+    author: str
+    number_of_pages: int
+    publishing_year: date
+    publisher: str
+    #cover_image: str
+    quantity: int
+    price: float
+
+
+class ProductUpdate(BaseModel):
+    name: str
+    category: str
+    #cate_id: Category = Field(None)
+    rating: float
+    description: str
+    detail: str
+    author: str
+    number_of_pages: int
+    publishing_year: date
+    publisher: str
+    cover_image: str
+    quantity: int
+    price: float
+
+
 class ProductSell(Product):
     sum: int
+    

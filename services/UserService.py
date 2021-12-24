@@ -4,6 +4,7 @@ import jwt
 from datetime import datetime
 from repositories.UserRepository import UserRepository
 from schemas import user_schema
+from fastapi.exceptions import HTTPException
 from configs.constant import DEFAULT_AVT, JWT_SECRET
 
 
@@ -77,5 +78,8 @@ class UserService:
 
     @classmethod
     def resetPassword(cls, token_id, password):
-        user_id = jwt.decode(token_id, JWT_SECRET, algorithms=["HS256"])
+        try:
+            user_id = jwt.decode(token_id, JWT_SECRET, algorithms=["HS256"])
+        except:
+            raise HTTPException(406, detail="Khong decode duoc!")
         return UserRepository.updatePassword(user_id['id'], password)

@@ -48,7 +48,7 @@ class ProductRepository():
       
 
    @classmethod
-   def create(cls, store_id: int, category: str, productDict):
+   def create(cls, store_id: int, productDict):#category: str, productDict):
        try:
            store = Store.get_by_id(store_id)
        except:
@@ -56,7 +56,8 @@ class ProductRepository():
 
 
        try:
-           cate = Category.get(Category.name == category)
+           cate = Category.get(Category.name == productDict['category'])
+           #cate = Category.get(Category.name == category)
        except:
            raise Exception(404, { "ERROR": "Category does not exist" })
 

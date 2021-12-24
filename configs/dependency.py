@@ -10,3 +10,11 @@ def getUser(req: Request):
     except:
         raise HTTPException(status_code=401, detail='Unauthorized')
     return currentUser
+
+
+def getStore(req: Request):
+    try:
+        currentStore = jwt.decode(req.cookies.get('token', ''), JWT_SECRET, algorithms=['HS256'])
+    except:
+        raise HTTPException(status_code=401, detail='Unauthorized')
+    return currentStore
