@@ -3,14 +3,14 @@ import jwt
 
 from datetime import datetime
 from repositories.UserRepository import UserRepository
-from schemas import schema
+from schemas import user_schema
 from configs.constant import DEFAULT_AVT, JWT_SECRET
 
 
 class UserService:
 
     @classmethod
-    def signup(cls, payload: schema.UserCreate):
+    def signup(cls, payload: user_schema.UserCreate):
         userDict = payload.__dict__
         userDict['avt_link'] = DEFAULT_AVT
 
@@ -23,7 +23,7 @@ class UserService:
 
 
     @classmethod
-    def signin(cls, payload: schema.UserLogin):
+    def signin(cls, payload: user_schema.UserLogin):
         userDict = payload.__dict__
 
         # check username & password existence
@@ -41,13 +41,6 @@ class UserService:
 
         return token
 
-    # @classmethod
-    # def getById(cls, id):
-    #     user = UserRepository.getById(id)
-    #     if not user:
-    #         return None
-    #     else:
-    #         return user
 
     @classmethod
     def getAll(cls, skip, limit):
@@ -55,24 +48,34 @@ class UserService:
 
 
     @classmethod
-    def forgetPassword(cls, email):
-        user = UserRepository.getByEmail(email)
+    def getById(cls, id):
+        return UserRepository.getById(id)
+
+    
+    @classmethod
+    def update(cls, id, payload):
+        return UserRepository.update(id, payload.__dict__)
+
+    @classmethod
+    def getByUsername(cls, payload):
+        return UserRepository.getByUsername(payload.username)
+
+    @classmethod
+    def forgetPassword(cls, payload: user_schema.forgetPassword):
+        # check username existence
+        user = UserRepository.getByUsername(payload.username)
         if not user:
             return None
-        
+
         # generate jwt token
         jwtPayload = {
             "id": user.id,
-            "exp": int(datetime.now().timestamp()) + 24 * 60 * 60
+            "exp": int(datetime.now().timestamp()) + 60
         }
         token = jwt.encode(jwtPayload, JWT_SECRET)
-        # Send email
-        return token
-
+        return [user.email,user.name,token]
 
     @classmethod
-    def resetPassword(cls, token):
-        pass
-
-
-       
+    def resetPassword(cls, token_id, password):
+        user_id = jwt.decode(token_id, JWT_SECRET, algorithms=["HS256"])
+        return UserRepository.updatePassword(user_id['id'], password)

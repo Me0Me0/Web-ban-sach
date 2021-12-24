@@ -1,6 +1,8 @@
+from controllers.ProductController import ProductController
+from controllers.StoreController import StoreController
 from controllers.UserController import UserController
 from repositories.UserRepository import UserRepository
-from schemas import schema
+from schemas import user_schema
 import configs
 
 from typing import List
@@ -10,6 +12,9 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from fastapi.staticfiles import StaticFiles
+
+import sentry_sdk
+from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
 
 
 app = FastAPI()
@@ -23,13 +28,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 #static files
 app.mount("/public", StaticFiles(directory="public"))
 
 # include controller
 app.include_router(UserController.router)
+app.include_router(ProductController.router)
+app.include_router(StoreController.router)
+app.include_router(StoreController.router2)
 
-@app.get("/", response_model=List[schema.User],dependencies=[Depends(configs.db.get_db)])
+@app.get("/", response_model=List[user_schema.User],dependencies=[Depends(configs.db.get_db)])
 def read_users(skip: int = 0, limit: int = 100):
     # get a list of all user
     users = UserRepository.getAll(skip = 0, limit = 100)
@@ -46,3 +55,12 @@ async def http_exception_handler(request, exc):
 # @app.exception_handler(RequestValidationError)
 # async def validation_exception_handler(request, exc):
 #     return PlainTextResponse(str(exc), status_code=400)
+
+@app.on_event("startup")
+async def startup_event():
+    sentry_sdk.init(
+        dsn=configs.constant.SENTRY_DSN,
+        environment=configs.constant.SENTRY_ENV
+    )
+    app.add_middleware(SentryAsgiMiddleware)
+

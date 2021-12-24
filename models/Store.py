@@ -4,12 +4,13 @@ from models.User import User
 
 class Store(BModel):
     id=AutoField()
-    name=CharField()
-    owner=ForeignKeyField(User, field="id")
+    name=CharField(unique=True)
+    owner_id=ForeignKeyField(User)
     phone=IntegerField()
     email=CharField()
     rating=FloatField()
     description=TextField()
+    deleted_at=DateField()
 
     class Meta:
        db_table='store'

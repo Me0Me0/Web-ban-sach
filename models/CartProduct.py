@@ -4,8 +4,8 @@ from models.Cart import Cart
 from models.Product import Product
 
 class CartProduct(BModel):
-   cart_id=ForeignKeyField(Cart, field="id")
-   product_id=ForeignKeyField(Product, field="id")
+   cart_id=ForeignKeyField(Cart)
+   product_id=ForeignKeyField(Product)
    quantity=IntegerField(index = True)
 
    class Meta:
