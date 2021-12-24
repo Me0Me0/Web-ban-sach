@@ -20,7 +20,7 @@ class UserRepository():
    @classmethod
    def getById(cls, id: int):
       result = None
-      for record in User.select().where(User.id == id):
+      for record in User.select().where(User.id == id and User.deleted_at.is_null()):
          result = record
 
       return result

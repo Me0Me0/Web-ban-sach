@@ -1,3 +1,5 @@
+from controllers.ProductController import ProductController
+from controllers.StoreController import StoreController
 from controllers.UserController import UserController
 from repositories.UserRepository import UserRepository
 from schemas import user_schema
@@ -32,6 +34,9 @@ app.mount("/public", StaticFiles(directory="public"))
 
 # include controller
 app.include_router(UserController.router)
+app.include_router(ProductController.router)
+app.include_router(StoreController.router)
+app.include_router(StoreController.router2)
 
 @app.get("/", response_model=List[user_schema.User],dependencies=[Depends(configs.db.get_db)])
 def read_users(skip: int = 0, limit: int = 100):
