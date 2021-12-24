@@ -310,6 +310,18 @@ header .actions a {
   background-color: #f2f7ff;
 }
 
+header .actions .menu a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+  width: 150px;
+  height: 48px;
+  border-radius: 5%;
+  background-color: #f2f7ff;
+}
+
 header .actions li {
   position: relative;
 }
@@ -379,14 +391,13 @@ header .actions .menu {
   left: 50%;
   transform: translate(calc(2px - 50%));
   font-size: 12px;
-  padding: 1px 7px;
   border-radius: 5px;
   line-height: 19px;
   transition: all 0.2s ease;
   opacity: 0;
   visibility: hidden;
   z-index: 999999;
-  width:100px
+  width: 150px
 }
 
 header .menu::before {
