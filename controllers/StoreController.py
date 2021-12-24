@@ -11,13 +11,13 @@ class StoreController:
     router = APIRouter(prefix='/stores')
     
     
-    # Handler store operation from owner
+    # Handle store operations from owner
     router2 = APIRouter(prefix='/mystore')
 
     @staticmethod
-    @router2.get('/', response_class=FileResponse)
+    @router2.get('', response_class=FileResponse)
     def mystore_page():
-        pass
+        pass # UI page
 
 
     @staticmethod

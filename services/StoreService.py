@@ -27,7 +27,7 @@ class StoreService:
             "owner_id": user.id,
             "phone": user.phone,
             "email": user.email,
-            "rating": None,
+            "rating": 0,
             "description": ""
         }
         return StoreRepository.create(store)
