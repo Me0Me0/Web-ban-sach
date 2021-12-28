@@ -16,6 +16,16 @@ class ProductController:
     router = APIRouter(prefix='/product')
 
 
+
+    @staticmethod
+    @router.get('/{id}',response_model=product_schema.Product,dependencies=[Depends(configs.db.get_db)])
+    def getById(id: int):
+        product = ProductService.getById(id)
+        if not product:
+            raise HTTPException(404, detail="Product not found!")
+        return product
+
+
     @staticmethod
     @router.get('/{id}',response_model=product_schema.Product,dependencies=[Depends(configs.db.get_db)])
     def getByID(id: int):

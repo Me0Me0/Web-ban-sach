@@ -111,9 +111,15 @@ class UserController:
             if e.args[0] == NOT_FOUND_ERROR:
                 raise HTTPException(404, detail=e.args[1])
             raise Exception(e)
+<<<<<<< Updated upstream
         
         #validated_link = './users/reset-password/' + token
         response = EmailService.sendEmail(user_email, user_name, token)#validated_link)
+=======
+
+        validated_link = './users/reset-password/' + token
+        response = EmailService.sendEmail(user_email, user_name, validated_link)
+>>>>>>> Stashed changes
 
         return {
             "data":{
@@ -124,12 +130,15 @@ class UserController:
 
 
     @staticmethod
+<<<<<<< Updated upstream
     @router.get('/forgot-password',response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
     def getInterface():
         return "./views/forgotPassword/forgot-password.html" 
 
 
     @staticmethod
+=======
+>>>>>>> Stashed changes
     @router.post('/reset-password/{token}')
     def resetPassword(token: str, payload: user_schema.resetPassword):
         try:

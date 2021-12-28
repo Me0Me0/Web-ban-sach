@@ -29,15 +29,21 @@ class Product(BaseModel):
 class ProductCreate(BaseModel):
     name: str
     category: str
+<<<<<<< Updated upstream
     #cate_id: Category = Field(None)
     rating: float
+=======
+>>>>>>> Stashed changes
     description: str
     detail: str
     author: str
     number_of_pages: int
     publishing_year: date
     publisher: str
+<<<<<<< Updated upstream
     #cover_image: str
+=======
+>>>>>>> Stashed changes
     quantity: int
     price: float
 
@@ -45,8 +51,11 @@ class ProductCreate(BaseModel):
 class ProductUpdate(BaseModel):
     name: str
     category: str
+<<<<<<< Updated upstream
     #cate_id: Category = Field(None)
     rating: float
+=======
+>>>>>>> Stashed changes
     description: str
     detail: str
     author: str
