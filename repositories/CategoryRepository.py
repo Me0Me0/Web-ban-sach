@@ -28,6 +28,6 @@ class CategoryRepository():
       try:
          delete_category = Category.get_by_id(id)
       except:
-         raise Exception(404, { "DELETE ERROR": "Can not find category with given id" })
+         raise Exception(404, {"Can not find category with given id" })
 
       return delete_category.delete_instance()

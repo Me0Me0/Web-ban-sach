@@ -6,7 +6,7 @@ from models.Product import Product
 class CartProduct(BModel):
    cart_id=ForeignKeyField(Cart)
    product_id=ForeignKeyField(Product)
-   quantity=IntegerField(index = True)
+   quantity=IntegerField()
 
    class Meta:
       db_table='cart_product'

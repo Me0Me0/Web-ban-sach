@@ -2,12 +2,18 @@
 -- Đang đổ dữ liệu cho bảng `user`
 --
 
-INSERT INTO `user` (`username`, `password`, `name`, `dob`, `phone`, `email`, `avt_link`) VALUES
-	('QuanQuan', '123456Abc!', 'Nguyễn Văn A', '1997-11-09', '0367854', 'meowmeow123@gmail.com', 'https://i.pinimg.com/736x/21/2d/12/212d12e421963f8a66f95aece1182069.jpg?fbclid=IwAR3q_BfvC0p6Wif4XOIZ7YgUdDKS4mB8Z1uBi8pGyR33zYA8L-LEOxA37hg'),
-	('HahaBook', 'ABCdef2_@', 'Nguyễn Văn B', '1986-10-19', '0360974', 'haha2@gmail.com', 'https://i.pinimg.com/736x/21/2d/12/212d12e421963f8a66f95aece1182069.jpg?fbclid=IwAR3q_BfvC0p6Wif4XOIZ7YgUdDKS4mB8Z1uBi8pGyR33zYA8L-LEOxA37hg'),
-	('TheFlaming', 'Hahaha222@q', 'Trần Xuân C', '1991-02-08', '0367854', 'cooolguy77@gmail.com', 'https://i.pinimg.com/736x/21/2d/12/212d12e421963f8a66f95aece1182069.jpg?fbclid=IwAR3q_BfvC0p6Wif4XOIZ7YgUdDKS4mB8Z1uBi8pGyR33zYA8L-LEOxA37hg'),
-	('BookNeet@8', 'Kawaii333^^', 'Lê Thanh T', '2003-07-15', '0367854', 'kurumi3@gmail.com', 'https://i.pinimg.com/736x/21/2d/12/212d12e421963f8a66f95aece1182069.jpg?fbclid=IwAR3q_BfvC0p6Wif4XOIZ7YgUdDKS4mB8Z1uBi8pGyR33zYA8L-LEOxA37hg'),
-	('DogLover', 'AmXcDc543', 'Trịnh Đình H', '2001-05-19', '0367854', 'wibuforever534@gmail.com', 'https://i.pinimg.com/736x/21/2d/12/212d12e421963f8a66f95aece1182069.jpg?fbclid=IwAR3q_BfvC0p6Wif4XOIZ7YgUdDKS4mB8Z1uBi8pGyR33zYA8L-LEOxA37hg');	
+
+INSERT INTO `user` (`username`, `password`, `name`, `dob`, `phone`, `email`, `avt_link`) VALUES 
+	-- password: 123456Abc!
+	('QuanQuan', '$2a$10$.lddI9UHU.XWAJ5k3i0dTulW.H6nTCsJkCBNvLcz9tdK0lg.COwpW', 'Nguyễn Văn A', '1997-11-09', '0367854', 'meowmeow123@gmail.com', 'https://i.pinimg.com/736x/21/2d/12/212d12e421963f8a66f95aece1182069.jpg?fbclid=IwAR3q_BfvC0p6Wif4XOIZ7YgUdDKS4mB8Z1uBi8pGyR33zYA8L-LEOxA37hg'),
+	-- password: ABCdef2_@
+    ('HahaBook', '$2a$10$Ne5WNs6n8Q0Ni2cgzWl1Ve3feMB3nhnDqyHFemGHTGu5I8K4xp1d2', 'Nguyễn Văn B', '1986-10-19', '0360974', 'haha2@gmail.com', 'https://i.pinimg.com/736x/21/2d/12/212d12e421963f8a66f95aece1182069.jpg?fbclid=IwAR3q_BfvC0p6Wif4XOIZ7YgUdDKS4mB8Z1uBi8pGyR33zYA8L-LEOxA37hg'),
+	-- password: Hahaha222@q
+    ('TheFlaming', '$2a$10$zb3ume6GgHpIIw15eNHjC.6HAVP9KmoYKRBvp.g0kMXE1sxWLDMfO', 'Trần Xuân C', '1991-02-08', '0367854', 'cooolguy77@gmail.com', 'https://i.pinimg.com/736x/21/2d/12/212d12e421963f8a66f95aece1182069.jpg?fbclid=IwAR3q_BfvC0p6Wif4XOIZ7YgUdDKS4mB8Z1uBi8pGyR33zYA8L-LEOxA37hg'),
+	-- password: Kawaii333^^
+    ('BookNeet@8', '$2a$10$YhEE9kuMB/pHUG5Fgv4gBuko4aCOoJ5Dh7TGO3iF5HTmjncT/0RO6', 'Lê Thanh T', '2003-07-15', '0367854', 'kurumi3@gmail.com', 'https://i.pinimg.com/736x/21/2d/12/212d12e421963f8a66f95aece1182069.jpg?fbclid=IwAR3q_BfvC0p6Wif4XOIZ7YgUdDKS4mB8Z1uBi8pGyR33zYA8L-LEOxA37hg'),
+	-- password: AmXcDc543
+    ('DogLover', '$2a$10$AvXBiDL6KU4q4LT58fZgvOkp4/1hDs6r27yK6f2xiP4OYWRz75G9u', 'Trịnh Đình H', '2001-05-19', '0367854', 'wibuforever534@gmail.com', 'https://i.pinimg.com/736x/21/2d/12/212d12e421963f8a66f95aece1182069.jpg?fbclid=IwAR3q_BfvC0p6Wif4XOIZ7YgUdDKS4mB8Z1uBi8pGyR33zYA8L-LEOxA37hg');	
     
     
 --
@@ -43,6 +49,28 @@ INSERT INTO `user` (`username`, `password`, `name`, `dob`, `phone`, `email`, `av
     ('Đường về nhà', '2', 'Sách mới, nguyên seal', 'Cuốn sách kể về hành trình...', 'Vũ V', 60, '2019', 'NXB2', 'image_link', '2', 1, 120000),
     ('Tổng quan vũ trụ', '6', 'Sách cũ, bìa còn tốt', 'Cuốn sách giải thích...', 'Nguyễn Xuân B', 200, '2011', 'NXB3', 'image_link', '2', 3, 180000),
 	('Hướng dẫn gấp giấy', '4', 'Sách cũ, màu tốt', 'Cuốn sách hướng dẫn...', 'Trịnh K', 80, '2015', 'NXB2', 'image_link', '3', 2, 100000);
+    
+    
+--
+-- Đang đổ dữ liệu cho bảng `cart`
+--
+
+	INSERT INTO `cart` (`id`, `owner_id`) VALUES
+	('1', '1'),
+	('2', '4'),
+	('3', '5');
+    
+    
+--
+-- Đang đổ dữ liệu cho bảng `cart_product`
+--
+
+	INSERT INTO `cart_product` (`cart_id`, `product_id`, `quantity`) VALUES
+	('1', '1', '1'),
+	('2', '2', '1'),
+    ('2', '3', '1'),
+    ('2', '5', '2'),
+	('3', '4', '2');
     
     
 
@@ -12126,3 +12154,13 @@ INSERT INTO `ward` (`id`, `_name`, `_prefix`, `_province_id`, `_district_id`) VA
 (11281, 'Thông Huề', 'Xã', 63, 709),
 (11282, 'Trùng Khánh', 'Thị trấn', 63, 709),
 (11283, 'Trung Phúc', 'Xã', 63, 709);
+
+
+--
+-- Đang đổ dữ liệu cho bảng `order_detail`
+--
+
+	INSERT INTO `order_detail` (`owner_id`, `status`, `total_cost`, `recipient_name`, `recipient_phone`, `recipient_address`, `province_id`, `district_id`, `ward_id`) VALUES
+	('1', '1', '84000', 'Nguyễn A', '022334342', '123 ABC', '1', '1', '1'),
+	('4', '1', '400000', 'Lê B', '022334342', '13 XYZ', '1', '1', '1'),
+    ('5', '1', '370000', 'Nguyễn C', '022334342', '57 DEF', '1', '1', '1');
