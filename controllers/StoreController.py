@@ -39,15 +39,15 @@ class StoreController:
     # Mystore - View nguoi ban
 
 
-    #@staticmethod
-    #@router2.get('', response_class=FileResponse)
-    #def mystore_page():
-    #    pass # UI page
+    @staticmethod
+    @router2.get('', response_class=FileResponse)
+    def mystore_page():
+        pass # UI page
 
 
     @staticmethod
-    @router2.get('', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-    def getAll(user = Depends(getUser)):
+    @router2.get('/details', dependencies=[Depends(configs.db.get_db)])
+    def storeDetail(user = Depends(getUser)):
         """Return: 
            [store_info_dict, list(product_info_dict)]"""
         # Store id
