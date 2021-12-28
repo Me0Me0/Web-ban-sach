@@ -20,7 +20,7 @@ class UserRepository():
    @classmethod
    def getById(cls, id: int):
       result = None
-      for record in User.select().where(User.id == id and User.deleted_at.is_null()):
+      for record in User.select().where(User.id == id & User.deleted_at.is_null(True)):
          result = record
 
       return result
@@ -29,7 +29,7 @@ class UserRepository():
    @classmethod
    def getByUsername(cls,username) -> str:
       result = None
-      for record in User.select().where(User.username==username):
+      for record in User.select().where(User.username==username & User.deleted_at.is_null(True)):
          result = record
 
       return result
@@ -62,7 +62,7 @@ class UserRepository():
       try:
          delete_user = User.get_by_id(id)
       except:
-         raise Exception(404, { "DELETE ERROR": "Can not find user with given id" })
+         raise Exception(404, {"Can not find user with given id" })
 
       if (delete_user.deleted_at != None):
          return 0
@@ -88,7 +88,7 @@ class UserRepository():
       try:
          update_user = User.get_by_id(id)
       except:
-         raise Exception(404, { "UPDATE ERROR": "Can not find user with given id" })
+         raise Exception(404, {"Can not find user with given id" })
 
       update_user.password = passwd
       return update_user.save()
@@ -99,7 +99,7 @@ class UserRepository():
       try:
          update_user = User.get_by_id(id)
       except:
-         raise Exception(404, { "UPDATE ERROR": "Can not find user with given id" })
+         raise Exception(404, {"Can not find user with given id" })
 
       update_user.name = userDict["name"]
       update_user.email = userDict["email"]
