@@ -1,3 +1,4 @@
+USE BOOKSTORE;
 --
 -- Đang đổ dữ liệu cho bảng `user`
 --

@@ -20,16 +20,35 @@ class UserController:
     @staticmethod
     @router.get('/signin', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
     def signin():
-        return "./views/signin/index.html"
+        return "./views/signin/signin.html"
 
 
     @staticmethod
     @router.get('/signup', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)]) 
     def signup():
-        return "./views/signup/index.html"
+        return "./views/signup/signup.html"
 
 
     @staticmethod
+    @router.get('/forgot-password', response_class=FileResponse) 
+    def signup():
+        return "./views/forgotPassword/forgot-password.html"
+
+    @staticmethod
+    @router.get('/home', response_class=FileResponse)
+    def signin():
+        return "./views/homepage/index.html"
+
+    @staticmethod
+    @router.get('/view-profile', response_class=FileResponse)
+    def signin():
+        return "./views/viewProfile/view-profile.html"
+
+    @staticmethod
+    @router.get('/change-profile', response_class=FileResponse)
+    def signin():
+        return "./views/changeProfile/change-profile.html"
+
     @router.post('/signup', dependencies=[Depends(configs.db.get_db)])
     def signup(payload: user_schema.UserCreate):
         try:
@@ -137,3 +156,5 @@ class UserController:
                 "success": True
             }
         }
+
+    

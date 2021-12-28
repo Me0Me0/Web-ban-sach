@@ -20,11 +20,7 @@ class UserRepository():
    @classmethod
    def getById(cls, id: int):
       result = None
-<<<<<<< Updated upstream
-      for record in User.select().where(User.id == id):
-=======
       for record in User.select().where(User.id == id & User.deleted_at.is_null(True)):
->>>>>>> Stashed changes
          result = record
 
       return result

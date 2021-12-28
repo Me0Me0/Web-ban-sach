@@ -136,13 +136,13 @@ $(document).ready(function () {
       $(".header-bottom-wrapper .actions").show();
       $(".header-bottom-wrapper .brand").show();
       $(".header-bottom-wrapper .categories-top-content").css("background-color", "#fff");
-      $(".header-bottom-wrapper .categories-top-content p").hide();
+      // $(".header-bottom-wrapper .categories-top-content p").hide();
     } else {
       $(".header-bottom-wrapper").removeClass("sticky");
       $(".header-bottom-wrapper .actions").hide();
       $(".header-bottom-wrapper .brand").hide();
-      $(".header-bottom-wrapper .categories-top-content").css("background-color", "#f3f5f9");
-      $(".header-bottom-wrapper .categories-top-content p").show();
+      $(".header-bottom-wrapper .categories-top-content").css("background-color", "#fff");
+      // $(".header-bottom-wrapper .categories-top-content p").show();
     }
 
     if (($(window).width() < 992) && ($(this).scrollTop() >= 43)) {
