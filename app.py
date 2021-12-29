@@ -36,6 +36,7 @@ app.mount("/public", StaticFiles(directory="public"))
 app.include_router(UserController.router)
 app.include_router(ProductController.router)
 app.include_router(StoreController.router)
+app.include_router(StoreController.router2)
 
 @app.get("/", response_model=List[user_schema.User],dependencies=[Depends(configs.db.get_db)])
 def read_users(skip: int = 0, limit: int = 100):

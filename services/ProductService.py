@@ -5,12 +5,6 @@ from configs.constant import DEFAULT_AVT
 
 
 class ProductService:
-<<<<<<< Updated upstream
-        
-    @classmethod
-    def getById(cls, id):
-        return ProductRepository.getById(id)
-=======
 
     @classmethod
     def getById(cls, id):
@@ -32,4 +26,3 @@ class ProductService:
 
             
             
->>>>>>> Stashed changes

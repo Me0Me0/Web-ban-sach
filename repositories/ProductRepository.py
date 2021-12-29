@@ -13,11 +13,6 @@ class ProductRepository():
         return list(Product.select().offset(skip).limit(limit))
 
 
-<<<<<<< Updated upstream
-   @classmethod
-   def getByName(cls, name: str, skip: int = 0, limit: int = 100):
-      return list(Product.select().where(Product.name == name).offset(skip).limit(limit))
-=======
     @classmethod
     def getDeletedProduct(cls, skip: int = 0, limit: int = 100):
         return list(Product.select().where(Product.deleted_at.is_null(False)).offset(skip).limit(limit))
@@ -26,7 +21,6 @@ class ProductRepository():
     @classmethod
     def getByName(cls, name: str, skip: int = 0, limit: int = 100):
         return list(Product.select().where(Product.name == name).offset(skip).limit(limit))
->>>>>>> Stashed changes
 
 
     @classmethod
@@ -58,21 +52,6 @@ class ProductRepository():
             return list(Product.select(Product, fn.SUM(OrderProduct.quantity).alias('sum')).join(OrderProduct).group_by(OrderProduct.product_id).order_by(fn.SUM(OrderProduct.quantity).desc()).offset(skip).limit(limit))
         
 
-<<<<<<< Updated upstream
-   @classmethod
-   def create(cls, store_id: int, productDict):#category: str, productDict):
-       try:
-           store = Store.get_by_id(store_id)
-       except:
-           raise Exception(404, { "ERROR": "Can not find store with given id" })
-
-
-       try:
-           cate = Category.get(Category.name == productDict['category'])
-           #cate = Category.get(Category.name == category)
-       except:
-           raise Exception(404, { "ERROR": "Category does not exist" })
-=======
     @classmethod
     def create(cls, store_id: int, category: str, productDict):
         try:
@@ -85,7 +64,6 @@ class ProductRepository():
             cate = Category.get(Category.name == category)
         except:
             raise Exception(404, { "ERROR": "Category does not exist" })
->>>>>>> Stashed changes
 
         return Product.create(cate_id = cate, store_id = store, **productDict).id
 
@@ -97,9 +75,6 @@ class ProductRepository():
         except:
             raise Exception(404, { "DELETE ERROR": "Can not find product with given id" })
 
-<<<<<<< Updated upstream
-      return delete_product.delete_instance()
-=======
         delete_product.deleted_at = datetime.datetime.now().date()
 
         return delete_product.save()
@@ -122,4 +97,3 @@ class ProductRepository():
     @classmethod
     def update(cls, store_id: int, product_id: int, productDict):
         pass
->>>>>>> Stashed changes
