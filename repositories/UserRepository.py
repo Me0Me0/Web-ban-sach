@@ -1,5 +1,8 @@
 from peewee import *
+from peewee import datetime
+from datetime import timedelta
 from models.User import User
+from repositories.StoreRepository import StoreRepository
 
 
 class UserRepository():
@@ -10,9 +13,14 @@ class UserRepository():
 
 
    @classmethod
+   def getDeletedUser(cls, skip: int = 0, limit: int = 100):
+      return list(User.select().where(User.deleted_at.is_null(False)).offset(skip).limit(limit))
+
+
+   @classmethod
    def getById(cls, id: int):
       result = None
-      for record in User.select().where(User.id == id):
+      for record in User.select().where(User.id == id & User.deleted_at.is_null(True)):
          result = record
 
       return result
@@ -21,7 +29,7 @@ class UserRepository():
    @classmethod
    def getByUsername(cls,username) -> str:
       result = None
-      for record in User.select().where(User.username==username):
+      for record in User.select().where(User.username==username & User.deleted_at.is_null(True)):
          result = record
 
       return result
@@ -48,14 +56,31 @@ class UserRepository():
             raise Exception(409, { "field": field })
 
 
+   # update delete date
    @classmethod
    def deleteById(cls, id: int):
       try:
          delete_user = User.get_by_id(id)
       except:
-         raise Exception(404, { "DELETE ERROR": "Can not find user with given id" })
+         raise Exception(404, {"Can not find user with given id" })
 
-      return delete_user.delete_instance()
+      if (delete_user.deleted_at != None):
+         return 0
+
+      delete_user.deleted_at = datetime.datetime.now().date()
+      StoreRepository.deleteByUserId(delete_user.id)
+
+      return delete_user.save()
+
+
+   # Delete from DB, only Admin use this method
+   @classmethod
+   def deleteFromDB(cls, max_day: int = 30):
+      StoreRepository.deleteFromDB()
+      query = User.delete().where(User.deleted_at <= datetime.datetime.now().date() - timedelta(days=max_day))
+
+      return query.execute()
+
 
 
    @classmethod
@@ -63,7 +88,7 @@ class UserRepository():
       try:
          update_user = User.get_by_id(id)
       except:
-         raise Exception(404, { "UPDATE ERROR": "Can not find user with given id" })
+         raise Exception(404, {"Can not find user with given id" })
 
       update_user.password = passwd
       return update_user.save()
@@ -74,7 +99,7 @@ class UserRepository():
       try:
          update_user = User.get_by_id(id)
       except:
-         raise Exception(404, { "UPDATE ERROR": "Can not find user with given id" })
+         raise Exception(404, {"Can not find user with given id" })
 
       update_user.name = userDict["name"]
       update_user.email = userDict["email"]

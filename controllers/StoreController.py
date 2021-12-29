@@ -5,7 +5,7 @@ from starlette.responses import FileResponse
 from fastapi.responses import Response
 import configs
 
-from configs.constant import DUPLICATION_ERROR, NOT_FOUND_ERROR
+from configs.constant import NOT_FOUND_ERROR, DUPLICATION_ERROR
 from configs.dependency import getUser
 from schemas import store_schema
 from schemas import product_schema
@@ -20,18 +20,34 @@ from services.ProductService import ProductService
 class StoreController:
     router = APIRouter(prefix='/stores')
 
+    
     # Handle store operations from owner
     router2 = APIRouter(prefix='/mystore')
 
     # -----------------------------------------------------------------------------
     # Mystore - View nguoi ban
 
-
+    
     @staticmethod
     @router2.get('', response_class=FileResponse)
     def mystore_page():
         pass # UI page
 
+      
+    @staticmethod
+    @router2.post('/register')
+    def registerStore(user = Depends(getUser)):
+        try:
+            store_id = StoreService.registerStore(user['id'])
+        except Exception as e:
+            if e.args[0] == NOT_FOUND_ERROR or e.args[0] == DUPLICATION_ERROR:
+                raise HTTPException(status_code=e.args[0], detail=e.args[1])
+            raise Exception(e)
+
+        return {
+            "id": store_id
+        }  
+     
 
     @staticmethod
     @router2.get('/details', dependencies=[Depends(configs.db.get_db)])

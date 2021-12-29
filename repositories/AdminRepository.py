@@ -19,6 +19,6 @@ class AdminRepository():
       try:
          delete_admin = Admin.get_by_id(id)
       except:
-         raise Exception(404, { "DELETE ERROR": "Can not find admin with given id" })
+         raise Exception(404, {"Can not find admin with given id" })
 
       return delete_admin.delete_instance()

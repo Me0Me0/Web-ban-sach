@@ -39,8 +39,13 @@ class User(BaseModel):
         orm_mode = True
         getter_dict = PeeweeGetterDict
 
+
+class UserDeleted(User):
+    deleted_at: date
+
 class forgetPassword(BaseModel):
     username: str
 
 class resetPassword(BaseModel):
     password: str
+

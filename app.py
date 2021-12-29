@@ -1,3 +1,5 @@
+from controllers.ProductController import ProductController
+from controllers.StoreController import StoreController
 from controllers.UserController import UserController
 from controllers.ProductController import ProductController
 from controllers.StoreController import StoreController
