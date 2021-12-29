@@ -96,3 +96,8 @@ class ProductRepository():
       query = Product.delete().where(Product.deleted_at <= datetime.datetime.now().date() - timedelta(days=max_day))
 
       return query.execute()
+    
+    
+   @classmethod
+   def update(cls, store_id: int, product_id: int, productDict):
+      pass

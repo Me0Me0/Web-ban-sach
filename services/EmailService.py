@@ -22,7 +22,7 @@ class EmailService:
                 """.format(name,validated_link)
         )
         try:
-            sg = SendGridAPIClient("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")
+            sg = SendGridAPIClient("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")
             response = sg.send(message)
             return [response.status_code, "email has been sent"]
 

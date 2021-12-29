@@ -1,6 +1,10 @@
 from fastapi import APIRouter
 from repositories.StoreRepository import StoreRepository
 from repositories.UserRepository import UserRepository
+from repositories.ProductRepository import ProductRepository
+from schemas import store_schema
+from schemas import product_schema
+from configs.constant import DEFAULT_AVT
 
 class StoreService:
 
@@ -31,3 +35,19 @@ class StoreService:
             "description": ""
         }
         return StoreRepository.create(store)
+
+
+    @classmethod
+    def createProduct(cls, payload: product_schema.ProductCreate, store_id):
+        productDict = payload.__dict__
+        productDict['avt_link'] = DEFAULT_AVT
+        # Get category of product
+        category = productDict['category']
+        # Remove category field from productDict 
+        del productDict['category']
+        return ProductRepository.create(store_id, category, productDict)
+
+    
+    @classmethod
+    def getAll(cls, skip, limit, store_id):
+        return [StoreRepository.getById(store_id), ProductRepository.getByStore(store_id, skip, limit)]
