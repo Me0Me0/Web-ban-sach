@@ -54,7 +54,7 @@ class ProductRepository():
       
 
    @classmethod
-   def create(cls, store_id: int, category: str, productDict):
+   def create(cls, store_id: int, category_id: int, productDict):
        try:
            store = Store.get_by_id(store_id)
        except:
@@ -62,7 +62,7 @@ class ProductRepository():
 
 
        try:
-           cate = Category.get(Category.name == category)
+           cate = Category.get_by_id(category_id)
        except:
            raise Exception("Category does not exist")
 
@@ -105,8 +105,14 @@ class ProductRepository():
        except:
          raise Exception("Can not find product with given id")
 
+
+       try:
+           cate = Category.get_by_id(productDict["cate_id"])
+       except:
+           raise Exception("Category does not exist")
+
        update_product.name = productDict["name"]
-       update_product.cate_id = productDict["cate_id"]
+       update_product.cate_id = cate
        update_product.description = productDict["description"]
        update_product.detail = productDict["detail"]
        update_product.author = productDict["author"]
