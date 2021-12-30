@@ -1,6 +1,8 @@
 from controllers.ProductController import ProductController
 from controllers.StoreController import StoreController
 from controllers.UserController import UserController
+from controllers.ProductController import ProductController
+from controllers.StoreController import StoreController
 from repositories.UserRepository import UserRepository
 from schemas import user_schema
 import configs

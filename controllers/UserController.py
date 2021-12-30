@@ -131,7 +131,8 @@ class UserController:
                 raise HTTPException(404, detail=e.args[1])
             raise Exception(e)
 
-        response = EmailService.sendEmail(user_email, user_name, token)
+        validated_link = './users/reset-password/' + token
+        response = EmailService.sendEmail(user_email, user_name, validated_link)
 
         return {
             "data":{
@@ -139,10 +140,16 @@ class UserController:
                 "message: " + str(response[1])
             }
         }
-        
+
 
     @staticmethod
-    @router.post('/forgot-password/{token}')
+    @router.get('/forgot-password',response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
+    def getInterface():
+        return "./views/forgotPassword/forgot-password.html" 
+
+
+    @staticmethod
+    @router.post('/reset-password/{token}')
     def resetPassword(token: str, payload: user_schema.resetPassword):
         try:
             UserService.resetPassword(token, payload.password)
@@ -157,4 +164,8 @@ class UserController:
             }
         }
 
-    
+      
+    @staticmethod
+    @router.get('/reset-password/{token}',response_class=FileResponse)
+    def getInterface(token):
+        return "./views/forgotPassword/forgot-password-2.html"

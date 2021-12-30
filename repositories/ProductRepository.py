@@ -95,9 +95,6 @@ class ProductRepository():
    def deleteFromDB(cls,max_day: int = 30):
       query = Product.delete().where(Product.deleted_at <= datetime.datetime.now().date() - timedelta(days=max_day))
 
-<<<<<<< Updated upstream
-      return query.execute()
-=======
       return query.execute()
     
     
@@ -157,4 +154,4 @@ class ProductRepository():
        update_product.cover_image = image_link
 
        return update_product.save()
->>>>>>> Stashed changes
+
