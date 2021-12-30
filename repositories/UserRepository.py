@@ -62,7 +62,7 @@ class UserRepository():
       try:
          delete_user = User.get_by_id(id)
       except:
-         raise Exception(404, {"Can not find user with given id" })
+         raise Exception("Can not find user with given id")
 
       if (delete_user.deleted_at != None):
          return 0
@@ -88,7 +88,7 @@ class UserRepository():
       try:
          update_user = User.get_by_id(id)
       except:
-         raise Exception(404, {"Can not find user with given id" })
+         raise Exception("Can not find user with given id")
 
       update_user.password = passwd
       return update_user.save()
@@ -99,7 +99,7 @@ class UserRepository():
       try:
          update_user = User.get_by_id(id)
       except:
-         raise Exception(404, {"Can not find user with given id" })
+         raise Exception("Can not find user with given id")
 
       update_user.name = userDict["name"]
       update_user.email = userDict["email"]

@@ -40,7 +40,7 @@ class StoreRepository():
        try:
            user = User.get_by_id(user_id)
        except:
-           raise Exception(404, {"Can not find user with given id"})
+           raise Exception("Can not find user with given id")
 
        # Each user only has one store, return -1 if user already has a store
        num = len(list(Store.select().join(User).where(Store.owner_id == user_id)))
@@ -56,7 +56,7 @@ class StoreRepository():
       try:
          delete_store = Store.get_by_id(id)
       except:
-         raise Exception(404, {"Can not find store with given id" })
+         raise Exception("Can not find store with given id")
 
 
       if (delete_store.deleted_at != None):

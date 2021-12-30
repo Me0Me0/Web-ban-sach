@@ -95,4 +95,66 @@ class ProductRepository():
    def deleteFromDB(cls,max_day: int = 30):
       query = Product.delete().where(Product.deleted_at <= datetime.datetime.now().date() - timedelta(days=max_day))
 
+<<<<<<< Updated upstream
       return query.execute()
+=======
+      return query.execute()
+    
+    
+   @classmethod
+   def update(cls, product_id: int, productDict):
+       try:
+         update_product = Product.get_by_id(product_id)
+       except:
+         raise Exception("Can not find product with given id")
+
+       update_product.name = productDict["name"]
+       update_product.cate_id = productDict["cate_id"]
+       update_product.description = productDict["description"]
+       update_product.detail = productDict["detail"]
+       update_product.author = productDict["author"]
+       update_product.number_of_pages = productDict["number_of_pages"]
+       update_product.publishing_year = productDict["publishing_year"]
+       update_product.publisher = productDict["publisher"]
+       update_product.cover_image = productDict["cover_image"]
+       update_product.quantity = productDict["quantity"]
+       update_product.price = productDict["price"]
+
+       return update_product.save()
+
+
+   @classmethod
+   def updatePrice(cls, product_id: int, price: float):
+       try:
+         update_product = Product.get_by_id(product_id)
+       except:
+         raise Exception("Can not find product with given id")
+
+       update_product.price = price
+
+       return update_product.save()
+
+
+   @classmethod
+   def updateQuantity(cls, product_id: int, quantity: int):
+       try:
+         update_product = Product.get_by_id(product_id)
+       except:
+         raise Exception("Can not find product with given id")
+
+       update_product.quantity = quantity
+
+       return update_product.save()
+
+
+   @classmethod
+   def updateImage(cls, product_id: int, image_link: str):
+       try:
+         update_product = Product.get_by_id(product_id)
+       except:
+         raise Exception("Can not find product with given id")
+
+       update_product.cover_image = image_link
+
+       return update_product.save()
+>>>>>>> Stashed changes
