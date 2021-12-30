@@ -42,9 +42,9 @@ class StoreService:
         productDict = payload.__dict__
         productDict['avt_link'] = DEFAULT_AVT
         # Get category of product
-        category = productDict['category']
+        category = productDict['cate_id']
         # Remove category field from productDict 
-        del productDict['category']
+        del productDict['cate_id']
         return ProductRepository.create(store_id, category, productDict)
 
     

@@ -1,6 +1,7 @@
 from datetime import datetime
 from repositories.ProductRepository import ProductRepository
 from repositories.StoreRepository import StoreRepository
+from fastapi.exceptions import HTTPException
 from schemas import product_schema
 from configs.constant import DEFAULT_AVT
 
@@ -25,4 +26,12 @@ class ProductService:
 
     @classmethod
     def update(cls, store_id, product_id, payload):
-        return ProductRepository.update(store_id, product_id, payload.__dict__)
+        # Check if this product_id owned by store_id
+        #try:
+        #    product = ProductRepository.getById(product_id)
+        #except Exception as e:
+        #    raise Exception(e)
+        
+        #if product["store_id"] != store_id:
+        #    raise HTTPException(status_code=403, detail="forbidden")
+        return ProductRepository.update(product_id, payload.__dict__)

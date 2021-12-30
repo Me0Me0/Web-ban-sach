@@ -28,7 +28,7 @@ class Product(BaseModel):
 
 class ProductCreate(BaseModel):
     name: str
-    category: str
+    cate_id: int
     description: str
     detail: str
     author: str
@@ -41,7 +41,8 @@ class ProductCreate(BaseModel):
 
 class ProductUpdate(BaseModel):
     name: str
-    category: str
+    #category: str
+    cate_id: int
     description: str
     detail: str
     author: str
