@@ -307,7 +307,7 @@ header .actions a {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background-color: #3eb5ff;
+  background-color: #aadfff;
 }
 
 header .actions .menu a {
@@ -319,7 +319,7 @@ header .actions .menu a {
   width: 150px;
   height: 48px;
   border-radius: 1%;
-  background-color: #3eb5ff;
+  background-color: #aadfff;
 }
 
 header .actions li {
@@ -675,7 +675,7 @@ header .actions .menu ul li{
 
 #category {
   padding-top: 40px;
-  background-color: #3eb5ff;
+  background-color: #aadfff;
   overflow-x: hidden;
 }
 
@@ -756,7 +756,7 @@ header .actions .menu ul li{
 ============================== */
 #best-seller {
   padding: 40px 0;
-  background-color: #3eb5ff;
+  background-color: #aadfff;
   overflow-x: hidden;
 }
 
@@ -856,7 +856,7 @@ header .actions .menu ul li{
 }
 
 #best-seller .item-top .actions button:hover {
-  background-color: #1597E5;
+  background-color: #aadfff;
   color: #fff;
 }
 
@@ -998,7 +998,7 @@ span {
 }
 
 #best-seller .add-to-cart-btn button:hover {
-  background-color: #1597E5;
+  background-color: #aadfff;
 }
 
 #best-seller .add-to-cart-btn i {
@@ -1073,7 +1073,7 @@ span {
   right: 0;
   border-radius: 8px;
   transition: all 0.4s ease;
-  background-color: #1597E5;
+  background-color: #aadfff;
   opacity: 0;
   visibility: hidden;
   z-index: 1;
@@ -1200,7 +1200,7 @@ span {
   justify-content: center;
   width: 66px;
   height: 66px;
-  background-color: #1597E5;
+  background-color: #aadfff;
   border-radius: 50%;
 }
 
@@ -1297,7 +1297,7 @@ span {
              FOOTER
 ============================== */
 .footer-top {
-  background-color: #3eb5ff;
+  background-color: #aadfff;
   padding: 80px 0 95px;
 }
 

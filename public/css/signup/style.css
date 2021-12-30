@@ -4,7 +4,7 @@ body {
 .page-content {
 	width: 100%;
 	margin:  0 auto;
-	background: #5eb2b3;
+	background: #aadfff;
 	display: flex;
 	display: -webkit-flex;
 	justify-content: center;
@@ -46,7 +46,7 @@ body {
 	margin-bottom: 40px;
 }
 .form-detail h2::after {
-	background: #3786bd;
+	background: #aadfff;
 	width: 50px;
 	height: 2px;
 	content: "";
@@ -102,7 +102,7 @@ body {
 .form-detail .register {
 	font-size: 18px;
 	color: #fff;
-	background: #3786bd;
+	background: #aadfff;
 	border-radius: 5px;
 	-o-border-radius: 5px;
 	-ms-border-radius: 5px;
@@ -119,33 +119,34 @@ body {
 	cursor: pointer;
 }
 .form-detail .register:hover {
-	background: #2f73a3;
+	background: #aadfff;
 }
 .form-detail .form-row-last input {
 	padding: 14px;
+	color: #000;
 }
 .form-detail i {
 	font-size: 14px;
-	color: #999;
+	color: #000;
 	left: 7px;
 	top: 45%;
 	transform: translateX(-30%);
 	position: absolute;
 }
 input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: #999;
+  color: #000;
   font-size: 16px;
 }
 input::-moz-placeholder { /* Firefox 19+ */
-  color: #999;
+  color: #000;
   font-size: 16px;
 }
 input:-ms-input-placeholder { /* IE 10+ */
-  color: #999;
+  color: #000;
   font-size: 16px;
 }
 input:-moz-placeholder { /* Firefox 18- */
-  color: #999;
+  color: #000;
   font-size: 16px;
 }
 
