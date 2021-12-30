@@ -5,25 +5,25 @@
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
-@font-face {
+/* @font-face {
   font-family: Poppins-Regular;
-  src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+  src: url('/public/fonts/signin/Poppins-Regular.ttf'); 
 }
 
 @font-face {
   font-family: Poppins-Bold;
-  src: url('../fonts/poppins/Poppins-Bold.ttf'); 
+  src: url('/public/fonts/signin/Poppins-Bold.ttf'); 
 }
 
 @font-face {
   font-family: Poppins-Medium;
-  src: url('../fonts/poppins/Poppins-Medium.ttf'); 
+  src: url('/public/fonts/signin/Poppins-Medium.ttf'); 
 }
 
 @font-face {
   font-family: Montserrat-Bold;
-  src: url('../fonts/montserrat/Montserrat-Bold.ttf'); 
-}
+  src: url('/public/fonts/signin/Montserrat-Bold.ttf'); 
+} */
 
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
@@ -44,7 +44,7 @@ a {
 	font-family: Poppins-Regular;
 	font-size: 14px;
 	line-height: 1.7;
-	color: #666666;
+	color: #000;
 	margin: 0px;
 	transition: all 0.4s;
 	-webkit-transition: all 0.4s;
@@ -58,7 +58,7 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-  color: #57b846;
+  color: #193498;
 }
 
 /*---------------------------------------------*/
@@ -70,7 +70,7 @@ p {
 	font-family: Poppins-Regular;
 	font-size: 14px;
 	line-height: 1.7;
-	color: #666666;
+	color: #000;
 	margin: 0px;
 }
 
@@ -105,15 +105,15 @@ textarea:focus:-moz-placeholder { color:transparent; }
 textarea:focus::-moz-placeholder { color:transparent; }
 textarea:focus:-ms-input-placeholder { color:transparent; }
 
-input::-webkit-input-placeholder { color: #999999; }
-input:-moz-placeholder { color: #999999; }
-input::-moz-placeholder { color: #999999; }
-input:-ms-input-placeholder { color: #999999; }
+input::-webkit-input-placeholder { color: #000; }
+input:-moz-placeholder { color: #000; }
+input::-moz-placeholder { color: #000; }
+input:-ms-input-placeholder { color: #000; }
 
-textarea::-webkit-input-placeholder { color: #999999; }
-textarea:-moz-placeholder { color: #999999; }
-textarea::-moz-placeholder { color: #999999; }
-textarea:-ms-input-placeholder { color: #999999; }
+textarea::-webkit-input-placeholder { color: #000; }
+textarea:-moz-placeholder { color: #000; }
+textarea::-moz-placeholder { color: #000; }
+textarea:-ms-input-placeholder { color: #000; }
 
 /*---------------------------------------------*/
 button {
@@ -137,14 +137,14 @@ iframe {
   font-family: Poppins-Regular;
   font-size: 13px;
   line-height: 1.5;
-  color: #999999;
+  color: #000;
 }
 
 .txt2 {
   font-family: Poppins-Regular;
   font-size: 13px;
   line-height: 1.5;
-  color: #666666;
+  color: #000;
 }
 
 
@@ -168,11 +168,7 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #9053c7;
-  background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
-  background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
-  background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
-  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  background: #aadfff;
 }
 
 .wrap-login100 {
@@ -209,9 +205,10 @@ iframe {
 }
 
 .login100-form-title {
+  font-weight: bold;
   font-family: Poppins-Bold;
   font-size: 24px;
-  color: #333333;
+  color: #000;
   line-height: 1.2;
   text-align: center;
 
@@ -256,7 +253,7 @@ iframe {
   width: 100%;
   height: 100%;
   box-shadow: 0px 0px 0px 0px;
-  color: rgba(87,184,70, 0.8);
+  color: #193498;
 }
 
 .input100:focus + .focus-input100 {
@@ -304,7 +301,7 @@ iframe {
 }
 
 .input100:focus + .focus-input100 + .symbol-input100 {
-  color: #57b846;
+  color: #193498;
   padding-left: 28px;
 }
 
@@ -326,13 +323,13 @@ iframe {
   font-family: Montserrat-Bold;
   font-size: 15px;
   line-height: 1.5;
-  color: #fff;
+  color: #000;
   text-transform: uppercase;
 
   width: 100%;
   height: 50px;
   border-radius: 25px;
-  background: #57b846;
+  background: #aadfff;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -349,7 +346,8 @@ iframe {
 }
 
 .login100-form-btn:hover {
-  background: #333333;
+  background: #193498;
+  color: #fff;
 }
 
 
@@ -406,7 +404,7 @@ iframe {
   position: absolute;
   max-width: 70%;
   background-color: white;
-  border: 1px solid #c80000;
+  border: 1px solid #193498;
   border-radius: 13px;
   padding: 4px 25px 4px 10px;
   top: 50%;
@@ -419,7 +417,7 @@ iframe {
   pointer-events: none;
 
   font-family: Poppins-Medium;
-  color: #c80000;
+  color: #193498;
   font-size: 13px;
   line-height: 1.4;
   text-align: left;
@@ -438,7 +436,7 @@ iframe {
   font-family: FontAwesome;
   display: block;
   position: absolute;
-  color: #c80000;
+  color: #193498;
   font-size: 15px;
   top: 50%;
   -webkit-transform: translateY(-50%);

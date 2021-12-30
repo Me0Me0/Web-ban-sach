@@ -9,7 +9,7 @@
 }
 
 body{
-   background-color: #f3f3f3;
+   background-color: #aadfff;
 }
 
 .wrapper{
@@ -17,14 +17,14 @@ body{
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  width: 450px;
+  width: 650px;
   display: flex;
   box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
 }
 
 .wrapper .left{
   width: 35%;
-  background: linear-gradient(to right,#01a9ac,#01dbdf);
+  background: #193498;
   padding: 30px 25px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -93,13 +93,13 @@ body{
 
 .wrapper .setting_btn ul{
   display: flex;
+  justify-content: space-between;
 }
 
 .wrapper .setting_btn ul li{
-  width: 90px;
+  width: 180px;
   height: 45px;
-  background: linear-gradient(to right,#01a9ac,#01dbdf);
-  margin-left: 10px;
+  background: #193498;
   border-radius: 5px;
   text-align: center;
   line-height: 45px;
@@ -109,4 +109,7 @@ body{
   color :#fff;
   display: block;
   font-size: 18px;
+  width: 180px;
+  height: 45px;
+  text-decoration: none;
 }
