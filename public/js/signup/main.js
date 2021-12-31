@@ -63,9 +63,6 @@ async function onFormsubmit(e) {
   else if(phone==''){
     alert('Vui lòng nhập số điện thoại');
   }
-
-  
-  
 }
 
 sign_up_btn.addEventListener("click", () => {
