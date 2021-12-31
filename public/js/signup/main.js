@@ -12,7 +12,7 @@ var inputPhonenumber = document.getElementById('phone');
 
 var signUpForm = document.getElementById('signupform');
 
-var letters = /^[A-Za-z]+$/;
+var letters = /^[A-Za-zàáâãèéêìíòóôõùúýỳỹỷỵựửữừứưụủũợởỡờớơộổỗồốọỏịỉĩệểễềếẹẻẽặẳẵằắăậẩẫầấạảđÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝỲỸỶỴỰỬỮỪỨƯỤỦŨỢỞỠỜỚƠỘỔỖỒỐỌỎỊỈĨỆỂỄỀẾẸẺẼẶẲẴẰẮĂẬẨẪẦẤẠẢĐ\s]+$/;
 var expression = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])/;
 
 if (signUpForm.attachEvent) {
@@ -32,27 +32,27 @@ async function onFormsubmit(e) {
   var phone = inputPhonenumber.value;
 
   if (user.length < 5) {
-    alert('Tài khoản phải có ít nhất 5 kí tự');
+    alert('Tên đăng nhập phải có ít nhất 5 ký tự');
   }
   else if (pass.length < 8) {
-    alert('Mật khẩu phải có ít nhất 8 kí tự');
+    alert('Mật khẩu phải có ít nhất 8 ký tự');
   }
   else if(!expression.test(pass))
   {
-    alert('Mật khẩu phải chứa ít nhất 1 ký tự hoa, 1 ký tự thường và 1 số và không có ký tự đặc biệt')
+    alert('Mật khẩu phải chứa ít nhất 1 chữ hoa, 1 chữ thường, 1 số và không có ký tự đặc biệt')
   }
   else if(repass==''){
     alert('Vui lòng xác nhận lại mật khẩu');
   }
   else if(repass!==pass){
-    alert('Xác nhận mật khẩu không trùng khớp');
+    alert('Mật khẩu xác nhận không trùng khớp');
   }
   else if(name==''){
     alert('Vui lòng nhập họ tên');
   }
   else if(!letters.test(name))
 	{
-		alert('Họ và tên chỉ sử dụng ký tự alphabet');
+		alert('Họ và tên không bao gồm ký tự đặc biệt và số');
 	}
   else if(dob==''){
     alert('Vui lòng chọn ngày tháng năm sinh');

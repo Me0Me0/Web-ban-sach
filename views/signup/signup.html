@@ -20,12 +20,12 @@
 				<h2>Đăng Ký</h2>
 				<div class="form-row">
 					<label for="full-name">Tên đăng nhập</label>
-					<input type="text" name="username" id="username" class="input-text" placeholder="Tên đăng nhập" required>
+					<input type="text" name="username" id="username" class="input-text" placeholder="Tên đăng nhập phải có ít nhất 5 ký tự" required>
 					<i class="fas fa-user"></i>
 				</div>
 				<div class="form-row">
 					<label for="password">Mật khẩu</label>
-					<input type="password" name="password" id="password" class="input-text" placeholder="Mật khẩu" required>
+					<input type="password" name="password" id="password" class="input-text" placeholder="Mật khẩu phải có ít nhất 8 ký tự, chứa ít nhất 1 chữ hoa, 1 chữ thường, 1 số và không có ký tự đặc biệt" required>
 					<i class="fas fa-lock"></i>
 				</div>
 				<div class="form-row">
@@ -35,7 +35,7 @@
 				</div>
 				<div class="form-row">
 					<label for="full-name">Họ và tên</label>
-					<input type="text" name="full-name" id="fullname" class="input-text" placeholder="Họ và tên" required>
+					<input type="text" name="full-name" id="fullname" class="input-text" placeholder="Họ và tên không bao gồm ký tự đặc biệt và số" required>
 					<i class="fas fa-user"></i>
 				</div>
 				<div class="form-row">
@@ -50,7 +50,7 @@
 				</div>	
 				<div class="form-row">
 					<label for="your-phone">Số điện thoại</label>
-					<input type="tel" name="your-phone" id="phone" class="input-text" placeholder="Số điện thoại" required pattern="[0-9]{3}[0-9]{2}[0-9]{3}">
+					<input type="tel" name="your-phone" id="phone" class="input-text" placeholder="Số điện thoại" required pattern="[0-9]{10}">
 					<i class="fas fa-envelope"></i>
 				</div>				
 				<div class="form-row-last">
@@ -60,5 +60,4 @@
 		</div>
 	</div>
 	<script src="/public/js/signup/main.js"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
