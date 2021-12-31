@@ -31,7 +31,6 @@ class UserService:
 
         # check username & password existence
         user = UserRepository.getByUsername(userDict['username'])
-        print(userDict['password'], user.username)
         if not user or not bcrypt.checkpw(userDict['password'].encode(), user.password.encode()):
             return None
         
