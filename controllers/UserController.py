@@ -31,24 +31,25 @@ class UserController:
 
     @staticmethod
     @router.get('/forgot-password', response_class=FileResponse) 
-    def signup():
+    def forgotPassword():
         return "./views/forgotPassword/forgot-password.html"
 
     @staticmethod
     @router.get('/home', response_class=FileResponse)
-    def signin():
+    def index():
         return "./views/homepage/index.html"
 
     @staticmethod
     @router.get('/view-profile', response_class=FileResponse)
-    def signin():
+    def viewProfile():
         return "./views/viewProfile/view-profile.html"
 
     @staticmethod
     @router.get('/change-profile', response_class=FileResponse)
-    def signin():
+    def changeProfile():
         return "./views/changeProfile/change-profile.html"
 
+    @staticmethod
     @router.post('/signup', dependencies=[Depends(configs.db.get_db)])
     def signup(payload: user_schema.UserCreate):
         try:

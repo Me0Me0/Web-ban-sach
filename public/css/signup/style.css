@@ -73,7 +73,7 @@ body {
 .form-detail .input-text {
 	margin-bottom: 26px;
 }
-.form-detail input {
+.form-detail input, button {
 	width: 94.5%;
     padding: 10.5px 20px;
     border: 1px solid #000;
@@ -101,7 +101,7 @@ body {
 }
 .form-detail .register {
 	font-size: 18px;
-	color: #fff;
+	color: #000;
 	background: #aadfff;
 	border-radius: 5px;
 	-o-border-radius: 5px;
@@ -120,8 +120,9 @@ body {
 }
 .form-detail .register:hover {
 	background: #193498;
+	color: #fff;
 }
-.form-detail .form-row-last input {
+.form-detail .form-row-last button {
 	padding: 14px;
 	color: #000;
 }
