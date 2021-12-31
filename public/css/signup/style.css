@@ -26,7 +26,7 @@ body {
 	-ms-border-radius: 8px;
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
-	margin: 175px 0;
+	margin: 15px 0;
 	font-family: 'Roboto', sans-serif;
 	color: #333;
 	font-weight: 400;
@@ -76,7 +76,7 @@ body {
 .form-detail input {
 	width: 94.5%;
     padding: 10.5px 20px;
-    border: 1px solid #e5e5e5;
+    border: 1px solid #000;
     appearance: unset;
     -moz-appearance: unset;
     -webkit-appearance: unset;
@@ -119,7 +119,7 @@ body {
 	cursor: pointer;
 }
 .form-detail .register:hover {
-	background: #aadfff;
+	background: #193498;
 }
 .form-detail .form-row-last input {
 	padding: 14px;

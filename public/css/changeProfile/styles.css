@@ -9,7 +9,7 @@
 }
 
 body{
-   background-color: #f3f3f3;
+   background-color: #aadfff;
 }
 
 .wrapper{
@@ -17,14 +17,14 @@ body{
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  width: 450px;
+  width: 700px;
   display: flex;
   box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
 }
 
 .wrapper .left{
   width: 35%;
-  background: linear-gradient(to right,#01a9ac,#01dbdf);
+  background: #193498;
   padding: 30px 25px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -63,7 +63,7 @@ body{
     margin-bottom: 15px;
     padding-bottom: 5px;
     border-bottom: 1px solid #e0e0e0;
-    color: #353c4e;
+    color: #000;
   text-transform: uppercase;
   letter-spacing: 5px;
 }
@@ -80,33 +80,49 @@ body{
 
 .wrapper .right .info_data .data h4,
 .wrapper .right .projects_data .data h4{
-    color: #353c4e;
-    margin-bottom: 5px;
+  color: #000;
+  margin: 5px 0 5px 0;
+}
+
+.wrapper .right .info_data .data input{
+  margin: 10px 0 10px 0;
+  padding: 5px 0 5px 0;
+  width: 405px;
+}
+
+.wrapper .right .info_data .data input::placeholder{
+  position: relative;
+  left: 10px;
 }
 
 .wrapper .right .info_data .data p,
 .wrapper .right .projects_data .data p{
   font-size: 13px;
   margin-bottom: 10px;
-  color: #919aa3;
+  color: #000;
 }
 
 .wrapper .setting_btn ul{
   display: flex;
+  justify-content: space-between;
 }
 
-.wrapper .setting_btn ul li{
-  width: 90px;
+.wrapper .setting_btn ul li, button{
+  width: 195px;
   height: 45px;
-  background: linear-gradient(to right,#01a9ac,#01dbdf);
-  margin-left: 10px;
+  background: #193498;
   border-radius: 5px;
   text-align: center;
   line-height: 45px;
 }
 
-.wrapper .setting_btn ul li a{
+.wrapper .setting_btn ul li a, button{
   color :#fff;
   display: block;
   font-size: 18px;
+  text-decoration: none;
+}
+
+.wrapper .setting_btn button:hover{
+  cursor: pointer;
 }
