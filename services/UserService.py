@@ -5,8 +5,10 @@ from datetime import datetime
 from repositories.UserRepository import UserRepository
 from schemas import user_schema
 from fastapi.exceptions import HTTPException
-from configs.constant import DEFAULT_AVT, JWT_SECRET
+from configs.constant import DEFAULT_AVT
+from configs.env import getEnv
 
+JWT_SECRET = getEnv().JWT_SECRET
 
 class UserService:
 
@@ -29,6 +31,7 @@ class UserService:
 
         # check username & password existence
         user = UserRepository.getByUsername(userDict['username'])
+        print(userDict['password'], user.username)
         if not user or not bcrypt.checkpw(userDict['password'].encode(), user.password.encode()):
             return None
         

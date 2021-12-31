@@ -27,7 +27,10 @@ class ProductRepository():
    @classmethod
    def getById(cls, id: int):
        try:
-           return Product.get_by_id(id)
+           product = Product.get_by_id(id)
+           if product.deleted_at is None:
+               return product
+           raise Exception("Product is deleted")
        except:
            raise Exception("Does not exist product with given id")
 

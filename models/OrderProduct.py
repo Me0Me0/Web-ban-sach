@@ -4,7 +4,7 @@ from models.OrderDetail import OrderDetail
 from models.Product import Product
 
 class OrderProduct(BModel):
-   order_id=ForeignKeyField(OrderDetail)
+   order_id=ForeignKeyField(OrderDetail , backref='order_products')
    product_id=ForeignKeyField(Product)
    quantity=IntegerField()
 
