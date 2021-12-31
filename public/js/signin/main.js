@@ -45,7 +45,7 @@ async function onFormsubmit(e) {
         alert('Tài khoản hoặc mật khẩu không đúng');
     } else if (data.data.success) {
         alert('Đăng nhập thành công');
-        window.location.href = "/";
+        window.location.href = "/users/home";
     } else {
         alert('Đã xảy ra lỗi, vui lòng thử lại sau');
     }
