@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <title>shop cart - Bootdey.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="/public/css/cart/styles.css" rel="stylesheet" />
+  <script src="https://use.fontawesome.com/a93c29b7d5.js"></script>
+</head>
+<body>
+<div class="container px-3 my-5 clearfix">
+  <!-- Shopping cart table -->
+  <div class="card">
+      <div class="card-header">
+          <h2>Giỏ hàng</h2>
+      </div>
+      <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered m-0">
+              <thead>
+                <tr>
+                  <!-- Set columns width -->
+                  <th class="text-center py-3 px-4" style="min-width: 400px;">Tên sách &amp; Thông tin chi tiết</th>
+                  <th class="text-right py-3 px-4" style="width: 100px;">Giá</th>
+                  <th class="text-center py-3 px-4" style="width: 120px;">Số lượng</th>
+                  <th class="text-right py-3 px-4" style="width: 100px;">Tổng cộng</th>
+                  <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
+                </tr>
+              </thead>
+              <tbody>
+      
+                <tr>
+                  <td class="p-4">
+                    <div class="media align-items-center">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="d-block ui-w-40 ui-bordered mr-4" alt="">
+                      <div class="media-body">
+                        <a href="#" class="d-block text-dark">tên sách</a>
+                        <small>
+                          <span class="text-muted">Thể loại:</span> tên thể loại 
+                          <span class="text-muted">Tác giả: </span> tên tác giả
+                        </small>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="text-right font-weight-semibold align-middle p-4">$57.55</td>
+                  <td class="align-middle p-4"><input type="text" class="form-control text-center" value="2"></td>
+                  <td class="text-right font-weight-semibold align-middle p-4">$115.1</td>
+                  <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
+                </tr>
+      
+                <tr>
+                  <td class="p-4">
+                    <div class="media align-items-center">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="d-block ui-w-40 ui-bordered mr-4" alt="">
+                      <div class="media-body">
+                        <a href="#" class="d-block text-dark">tên sách</a>
+                        <small>
+                          <span class="text-muted">Thể loại:</span> tên thể loại 
+                          <span class="text-muted">Tác giả: </span> tên tác giả
+                        </small>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="text-right font-weight-semibold align-middle p-4">$1049.00</td>
+                  <td class="align-middle p-4"><input type="text" class="form-control text-center" value="1"></td>
+                  <td class="text-right font-weight-semibold align-middle p-4">$1049.00</td>
+                  <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
+                </tr>
+      
+                <tr>
+                  <td class="p-4">
+                    <div class="media align-items-center">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="d-block ui-w-40 ui-bordered mr-4" alt="">
+                      <div class="media-body">
+                        <a href="#" class="d-block text-dark">tên sách</a>
+                        <small>
+                          <span class="text-muted">Thể loại:</span> tên thể loại 
+                          <span class="text-muted">Tác giả: </span> tên tác giả
+                        </small>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="text-right font-weight-semibold align-middle p-4">$20.55</td>
+                  <td class="align-middle p-4"><input type="text" class="form-control text-center" value="1"></td>
+                  <td class="text-right font-weight-semibold align-middle p-4">$20.55</td>
+                  <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
+                </tr>
+      
+              </tbody>
+            </table>
+          </div>
+          <!-- / Shopping cart table -->
+      
+          <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
+            <div class="mt-4">
+              <label class="text-muted font-weight-normal">Mã giảm giá</label>
+              <input type="text" placeholder="Nhập mã giảm giá" class="form-control">
+            </div>
+            <div class="d-flex">
+              <div class="text-right mt-4 mr-5">
+                <label class="text-muted font-weight-normal m-0">Giá giảm</label>
+                <div class="text-large"><strong>$20</strong></div>
+              </div>
+              <div class="text-right mt-4">
+                <label class="text-muted font-weight-normal m-0">Tổng giá</label>
+                <div class="text-large"><strong>$1164.65</strong></div>
+              </div>
+            </div>
+          </div>
+      
+          <div class="float-right">
+            <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" onclick="location.href='/users/home'">Tiếp tục mua hàng</button>
+            <button type="button" class="btn btn-lg btn-primary mt-2" onclick="location.href='#'">Tiến hành thanh toán</button>
+          </div>
+      
+        </div>
+    </div>
+</div>
+<script src="/public/js/cart/scripts.js"></script>
+</body>
+</html>
