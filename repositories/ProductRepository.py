@@ -21,7 +21,18 @@ class ProductRepository():
 
    @classmethod
    def getByName(cls, name: str, skip: int = 0, limit: int = 100):
+      print(name)
       return list(Product.select().where((Product.name == name) & (Product.deleted_at.is_null(True))).offset(skip).limit(limit))
+
+
+   @classmethod
+   def getByName(cls, name: str, skip: int = 0, limit: int = 100):
+      return list(Product.select().where((Product.name == name) & (Product.deleted_at.is_null(True))).offset(skip).limit(limit))
+
+
+   @classmethod
+   def getByCate(cls, cate_id: int, skip: int = 0, limit: int = 100):
+      return list(Product.select().where((Product.cate_id == cate_id) & (Product.deleted_at.is_null(True))).offset(skip).limit(limit))
 
 
    @classmethod
@@ -54,7 +65,19 @@ class ProductRepository():
            return list(Product.select(Product, fn.SUM(OrderProduct.quantity).alias('sum')).join(OrderProduct).where(Product.deleted_at.is_null(True)).group_by(OrderProduct.product_id).order_by(fn.SUM(OrderProduct.quantity)).offset(skip).limit(limit))
        else:
            return list(Product.select(Product, fn.SUM(OrderProduct.quantity).alias('sum')).join(OrderProduct).where(Product.deleted_at.is_null(True)).group_by(OrderProduct.product_id).order_by(fn.SUM(OrderProduct.quantity).desc()).offset(skip).limit(limit))
-      
+
+
+   @classmethod
+   def searchByName(cls, name: str, skip: int = 0, limit: int = 100):
+       tokens = name.split()
+       search_name = ""
+       for i in tokens:
+           search_name = search_name + "%" + i + "%"
+
+       query = Product.select().where((Product.name ** search_name) & (Product.deleted_at.is_null(True)))
+       return list(query.execute())
+
+
 
    @classmethod
    def create(cls, store_id: int, category_id: int, productDict):
