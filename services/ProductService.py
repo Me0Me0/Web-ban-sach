@@ -58,8 +58,8 @@ class ProductService:
 
 
     @classmethod
-    def getProductFromCategory(cate_id):
+    def getProductByCategory(cls, cate_id, skip, limit):
         category = CategoryRepository.getById(cate_id)
         if not category:
             raise HTTPException(status_code=404, detail="")
-        return ProductRepository.getProductFromCategory(cate_id)
+        return ProductRepository.getByCate(cate_id, skip, limit)

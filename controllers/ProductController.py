@@ -107,5 +107,7 @@ class ProductController:
     # Hien thi san pham theo doanh muc
     @staticmethod
     @router.post('/category={cate_id}', dependencies=[Depends(configs.db.get_db)])
-    def getProductFromCategory(cate_id: int):
-        pass
+    def getProductByCategory(cate_id: int):
+        limit = 10#Query(10, gt=0)
+        skip = 0#Query(0, ge=0)
+        return ProductService.getProductByCategory(cate_id, skip, limit)
