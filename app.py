@@ -49,7 +49,7 @@ app.include_router(CartController.router)
 
 @app.get("/",response_class=FileResponse)
 def homepage():
-    return "views/homepage/index.html"
+    return "views/index.html"
 
 
 @app.exception_handler(StarletteHTTPException)

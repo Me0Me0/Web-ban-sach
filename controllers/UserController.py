@@ -28,6 +28,10 @@ class UserController:
     def signup():
         return "./views/signup/signup.html"
 
+    @staticmethod
+    @router.get('/signout', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)]) 
+    def signup():
+        return "./views/index.html"
 
     @staticmethod
     @router.get('/forgot-password', response_class=FileResponse) 
