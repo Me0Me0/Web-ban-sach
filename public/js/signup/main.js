@@ -85,7 +85,7 @@ async function onFormsubmit(e) {
       console.log(data);
       if(data.data&&data.data.id)
       {
-        alert("Tạo tài khoản thành công"); 
+        alert("Tạo tài khoản thành công, đăng nhập để tiếp tục"); 
       } 
       else
       {
