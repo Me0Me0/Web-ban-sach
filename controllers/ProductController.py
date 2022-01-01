@@ -8,8 +8,10 @@ from schemas import product_schema
 from fastapi.exceptions import HTTPException
 from fastapi.responses import FileResponse
 from configs.dependency import getUser
-
+from repositories import CartProductRepository
+from repositories import CartRepository
 from services.ProductService import ProductService
+from services.CartService import CartService
 
 class ProductController:
     router = APIRouter(prefix='/products')
@@ -39,3 +41,71 @@ class ProductController:
             }
         }
     
+
+    # Them san pham vao gio hang
+    @staticmethod
+    @router.post('/{product_id}/add-to-cart', dependencies=[Depends(configs.db.get_db)])
+    def addToCart(product_id: int, user = Depends(getUser)):
+        try:
+            cart_id = CartService.getCartID(user['id'])
+        except Exception as e:
+            if e.args[0] == 404:
+                raise HTTPException(status_code=404, detail=e.args[1])
+            raise Exception(e)
+            
+        ProductService.addToCart(cart_id, product_id, 1)  # Số lượng ban đầu là 1
+
+        return {
+            "data": {
+                "success": True
+            }
+        }
+
+    
+    # DS san pham moi nhat
+    @staticmethod
+    @router.post('/newest', dependencies=[Depends(configs.db.get_db)])
+    def getProductNew():
+        limit = 10#Query(10, gt=0)
+        skip = 0#Query(0, ge=0)
+        return ProductService.getProductNew(True, skip, limit)
+
+
+    # DS san pham ban chay nhat
+    @staticmethod
+    @router.post('/top-product', dependencies=[Depends(configs.db.get_db)])
+    def getTopProduct():
+        limit = Query(10, gt=0)
+        skip = Query(0, ge=0)
+        return ProductService.getTopProduct(True, skip, limit)
+
+
+    # Tim san pham theo keyword
+    @staticmethod
+    @router.post('/search?keyword={keyword}', dependencies=[Depends(configs.db.get_db)])
+    def getProductByName(keyword: str):
+        pass
+    
+    
+    # Tim san pham theo keyword + khung gia?
+    # 1 method duoi nay``
+
+    
+    # Tim cua hang theo keyword
+    @staticmethod
+    @router.post('/search_store?keyword={keyword}', dependencies=[Depends(configs.db.get_db)])
+    def getStoreByName(keyword: str):
+        pass
+
+
+    # Sap xep san pham theo khung gia 
+    #@staticmethod
+    #@router.post('/sort/{}')
+    #def getProductWithPriceInterval
+
+
+    # Hien thi san pham theo doanh muc
+    @staticmethod
+    @router.post('/category={cate_id}', dependencies=[Depends(configs.db.get_db)])
+    def getProductFromCategory(cate_id: int):
+        pass

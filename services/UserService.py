@@ -31,7 +31,6 @@ class UserService:
 
         # check username & password existence
         user = UserRepository.getByUsername(userDict['username'])
-        print(userDict['password'], user.username)
         if not user or not bcrypt.checkpw(userDict['password'].encode(), user.password.encode()):
             return None
         
@@ -82,7 +81,12 @@ class UserService:
     @classmethod
     def resetPassword(cls, token_id, password):
         try:
-            user_id = jwt.decode(token_id, JWT_SECRET, algorithms=["HS256"])
+            user = jwt.decode(token_id, JWT_SECRET, algorithms=["HS256"])
         except:
             raise HTTPException(406, detail="Khong decode duoc!")
-        return UserRepository.updatePassword(user_id['id'], password)
+        
+        #hass password with bcrypt
+        salt = bcrypt.gensalt(10)
+        hashed = bcrypt.hashpw(password.encode(), salt)
+        
+        return UserRepository.updatePassword(user['id'], hashed)
