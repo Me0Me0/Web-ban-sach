@@ -1,11 +1,11 @@
 var usernameInput = document.getElementById('username');
 
-var formLogin = document.getElementById('forgot_password');
+var formForgotPassword = document.getElementById('forgot_password');
 
-if (formLogin.attachEvent) {
-    formLogin.attachEvent('submit', onFormsubmit);
+if (formForgotPassword.attachEvent) {
+    formForgotPassword.attachEvent('submit', onFormsubmit);
 } else {
-    formLogin.addEventListener('submit', onFormsubmit);
+    formForgotPassword.addEventListener('submit', onFormsubmit);
 }
 
 async function onFormsubmit(e) {
@@ -18,7 +18,7 @@ async function onFormsubmit(e) {
             "content-type": "application/json"
         },
         body: JSON.stringify({
-            username:username
+            username: username
         })
     }
 
@@ -26,9 +26,10 @@ async function onFormsubmit(e) {
     const data = await res.json();
 
     //Có gì sửa lại dòng này giúp e
+    console.log(data.data)
     if (data.error) {
         alert('Tên đăng nhập không tồn tại');
-    } else if (data.data.success) {
+    } else if (data.data.status_code == 202) {
         alert('Liên kết dẫn đến trang đặt lại mật khẩu đã gửi tới email đăng ký tài khoản này');
     } else {
         alert('Đã xảy ra lỗi, vui lòng thử lại sau');
