@@ -105,15 +105,15 @@ textarea:focus:-moz-placeholder { color:transparent; }
 textarea:focus::-moz-placeholder { color:transparent; }
 textarea:focus:-ms-input-placeholder { color:transparent; }
 
-input::-webkit-input-placeholder { color: #000; }
-input:-moz-placeholder { color: #000; }
-input::-moz-placeholder { color: #000; }
-input:-ms-input-placeholder { color: #000; }
+input::-webkit-input-placeholder { color: #666666; }
+input:-moz-placeholder { color: #666666; }
+input::-moz-placeholder { color: #666666; }
+input:-ms-input-placeholder { color: #666666; }
 
-textarea::-webkit-input-placeholder { color: #000; }
-textarea:-moz-placeholder { color: #000; }
-textarea::-moz-placeholder { color: #000; }
-textarea:-ms-input-placeholder { color: #000; }
+textarea::-webkit-input-placeholder { color: #666666; }
+textarea:-moz-placeholder { color: #666666; }
+textarea::-moz-placeholder { color: #666666; }
+textarea:-ms-input-placeholder { color: #666666; }
 
 /*---------------------------------------------*/
 button {
