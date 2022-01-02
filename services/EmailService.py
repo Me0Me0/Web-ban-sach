@@ -14,7 +14,7 @@ class EmailService:
     @classmethod
     def sendEmail(cls, toEmail, name, validated_link):
         message = Mail(
-            from_email='tiendat101001@gmail.com',
+            from_email='nuoclibi@gmail.com',
             to_emails=toEmail,
             subject="Forget Password",
             html_content="""
@@ -29,7 +29,7 @@ class EmailService:
             return [response.status_code, "email has been sent"]
 
         except Exception as e:
-            return [e,"failed to send mail!"]
+            return [e,"failed to send email!"]
 
         
         
