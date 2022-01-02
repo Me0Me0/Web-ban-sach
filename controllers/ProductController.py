@@ -65,18 +65,14 @@ class ProductController:
     # DS san pham moi nhat
     @staticmethod
     @router.post('/newest', dependencies=[Depends(configs.db.get_db)])
-    def getProductNew():
-        limit = 10#Query(10, gt=0)
-        skip = 0#Query(0, ge=0)
+    def getProductNew(limit:int = Query(10, gt=0), skip:int = Query(0, ge=0)):
         return ProductService.getProductNew(True, skip, limit)
 
 
     # DS san pham ban chay nhat
     @staticmethod
     @router.post('/top-product', dependencies=[Depends(configs.db.get_db)])
-    def getTopProduct():
-        limit = Query(10, gt=0)
-        skip = Query(0, ge=0)
+    def getTopProduct(limit:int = Query(10, gt=0), skip:int = Query(0, ge=0)):
         return ProductService.getTopProduct(True, skip, limit)
 
 
@@ -107,7 +103,5 @@ class ProductController:
     # Hien thi san pham theo doanh muc
     @staticmethod
     @router.post('/category={cate_id}', dependencies=[Depends(configs.db.get_db)])
-    def getProductByCategory(cate_id: int):
-        limit = 10#Query(10, gt=0)
-        skip = 0#Query(0, ge=0)
+    def getProductByCategory(cate_id: int, limit:int = Query(10, gt=0), skip:int = Query(0, ge=0)):
         return ProductService.getProductByCategory(cate_id, skip, limit)

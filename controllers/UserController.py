@@ -136,7 +136,7 @@ class UserController:
                 raise HTTPException(404, detail=e.args[1])
             raise Exception(e)
 
-        validated_link = './users/reset-password/' + token
+        validated_link = 'http://localhost:3000/users/reset-password/' + token
         response = EmailService.sendEmail(user_email, user_name, validated_link)
 
         return {

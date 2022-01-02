@@ -13,14 +13,18 @@ class EmailService:
 
     @classmethod
     def sendEmail(cls, toEmail, name, validated_link):
+        url_youtube = "www.youtube.com"
         message = Mail(
-            from_email='nuoclibi@gmail.com',
+            from_email='tiendat101001@gmail.com',
             to_emails=toEmail,
             subject="Forget Password",
             html_content="""
-                Xin chào {}<br>
-                Hãy nhấp vào đường link bên dưới để khôi phục mật khẩu.<br>
-                {}
+                Xin chào {},<br>
+                Hãy nhấp vào 
+                <a href={}>khôi phục mật khẩu</a> 
+                để đặt lại mật khẩu mới.<br>
+                Cảm ơn đã sử dụng dịch vụ của chúng tôi,<br>
+                Me0Me0
                 """.format(name,validated_link)
         )
         try:
