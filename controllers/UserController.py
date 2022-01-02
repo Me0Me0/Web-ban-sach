@@ -140,9 +140,9 @@ class UserController:
         response = EmailService.sendEmail(user_email, user_name, validated_link)
 
         return {
-            "data":{
-                "status_code: " + str(response[0]),
-                "message: " + str(response[1])
+            "data": {
+                "status_code": response[0],
+                "message": response[1]
             }
         }
 
