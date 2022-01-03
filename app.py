@@ -51,6 +51,9 @@ app.include_router(CartController.router)
 def homepage():
     return "views/index.html"
 
+@app.get("/home",response_class=FileResponse)
+def homepage():
+    return "views/homepage/index.html"
 
 @app.exception_handler(StarletteHTTPException)
 async def http_exception_handler(request, exc):

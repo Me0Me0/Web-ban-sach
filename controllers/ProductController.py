@@ -17,6 +17,11 @@ class ProductController:
     router = APIRouter(prefix='/products')
 
     @staticmethod
+    @router.get('/best-seller', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
+    def getBestSeller():
+        return "./views/bestSeller/index.html"
+
+    @staticmethod
     @router.get('/{id}',response_model=product_schema.Product,dependencies=[Depends(configs.db.get_db)])
     def getById(id: int):
         product = ProductService.getById(id)

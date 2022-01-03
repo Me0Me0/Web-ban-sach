@@ -30,7 +30,7 @@ class UserController:
 
     @staticmethod
     @router.get('/signout', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)]) 
-    def signup():
+    def signout():
         return "./views/index.html"
 
     @staticmethod
@@ -92,7 +92,7 @@ class UserController:
 
 
     @staticmethod
-    @router.get('/details', response_model=user_schema.User,dependencies=[Depends(configs.db.get_db)])
+    @router.get('/details', response_model=user_schema.User,dependencies=[Depends(configs.db.get_db)])#details
     def getDetail(currentUser = Depends(getUser)):
         user = UserService.getById(currentUser['id'])
         if not user:
