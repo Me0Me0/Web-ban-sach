@@ -63,6 +63,41 @@ async function onFormsubmit(e) {
   else if(phone==''){
     alert('Vui lòng nhập số điện thoại');
   }
+  else
+  {
+    const options = {
+      method: "POST",
+      headers: {
+          "content-type": "application/json"
+      },
+      body: JSON.stringify({
+          username: user,
+          password: pass,
+          name: name,
+          dob: dob,
+          phone: phone,
+          email: email
+      })
+    }
+    fetch("/users/signup", options)
+    .then(data => data.json())
+    .then(data =>  { 
+      console.log(data);
+      if(data.data&&data.data.id)
+      {
+        alert("Tạo tài khoản thành công, đăng nhập để tiếp tục"); 
+        location.href = "/users/signin"
+      } 
+      else
+      {
+        alert("Tên tài khoản đã tồn tại, vui lòng thử lại với tên khác");
+      }
+    })
+    .catch((err) => {
+      alert ("Đã xảy ra lỗi, vui lòng thử lại sau");
+      console.error(err);
+    })
+  }
 }
 
 // sign_up_btn.addEventListener("click", () => {

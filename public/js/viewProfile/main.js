@@ -9,7 +9,7 @@ if (formProfile.attachEvent) {
 async function onFormsubmit(e) {
     e.preventDefault();
 
-    fetch("/users/profile", {
+    fetch("/users/details", {
         method: "GET", 
         headers: {
             "Content-Type": "text/plain;charset=UTF-8" // for a string body, depends on body

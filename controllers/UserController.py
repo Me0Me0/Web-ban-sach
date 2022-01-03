@@ -28,6 +28,10 @@ class UserController:
     def signup():
         return "./views/signup/signup.html"
 
+    @staticmethod
+    @router.get('/signout', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)]) 
+    def signup():
+        return "./views/index.html"
 
     @staticmethod
     @router.get('/forgot-password', response_class=FileResponse) 
@@ -132,13 +136,13 @@ class UserController:
                 raise HTTPException(404, detail=e.args[1])
             raise Exception(e)
 
-        validated_link = './users/reset-password/' + token
+        validated_link = 'http://localhost:3000/users/reset-password/' + token
         response = EmailService.sendEmail(user_email, user_name, validated_link)
 
         return {
-            "data":{
-                "status_code: " + str(response[0]),
-                "message: " + str(response[1])
+            "data": {
+                "status_code": response[0],
+                "message": response[1]
             }
         }
 

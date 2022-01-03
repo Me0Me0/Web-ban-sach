@@ -5,7 +5,7 @@ from starlette.responses import FileResponse
 from fastapi.responses import Response
 import configs
 
-from configs.constant import NOT_FOUND_ERROR, DUPLICATION_ERROR
+from configs.constant import NOT_FOUND_ERROR, DUPLICATION_ERROR, FORBIDDEN_ERROR
 from configs.dependency import getUser
 from schemas import store_schema
 from schemas import product_schema
@@ -82,33 +82,25 @@ class StoreController:
             id = StoreService.createProduct(payload, store['id'])
         except Exception as e:
             if e.args[0] == DUPLICATION_ERROR:
-                raise HTTPException(409, detail=e.args[1])
+                raise HTTPException(status_code=409, detail=e.args[1])
             raise Exception(e)
 
         return {
-            "data":{
-                "id":id
-            }
+            'data':'success'
         }
         
         
     @staticmethod
     @router2.put('/products/{product_id}', dependencies=[Depends(configs.db.get_db)])
     def updateProduct(product_id: int, payload: product_schema.ProductUpdate, user = Depends(getUser)):
-        # Store id
         try:
-            store = StoreService.getOwnStore(user['id'])
+            ProductService.update(store['id'], product_id, payload)
         except Exception as e:
             if e.args[0] == NOT_FOUND_ERROR:
                 raise HTTPException(status_code=404, detail=e.args[1])
-            raise Exception(e)
-
-        try:
-            ProductService.update(store, product_id, payload)
-        except Exception as e:
-            if e.args[0] == NOT_FOUND_ERROR:
-                raise HTTPException(status_code=404, detail=e.args[1])
-            raise Exception(e)
+            elif e.args[0] == FORBIDDEN_ERROR:
+                raise HTTPException(status_code=403, detail=e.args[1])
+            raise Exception(e) 
         
         return {
             "data": {

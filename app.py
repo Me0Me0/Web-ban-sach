@@ -4,7 +4,9 @@ from controllers.StoreController import StoreController
 from controllers.UserController import UserController
 from controllers.ProductController import ProductController
 from controllers.StoreController import StoreController
+from controllers.CartController import CartController
 from repositories.UserRepository import UserRepository
+from fastapi.responses import FileResponse
 from schemas import user_schema
 from configs.env import getEnv
 from configs.db import get_db
@@ -42,13 +44,12 @@ app.include_router(ProductController.router)
 app.include_router(StoreController.router)
 app.include_router(StoreController.router2)
 app.include_router(OrderController.router)
+app.include_router(CartController.router)
 
 
-@app.get("/", response_model=List[user_schema.User],dependencies=[Depends(get_db)])
-def read_users(skip: int = 0, limit: int = 100):
-    # get a list of all user
-    users = UserRepository.getAll(skip = 0, limit = 100)
-    return users
+@app.get("/",response_class=FileResponse)
+def homepage():
+    return "views/index.html"
 
 
 @app.exception_handler(StarletteHTTPException)
