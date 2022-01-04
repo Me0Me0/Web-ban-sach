@@ -33,5 +33,5 @@ class CartProductRepository():
     # example: product_list = [(2,1), (3, 1), (5,2)]
    @classmethod
    def createMany(cls, product_list):
-       with db.atomic:
+       with db.atomic():
            CartProduct.insert_many(product_list, fields=[CartProduct.product_id, CartProduct.quantity]).execute()

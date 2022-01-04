@@ -164,6 +164,7 @@ CREATE TABLE `product` (
 
 CREATE TABLE `product_image` (
   `id` int NOT NULL,
+  `product_id` int NOT NULL,
   `image_link` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -462,7 +463,7 @@ ALTER TABLE `product`
 -- Các ràng buộc cho bảng `product_image`
 --
 ALTER TABLE `product_image`
-  ADD CONSTRAINT `product_image_ibfk_1` FOREIGN KEY (`id`) REFERENCES `product` (`id`);
+  ADD CONSTRAINT `product_image_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
 
 --
 -- Các ràng buộc cho bảng `store`

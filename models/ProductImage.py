@@ -3,7 +3,8 @@ from models.BModel import BModel
 from models.Product import Product
 
 class ProductImage(BModel):
-    id=ForeignKeyField(Product)
+    id=AutoField()
+    product_id=ForeignKeyField(Product)
     image_link=CharField()
 
     class Meta:
