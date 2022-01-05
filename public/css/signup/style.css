@@ -62,6 +62,9 @@ body {
 .form-detail .form-row {
 	position: relative;
 }
+.form-detail .form-row i {
+	padding-top: 1px;
+}
 .form-detail .form-row-last {
 	text-align: center;
 }
@@ -170,4 +173,8 @@ input:-moz-placeholder { /* Firefox 18- */
 	.form-v5-content {
 	    margin: 175px 20px;
 	}
+}
+
+.fa{
+	margin-top: :1px;
 }
