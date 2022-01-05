@@ -144,20 +144,8 @@ input::-webkit-inner-spin-button{
   margin: 20px 0 50px;
 }
 
-.btn.left{
-  width: 200px;
-  padding: 10px 30px;
-  text-transform: capitalize;
-  color: #fff;
-  background: #193489;
-  border-radius: 5px;
-  border: none;
-  outline: none;
-  margin-right: 10px;
-  cursor: pointer;
-}
 
-.btn.right{
+.btn{
   width: 200px;
   padding: 10px 30px;
   text-transform: capitalize;
