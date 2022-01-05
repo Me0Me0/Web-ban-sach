@@ -1,10 +1,10 @@
 body{
   margin-top:20px;
-  background:#eee;
+  background:#aadfff;
 }
 .ui-w-40 {
-  width: 40px !important;
-  height: auto;
+  width: 70px !important;
+  height: 70px;
 }
 
 .card{
@@ -21,4 +21,23 @@ body{
   -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset;
   box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset;
   vertical-align: middle;
+}
+
+.btn-primary {
+  background-color: #193498;
+  border-color: transparent;
+}
+
+.btn-primary:hover {
+  background-color: #aadfff;
+  color: #000;
+  border-color: transparent;
+}
+
+.pb-4 {
+  justify-content: right;
+}
+
+span p{
+  display: inline;
 }
