@@ -1,6 +1,6 @@
-﻿var CORRECT_USER = 'user';
-var CORRECT_PASS = 'pass';
-var check = true;
+﻿// var CORRECT_USER = 'user';
+// var CORRECT_PASS = 'pass';
+// var check = true;
 
 var inputUsername = document.getElementById('loginusername');
 var inputPassword = document.getElementById('loginpassword');

@@ -17,13 +17,13 @@ body{
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  width: 700px;
+  width: 900px;
   display: flex;
   box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
 }
 
 .wrapper .left{
-  width: 37%;
+  width: 45%;
   background: #193498;
   padding: 30px 25px;
   border-top-left-radius: 5px;
@@ -60,7 +60,7 @@ body{
 }
 
 .wrapper .right{
-  width: 63%;
+  width: 55%;
   background: #fff;
   padding: 30px 25px;
   border-top-right-radius: 5px;
@@ -101,7 +101,7 @@ body{
 .wrapper .right .info_data .data input{
   margin: 10px 0 10px 0;
   padding: 5px 0 5px 0;
-  width: 390px;
+  width: 440px;
 }
 
 .wrapper .right .info_data .data input::placeholder,
@@ -114,7 +114,7 @@ body{
 
 .wrapper .right .info_data .data p,
 .wrapper .right .projects_data .data p{
-  font-size: 13px;
+  font-size: 15px;
   margin-bottom: 10px;
   color: #000;
 }
