@@ -29,9 +29,24 @@ class StoreController:
 
     
     @staticmethod
-    @router2.get('', response_class=FileResponse)
+    @router2.get('', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
     def mystore_page():
-        pass # UI page
+        return "./views/storeViewSeller/index.html"
+
+    @staticmethod
+    @router2.get('/register', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
+    def mystore_page():
+        return "./views/stroreRegistration/index.html"
+
+    @staticmethod
+    @router2.get('/details', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
+    def mystore_page():
+        return "./views/storeDetails_ViewSeller/index.html"
+
+    @staticmethod
+    @router2.get('/edit', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
+    def mystore_page():
+        return "./views/editStore/index.html"
 
       
     @staticmethod
