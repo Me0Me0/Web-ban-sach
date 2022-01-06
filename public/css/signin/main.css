@@ -32,16 +32,17 @@
 	margin: 0px; 
 	padding: 0px; 
 	box-sizing: border-box;
+
 }
 
 body, html {
 	height: 100%;
-	font-family: Poppins-Regular, sans-serif;
+	font-family: 'Josefin Sans', sans-serif;
 }
 
 /*---------------------------------------------*/
 a {
-	font-family: Poppins-Regular;
+	font-family: 'Josefin Sans', sans-serif;
 	font-size: 14px;
 	line-height: 1.7;
 	color: #000;
@@ -67,7 +68,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 p {
-	font-family: Poppins-Regular;
+	font-family: 'Josefin Sans', sans-serif;
 	font-size: 14px;
 	line-height: 1.7;
 	color: #000;
@@ -134,15 +135,15 @@ iframe {
 /*//////////////////////////////////////////////////////////////////
 [ Utility ]*/
 .txt1 {
-  font-family: Poppins-Regular;
+  font-family: 'Josefin Sans', sans-serif;
   font-size: 13px;
   line-height: 1.5;
   color: #000;
 }
 
 .txt2 {
-  font-family: Poppins-Regular;
-  font-size: 13px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 16px;
   line-height: 1.5;
   color: #000;
 }
@@ -206,8 +207,8 @@ iframe {
 
 .login100-form-title {
   font-weight: bold;
-  font-family: Poppins-Bold;
-  font-size: 24px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 30px;
   color: #000;
   line-height: 1.2;
   text-align: center;
@@ -227,7 +228,7 @@ iframe {
 }
 
 .input100 {
-  font-family: Poppins-Medium;
+  font-family: 'Josefin Sans', sans-serif;
   font-size: 15px;
   line-height: 1.5;
   color: #666666;
@@ -320,7 +321,7 @@ iframe {
 }
 
 .login100-form-btn {
-  font-family: Montserrat-Bold;
+  font-family: 'Josefin Sans', sans-serif;
   font-size: 15px;
   line-height: 1.5;
   color: #000;
@@ -417,7 +418,7 @@ iframe {
   right: 8px;
   pointer-events: none;
 
-  font-family: Poppins-Medium;
+  font-family: 'Josefin Sans', sans-serif;
   color: #193498;
   font-size: 13px;
   line-height: 1.4;
@@ -434,7 +435,7 @@ iframe {
 
 .alert-validate::after {
   content: "\f06a";
-  font-family: FontAwesome;
+  font-family: 'Josefin Sans', sans-serif;
   display: block;
   position: absolute;
   color: #193498;

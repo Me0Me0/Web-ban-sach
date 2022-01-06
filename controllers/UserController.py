@@ -16,7 +16,6 @@ from services.EmailService import EmailService
 class UserController:
     router = APIRouter(prefix='/users')
 
-
     @staticmethod
     @router.get('/signin', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
     def signin():
@@ -52,6 +51,11 @@ class UserController:
     @router.get('/change-profile', response_class=FileResponse)
     def changeProfile():
         return "./views/changeProfile/change-profile.html"
+
+    @staticmethod
+    @router.get('/change-password', response_class=FileResponse)
+    def changeProfile():
+        return "./views/changePassword/change-password.html"
 
     @staticmethod
     @router.post('/signup', dependencies=[Depends(configs.db.get_db)])
