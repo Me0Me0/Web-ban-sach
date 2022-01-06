@@ -45,13 +45,13 @@ class StoreController:
         return "./views/stroreRegistration/index.html"
 
     @staticmethod
-    @router2.get('/details', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-    def mystoreDetails():
+    @router2.get('/view-details', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
+    def mystore_page():
         return "./views/storeDetails_ViewSeller/index.html"
 
     @staticmethod
-    @router2.get('/edit', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-    def mystoreEdit():
+    @router2.get('/edit-details', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
+    def mystore_page():
         return "./views/editStore/index.html"
 
       

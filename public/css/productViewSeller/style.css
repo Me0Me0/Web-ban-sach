@@ -55,7 +55,7 @@ button {
   min-height: 1000px;
   padding: 0;
   margin: 0 !important;
-  background: radial-gradient(#303d55, #2f3352);
+  background: #aadfff;
 }
 
 .wrappen_block {
@@ -72,11 +72,12 @@ button {
 
 .productCard_block {
   position: relative;
-  margin: 190px auto 0;
-  max-width: 800px;
+  margin: 100px auto 0;
+  max-width: 1000px;
   min-height: 600px;
   box-shadow: 0 5px 21px rgba(0, 0, 0, 0.08);
   background-color: #fff;
+  border-radius: 5px;
 }
 
 /* LEFT SIDE */
@@ -112,8 +113,8 @@ button {
 .sliderBlock {
   position: relative;
   height: 100%;
-  margin-left: 70px;
-  margin-top: 89px;
+  /* margin-left: 70px; */
+  margin-top: 34px;
   margin-bottom: 46px;
   overflow: hidden;
 }
@@ -131,6 +132,8 @@ button {
   opacity: 0;
   z-index: 2;
   transition: opacity 1s;
+  display: flex;
+  justify-content: center;
 }
 .sliderBlock_items__showing {
   opacity: 1;
@@ -143,7 +146,7 @@ button {
   height: 100%;
   top: 0;
   left: 0;
-  background: url("../img/decorElements/DecorRectangle.png") 50% 50% no-repeat;
+  /* background: url("../img/decorElements/DecorRectangle.png") 50% 50% no-repeat; */
   opacity: 0.2;
   z-index: 4;
 }
@@ -307,8 +310,6 @@ button {
 }
 
 .block_descriptionInformation {
-
-  width: 304px;
   height: 104px;
   margin-top: 10px;
   font-size: 14px;
@@ -578,33 +579,37 @@ input[type=checkbox] + label, input[type=radio] + label {
 }
 
 .button.button_addToCard {
-  width: 160px;
+  width: 200px;
   height: 46px;
   margin-top: 117px;
   margin-bottom: 0;
   padding: 0;
   color: #fff;
-  background-color: #536dfe;
+  background-color: #193498;
   font-size: 17px;
+  border-radius: 3px;
   transition: all 0.3s;
 }
 .button.button_addToCard:hover {
-  background-color: #0d2660;
+  background-color: #aadfff;
+  color: #000;
 }
 
 .button.button_delCard {
-  width: 147px;
+  width: 200px;
   height: 46px;
-  margin-top: 46px;
-  margin-bottom: 10px;
+  margin-top: 47px;
+  margin-bottom: 0;
   padding: 0;
   color: #fff;
-  background-color: #fe5353;
+  background-color: #981919;
   font-size: 17px;
+  border-radius: 3px;
   transition: all 0.3s;
 }
 .button.button_delCard:hover {
-  background-color: #600d0d;
+  background-color: #ffaaaa;
+  color: #000;
 }
 
 .aboutMe a {
@@ -616,5 +621,51 @@ input[type=checkbox] + label, input[type=radio] + label {
   color: rgba(255, 255, 255, 0.6);
   font-size: 1.5em;
   font-family: "Roboto", sans-serif;
+  text-decoration: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+/* input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+} */
+
+.details {
+  margin-left: 70px;
+}
+
+.back {
+  width: 110px;
+  height: 46px;
+  background-color: #193498;
+  margin: 60px  auto;
+  border-radius: 3px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.back a {
+  width: 110px;
+  height: 46px;
+  margin: 0 auto;
+  border-radius: 3px;
+  color: #fff;
+  background-color: #193498;
+  text-decoration: none;
+  padding-top: 10px;
+  font-size: 17px;
+  transition: all 0.3s;
+}
+
+.back a:hover {
+  background-color: #aadfff;
+  color: #000;
   text-decoration: none;
 }

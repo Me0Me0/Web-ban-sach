@@ -46,7 +46,7 @@ async function onFormsubmit(e) {
     } else if (data.data.success) {
         //alert('Đăng nhập thành công');
         localStorage.setItem('user', user);
-        window.location.href = "/home";
+        window.location.href = "/";
     } else {
         alert('Đã xảy ra lỗi, vui lòng thử lại sau');
     }
