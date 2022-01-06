@@ -24,19 +24,19 @@
                                     <div class="sliderBlock">
                                         <ul class="sliderBlock_items">
                                             <li class="sliderBlock_items__itemPhoto sliderBlock_items__showing">
-                                                <img src="https://github.com/BlackStar1991/CardProduct/blob/master/app/img/goods/item1/phones1.png?raw=true" alt="headphones">
+                                                <img src="https://github.com/BlackStar1991/CardProduct/blob/master/app/img/goods/item1/phones1.png?raw=true" alt="product-image" id="image-1">
                                             </li>
                                             <li class="sliderBlock_items__itemPhoto">
-                                                <img src="https://github.com/BlackStar1991/CardProduct/blob/master/app/img/goods/item1/phones2.png?raw=true"  alt="headphones">
+                                                <img src="https://github.com/BlackStar1991/CardProduct/blob/master/app/img/goods/item1/phones2.png?raw=true"  alt="product-image" id="image-2">
                                             </li>
                                             <li class="sliderBlock_items__itemPhoto">
-                                                <img src="https://github.com/BlackStar1991/CardProduct/blob/master/app/img/goods/item1/phones3.png?raw=true"  alt="headphones">
+                                                <img src="https://github.com/BlackStar1991/CardProduct/blob/master/app/img/goods/item1/phones3.png?raw=true"  alt="product-image" id="image-3">
                                             </li>
                                             <li class="sliderBlock_items__itemPhoto">
-                                                <img src="https://github.com/BlackStar1991/CardProduct/blob/master/app/img/goods/item1/phones4.png?raw=true"  alt="headphones">
+                                                <img src="https://github.com/BlackStar1991/CardProduct/blob/master/app/img/goods/item1/phones4.png?raw=true"  alt="product-image" id="image-4">
                                             </li>
                                             <li class="sliderBlock_items__itemPhoto">
-                                                <img src="https://github.com/BlackStar1991/CardProduct/blob/master/app/img/goods/item1/phones5.png?raw=true"  alt="headphones">
+                                                <img src="https://github.com/BlackStar1991/CardProduct/blob/master/app/img/goods/item1/phones5.png?raw=true"  alt="product-image" id="image-5">
                                             </li>
                                         </ul>
 
@@ -44,10 +44,10 @@
                                         <div class="sliderBlock_controls">
                                             <div class="sliderBlock_controls__navigatin">
                                                 <div class="sliderBlock_controls__wrapper">
-                                                    <div class="sliderBlock_controls__arrow sliderBlock_controls__arrowBackward">
+                                                    <div class="sliderBlock_controls__arrow sliderBlock_controls__arrowBackward" id="prev-image">
                                                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                                                     </div>
-                                                    <div class="sliderBlock_controls__arrow sliderBlock_controls__arrowForward">
+                                                    <div class="sliderBlock_controls__arrow sliderBlock_controls__arrowForward" id="next-image">
                                                         <i class="fa fa-angle-right" aria-hidden="true"></i>
                                                     </div>
                                                 </div>
@@ -61,17 +61,18 @@
                                                 <li class="sliderBlock_positionControls__paginatorItem"></li>
                                             </ul> -->
                                         </div>
-                                        <div class="back-to-home">
-                                            <a href="javascript:history.back()">Trang chủ</a>
-                                        </div>
+                                        <div class="back">
+                                            <a href="javascript:history.back()">Quay lại</a>
+                                        </div>   
                                     </div>
-                                </div>
+                                     
+                                </div>                                
                             </div>
                             <div class="small-12 large-6 columns">
                                 <div class="productCard_rightSide">
 
                                     <div class="block_product">
-                                        <h2 class="block_name block_name__mainName">Tên sản phẩm</h2>
+                                        <h2 class="block_name block_name__mainName" id="product-name">Tên sản phẩm</h2>
 
                                         <p class="block_product__advantagesProduct">
                                             Thể loại: <span id="category-name">tên thể loại</span>
@@ -93,7 +94,7 @@
                                         </p>
 
                                         <div class="block_descriptionInformation">
-                                            Mô tả sản phẩm: <span>mô tả</span>
+                                            Mô tả sản phẩm: <span id="description">mô tả</span>
                                         </div>
 
                                         <!-- <div class="block_rating clearfix">
@@ -131,7 +132,7 @@
                                             <span class="block_rating__avarage">4.25</span>
 
                                         </div> -->
-                                        <div class="row ">
+                                        <div class="row">
                                             <div class="large-6 small-12 column left-align">
                                                 <div class="block_price">
                                                     <p class="block_price__currency">Giá: <span id="price">giá</span></p>
@@ -140,14 +141,14 @@
                                                 <div class="block_quantity clearfix">
                                                     <span class="text_specification">Số lượng</span>
                                                     <div class="block_quantity__chooseBlock">
-                                                        <input class="block_quantity__number" name="quantityNumber" type="number" min="1" value="1">
+                                                        <input class="block_quantity__number" name="quantityNumber" type="number" min="1" value="1" id="quantity">
                                                         <!-- <button class="block_quantity__button block_quantity__up"></button>
                                                         <button class="block_quantity__button block_quantity__down"></button> -->
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="large-6 small-12 column end">
-                                                <input type="submit" class="button button_addToCard" value="Thêm vào giỏ hàng">
+                                                <input type="submit" class="button button_addToCard" value="Thêm vào giỏ hàng" id="add-to-cart">
                                             </div>                                
                                         </div>
                                     </div>
