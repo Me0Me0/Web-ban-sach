@@ -24,6 +24,7 @@ class StoreController:
     # Handle store operations from owner
     router2 = APIRouter(prefix='/mystore')
 
+
     # -----------------------------------------------------------------------------
     # Mystore - View nguoi ban
 
@@ -40,7 +41,7 @@ class StoreController:
 
     @staticmethod
     @router2.get('/register', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-    def mystore_page():
+    def mystoreRegistration():
         return "./views/stroreRegistration/index.html"
 
     @staticmethod
@@ -131,6 +132,16 @@ class StoreController:
 
     # -----------------------------------------------------------------------------
     # Store - View nguoi dung
+
+    @staticmethod
+    @router.get('/{store_id}', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
+    def storePage():
+        return "./views/storeViewCus/index.html"
+
+    @staticmethod
+    @router.get('/{store_id}/details', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
+    def mystoreDetails():
+        return "./views/storeDetails_ViewCus/index.html"
     
     @staticmethod
     @router.get('/{store_id}', dependencies=[Depends(configs.db.get_db)])

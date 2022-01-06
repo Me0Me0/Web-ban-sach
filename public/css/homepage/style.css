@@ -424,6 +424,10 @@ header .actions .menu ul li{
   align-items: center;
 }
 
+header .actions .menu #logged-in{
+  display: none;
+}
+
 /* ======= Header-Bottom ======= */
 .header-bottom {
   position: relative;

@@ -5,6 +5,15 @@ window.addEventListener("load", function () {
 });
 
 $(document).ready(function () {
+  // ======= Check login ======= //
+  if (document.cookie.indexOf("loggedin=true") > -1) {
+    $("header .actions .menu #logged-in").show()
+    $("header .actions .menu #not-logged-in").hide()
+  } else {
+    $("header .actions .menu #not-logged-in").show()
+    $("header .actions .menu #logged-in").hide()
+  }
+
   // ======= Dropdown actions ======= //
   $(".header-top .dropdown-top").click(function () {
     $(this).next().toggleClass("show-dropdown");

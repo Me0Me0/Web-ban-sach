@@ -1,7 +1,8 @@
 from typing import List
 from fastapi import APIRouter
+from fastapi import responses
 from fastapi.params import Depends, Query
-from fastapi.responses import Response
+from fastapi.responses import Response, RedirectResponse
 import configs
 
 from configs.constant import DUPLICATION_ERROR, NOT_FOUND_ERROR
@@ -29,8 +30,12 @@ class UserController:
 
     @staticmethod
     @router.get('/signout', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)]) 
-    def signout():
-        return "./views/index.html"
+    def signout(response: Response):
+        response.set_cookie('token', '', expires=0)
+        response.set_cookie('loggedin', '', expires=0)
+        response.headers['Location'] = '/'
+        response.status_code = 307
+        return response
 
     @staticmethod
     @router.get('/forgot-password', response_class=FileResponse) 
@@ -54,7 +59,7 @@ class UserController:
 
     @staticmethod
     @router.get('/change-password', response_class=FileResponse)
-    def changeProfile():
+    def changePassword():
         return "./views/changePassword/change-password.html"
 
     @staticmethod
@@ -82,6 +87,7 @@ class UserController:
             raise HTTPException(401, detail="Unauthorized")
 
         response.set_cookie(key="token", value=token, max_age=24*60*60, httponly=True)
+        response.set_cookie(key="loggedin", value="true", max_age=24*60*60, httponly=False)
         return {
             "data": {
                 "success": True
