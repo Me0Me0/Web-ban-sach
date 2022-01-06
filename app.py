@@ -49,7 +49,7 @@ app.include_router(CartController.router)
 
 @app.get("/",response_class=FileResponse)
 def homepage():
-    return "views/index.html"
+    return "views/homepage/index.html"
 
 @app.get("/home",response_class=FileResponse)
 def homepage():
