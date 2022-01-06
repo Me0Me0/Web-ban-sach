@@ -33,6 +33,7 @@ body form {
   -ms-flex-wrap: wrap; /* IE10 */
   flex-wrap: wrap;
   margin: 0 -16px;
+  align-items: center;
 }
 
 .row-20 {
@@ -181,6 +182,7 @@ span.price {
   table#cart tbody td .form-control{
   width:20%;
   display: inline !important;
+  }
 }
 .actions .btn{
   width:36%;
@@ -194,14 +196,18 @@ span.price {
   float:right;
 }
 
-table#cart thead { display: none; }
+/* table#cart thead { display: none; }
 table#cart tbody td { display: block; padding: .6rem; min-width:320px;}
 table#cart tbody tr td:first-child { background: #333; color: #fff; }
 table#cart tbody td:before {
   content: attr(data-th); font-weight: bold;
   display: inline-block; width: 8rem;
+} */
+
+.right {
+  text-align: right;
 }
 
-.right{
-  text-align: right;
+.col-sm-8 {
+  width: 60% !important;
 }

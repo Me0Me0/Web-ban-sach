@@ -23,83 +23,88 @@
       <div class="card-body">
         <table id="cart" class="table table-hover table-condensed">
           <thead>
-          <tr>
-            <th style="width:67%">Thông tin sách</th>
-            <th style="width:10%">Giá</th>
-            <th style="width:10%">Số lượng</th>
-            <th style="width:10%" class="text-center">Tổng cộng</th>
-            <th style="width:8%"></th>
-          </tr>
+            <tr>
+              <th style="width:67%">Sản phẩm</th>
+              <th style="width:10%">Đơn giá</th>
+              <th style="width:10%">Số lượng</th>
+              <th style="width:10%">Tổng cộng</th>
+              <th style="width:8%"></th>
+            </tr>
         </thead>
         <tbody>         
           <tr>
             <td data-th="Product">
               <div class="row">
-                <input type="checkbox" id="checkbox1" class="check">
-                <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div>
+                <input type="checkbox" id="checkbox-1" class="check">
+                <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive" id="product-image-1"/></div>
                 <div class="col-sm-8">
-                  <h4 class="nomargin">Tên sản phẩm</h4>
-                  <p>Tên cửa hàng</p>
+                  <h4 class="nomargin" id="product-name-1">Tên sản phẩm</h4>
+                  <p id="store-name-1">Tên cửa hàng</p>
+                </div>
+                <div>
+                  <a class="view-detail" href="/products/details" id="product-detail-1">Chi tiết</a>
                 </div>
               </div>
             </td>
-            <td data-th="Price">$1.99</td>
+            <td data-th="Price" id="price-1">1.99</td>
             <td data-th="Quantity">
-              <input type="number" class="form-control text-center mt2" value="1">
+              <input type="number" class="form-control text-center mt2" value="1" min="1" id="quantity-1">
             </td>
-            <td data-th="Subtotal" class="text-center">1.99</td>
+            <td data-th="Subtotal" class="text-center" id="subtotal-1">1.99</td>
             <td class="actions" data-th="">
-              <button class="btn_delete btn-danger "><i class="fa fa-trash-o"></i></button>								
+              <button class="btn_delete btn-danger " id="delete-1"><i class="fa fa-trash-o"></i></button>								
             </td>
-          </tr>
-        </tbody>
-        <tbody>         
+          </tr>       
           <tr>
             <td data-th="Product">
               <div class="row">
-                <input type="checkbox" id="checkbox1">
-                <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div>
+                <input type="checkbox" id="checkbox-2" class="check">
+                <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive" id="product-image-2"/></div>
                 <div class="col-sm-8">
-                  <h4 class="nomargin">Tên sản phẩm</h4>
-                  <p>Tên cửa hàng</p>
+                  <h4 class="nomargin" id="product-name-2">Tên sản phẩm</h4>
+                  <p id="store-name-2">Tên cửa hàng</p>
+                </div>
+                <div>
+                  <a class="view-detail" href="/products/details" id="product-detail-2">Chi tiết</a>
                 </div>
               </div>
             </td>
-            <td data-th="Price">$1.99</td>
+            <td data-th="Price" id="price-2">1.99</td>
             <td data-th="Quantity">
-              <input type="number" class="form-control text-center mt2" value="1">
+              <input type="number" class="form-control text-center mt2" value="1" min="1" id="quantity-2">
             </td>
-            <td data-th="Subtotal" class="text-center">1.99</td>
+            <td data-th="Subtotal" class="text-center" id="subtotal-2">1.99</td>
             <td class="actions" data-th="">
-              <button class="btn_delete btn-danger "><i class="fa fa-trash-o"></i></button>								
+              <button class="btn_delete btn-danger " id="delete-2"><i class="fa fa-trash-o"></i></button>								
             </td>
-          </tr>
-        </tbody>
-        <tbody>         
+          </tr>      
           <tr>
             <td data-th="Product">
               <div class="row">
-                <input type="checkbox" id="checkbox1">
-                <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div>
+                <input type="checkbox" id="checkbox-3" class="check">
+                <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive" id="product-image-3"/></div>
                 <div class="col-sm-8">
-                  <h4 class="nomargin">Tên sản phẩm</h4>
-                  <p>Tên cửa hàng</p>
+                  <h4 class="nomargin" id="product-name-3">Tên sản phẩm</h4>
+                  <p id="store-name-3">Tên cửa hàng</p>
+                </div>
+                <div>
+                  <a class="view-detail" href="/products/details" id="product-detail-3">Chi tiết</a>
                 </div>
               </div>
             </td>
-            <td data-th="Price">$1.99</td>
+            <td data-th="Price" id="price-3">1.99</td>
             <td data-th="Quantity">
-              <input type="number" class="form-control text-center mt2" value="1">
+              <input type="number" class="form-control text-center mt2" value="1" min="1" id="quantity-3">
             </td>
-            <td data-th="Subtotal" class="text-center">1.99</td>
+            <td data-th="Subtotal" class="text-center" id="subtotal-3">1.99</td>
             <td class="actions" data-th="">
-              <button class="btn_delete btn-danger "><i class="fa fa-trash-o"></i></button>								
+              <button class="btn_delete btn-danger " id="delete-3"><i class="fa fa-trash-o"></i></button>								
             </td>
           </tr>
         </tbody>
       </table>
       <hr>
-      <p class="right"><strong>Tổng hóa đơn: $1.99</strong></p>
+      <p class="right"><strong>Tổng hóa đơn: <span id="total">18000</span> VND</strong></p>
       <div class="buttons">
         <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" onclick="location.href='/home'">Tiếp tục mua hàng</button>
         <button type="button" class="btn btn-lg btn-primary mt-2" onclick="location.href='#payment'">Tiến hành thanh toán</button>
@@ -115,26 +120,26 @@
       <div class="card-body">
         <div class="col-75">
           <div class="container">
-            <form action="/action_page.php">
+            <form action="/action_page.php" id="order-details-form">
             
               <div class="row">
                 <div class="col-25">
                   <h3>Thông tin người nhận</h3>
-                  <label for="name"><i class="fa fa-user"></i> Họ và tên</label>
-                  <input type="text" id="fname" name="firstname" placeholder="Họ và tên người nhận hàng" required>
+                  <label for="name"><i class="fa fa-user"></i>  Họ và tên</label>
+                  <input type="text" id="name" name="firstname" placeholder="Họ và tên người nhận hàng" required>
       
                   <label for="email"><i class="fa fa-envelope"></i> Email</label>
                   <input type="text" id="email" name="email" placeholder="Email người nhận hàng" required>
       
-                  <label for="phone"><i class="fa fa-phone"></i> Số điện thoại</label>
-                  <input type="tel" id="phone" name="phone" placeholder="Số điện thoại người nhận">
+                  <label for="phone"><i class="fa fa-phone"></i>  Số điện thoại</label>
+                  <input type="tel" id="phone" name="phone" placeholder="Số điện thoại người nhận hàng">
 
       
-                  <label for="methos"><i class="fa fa-money"></i> Phương thức thanh toán</label>
+                  <!-- <label for="methos"><i class="fa fa-money"></i> Phương thức thanh toán</label>
                   <select class="form-control" required>
                       <option value="">--Chọn thành phố--</option>
                       <option value="City">Thành phố</option>
-                  </select>
+                  </select> -->
       
                 
                 </div>
@@ -142,44 +147,41 @@
                 <div class="col-25">
                   <h3>Địa chỉ nhận hàng</h3>          
                   <label for="city"> Tỉnh/Thành phố</label>
-                  <select class="form-control" required>
-                      <option value="">--Chọn thành phố--</option>
-                      <option value="City">Thành phố</option>
-                      <option value="City">Thành phố</option>
-                      <option value="City">Thành phố</option>
-                      <option value="City">Thành phố</option>
-                      <option value="City">Thành phố</option>
-                      <option value="City">Thành phố</option>
+                  <select class="form-control" name="Chọn tỉnh/thành phố" required>
+                      <option value="City" id="city-1">Thành phố</option>
+                      <option value="City" id="city-2">Thành phố</option>
+                      <option value="City" id="city-3">Thành phố</option>
+                      <option value="City" id="city-4">Thành phố</option>
+                      <option value="City" id="city-5">Thành phố</option>
+                      <option value="City" id="city-6">Thành phố</option>
                   </select>
       
                   <label for="district"> Quận/Huyện</label>
-                  <select class="form-control" required>
-                      <option value="">--Chọn thành phố--</option>
-                      <option value="City">Thành phố</option>
-                      <option value="City">Thành phố</option>
-                      <option value="City">Thành phố</option>
-                      <option value="City">Thành phố</option>
-                      <option value="City">Thành phố</option>
-                      <option value="City">Thành phố</option>
+                  <select class="form-control" name="Chọn quận/huyện" required>
+                      <option value="district" id="district-1">Thành phố</option>
+                      <option value="district" id="district-2">Thành phố</option>
+                      <option value="district" id="district-3">Thành phố</option>
+                      <option value="district" id="district-4">Thành phố</option>
+                      <option value="district" id="district-5">Thành phố</option>
+                      <option value="district" id="district-6">Thành phố</option>
                   </select>
       
                   <label for="village"> Phường/Xã</label>
-                  <select class="form-control" required>
-                      <option value="">--Chọn thành phố--</option>
-                      <option value="City">Thành phố</option>
-                      <option value="City">Thành phố</option>
-                      <option value="City">Thành phố</option>
-                      <option value="City">Thành phố</option>
-                      <option value="City">Thành phố</option>
-                      <option value="City">Thành phố</option>
+                  <select class="form-control" name="Chọn phường/xã" required>
+                      <option value="village" id="village-1">Thành phố</option>
+                      <option value="village" id="village-2">Thành phố</option>
+                      <option value="village" id="village-3">Thành phố</option>
+                      <option value="village" id="village-4">Thành phố</option>
+                      <option value="village" id="village-5">Thành phố</option>
+                      <option value="village" id="village-6">Thành phố</option>
                   </select> 
                   
                   <label for="adr"> Địa chỉ cụ thể</label>
-                  <input type="text" id="adr" name="address" placeholder="Số nhà, đường..." required>
+                  <input type="text" id="address" name="address" placeholder="Số nhà, tên đường..." required>
                 </div>         
               </div>
               <div class="button_center">
-                <input type="submit" value="Kiểm tra đơn hàng" class="btn center">
+                <input type="submit" value="Xác nhận mua hàng" id="confirm-payment" class="btn center">
               </div>              
             </form>
           </div>
