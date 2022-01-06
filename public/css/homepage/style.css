@@ -634,7 +634,7 @@ header .actions .menu #logged-in{
 }
 
 .header-bottom .nav-links ul {
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -643,6 +643,8 @@ header .actions .menu #logged-in{
   text-decoration: none;
   transition: all 0.3s ease;
   position: relative;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .header-bottom .nav-links a::after {
@@ -1896,7 +1898,7 @@ span {
     height: 230px;
     padding: 22px 0 0 30px;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: flex-start;
   }
 

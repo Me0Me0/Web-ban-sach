@@ -59,7 +59,7 @@ class UserController:
 
     @staticmethod
     @router.get('/change-password', response_class=FileResponse)
-    def changeProfile():
+    def changePassword():
         return "./views/changePassword/change-password.html"
 
     @staticmethod
