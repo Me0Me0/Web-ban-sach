@@ -27,6 +27,16 @@ class ProductController:
         return "./views/category/index.html"
 
     @staticmethod
+    @router.get('/new-product', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
+    def getBestSeller():
+        return "./views/newProduct/index.html"
+
+    @staticmethod
+    @router.get('/details', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
+    def getBestSeller():
+        return "./views/productViewCustomer/index.html"
+
+    @staticmethod
     @router.get('/{id}',response_model=product_schema.Product,dependencies=[Depends(configs.db.get_db)])
     def getById(id: int):
         product = ProductService.getById(id)
