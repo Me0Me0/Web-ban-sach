@@ -146,7 +146,7 @@ button {
   height: 100%;
   top: 0;
   left: 0;
-  background: url("../img/decorElements/DecorRectangle.png") 50% 50% no-repeat;
+  /* background: url("../img/decorElements/DecorRectangle.png") 50% 50% no-repeat; */
   opacity: 0.2;
   z-index: 4;
 }

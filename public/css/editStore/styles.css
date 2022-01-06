@@ -17,7 +17,7 @@ body{
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  width: 600px;
+  width: 615px;
   height: auto;
   display: flex;
   box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
@@ -62,9 +62,9 @@ body{
 }
 
 .wrapper .right .info_data .data input{
-  margin: 10px 0 10px 0;
+  margin: 20px 0 20px 0;
   padding: 10px 0 10px 0;
-  width: 550px;
+  width: 565px;
   height: auto;
   font-size: 15px;
 }
