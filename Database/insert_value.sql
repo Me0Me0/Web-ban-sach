@@ -32,12 +32,16 @@ INSERT INTO `user` (`username`, `password`, `name`, `dob`, `phone`, `email`, `av
 --
 
 	INSERT INTO `category` (`id`, `name`) VALUES
-	(1, 'Văn học'),
-    (2, 'Truyện tranh'),
-    (3, 'Kinh doanh'),
-    (4, 'Thủ công'),
-    (5, 'Ngoại văn'),
-    (6, 'Khoa học');
+	(1, 'Chính trị – pháp luật'),
+    (2, 'Khoa học công nghệ'),
+    (3, 'Kinh tế'),
+    (4, 'Văn học'),
+    (5, 'Văn học nước ngoài'),
+    (6, 'Tiểu thuyết'),
+    (7, 'Văn hóa – Lịch sử'),
+    (8, 'Tâm lý'),
+    (9, 'Thiếu nhi'),
+    (10, 'Khác');
     
     
 --
@@ -45,11 +49,11 @@ INSERT INTO `user` (`username`, `password`, `name`, `dob`, `phone`, `email`, `av
 --
 
 	INSERT INTO `product` (`name`, `cate_id`, `description`, `detail`, `author`, `number_of_pages`, `publishing_year`, `publisher`, `cover_image`, `store_id`, `quantity`, `price`) VALUES
-	('Bầu trời xanh', '1', 'Sách mới, nguyên seal', 'Cuốn sách kể về hành trình...', 'Nguyễn Văn T', 154, '2018', 'NXB1', 'image_link', '1', 5, 79000),
-	('Mèo và cá', '1', 'Sách mới, nguyên seal', 'Cuốn sách kể về hành trình...', 'Lê A', 108, '2020', 'NXB1', 'image_link', '1', 3, 70000),
-    ('Đường về nhà', '2', 'Sách mới, nguyên seal', 'Cuốn sách kể về hành trình...', 'Vũ V', 60, '2019', 'NXB2', 'image_link', '2', 1, 120000),
-    ('Tổng quan vũ trụ', '6', 'Sách cũ, bìa còn tốt', 'Cuốn sách giải thích...', 'Nguyễn Xuân B', 200, '2011', 'NXB3', 'image_link', '2', 3, 180000),
-	('Hướng dẫn gấp giấy', '4', 'Sách cũ, màu tốt', 'Cuốn sách hướng dẫn...', 'Trịnh K', 80, '2015', 'NXB2', 'image_link', '3', 2, 100000);
+	('Bầu trời xanh', '6', 'Sách mới, nguyên seal', 'Cuốn sách kể về hành trình...', 'Nguyễn Văn T', 154, '2018', 'NXB1', 'image_link', '1', 5, 79000),
+	('Mèo và cá', '5', 'Sách mới, nguyên seal', 'Cuốn sách kể về hành trình...', 'Lê A', 108, '2020', 'NXB1', 'image_link', '1', 3, 70000),
+    ('Đường về nhà', '8', 'Sách mới, nguyên seal', 'Cuốn sách kể về hành trình...', 'Vũ V', 60, '2019', 'NXB2', 'image_link', '2', 3, 120000),
+    ('Tổng quan vũ trụ', '2', 'Sách cũ, bìa còn tốt', 'Cuốn sách giải thích...', 'Nguyễn Xuân B', 200, '2011', 'NXB3', 'image_link', '2', 3, 180000),
+	('Khởi nghiệp', '3', 'Sách cũ, màu tốt', 'Cuốn sách hướng dẫn...', 'Trịnh K', 80, '2015', 'NXB2', 'image_link', '3', 4, 100000);
     
     
 --
@@ -12161,7 +12165,15 @@ INSERT INTO `ward` (`id`, `_name`, `_prefix`, `_province_id`, `_district_id`) VA
 -- Đang đổ dữ liệu cho bảng `order_detail`
 --
 
--- 	INSERT INTO `order_detail` (`owner_id`, `store_id`, `status`, `total_cost`, `recipient_name`, `recipient_phone`, `recipient_address`, `province_id`, `district_id`, `ward_id`) VALUES
--- ('1', '1', '84000', 'Nguyễn A', '022334342', '123 ABC', '1', '1', '1'),
--- 	('4', '1', '400000', 'Lê B', '022334342', '13 XYZ', '1', '1', '1'),
--- ('5', '1', '370000', 'Nguyễn C', '022334342', '57 DEF', '1', '1', '1');
+ INSERT INTO `order_detail` (`owner_id`, `store_id`, `status`, `total_cost`, `recipient_name`, `recipient_phone`, `recipient_address`, `province_id`, `district_id`, `ward_id`) VALUES
+ 	('1', '1','1', '220000', 'Quân', '367854', '123 đường ABC', '1', '1', '1'),
+    ('1', '2','1', '180000', 'Quân', '367854', '123 đường ABC', '1', '1', '1');
+
+--
+-- Đang đổ dữ liệu cho bảng `order_product`
+--
+
+ INSERT INTO `order_product` (`order_id`, `product_id`, `quantity`) VALUES
+ 	('1', '1','1'),
+    ('1', '2','2'),
+    ('2', '4','1');

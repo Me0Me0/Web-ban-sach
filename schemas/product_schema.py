@@ -63,4 +63,15 @@ class ProductUpdateImages(BaseModel):
 
 class ProductSell(Product):
     sum: int
+
+
+class ProductOrderDisplay(BaseModel):
+    id: int
+    name: str
+    price: float
+
+
+    class Config:
+        orm_mode = True
+        getter_dict = PeeweeGetterDict
     
