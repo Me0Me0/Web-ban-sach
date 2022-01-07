@@ -38,7 +38,7 @@ async function onFormsubmit(e) {
         })
     }
 
-    const res = await fetch("/users/signin", options);
+    const res = await fetch("/api/users/signin", options);
     const data = await res.json();
 
     if (data.error) {

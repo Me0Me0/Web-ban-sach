@@ -6,10 +6,10 @@ class CartService:
 
     @classmethod
     def getOwnCart(cls, user_id):
-        cart = CartRepository.getCartID(user_id)
-        if len(cart) == 0:
-            raise Exception(404, "not found")
-        return cart[0].__data__
+        cart_id = CartRepository.getCartID(user_id)
+        # if len(cart) == 0:
+        #     raise Exception(404, "not found")
+        return cart_id
 
     @classmethod
     def createCart(cls, user_id):

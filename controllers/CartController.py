@@ -11,7 +11,7 @@ from configs.constant import DUPLICATION_ERROR
 from fastapi.responses import FileResponse
 
 class CartController:
-    router = APIRouter(prefix='/carts')
+    router = APIRouter(prefix='/cart')
 
     @staticmethod
     @router.post('', dependencies=[Depends(configs.db.get_db)])
@@ -28,14 +28,14 @@ class CartController:
         }
 
     @staticmethod
-    @router.get('/details', dependencies=[Depends(configs.db.get_db)])
+    @router.get('', dependencies=[Depends(configs.db.get_db)])
     def cartDetail(user = Depends(getUser)):
         try:
-            cart = CartService.getOwnCart(user['id'])
+            cart_id = CartService.getOwnCart(user['id'])
         except Exception as e:
             if e.args[0] == 404:
                 raise HTTPException(status_code=404, detail=e.args[1])
             raise Exception(e)
-        return CartService.getAll(cart['id'])
+        return CartService.getAll(cart_id)
 
         #return "./views/cart/index.html"

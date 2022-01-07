@@ -5,7 +5,7 @@ const options = {
   }
 }
 
-fetch("/users/details", options)
+fetch("/api/users/details", options)
 .then(data => data.json())
 .then(data =>  { 
   console.log(data);

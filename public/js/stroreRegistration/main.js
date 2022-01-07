@@ -46,7 +46,7 @@ async function onFormsubmit(e) {
           des: des
       })
     }
-    fetch("/mystore/register", options)
+    fetch("/api/mystore/register", options)
     .then(data => data.json())
     .then(data =>  { 
       console.log(data);

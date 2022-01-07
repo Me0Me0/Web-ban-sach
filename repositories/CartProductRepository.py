@@ -2,6 +2,7 @@ from peewee import *
 from configs.db import db
 from models.CartProduct import CartProduct
 from models.Product import Product
+from models.Store import Store
 
 
 class CartProductRepository():
@@ -17,11 +18,25 @@ class CartProductRepository():
       
       predicate1 = (CartProduct.cart_id == cart_id)
       predicate2 = (Product.id == CartProduct.product_id)
+      predicate3 = (Product.store_id == Store.id)
 
-      query = Product.select(Product.name, CartProduct.quantity, Product.price).join(CartProduct, on=predicate2).where(Product.deleted_at.is_null(True) & predicate1).dicts()
+      query = Product.select(
+         CartProduct.quantity, 
+         Product.id.alias('product_id'),
+         Product.name, 
+         Product.price, 
+         Store.id.alias('store_id'),
+         Store.name.alias('store_name'), 
+      ).join(CartProduct, on=predicate2).join(Store, on=predicate3).where(Product.deleted_at.is_null(True), predicate1).dicts()
+
       result = query.execute()
-
       return list(result)
+
+   
+   # get specific cart product
+   @classmethod
+   def get(cls, cart_id: int, product_id: int):
+      return CartProduct.get(CartProduct.cart_id == cart_id, CartProduct.product_id == product_id)
 
 
    @classmethod

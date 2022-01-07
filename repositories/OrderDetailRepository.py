@@ -1,4 +1,5 @@
 from peewee import *
+from models.CartProduct import CartProduct
 from models.OrderDetail import OrderDetail
 from models.OrderProduct import OrderProduct
 from models.User import User
@@ -54,6 +55,7 @@ class OrderDetailRepository():
                         if nUpdate == 0 or item.quantity <= 0: 
                             raise Exception(422, "Invalid quantity")
                         OrderProduct.create(order_id = order_id, product_id = item.product_id, quantity = item.quantity)      
+                        CartProduct.delete().where(CartProduct.cart_id == item.cart_id, CartProduct.product_id == item.product_id).execute()
 
                 transaction.commit()
                 return True

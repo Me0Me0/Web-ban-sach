@@ -103,6 +103,6 @@ class UserService:
         
         # hash password with bcrypt
         salt = bcrypt.gensalt(10)
-        hashed = bcrypt.hashpw(password.encode(), salt)
+        hashed = bcrypt.hashpw(new_password.encode(), salt)
 
         return UserRepository.updatePassword(user_id, hashed)

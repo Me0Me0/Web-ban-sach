@@ -5,7 +5,7 @@ const options = {
   }
 }
 
-fetch("/mystore/details", options)
+fetch("/api/mystore/details", options)
 .then(data => data.json())
 .then(data =>  { 
   console.log(data);

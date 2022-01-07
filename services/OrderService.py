@@ -1,3 +1,5 @@
+from repositories.CartProductRepository import CartProductRepository
+from repositories.CartRepository import CartRepository
 from repositories.OrderDetailRepository import OrderDetailRepository
 from repositories.OrderProductRepository import OrderProductRepository
 from repositories.ProductRepository import ProductRepository
@@ -22,23 +24,30 @@ class OrderService:
         except Exception as e:
             raise Exception(422, "Invalid province, district or ward")
 
-        ordersByStore = {}
+        if len(payload.products) == 0:
+            raise Exception(422, "Cart is empty")
 
+        ordersByStore = {}
         for item in payload.products:
             try:
                 product = ProductRepository.getById(item.product_id)
             except Exception as e:
                 raise Exception(422, "Invalid product")
-            
+
+            try:
+                cart_id = CartRepository.getCartID(user_id)
+                cartItem = CartProductRepository.get(cart_id, item.product_id)
+            except Exception as e:
+                raise Exception(422, "Invalid cart")
 
             if product.store_id not in ordersByStore:
                 ordersByStore[product.store_id] = {
-                    'total_cost': product.price * item.quantity,
-                    'items': [ item ]
+                    'total_cost': product.price * cartItem.quantity,
+                    'items': [ cartItem ]
                 }
             else:
-                ordersByStore[product.store_id]['total_cost'] += product.price * item.quantity
-                ordersByStore[product.store_id]['items'].append(item)
+                ordersByStore[product.store_id]['total_cost'] += product.price * cartItem.quantity
+                ordersByStore[product.store_id]['items'].append(cartItem)
         
         return OrderDetailRepository.createOrdersTransaction(
             user_id = user_id,

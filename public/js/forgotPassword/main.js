@@ -27,7 +27,7 @@ async function onFormsubmit(e) {
             })
         }        
 
-        const res = await fetch("/users/forgot-password", options);
+        const res = await fetch("/api/users/forgot-password", options);
         const data = await res.json();
 
         //Có gì sửa lại dòng này giúp e

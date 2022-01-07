@@ -17,36 +17,6 @@ class ProductController:
     router = APIRouter(prefix='/products')
 
     @staticmethod
-    @router.get('/best-seller', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
-    def getBestSeller():
-        return "./views/bestSeller/index.html"
-
-    @staticmethod
-    @router.get('/category', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
-    def getCategory():
-        return "./views/category/index.html"
-
-    @staticmethod
-    @router.get('/new-product', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
-    def getNewProduct():
-        return "./views/newProduct/index.html"
-
-    @staticmethod
-    @router.get('/details', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
-    def getProductDetails():
-        return "./views/productViewCustomer/index.html"
-
-    @staticmethod
-    @router.get('/details-view-seller', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
-    def getProductDetailsViewSeller():
-        return "./views/productViewSeller/index.html"
-
-    @staticmethod
-    @router.get('/edit-product', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
-    def getProductDetails():
-        return "./views/editProduct/index.html"
-
-    @staticmethod
     @router.get('/{id}',response_model=product_schema.Product,dependencies=[Depends(configs.db.get_db)])
     def getById(id: int):
         product = ProductService.getById(id)

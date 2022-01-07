@@ -40,8 +40,8 @@ async function onFormsubmit(e) {
         }   
         
         token = token.substring(token.lastIndexOf('/') + 1)
-        console.log(`/users/reset-password/${token}`)
-        const res = await fetch(`/users/reset-password/${token}`, options);
+        console.log(`/api/users/reset-password/${token}`)
+        const res = await fetch(`/api/users/reset-password/${token}`, options);
         const data = await res.json();
 
         //Có gì sửa lại dòng này giúp em

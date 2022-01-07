@@ -37,12 +37,12 @@ async function onFormsubmit(e) {
                 "content-type": "application/json"
             },
             body: JSON.stringify({
-                oldpass: oldpass,
-                newpass: password
+                old_password: oldpass,
+                new_password: password
             })
         }   
         
-        const res = await fetch("/users/change-password", options);
+        const res = await fetch("/api/users/change-password", options);
         const data = await res.json();
 
 

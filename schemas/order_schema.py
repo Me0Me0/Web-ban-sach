@@ -38,7 +38,6 @@ class OrderDetail(BaseModel):
 
 class OrderCreationProduct(BaseModel):
     product_id: int
-    quantity: int
 
 
 class OrderCreation(BaseModel):

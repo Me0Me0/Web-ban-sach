@@ -27,33 +27,6 @@ class StoreController:
 
     # -----------------------------------------------------------------------------
     # Mystore - View nguoi ban
-
-    
-    @staticmethod
-    @router2.get('', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-    def mystore_page():
-        return "./views/storeViewSeller/index.html"
-
-    @staticmethod
-    @router2.get('/add-product', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-    def mystore_page():
-        return "./views/addProduct/index.html"
-
-    @staticmethod
-    @router2.get('/register', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-    def mystoreRegistration():
-        return "./views/stroreRegistration/index.html"
-
-    @staticmethod
-    @router2.get('/view-details', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-    def mystore_page():
-        return "./views/storeDetails_ViewSeller/index.html"
-
-    @staticmethod
-    @router2.get('/edit-details', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-    def mystore_page():
-        return "./views/editStore/index.html"
-
       
     @staticmethod
     @router2.post('/register')
@@ -71,7 +44,7 @@ class StoreController:
      
 
     @staticmethod
-    @router2.get('/details', dependencies=[Depends(configs.db.get_db)])
+    @router2.get('', dependencies=[Depends(configs.db.get_db)])
     def storeDetail(limit:int = Query(10, gt=0), skip:int = Query(0, ge=0), user = Depends(getUser)):
         """Return: 
            [store_info_dict, list(product_info_dict)]"""
@@ -185,16 +158,6 @@ class StoreController:
    
     # -----------------------------------------------------------------------------
     # Store - View nguoi dung
-
-    @staticmethod
-    @router.get('/{store_id}', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-    def storePage():
-        return "./views/storeViewCus/index.html"
-
-    @staticmethod
-    @router.get('/{store_id}/details', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-    def storeDetails():
-        return "./views/storeDetails_ViewCus/index.html"
     
     @staticmethod
     @router.get('/{store_id}', dependencies=[Depends(configs.db.get_db)])

@@ -31,31 +31,33 @@
               <th style="width:8%"></th>
             </tr>
         </thead>
-        <tbody>         
-          <tr>
-            <td data-th="Product">
-              <div class="row">
-                <input type="checkbox" id="checkbox-1" class="check">
-                <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive" id="product-image-1"/></div>
-                <div class="col-sm-8">
-                  <h4 class="nomargin" id="product-name-1">Tên sản phẩm</h4>
-                  <p id="store-name-1">Tên cửa hàng</p>
+        <tbody id="cart-items"> 
+          <template id="item-template">     
+            <tr>
+              <td data-th="Product">
+                <div class="row">
+                  <input type="checkbox" class="checkbox" class="check">
+                  <div class="col-sm-2 hidden-xs product-image"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div>
+                  <div class="col-sm-8">
+                    <h4 class="nomargin product-name">Tên sản phẩm</h4>
+                    <p class="store-name">Tên cửa hàng</p>
+                  </div>
+                  <div>
+                    <a class="view-detail" href="/products/">Chi tiết</a>
+                  </div>
                 </div>
-                <div>
-                  <a class="view-detail" href="/products/details" id="product-detail-1">Chi tiết</a>
-                </div>
-              </div>
-            </td>
-            <td data-th="Price" id="price-1">1.99</td>
-            <td data-th="Quantity">
-              <input type="number" class="form-control text-center mt2" value="1" min="1" id="quantity-1">
-            </td>
-            <td data-th="Subtotal" class="text-center" id="subtotal-1">1.99</td>
-            <td class="actions" data-th="">
-              <button class="btn_delete btn-danger " id="delete-1"><i class="fa fa-trash-o"></i></button>								
-            </td>
-          </tr>       
-          <tr>
+              </td>
+              <td data-th="Price" class="price">1.99</td>
+              <td data-th="Quantity">
+                <input type="number" class="form-control text-center mt2 quantity" value="1" min="1">
+              </td>
+              <td data-th="Subtotal" class="text-center subtotal">1.99</td>
+              <td class="actions" data-th="">
+                <button class="btn_delete btn-danger delete"><i class="fa fa-trash-o"></i></button>								
+              </td>
+            </tr>
+          </template>
+          <!-- <tr>
             <td data-th="Product">
               <div class="row">
                 <input type="checkbox" id="checkbox-2" class="check">
@@ -100,11 +102,11 @@
             <td class="actions" data-th="">
               <button class="btn_delete btn-danger " id="delete-3"><i class="fa fa-trash-o"></i></button>								
             </td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
       <hr>
-      <p class="right"><strong>Tổng hóa đơn: <span id="total">18000</span> VND</strong></p>
+      <p class="right"><strong>Tổng hóa đơn: <span id="total">0</span> VND</strong></p>
       <div class="buttons">
         <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" onclick="location.href='/'">Tiếp tục mua hàng</button>
         <button type="button" class="btn btn-lg btn-primary mt-2" onclick="location.href='#payment'">Tiến hành thanh toán</button>

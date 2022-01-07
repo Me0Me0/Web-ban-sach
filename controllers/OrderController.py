@@ -28,7 +28,7 @@ class OrderController:
 
 
     @staticmethod
-    @router.get("/own", response_model=List[order_schema.OrderDetail], dependencies=[Depends(get_db)])
+    @router.get("", response_model=List[order_schema.OrderDetail], dependencies=[Depends(get_db)])
     def getOwnOrders(limit: int = 10, skip: int = 0, user = Depends(getUser)):
         orders = OrderService.getOwnOrders(user['id'], limit, skip)
         return orders

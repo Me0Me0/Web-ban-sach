@@ -82,7 +82,7 @@ async function onFormsubmit(e) {
       if(data.data&&data.data.id)
       {
         alert("Tạo tài khoản thành công, đăng nhập để tiếp tục"); 
-        location.href = "/users/signin"
+        location.href = "/api/users/signin"
       } 
       else
       {

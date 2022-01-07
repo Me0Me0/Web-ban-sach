@@ -19,7 +19,7 @@ const options = {
   }
 }
 
-fetch("/mystore/edit", options)
+fetch("/api/mystore/edit", options)
 .then(data => data.json())
 .then(data =>  { 
   inputFullname.value = data.name;
@@ -67,7 +67,7 @@ async function onFormsubmit(e) {
             des: des
         })
       }
-      fetch("/mystore/edit", options)
+      fetch("/api/mystore/edit", options)
       .then(data => data.json())
       .then(data =>  { 
         alert("Thay đổi thông tin cửa hàng thành công"); 
