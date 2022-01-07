@@ -23,8 +23,18 @@ class OrderDetailRepository():
 
 
     @classmethod
+    def getByStoreId(cls, store_id, skip: int = 0, limit: int = 100):
+        return list(OrderDetail.select().where(OrderDetail.store_id == store_id).offset(skip).limit(limit))
+    
+    
+    @classmethod
     def getByIdList(cls, id_list):
         return list(OrderDetail.select().where(OrderDetail.id.in_(id_list)))
+
+
+    @classmethod
+    def getById(cls, id_order: int):
+        return OrderDetail.get_by_id(id_order)
 
 
     @classmethod
@@ -108,3 +118,13 @@ class OrderDetailRepository():
           raise Exception("Can not find order with given id")
 
        return delete_order.delete_instance()
+
+    
+    @classmethod
+    def setStatus(cls, id: int, status: int):
+        try:
+            update_order = OrderDetail.get_by_id(id)
+        except:
+            raise Exception("Can not find order with given id")
+        update_order.status = status
+        return update_order.save()

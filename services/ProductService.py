@@ -15,7 +15,7 @@ class ProductService:
     def getById(cls, id):
         return ProductRepository.getById(id)
 
-      
+    
     @classmethod
     def delete(cls, id, user_id):
         stores = StoreRepository.getByUserId(user_id)
@@ -24,6 +24,11 @@ class ProductService:
         if len(stores) == 0 or product.store_id != stores[0]:
             raise Exception(403, "forbidden")
 
+        # Các order có sản phẩm này và đang trong status 1 hoặc 2
+        productsOnOrder = ProductRepository.inOrderWithStatus(id)
+        if len(productsInOrder) > 0:
+            raise Exception(403, "Can't delete, products are currently on order")
+        
         ProductRepository.deleteById(id)
         
 

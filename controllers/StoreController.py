@@ -45,9 +45,7 @@ class StoreController:
 
     @staticmethod
     @router2.get('', dependencies=[Depends(configs.db.get_db)])
-    def storeDetail(limit:int = Query(10, gt=0), skip:int = Query(0, ge=0), user = Depends(getUser)):
-        """Return: 
-           [store_info_dict, list(product_info_dict)]"""
+    def getStoreDetail(user = Depends(getUser)):
         # Store id
         try:
             store = StoreService.getOwnStore(user['id'])
@@ -55,9 +53,22 @@ class StoreController:
             if e.args[0] == NOT_FOUND_ERROR:
                 raise HTTPException(status_code=404, detail=e.args[1])
             raise Exception(e)
-        return StoreService.getAll(skip, limit, store['id'])
+        return StoreService.getStoreDetail(store['id'])
        
-        
+    
+    @staticmethod
+    @router2.get('/products', dependencies=[Depends(configs.db.get_db)])
+    def getStoreProduct(limit:int = Query(10, gt=0), skip:int = Query(0, ge=0), user = Depends(getUser)):
+        # Store id
+        try:
+            store = StoreService.getOwnStore(user['id'])
+        except Exception as e:
+            if e.args[0] == NOT_FOUND_ERROR:
+                raise HTTPException(status_code=404, detail=e.args[1])
+            raise Exception(e)
+        return StoreService.getStoreProduct(skip, limit, store['id'])
+
+
     @staticmethod
     @router2.post('/products/new', dependencies=[Depends(configs.db.get_db)])
     def createProduct(payload: product_schema.ProductCreate, user = Depends(getUser)):
@@ -156,6 +167,7 @@ class StoreController:
             }
         }
    
+
     # -----------------------------------------------------------------------------
     # Store - View nguoi dung
     

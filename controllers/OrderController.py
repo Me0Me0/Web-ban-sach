@@ -4,8 +4,9 @@ from configs.db import get_db
 
 from services.OrderService import OrderService
 from schemas import order_schema
+from schemas import order_product_schema
 from configs.dependency import getUser
-from configs.constant import UNPROCCESSABLE_ENTITY_ERROR
+from configs.constant import UNPROCCESSABLE_ENTITY_ERROR, NOT_FOUND_ERROR, FORBIDDEN_ERROR
 from fastapi.responses import FileResponse
 
 class OrderController:
@@ -35,22 +36,45 @@ class OrderController:
 
 
     @staticmethod
-    @router.get("/products", response_model=List[order_schema.OrderProduct], dependencies=[Depends(get_db)])
-    def getProductsOrders(limit: int = 10, skip: int = 0, user = Depends(getUser)): #user_type: int
-        # user_type = 0 nếu là user, 1 nếu là store
-        # truyền vào từ FE?
-        
-        # Store 
-        #if user_type == 1:
-        #    try:
-        #        getOwnOrders()
-        products = OrderService.getProducts(user['id'], limit, skip)
-        return products
+    @router.get("/products", response_model=List[order_product_schema.OrderProductDisplay], dependencies=[Depends(get_db)])
+    def getProductsOrders(user_type: int, limit: int = 10, skip: int = 0, user = Depends(getUser)):
+        # user_type = 1 nếu là user, 2 nếu là store
+        orders = []
+
+        # User 
+        if user_type == 1:
+            try:
+                orders = OrderService.getOwnOrders(user['id'], limit, skip)
+            except Exception as e:
+                if e.args[0] == NOT_FOUND_ERROR:
+                    raise HTTPException(e.args[0], detail=e.args[1])
+                raise Exception(e)
+
+        # Store
+        elif user_type == 2:
+            try: 
+                orders = OrderService.getStoreOrders(user['id'], limit, skip)
+            except Exception as e:
+                if e.args[0] == NOT_FOUND_ERROR:
+                    raise HTTPException(e.args[0], detail=e.args[1])
+                raise Exception(e)
+
+        return OrderService.getByListOrderID(orders, skip, limit)
 
     
     @staticmethod
-    @router.delete('/{id}', dependencies=[Depends(get_db)])
-    def delete(id: int, user = Depends(getUser)):
-        pass
-        # case 1: if user want to del order -> check if user own this order
-        # case 2: if store want to del order -> check if store have this order
+    @router.delete('/{order_id}', dependencies=[Depends(get_db)])
+    def delete(user_type: int, order_id: int):#, user = Depends(getUser)):
+        # Cancel order
+        try:
+            OrderService.cancelOrder(user_type, 3, order_id)#user['id'], order_id)
+        except Exception as e:
+            if e.args[0] == NOT_FOUND_ERROR or e.args[0] == FORBIDDEN_ERROR:
+                raise HTTPException(e.args[0], detail=e.args[1])
+            raise Exception(e)
+
+        return {
+            "data":{
+                "success": True
+            }
+        }
