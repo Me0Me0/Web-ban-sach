@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Chỉnh sửa thông tin cửa hàng</title>
+  <link rel="icon" type="image/png" href="/public/images/signin/favicon.png"/>
+	<link rel="stylesheet" href="/public/css/editStore/styles.css">
+</head>
+<body>
+  <form id="edit-profile-form">
+    <div class="wrapper">
+      <div class="right">
+          <div class="info">
+              <h3>Chỉnh sửa thông tin cửa hàng</h3>
+              <div class="info_data">
+                  <div class="data">
+                    <h4>Tên cửa hàng</h4>
+                    <input class="input100" type="text" name="name" id="name" placeholder="Tên cửa hàng">
+                  </div>
+                  <div class="data">
+                    <h4>Email</h4>
+                    <input class="input100" type="email" name="email" id="email" placeholder="Email">
+                  </div>
+                  <div class="data">
+                    <h4>Số điện thoại</h4>
+                    <input class="input100" type="tel" name="phone" id="phone" placeholder="Số điện thoại">
+                  </div>
+                  <div class="data">
+                    <h4>Mô tả</h4>
+                    <input class="input100" type="text" name="description" id="description" placeholder="Nhập mô tả cửa hàng">
+                  </div>
+              </div>
+          </div>     
+          <div class="setting_btn">
+              <ul>
+                <li><a href="javascript:history.back()">Quay lại</a></li>
+                <li>
+                  <!-- <button class="login100-form-btn" id="submit_btn" type="submit">
+                    Hoàn thành
+                  </button> -->
+                  <input type="submit" name="change-profile" class="login100-form-btn" id="submit-change" value="Thay đổi">
+                </li>                
+            </ul>
+        </div>
+      </div>
+    </div>
+  </form>
+  <script src="/public/js/editStore/main.js"></script>
+  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+</body>
+</html>

@@ -43,9 +43,15 @@ class User(BaseModel):
 class UserDeleted(User):
     deleted_at: date
 
+
 class forgetPassword(BaseModel):
     username: str
+
 
 class resetPassword(BaseModel):
     password: str
 
+
+class changePassword(BaseModel):
+    old_password: str
+    new_password: str

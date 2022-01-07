@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+body{
+   background-color: #aadfff;
+}
+
+.wrapper{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 615px;
+  height: auto;
+  display: flex;
+  box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
+}
+
+.wrapper .right{
+  width: 100%;
+  background: #fff;
+  padding: 30px 25px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.wrapper .right .info,
+.wrapper .right .projects{
+  margin-bottom: 25px;
+}
+
+.wrapper .right .info h3,
+.wrapper .right .projects h3{
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #e0e0e0;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+
+.wrapper .right .info_data,
+.wrapper .right .projects_data{
+  justify-content: space-between;
+}
+
+.wrapper .right .info_data .data,
+.wrapper .right .projects_data .data{
+  width: 95%;
+}
+
+.wrapper .right .info_data .data h4,
+.wrapper .right .projects_data .data h4{
+  color: #000;
+}
+
+.wrapper .right .info_data .data input{
+  margin: 20px 0 20px 0;
+  padding: 10px 0 10px 0;
+  width: 565px;
+  height: auto;
+  font-size: 15px;
+}
+
+.wrapper .right .info_data .data input::placeholder,
+.wrapper .right .info_data .data input::value
+{
+  position: relative;
+  left: 5px;
+  color: #000;
+}
+
+.wrapper .right .info_data .data p,
+.wrapper .right .projects_data .data p{
+  font-size: 15px;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.wrapper .setting_btn ul{
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrapper .setting_btn ul li,
+.wrapper .setting_btn ul li input{
+  width: 185px;
+  height: 45px;
+  background: #193498;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 45px;
+}
+
+.wrapper .setting_btn ul li a, 
+.wrapper .setting_btn ul li input{
+  color :#fff;
+  display: block;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.wrapper .setting_btn input:hover{
+  cursor: pointer;
+}

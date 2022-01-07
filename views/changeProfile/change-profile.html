@@ -2,65 +2,69 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Thông tin cá nhân</title>
+	<title>Chỉnh sửa thông tin cá nhân</title>
+  <link rel="icon" type="image/png" href="/public/images/signin/favicon.png"/>
 	<link rel="stylesheet" href="/public/css/changeProfile/styles.css">
-	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 <body>
-
-<form class="login100-form validate-form" id="eidt_profile_form"></form>
-  <div class="wrapper">
-    <div class="left">
-        <img id="avt" src="https://i.imgur.com/cMy8V5j.png" 
-        alt="user" width="100">
-        <p>Chọn ảnh đại diện</p>
-        <input type="file" accept="image/*" onchange="loadFile(event)">
-        <script>
-          var loadFile = function(event) {
-            var reader = new FileReader();
-            reader.onload = function(){
-              var output = document.getElementById('avt');
-              output.src = reader.result;
+  <form id="edit-profile-form">
+    <div class="wrapper">
+      <div class="left">
+        <div class="avt">
+          <img id="avt" src="https://i.imgur.com/cMy8V5j.png" alt="user" width="100">
+        </div>
+        <div class="input-avt">
+          <p>Ảnh đại diện</p>
+          <input type="file" accept="image/*" onchange="loadFile(event)">
+          <!-- <script>
+            var loadFile = function(event) {
+              var reader = new FileReader();
+              reader.onload = function(){
+                var output = document.getElementById('avt');
+                output.src = reader.result;
+              };
+              reader.readAsDataURL(event.target.files[0]);
             };
-            reader.readAsDataURL(event.target.files[0]);
-          };
-        </script>
-    </div>
-    <div class="right">
-        <div class="info">
-            <h3>Chỉnh sửa thông tin</h3>
-            <div class="info_data">
-                <div class="data">
+          </script> -->
+        </div>
+      </div>
+      <div class="right">
+          <div class="info">
+              <h3>Chỉnh sửa thông tin</h3>
+              <div class="info_data">
+                  <div class="data">
                     <h4>Họ và tên</h4>
-                    <input class="input100" type="email" name="name" id="name" placeholder="Họ và tên" required >
-                </div>
-                <div class="data">
-                  <h4>Ngày tháng năm sinh</h4>
-                  <input class="input100" type="date" name="dob" id="dob"required >
-                </div>
-                <div class="data">
-                  <h4>Email</h4>
-                  <input class="input100" type="email" name="email" id="email" placeholder="Email" required>
-               </div>
-                 <div class="data">
-                   <h4>Số điện thoại</h4>
-                   <input class="input100" type="tel" name="phone" id="phone" placeholder="Số điện thoại" required>
+                    <input class="input100" type="text" name="name" id="name" placeholder="Họ và tên">
+                  </div>
+                  <div class="data">
+                    <h4>Ngày sinh</h4>
+                    <input class="input100" type="date" name="dob" id="dob" value="2000-01-01">
+                  </div>
+                  <div class="data">
+                    <h4>Email</h4>
+                    <input class="input100" type="email" name="email" id="email" placeholder="Email">
+                  </div>
+                  <div class="data">
+                    <h4>Số điện thoại</h4>
+                    <input class="input100" type="tel" name="phone" id="phone" placeholder="Số điện thoại">
+                  </div>
               </div>
-            </div>
-        </div>     
-        <div class="setting_btn">
-            <ul>
-              <li>
-                <button class="login100-form-btn" id="submit_btn" type="submit">
-								  Hoàn thành
-							  </button>
-              </li>
-              <li><a href="/users/view-profile">Quay lại</a></li>
-          </ul>
+          </div>     
+          <div class="setting_btn">
+              <ul>
+                <li><a href="/users/view-profile">Quay lại</a></li>
+                <li>
+                  <!-- <button class="login100-form-btn" id="submit_btn" type="submit">
+                    Hoàn thành
+                  </button> -->
+                  <input type="submit" name="change-profile" class="login100-form-btn" value="Thay đổi">
+                </li>                
+            </ul>
+        </div>
       </div>
     </div>
-  </div>
-</form>
-<script src="/public/js/changeProfile/main.js"></script>
+  </form>
+  <script src="/public/js/changeProfile/main.js"></script>
+  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </body>
 </html>

@@ -2,11 +2,14 @@ from contextvars import ContextVar
 from fastapi import Depends
 import peewee
 
-DATABASE_NAME = "BOOKSTORE"
-USER_NAME = "root"
-PASSWORD = "Panzer_7"
-HOST = "localhost"
-PORT = 3306
+from configs.env import getEnv
+
+
+DATABASE_NAME = getEnv().DATABASE_NAME
+USER_NAME = getEnv().USER_NAME
+PASSWORD = getEnv().PASSWORD
+HOST = getEnv().HOST
+PORT = getEnv().PORT
 
 db_state_default = {"closed": None, "conn": None, "ctx": None, "transactions": None}
 db_state = ContextVar("db_state", default=db_state_default.copy())

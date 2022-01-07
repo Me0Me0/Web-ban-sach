@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết sản phẩm</title>
+    <link rel="icon" href="/public/assets/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="/public/css/productViewSeller/style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<main class="main">
+    <div class="mainWrapper">
+            <div class="row">
+                <div class="column small-centered">
+                    <div class="productCard_block">
+                        <div class="row">
+                            <div class="small-12 large-6 columns">
+                                <div class="productCard_leftSide clearfix">
+
+                                    <div class="sliderBlock">
+                                        <ul class="sliderBlock_items">
+                                            <li class="sliderBlock_items__itemPhoto sliderBlock_items__showing">
+                                                <img src="https://github.com/BlackStar1991/CardProduct/blob/master/app/img/goods/item1/phones1.png?raw=true" alt="product-image" id="image-1">
+                                            </li>
+                                            <li class="sliderBlock_items__itemPhoto">
+                                                <img src="https://github.com/BlackStar1991/CardProduct/blob/master/app/img/goods/item1/phones2.png?raw=true"  alt="product-image" id="image-2">
+                                            </li>
+                                            <li class="sliderBlock_items__itemPhoto">
+                                                <img src="https://github.com/BlackStar1991/CardProduct/blob/master/app/img/goods/item1/phones3.png?raw=true"  alt="product-image" id="image-3">
+                                            </li>
+                                            <li class="sliderBlock_items__itemPhoto">
+                                                <img src="https://github.com/BlackStar1991/CardProduct/blob/master/app/img/goods/item1/phones4.png?raw=true"  alt="product-image" id="image-4">
+                                            </li>
+                                            <li class="sliderBlock_items__itemPhoto">
+                                                <img src="https://github.com/BlackStar1991/CardProduct/blob/master/app/img/goods/item1/phones5.png?raw=true"  alt="product-image" id="image-5">
+                                            </li>
+                                        </ul>
+
+                                        
+                                        <div class="sliderBlock_controls">
+                                            <div class="sliderBlock_controls__navigatin">
+                                                <div class="sliderBlock_controls__wrapper">
+                                                    <div class="sliderBlock_controls__arrow sliderBlock_controls__arrowBackward" id="prev-image">
+                                                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                                    </div>
+                                                    <div class="sliderBlock_controls__arrow sliderBlock_controls__arrowForward" id="next-image">
+                                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- <ul class="sliderBlock_positionControls">
+                                                <li class="sliderBlock_positionControls__paginatorItem sliderBlock_positionControls__active"></li>
+                                                <li class="sliderBlock_positionControls__paginatorItem"></li>
+                                                <li class="sliderBlock_positionControls__paginatorItem"></li>
+                                                <li class="sliderBlock_positionControls__paginatorItem"></li>
+                                                <li class="sliderBlock_positionControls__paginatorItem"></li>
+                                            </ul> -->
+                                        </div>
+                                        <div class="back">
+                                            <a href="javascript:history.back()">Quay lại</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="small-12 large-6 columns">
+                                <div class="productCard_rightSide">
+
+                                    <div class="block_product">
+                                        <h2 class="block_name block_name__mainName" id="product-name">Tên sản phẩm</h2>
+                                        <p class="block_product__advantagesProduct">
+                                            Thể loại: <span id="category-name">tên thể loại</span>
+                                        </p>
+                                        <p class="block_product__advantagesProduct">
+                                            Tác giả: <span id="author">tên tác giả</span>
+                                        </p>
+                                        <p class="block_product__advantagesProduct">
+                                            Số trang: <span id="number-of-page">số trang</span>
+                                        </p>
+                                        <p class="block_product__advantagesProduct">
+                                            Năm xuất bản: <span id="publishing-year">năm xuất bản</span>
+                                        </p>
+                                        <p class="block_product__advantagesProduct">
+                                            Nhà xuất bản: <span id="publisher">nhà xuất bản</span>
+                                        </p>
+                                        <p class="block_product__advantagesProduct">
+                                            Số lượng còn lại: <span id="quantity">số lượng</span>
+                                        </p>
+                                        <div class="block_descriptionInformation">
+                                            Mô tả sản phẩm: <span id="description">mô tả</span>
+                                        </div>
+
+                                            <!-- <div class="block_rating clearfix">
+                                                <fieldset class="block_rating__stars">
+                                                    <input type="radio" id="star5" name="rating" value="5"/><label
+                                                        class="full" for="star5" title="Awesome - 5 stars"></label>
+                                                    <input type="radio" id="star4half" name="rating"
+                                                           value="4 and a half"/><label class="half" for="star4half"
+                                                                                        title="Pretty good - 4.5 stars"></label>
+                                                    <input type="radio" id="star4" name="rating" value="4"/><label
+                                                        class="full" for="star4" title="Good - 4 stars"></label>
+                                                    <input type="radio" id="star3half" name="rating"
+                                                           value="3 and a half"/><label class="half" for="star3half"
+                                                                                        title="Above average - 3.5 stars"></label>
+                                                    <input type="radio" id="star3" name="rating" value="3"/><label
+                                                        class="full" for="star3" title="Average - 3 stars"></label>
+                                                    <input type="radio" id="star2half" name="rating"
+                                                           value="2 and a half"/><label class="half" for="star2half"
+                                                                                        title="Kinda bad - 2.5 stars"></label>
+                                                    <input type="radio" id="star2" name="rating" value="2"/><label
+                                                        class="full" for="star2"
+                                                        title="Kinda bad - 2 stars"></label>
+                                                    <input type="radio" id="star1half" name="rating"
+                                                           value="1 and a half"/><label class="half" for="star1half"
+                                                                                        title="Meh - 1.5 stars"></label>
+                                                    <input type="radio" id="star1" name="rating" value="1"/><label
+                                                        class="full" for="star1"
+                                                        title="Sucks big time - 1 star"></label>
+                                                    <input type="radio" id="starhalf" name="rating"
+                                                           value="half"/><label
+                                                        class="half" for="starhalf"
+                                                        title="Sucks big time - 0.5 stars"></label>
+                                                </fieldset>
+
+                                                <span class="block_rating__avarage">4.25</span>
+
+                                            </div> -->
+                                            <div class="row ">
+                                                <div class="large-6 small-12 column left-align">
+                                                    <div class="block_price">
+                                                        <p class="block_price__currency">Giá: <span id="price">giá</span></p>
+                                                    </div>
+                                                    <input type="submit" class="button button_delCard" id="delete-product" value="Xóa sản phẩm">
+                                                </div>
+                                                <div class="large-6 small-12 column end">
+                                                    <input type="button" class="button button_addToCard" id="edit-product" onclick="javascipt:location.href = '/products/edit-product'" value="Chỉnh sửa sản phẩm">
+                                                </div>
+                                  
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <h4>Thông tin chi tiết về sản phẩm</h4>
+                                <p id="details">bruh</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+</main>
+
+
+<!-- partial -->
+  <script  src="/public/js/productViewSeller/script.js"></script>
+
+</body>
+</html>

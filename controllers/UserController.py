@@ -1,10 +1,11 @@
 from typing import List
 from fastapi import APIRouter
+from fastapi import responses
 from fastapi.params import Depends, Query
-from fastapi.responses import Response
+from fastapi.responses import Response, RedirectResponse
 import configs
 
-from configs.constant import DUPLICATION_ERROR, NOT_FOUND_ERROR
+from configs.constant import DUPLICATION_ERROR, NOT_FOUND_ERROR, FORBIDDEN_ERROR, NOT_ACCEPTABLE_ERROR
 from configs.dependency import getUser
 from schemas import user_schema
 from fastapi.exceptions import HTTPException
@@ -15,7 +16,6 @@ from services.EmailService import EmailService
 
 class UserController:
     router = APIRouter(prefix='/users')
-
 
     @staticmethod
     @router.get('/signin', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
@@ -28,27 +28,46 @@ class UserController:
     def signup():
         return "./views/signup/signup.html"
 
+    @staticmethod
+    @router.get('/signout', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)]) 
+    def signout(response: Response):
+        response.set_cookie('token', '', expires=0)
+        response.set_cookie('loggedin', '', expires=0)
+        response.headers['Location'] = '/'
+        response.status_code = 307
+        return response
 
     @staticmethod
     @router.get('/forgot-password', response_class=FileResponse) 
-    def signup():
+    def forgotPassword():
         return "./views/forgotPassword/forgot-password.html"
 
     @staticmethod
+    @router.get('/reset-password/{token}',response_class=FileResponse)
+    def resetPassword(token):
+        return "./views/forgotPassword/forgot-password-2.html"
+
+    @staticmethod
     @router.get('/home', response_class=FileResponse)
-    def signin():
+    def index():
         return "./views/homepage/index.html"
 
     @staticmethod
     @router.get('/view-profile', response_class=FileResponse)
-    def signin():
+    def viewProfile():
         return "./views/viewProfile/view-profile.html"
 
     @staticmethod
     @router.get('/change-profile', response_class=FileResponse)
-    def signin():
+    def changeProfile():
         return "./views/changeProfile/change-profile.html"
 
+    @staticmethod
+    @router.get('/change-password', response_class=FileResponse)
+    def changePassword():
+        return "./views/changePassword/change-password.html"
+
+    @staticmethod
     @router.post('/signup', dependencies=[Depends(configs.db.get_db)])
     def signup(payload: user_schema.UserCreate):
         try:
@@ -73,6 +92,7 @@ class UserController:
             raise HTTPException(401, detail="Unauthorized")
 
         response.set_cookie(key="token", value=token, max_age=24*60*60, httponly=True)
+        response.set_cookie(key="loggedin", value="true", max_age=24*60*60, httponly=False)
         return {
             "data": {
                 "success": True
@@ -87,7 +107,7 @@ class UserController:
 
 
     @staticmethod
-    @router.get('/details', response_model=user_schema.User,dependencies=[Depends(configs.db.get_db)])
+    @router.get('/details', response_model=user_schema.User,dependencies=[Depends(configs.db.get_db)])#details
     def getDetail(currentUser = Depends(getUser)):
         user = UserService.getById(currentUser['id'])
         if not user:
@@ -131,21 +151,15 @@ class UserController:
                 raise HTTPException(404, detail=e.args[1])
             raise Exception(e)
 
-        validated_link = './users/reset-password/' + token
+        validated_link = 'http://localhost:3000/users/reset-password/' + token
         response = EmailService.sendEmail(user_email, user_name, validated_link)
 
         return {
-            "data":{
-                "status_code: " + str(response[0]),
-                "message: " + str(response[1])
+            "data": {
+                "status_code": response[0],
+                "message": response[1]
             }
         }
-
-
-    @staticmethod
-    @router.get('/forgot-password',response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
-    def getInterface():
-        return "./views/forgotPassword/forgot-password.html" 
 
 
     @staticmethod
@@ -154,8 +168,8 @@ class UserController:
         try:
             UserService.resetPassword(token, payload.password)
         except Exception as e:
-            if e.args[0] == NOT_FOUND_ERROR:
-                raise HTTPException(404, detail=e.args[1])
+            if e.args[0] == NOT_ACCEPTABLE_ERROR:
+                raise HTTPException(406, detail=e.args[1])
             raise Exception(e)
         
         return {
@@ -166,6 +180,17 @@ class UserController:
 
       
     @staticmethod
-    @router.get('/reset-password/{token}',response_class=FileResponse)
-    def getInterface(token):
-        return "./views/forgotPassword/forgot-password-2.html"
+    @router.post('/change-password')
+    def changePassword(payload: user_schema.changePassword, currentUser = Depends(getUser)):
+        try:
+            UserService.changePassword(currentUser['id'], payload.old_password, payload.new_password)
+        except Exception as e:
+            if e.args[0] == NOT_FOUND_ERROR or e.args[0] == FORBIDDEN_ERROR:
+                raise HTTPException(e.args[0], detail=e.args[1])
+            raise Exception(e)
+        
+        return {
+            "data": {
+                "success": True
+            }
+        }

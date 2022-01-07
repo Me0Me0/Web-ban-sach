@@ -1,9 +1,12 @@
 from peewee import *
 from models.OrderDetail import OrderDetail
+from models.OrderProduct import OrderProduct
 from models.User import User
 from models.Province import Province
 from models.District import District
+from models.Product import Product
 from models.Ward import Ward
+from configs.db import db
 
 
 class OrderDetailRepository():
@@ -27,8 +30,7 @@ class OrderDetailRepository():
     def create(cls, orderDict):
         return OrderDetail.create(**orderDict).id
 
-<<<<<<< Updated upstream
-=======
+
     # status = 1: Đang xử lý, 2: Đang giao hàng, 3: Đã hoàn thành, 4: Đơn hàng bị hủy
     @classmethod
     def createOrdersTransaction(cls, user_id, province_id, district_id, ward_id, 
@@ -66,8 +68,7 @@ class OrderDetailRepository():
             except Exception as e:
                 transaction.rollback()
                 raise e
-
->>>>>>> Stashed changes
+                
 
     @classmethod
     def saveCreate(cls, user_id, province_id, district_id, ward_id, orderDict):
