@@ -3,6 +3,7 @@ from configs.db import db
 from models.OrderProduct import OrderProduct
 from models.OrderDetail import OrderDetail
 from models.Product import Product
+#from repositories.ProductRepository import ProductRepository
 
 
 class OrderProductRepository():
@@ -10,6 +11,19 @@ class OrderProductRepository():
     @classmethod
     def getAll(cls, skip: int = 0, limit: int = 100):
         return list(OrderProduct.select().offset(skip).limit(limit))
+
+
+    @classmethod
+    def getByOrderID(cls, order_id: int, skip: int = 0, limit: int = 100):
+        query = OrderProduct.select().join(Product).where(OrderProduct.order_id == order_id).offset(skip).limit(limit)
+        return list(query.execute())
+
+
+    #@classmethod
+    #def getByOrderID(cls, order_id: int, skip: int = 0, limit: int = 100):
+        #query = OrderProduct.select().where(OrderProduct.order_id == order_id).offset(skip).limit(limit)
+        #products = [item.product_id.id for item in query]
+        #return ProductRepository.getByIdList(products)
 
 
     @classmethod

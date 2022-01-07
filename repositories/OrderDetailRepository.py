@@ -23,10 +23,16 @@ class OrderDetailRepository():
 
 
     @classmethod
+    def getByIdList(cls, id_list):
+        return list(OrderDetail.select().where(OrderDetail.id.in_(id_list)))
+
+
+    @classmethod
     def create(cls, orderDict):
         return OrderDetail.create(**orderDict).id
 
-    
+
+    # status = 1: Đang xử lý, 2: Đang giao hàng, 3: Đã hoàn thành, 4: Đơn hàng bị hủy
     @classmethod
     def createOrdersTransaction(cls, user_id, province_id, district_id, ward_id, 
                                     recipient_name, recipient_phone, recipient_address, orderByStore):
@@ -36,6 +42,7 @@ class OrderDetailRepository():
                 for store_id, info in orderByStore.items():
                     order_id = OrderDetail.create(
                         owner_id = user_id, 
+                        store_id = store_id,
                         recipient_name = recipient_name, 
                         recipient_phone = recipient_phone, 
                         recipient_address = recipient_address,
@@ -63,7 +70,7 @@ class OrderDetailRepository():
             except Exception as e:
                 transaction.rollback()
                 raise e
-
+                
 
     @classmethod
     def saveCreate(cls, user_id, province_id, district_id, ward_id, orderDict):
