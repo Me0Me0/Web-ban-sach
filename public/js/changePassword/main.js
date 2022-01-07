@@ -2,7 +2,6 @@ var oldPassword = document.getElementById('oldpass');
 var passwordInput = document.getElementById('pass');
 var repasswordInput = document.getElementById('repass')
 var formChangePassword = document.getElementById('change_password');
-var token = window.location.href;
 var expression = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])/;
 
 if (formChangePassword.attachEvent) {
@@ -49,8 +48,8 @@ async function onFormsubmit(e) {
         if (data.error) {
             alert('Đổi mật khẩu thất bại');
         } else if (data.data.success) {
-            alert('Đổi mật khẩu thành công, đăng nhập để tiếp tục sử dụng');
-            location.href = "/users/signin"
+            alert('Đổi mật khẩu thành công, bạn sẽ được đưa trở về trang chủ');
+            location.href = "/"
         } else {
             alert('Đã xảy ra lỗi, vui lòng thử lại sau');
         }
