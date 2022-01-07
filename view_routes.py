@@ -120,6 +120,7 @@ product_router = APIRouter(prefix="/products")
 def getBestSeller():
     return "./views/bestSeller/index.html"
 
+
 @product_router.get('/category', response_class=FileResponse)
 def getCategory():
     return "./views/category/index.html"
@@ -128,6 +129,11 @@ def getCategory():
 @product_router.get('/new-product', response_class=FileResponse)
 def getNewProduct():
     return "./views/newProduct/index.html"
+
+
+@product_router.get('/search-results', response_class=FileResponse)
+def getNewProduct():
+    return "./views/searchResults/index.html"
 
 
 @product_router.get('/view-seller/{id}', response_class=FileResponse)
@@ -164,6 +170,25 @@ view.include_router(cart_router)
 # order
 order_router = APIRouter(prefix="/orders")
 
+
+@order_router.get('/', response_class=FileResponse)
+def getOrders():
+    return "./views/listOrder_ViewCus/index.html"
+
+
+@order_router.get('/{id}', response_class=FileResponse) # id cua hoa don
+def getOrderDetails():
+    return "./views/orderDetails_ViewCus/index.html"
+
+
+@order_router.get('/mystore-orders/details/{id}', response_class=FileResponse) # id cua don hang
+def getMyStoreOrdersDetails():
+    return "./views/orderDetails_ViewSeller/index.html"
+
+
+@order_router.get('/mystore-orders/{id}', response_class=FileResponse) # id cua cua hang
+def getMyStoreOrders():
+    return "./views/listOrder_ViewSeller/index.html"
 
 
 view.include_router(order_router)

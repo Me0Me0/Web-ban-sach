@@ -11427,23 +11427,21 @@ textarea.form-control-lg {
   background-color: #aadfff;
 }
 
-.mt-5 .function {
+.mt-5 .back-to-home {
   text-align: center;
 }
 
-.mt-5 .function a {
+.mt-5 .back-to-home a {
   float: right;
-  width: fit-content;
+  width: 110px;
   height: 35px;
   background-color: #193498;
   color: #fff;
   text-decoration: none;
   border-radius: 3px;
-  padding: 0 10px 0 10px;
-  margin-left: 10px;
 }
 
-.mt-5 .function a:hover {
+.mt-5 .back-to-home a:hover {
   background-color: #aadfff;
   color: #000;
   text-decoration: none;
