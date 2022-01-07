@@ -130,19 +130,19 @@ def getNewProduct():
     return "./views/newProduct/index.html"
 
 
-@product_router.get('/{id}', response_class=FileResponse)
-def getProductDetails():
-    return "./views/productViewCustomer/index.html"
-
-
-@product_router.get('/details-view-seller', response_class=FileResponse)
+@product_router.get('/view-seller/{id}', response_class=FileResponse)
 def getProductDetailsViewSeller():
     return "./views/productViewSeller/index.html"
 
 
-@product_router.get('/edit-product', response_class=FileResponse)
-def getProductDetails():
+@product_router.get('/edit-product/{id}', response_class=FileResponse)
+def editProductDetails():
     return "./views/editProduct/index.html"
+
+
+@product_router.get('/{id}', response_class=FileResponse)
+def getProductDetails():
+    return "./views/productViewCustomer/index.html"
 
 
 view.include_router(product_router)
