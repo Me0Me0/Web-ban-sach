@@ -15,7 +15,7 @@ class OrderProductRepository():
 
     @classmethod
     def getByOrderID(cls, order_id: int, skip: int = 0, limit: int = 100):
-        query = OrderProduct.select().join(Product).where(OrderProduct.order_id == order_id).offset(skip).limit(limit)
+        query = OrderProduct.select(Product.id, Product.name, Product.price, OrderProduct.quantity).join(Product).where(OrderProduct.order_id == order_id).offset(skip).limit(limit)
         return list(query.execute())
 
 
