@@ -120,6 +120,7 @@ product_router = APIRouter(prefix="/products")
 def getBestSeller():
     return "./views/bestSeller/index.html"
 
+
 @product_router.get('/category', response_class=FileResponse)
 def getCategory():
     return "./views/category/index.html"
@@ -130,19 +131,24 @@ def getNewProduct():
     return "./views/newProduct/index.html"
 
 
-@product_router.get('/{id}', response_class=FileResponse)
-def getProductDetails():
-    return "./views/productViewCustomer/index.html"
+@product_router.get('/search-results', response_class=FileResponse)
+def getNewProduct():
+    return "./views/searchResults/index.html"
 
 
-@product_router.get('/details-view-seller', response_class=FileResponse)
+@product_router.get('/view-seller/{id}', response_class=FileResponse)
 def getProductDetailsViewSeller():
     return "./views/productViewSeller/index.html"
 
 
-@product_router.get('/edit-product', response_class=FileResponse)
-def getProductDetails():
+@product_router.get('/edit-product/{id}', response_class=FileResponse)
+def editProductDetails():
     return "./views/editProduct/index.html"
+
+
+@product_router.get('/{id}', response_class=FileResponse)
+def getProductDetails():
+    return "./views/productViewCustomer/index.html"
 
 
 view.include_router(product_router)
@@ -164,6 +170,25 @@ view.include_router(cart_router)
 # order
 order_router = APIRouter(prefix="/orders")
 
+
+@order_router.get('/', response_class=FileResponse)
+def getOrders():
+    return "./views/listOrder_ViewCus/index.html"
+
+
+@order_router.get('/{id}', response_class=FileResponse) # id cua hoa don
+def getOrderDetails():
+    return "./views/orderDetails_ViewCus/index.html"
+
+
+@order_router.get('/mystore-orders/details/{id}', response_class=FileResponse) # id cua don hang
+def getMyStoreOrdersDetails():
+    return "./views/orderDetails_ViewSeller/index.html"
+
+
+@order_router.get('/mystore-orders/{id}', response_class=FileResponse) # id cua cua hang
+def getMyStoreOrders():
+    return "./views/listOrder_ViewSeller/index.html"
 
 
 view.include_router(order_router)

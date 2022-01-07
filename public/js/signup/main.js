@@ -75,14 +75,14 @@ async function onFormsubmit(e) {
           email: email
       })
     }
-    fetch("/users/signup", options)
+    fetch("/api/users/signup", options)
     .then(data => data.json())
     .then(data =>  { 
       console.log(data);
       if(data.data&&data.data.id)
       {
         alert("Tạo tài khoản thành công, đăng nhập để tiếp tục"); 
-        location.href = "/api/users/signin"
+        location.href = "/users/signin"
       } 
       else
       {
