@@ -12161,7 +12161,7 @@ INSERT INTO `ward` (`id`, `_name`, `_prefix`, `_province_id`, `_district_id`) VA
 -- Đang đổ dữ liệu cho bảng `order_detail`
 --
 
-	INSERT INTO `order_detail` (`owner_id`, `status`, `total_cost`, `recipient_name`, `recipient_phone`, `recipient_address`, `province_id`, `district_id`, `ward_id`) VALUES
-	('1', '1', '84000', 'Nguyễn A', '022334342', '123 ABC', '1', '1', '1'),
-	('4', '1', '400000', 'Lê B', '022334342', '13 XYZ', '1', '1', '1'),
-    ('5', '1', '370000', 'Nguyễn C', '022334342', '57 DEF', '1', '1', '1');
+-- 	INSERT INTO `order_detail` (`owner_id`, `store_id`, `status`, `total_cost`, `recipient_name`, `recipient_phone`, `recipient_address`, `province_id`, `district_id`, `ward_id`) VALUES
+-- ('1', '1', '84000', 'Nguyễn A', '022334342', '123 ABC', '1', '1', '1'),
+-- 	('4', '1', '400000', 'Lê B', '022334342', '13 XYZ', '1', '1', '1'),
+-- ('5', '1', '370000', 'Nguyễn C', '022334342', '57 DEF', '1', '1', '1');
