@@ -1,4 +1,5 @@
 from repositories.OrderDetailRepository import OrderDetailRepository
+from repositories.OrderProductRepository import OrderProductRepository
 from repositories.ProductRepository import ProductRepository
 from repositories.ProvinceRepository import ProvinceRepository
 from repositories.DistrictRepository import DistrictRepository
@@ -51,4 +52,7 @@ class OrderService:
         )
         
         
-
+    @classmethod
+    def getProducts(cls, user_id):#, limit, skip):
+        orders = OrderProductRepository.getAll()#getByOrderID(user_id)#, skip, limit)
+        return orders

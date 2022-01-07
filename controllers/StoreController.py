@@ -67,23 +67,21 @@ class StoreController:
 
         return {
             "id": store_id
-        }  
+        }
      
 
     @staticmethod
     @router2.get('/details', dependencies=[Depends(configs.db.get_db)])
-    def storeDetail(user = Depends(getUser)):
+    def storeDetail(limit:int = Query(10, gt=0), skip:int = Query(0, ge=0), user = Depends(getUser)):
         """Return: 
            [store_info_dict, list(product_info_dict)]"""
         # Store id
         try:
             store = StoreService.getOwnStore(user['id'])
         except Exception as e:
-            if e.args[0] == 404:
+            if e.args[0] == NOT_FOUND_ERROR:
                 raise HTTPException(status_code=404, detail=e.args[1])
             raise Exception(e)
-        limit = Query(10, gt=0)
-        skip = Query(0, ge=0)
         return StoreService.getAll(skip, limit, store['id'])
        
         
@@ -114,12 +112,18 @@ class StoreController:
     @staticmethod
     @router2.put('/products/{product_id}', dependencies=[Depends(configs.db.get_db)])
     def updateProduct(product_id: int, payload: product_schema.ProductUpdate, user = Depends(getUser)):
+        # Store id
         try:
-            ProductService.update(store['id'], product_id, payload)
+            store = StoreService.getOwnStore(user['id'])
         except Exception as e:
             if e.args[0] == NOT_FOUND_ERROR:
                 raise HTTPException(status_code=404, detail=e.args[1])
-            elif e.args[0] == FORBIDDEN_ERROR:
+            raise Exception(e)
+
+        try:
+            ProductService.update(store['id'], product_id, payload)
+        except Exception as e:
+            if e.args[0] == FORBIDDEN_ERROR:
                 raise HTTPException(status_code=403, detail=e.args[1])
             raise Exception(e) 
         
@@ -130,6 +134,55 @@ class StoreController:
         }
 
 
+    @staticmethod
+    @router2.put('/products/{product_id}/cover-images', dependencies=[Depends(configs.db.get_db)])
+    def updateProductCoverImage(product_id: int, payload: product_schema.ProductUpdateCoverImage, user = Depends(getUser)):
+        # Store id
+        try:
+            store = StoreService.getOwnStore(user['id'])
+        except Exception as e:
+            if e.args[0] == 404:
+                raise HTTPException(status_code=404, detail=e.args[1])
+            raise Exception(e)
+
+        try:
+            ProductService.updateCoverImage(store['id'], product_id, payload.image_link)
+        except Exception as e:
+            if e.args[0] == FORBIDDEN_ERROR or e.args[0] == NOT_FOUND_ERROR:
+                raise HTTPException(status_code=e.args[0], detail=e.args[1])
+            raise Exception(e)
+        
+        return {
+            "data":{
+                "success": True
+            }
+        }
+
+    
+    @staticmethod
+    @router2.post('/products/{product_id}/images', dependencies=[Depends(configs.db.get_db)])
+    def updateProductImage(product_id: int, payload: product_schema.ProductUpdateImages, user = Depends(getUser)):
+        # Store id
+        try:
+            store = StoreService.getOwnStore(user['id'])
+        except Exception as e:
+            if e.args[0] == 404:
+                raise HTTPException(status_code=404, detail=e.args[1])
+            raise Exception(e)
+
+        try:
+            ProductService.updateImage(store['id'], product_id, payload.list_image_link)
+        except Exception as e:
+            if e.args[0] == FORBIDDEN_ERROR:
+                raise HTTPException(status_code=403, detail=e.args[1])
+            raise Exception(e)
+
+        return {
+            "data":{
+                "success": True
+            }
+        }
+   
     # -----------------------------------------------------------------------------
     # Store - View nguoi dung
 
@@ -140,7 +193,7 @@ class StoreController:
 
     @staticmethod
     @router.get('/{store_id}/details', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-    def mystoreDetails():
+    def storeDetails():
         return "./views/storeDetails_ViewCus/index.html"
     
     @staticmethod

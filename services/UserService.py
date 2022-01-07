@@ -59,9 +59,11 @@ class UserService:
     def update(cls, id, payload):
         return UserRepository.update(id, payload.__dict__)
 
+
     @classmethod
     def getByUsername(cls, payload):
         return UserRepository.getByUsername(payload.username)
+
 
     @classmethod
     def forgetPassword(cls, payload: user_schema.forgetPassword):
@@ -78,15 +80,29 @@ class UserService:
         token = jwt.encode(jwtPayload, JWT_SECRET)
         return [user.email,user.name,token]
 
+
     @classmethod
     def resetPassword(cls, token_id, password):
         try:
             user = jwt.decode(token_id, JWT_SECRET, algorithms=["HS256"])
         except:
-            raise HTTPException(406, detail="Khong decode duoc!")
+            raise Exception(406, 'Khong decode duoc!')
         
-        #hass password with bcrypt
+        # hash password with bcrypt
         salt = bcrypt.gensalt(10)
         hashed = bcrypt.hashpw(password.encode(), salt)
         
         return UserRepository.updatePassword(user['id'], hashed)
+
+
+    @classmethod
+    def changePassword(cls, user_id, old_password, new_password):
+        user = UserRepository.getById(user_id)
+        if not user or not bcrypt.checkpw(old_password.encode(), user.password.encode()):
+            raise Exception(403, 'Sai mat khau!')
+        
+        # hash password with bcrypt
+        salt = bcrypt.gensalt(10)
+        hashed = bcrypt.hashpw(password.encode(), salt)
+
+        return UserRepository.updatePassword(user_id, hashed)

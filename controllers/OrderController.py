@@ -32,3 +32,25 @@ class OrderController:
     def getOwnOrders(limit: int = 10, skip: int = 0, user = Depends(getUser)):
         orders = OrderService.getOwnOrders(user['id'], limit, skip)
         return orders
+
+
+    @staticmethod
+    @router.get("/products", response_model=List[order_schema.OrderProduct], dependencies=[Depends(get_db)])
+    def getProductsOrders(limit: int = 10, skip: int = 0, user = Depends(getUser)): #user_type: int
+        # user_type = 0 nếu là user, 1 nếu là store
+        # truyền vào từ FE?
+        
+        # Store 
+        #if user_type == 1:
+        #    try:
+        #        getOwnOrders()
+        products = OrderService.getProducts(user['id'], limit, skip)
+        return products
+
+    
+    @staticmethod
+    @router.delete('/{id}', dependencies=[Depends(get_db)])
+    def delete(id: int, user = Depends(getUser)):
+        pass
+        # case 1: if user want to del order -> check if user own this order
+        # case 2: if store want to del order -> check if store have this order

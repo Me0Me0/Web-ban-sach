@@ -1,5 +1,6 @@
 from datetime import datetime
 from repositories.ProductRepository import ProductRepository
+from repositories.ProductImageRepository import ProductImageRepository
 from repositories.StoreRepository import StoreRepository
 from repositories.CategoryRepository import CategoryRepository
 from repositories.CartProductRepository import CartProductRepository
@@ -31,11 +32,37 @@ class ProductService:
         product = ProductRepository.getById(product_id)
         stores = StoreRepository.getByUserId(user_id)
 
-        if len(stores) ==0 or product.store_id != stores[0]:
+        if len(stores) == 0 or product.store_id != stores[0]:
             raise Exception(403, "forbidden")
 
         return ProductRepository.update(product_id, payload.__dict__)
 
+
+    @classmethod
+    def updateCoverImage(cls, user_id, product_id, image_link):
+        product = ProductRepository.getById(product_id)
+        stores = StoreRepository.getByUserId(user_id)
+
+        if len(stores) == 0 or product.store_id != stores[0]:
+            raise Exception(403, "forbidden")
+        
+        return ProductRepository.updateImage(product_id, image_link)
+        
+    
+    @classmethod
+    def updateImage(cls, user_id, product_id, list_image_link):
+        product = ProductRepository.getById(product_id)
+        stores = StoreRepository.getByUserId(user_id)
+
+        if len(stores) == 0 or product.store_id != stores[0]:
+            raise Exception(403, "forbidden")
+        
+        image_list = []
+        for image_link in range(len(list_image_link)):
+            image_list.append((product_id, image_link))
+        
+        return ProductImageRepository.createMany(image_list)
+        
     
     @classmethod
     def addToCart(cls, cart_id, product_id, quantity):

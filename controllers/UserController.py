@@ -5,7 +5,7 @@ from fastapi.params import Depends, Query
 from fastapi.responses import Response, RedirectResponse
 import configs
 
-from configs.constant import DUPLICATION_ERROR, NOT_FOUND_ERROR
+from configs.constant import DUPLICATION_ERROR, NOT_FOUND_ERROR, FORBIDDEN_ERROR, NOT_ACCEPTABLE_ERROR
 from configs.dependency import getUser
 from schemas import user_schema
 from fastapi.exceptions import HTTPException
@@ -41,6 +41,11 @@ class UserController:
     @router.get('/forgot-password', response_class=FileResponse) 
     def forgotPassword():
         return "./views/forgotPassword/forgot-password.html"
+
+    @staticmethod
+    @router.get('/reset-password/{token}',response_class=FileResponse)
+    def resetPassword(token):
+        return "./views/forgotPassword/forgot-password-2.html"
 
     @staticmethod
     @router.get('/home', response_class=FileResponse)
@@ -158,19 +163,13 @@ class UserController:
 
 
     @staticmethod
-    @router.get('/forgot-password',response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
-    def getInterface():
-        return "./views/forgotPassword/forgot-password.html" 
-
-
-    @staticmethod
     @router.post('/reset-password/{token}')
     def resetPassword(token: str, payload: user_schema.resetPassword):
         try:
             UserService.resetPassword(token, payload.password)
         except Exception as e:
-            if e.args[0] == NOT_FOUND_ERROR:
-                raise HTTPException(404, detail=e.args[1])
+            if e.args[0] == NOT_ACCEPTABLE_ERROR:
+                raise HTTPException(406, detail=e.args[1])
             raise Exception(e)
         
         return {
@@ -181,6 +180,17 @@ class UserController:
 
       
     @staticmethod
-    @router.get('/reset-password/{token}',response_class=FileResponse)
-    def getInterface(token):
-        return "./views/forgotPassword/forgot-password-2.html"
+    @router.post('/change-password')
+    def changePassword(payload: user_schema.changePassword, currentUser = Depends(getUser)):
+        try:
+            UserService.changePassword(currentUser['id'], payload.old_password, payload.new_password)
+        except Exception as e:
+            if e.args[0] == NOT_FOUND_ERROR or e.args[0] == FORBIDDEN_ERROR:
+                raise HTTPException(e.args[0], detail=e.args[1])
+            raise Exception(e)
+        
+        return {
+            "data": {
+                "success": True
+            }
+        }

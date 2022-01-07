@@ -41,7 +41,6 @@ class ProductCreate(BaseModel):
 
 class ProductUpdate(BaseModel):
     name: str
-    #category: str
     cate_id: int
     description: str
     detail: str
@@ -52,6 +51,14 @@ class ProductUpdate(BaseModel):
     cover_image: str
     quantity: int
     price: float
+
+
+class ProductUpdateCoverImage(BaseModel):
+    image_link: str
+
+
+class ProductUpdateImages(BaseModel):
+    list_image_link: list
 
 
 class ProductSell(Product):
