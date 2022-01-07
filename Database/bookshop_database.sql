@@ -110,7 +110,8 @@ CREATE TABLE `district` (
 CREATE TABLE `order_detail` (
   `id` int NOT NULL,
   `owner_id` int NOT NULL,
-  `status` tinyint NOT NULL DEFAULT 1 COMMENT 'Quy định đang chờ cửa hàng xác nhận là kí tự ‘1’, đang giao hàng là kí tự ‘2’, đã giao thành công là kí tự ‘3’',
+  `store_id` int NOT NULL,
+  `status` tinyint NOT NULL DEFAULT 1 COMMENT 'Quy định đang chờ cửa hàng xác nhận là kí tự ‘1’, đang giao hàng là kí tự ‘2’, đã giao thành công là kí tự ‘3’, hùy là kí tự ‘4’ ',
   `total_cost` float UNSIGNED NOT NULL,
   `recipient_name` varchar(200) NOT NULL,
   `recipient_phone` int NOT NULL,
@@ -211,9 +212,8 @@ CREATE TABLE `user` (
   `password` varchar(200) NOT NULL,
   `name` varchar(200) NOT NULL,
   `dob` date DEFAULT NULL,
-  -- `address` varchar(200) NOT NULL,
   `phone` int DEFAULT NULL,
-  `email` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL UNIQUE,
   `avt_link` varchar(200) DEFAULT NULL,
   `deleted_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -441,9 +441,10 @@ ALTER TABLE `contact`
 --
 ALTER TABLE `order_detail`
   ADD CONSTRAINT `order_detail_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `order_detail_ibfk_2` FOREIGN KEY (`province_id`) REFERENCES `province` (`id`),
-  ADD CONSTRAINT `order_detail_ibfk_3` FOREIGN KEY (`district_id`) REFERENCES `district` (`id`),
-  ADD CONSTRAINT `order_detail_ibfk_4` FOREIGN KEY (`ward_id`) REFERENCES `ward` (`id`);
+  ADD CONSTRAINT `order_detail_ibfk_2` FOREIGN KEY (`store_id`) REFERENCES `store` (`id`),
+  ADD CONSTRAINT `order_detail_ibfk_3` FOREIGN KEY (`province_id`) REFERENCES `province` (`id`),
+  ADD CONSTRAINT `order_detail_ibfk_4` FOREIGN KEY (`district_id`) REFERENCES `district` (`id`),
+  ADD CONSTRAINT `order_detail_ibfk_5` FOREIGN KEY (`ward_id`) REFERENCES `ward` (`id`);
 
 --
 -- Các ràng buộc cho bảng `order_product`

@@ -19,9 +19,55 @@ class OrderDetailRepository():
 
 
     @classmethod
+    def getByIdList(cls, id_list):
+        return list(OrderDetail.select().where(OrderDetail.id.in_(id_list)))
+
+
+    @classmethod
     def create(cls, orderDict):
         return OrderDetail.create(**orderDict).id
 
+<<<<<<< Updated upstream
+=======
+    # status = 1: Đang xử lý, 2: Đang giao hàng, 3: Đã hoàn thành, 4: Đơn hàng bị hủy
+    @classmethod
+    def createOrdersTransaction(cls, user_id, province_id, district_id, ward_id, 
+                                    recipient_name, recipient_phone, recipient_address, orderByStore):
+
+        with db.atomic() as transaction:
+            try:
+                for store_id, info in orderByStore.items():
+                    order_id = OrderDetail.create(
+                        owner_id = user_id, 
+                        store_id = store_id,
+                        recipient_name = recipient_name, 
+                        recipient_phone = recipient_phone, 
+                        recipient_address = recipient_address,
+                        province_id = province_id, 
+                        district_id = district_id, 
+                        ward_id = ward_id, 
+                        status = 1, 
+                        total_cost = info['total_cost'], 
+                    ).id
+
+                    for item in info['items']:
+                        nUpdate = Product.update(quantity = Product.quantity - item.quantity).where(
+                            Product.id == item.product_id,
+                            Product.deleted_at == None,
+                            Product.quantity >= item.quantity,
+                        ).execute()
+                        if nUpdate == 0 or item.quantity <= 0: 
+                            raise Exception(422, "Invalid quantity")
+                        OrderProduct.create(order_id = order_id, product_id = item.product_id, quantity = item.quantity)      
+
+                transaction.commit()
+                return True
+
+            except Exception as e:
+                transaction.rollback()
+                raise e
+
+>>>>>>> Stashed changes
 
     @classmethod
     def saveCreate(cls, user_id, province_id, district_id, ward_id, orderDict):

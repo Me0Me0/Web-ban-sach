@@ -5,6 +5,7 @@ from models.Product import Product
 from models.Store import Store
 from models.Category import Category
 from models.OrderProduct import OrderProduct
+from models.OrderDetail import OrderDetail
 
 
 class ProductRepository():
@@ -17,12 +18,6 @@ class ProductRepository():
    @classmethod
    def getDeletedProduct(cls, skip: int = 0, limit: int = 100):
       return list(Product.select().where(Product.deleted_at.is_null(False)).offset(skip).limit(limit))
-
-
-   @classmethod
-   def getByName(cls, name: str, skip: int = 0, limit: int = 100):
-      print(name)
-      return list(Product.select().where((Product.name == name) & (Product.deleted_at.is_null(True))).offset(skip).limit(limit))
 
 
    @classmethod
@@ -43,9 +38,15 @@ class ProductRepository():
            raise Exception("Does not exist product with given id")
 
 
+    # id_list = [1,2,3,..]
+   @classmethod
+   def getByIdList(cls, id_list):
+       return list(Product.select().where(Product.id.in_(id_list) & Product.deleted_at.is_null(True)))
+
+
    @classmethod
    def getByStore(cls, store_id: int, skip: int = 0, limit: int = 100):
-       return list(Product.select().join(Store).where((Store.id == store_id) & (Product.deleted_at.is_null(True))))
+       return list(Product.select().join(Store).where((Store.id == store_id) & (Product.deleted_at.is_null(True))).offset(skip).limit(limit))
 
 
    @classmethod
@@ -71,9 +72,15 @@ class ProductRepository():
        for i in tokens:
            search_name = search_name + "%" + i + "%"
 
-       query = Product.select().where((Product.name ** search_name) & (Product.deleted_at.is_null(True)))
+       query = Product.select().where((Product.name ** search_name) & (Product.deleted_at.is_null(True))).offset(skip).limit(limit)
        return list(query.execute())
 
+
+   @classmethod
+   def inOrderWithStatus(cls, product_id: int, skip: int = 0, limit: int = 100):
+       query = OrderProduct.select().join(OrderDetail).where(OrderProduct.product_id == product_id & (OrderDetail.status == 1 | OrderDetail.status == 2 ))
+
+       return [item.order_id.id for item in query]
 
 
    @classmethod
