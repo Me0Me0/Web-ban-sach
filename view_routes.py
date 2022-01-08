@@ -24,8 +24,13 @@ def signin():
     return "./views/adminSignin/signin.html"
 
 @admin_router.get('/list-users', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-def signin():
-    return "./views/storeViewCus/index.html"
+def viewUserList():
+    return "./views/listUser/index.html"
+
+
+@admin_router.get('/list-users/{id}', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
+def viewUserDetails():
+    return "./views/adminViewUser/index.html"
 
 
 view.include_router(admin_router)

@@ -17,7 +17,7 @@ body{
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  width: 900px;
+  width: 1170px;
   display: flex;
   box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
 }
@@ -111,9 +111,22 @@ body{
   line-height: 45px;
 }
 
+.wrapper .setting_btn ul li:last-child{
+  background: #981919;
+  cursor: pointer;
+}
+
 .wrapper .setting_btn ul li a{
   color :#fff;
   display: block;
   font-size: 18px;
   text-decoration: none;
+}
+
+.wrapper .setting_btn ul li button {
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  padding: 10px 30px;
+  cursor: pointer;
 }
