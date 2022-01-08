@@ -102,7 +102,7 @@ body{
   justify-content: space-between;
 }
 
-.wrapper .setting_btn ul li{
+.wrapper .setting_btn ul li:first-child{
   width: 195px;
   height: 45px;
   background: #193498;
@@ -111,9 +111,27 @@ body{
   line-height: 45px;
 }
 
+.wrapper .setting_btn ul li:last-child{
+  width: 195px;
+  height: 45px;
+  background: #981919;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 45px;
+  cursor: pointer;
+}
+
 .wrapper .setting_btn ul li a{
   color :#fff;
   display: block;
   font-size: 18px;
   text-decoration: none;
+}
+
+.wrapper .setting_btn ul li button {
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  padding: 10px 30px;
+  cursor: pointer;
 }
