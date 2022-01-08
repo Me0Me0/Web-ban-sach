@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from fastapi.params import Depends, Query
 from fastapi.responses import Response
+from typing import Optional
 import configs
 
 from configs.constant import DUPLICATION_ERROR, NOT_FOUND_ERROR, FORBIDDEN_ERROR
@@ -78,32 +79,14 @@ class ProductController:
 
     # Hien thi san pham theo doanh muc
     @staticmethod
-    @router.post('/category={cate_id}', dependencies=[Depends(configs.db.get_db)])
+    @router.post('/category', dependencies=[Depends(configs.db.get_db)])
     def getProductByCategory(cate_id: int, limit:int = Query(10, gt=0), skip:int = Query(0, ge=0)):
         return ProductService.getProductByCategory(cate_id, skip, limit)
 
 
-    # ----------------- Đống search -----------------
-    # Hiện chưa xong cái nào
-    # Tim san pham theo keyword
+    # Search
     @staticmethod
-    @router.post('/search?keyword={keyword}', dependencies=[Depends(configs.db.get_db)])
-    def getProductByName(keyword: str):
-        pass
+    @router.post('/search', dependencies=[Depends(configs.db.get_db)])
+    def searchProduct(keyword:str, category: Optional[int]=None, maxPrice: Optional[int]=None, minPrice: Optional[int]=None, order: Optional[str]='asc', sortBy: Optional[str]=None):
+        return ProductService.searchProduct(keyword, category, maxPrice, minPrice, order, sortBy)
     
-    
-    # Tim san pham theo keyword + khung gia?
-    # 1 method duoi nay``
-
-    
-    # Tim cua hang theo keyword
-    @staticmethod
-    @router.post('/search_store?keyword={keyword}', dependencies=[Depends(configs.db.get_db)])
-    def getStoreByName(keyword: str):
-        pass
-
-
-    # Sap xep san pham theo khung gia 
-    #@staticmethod
-    #@router.post('/sort/{}')
-    #def getProductWithPriceInterval

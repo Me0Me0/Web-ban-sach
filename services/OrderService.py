@@ -118,3 +118,9 @@ class OrderService:
             OrderDetailRepository.setStatus(order_id, 4) # 4 ~ Da huy
         except Exception as e:
             raise Exception(e)
+        
+        # Refund quality products
+        try:
+            print(OrderProductRepository.cancelOrder(order_id))
+        except Exception as e:
+            raise Exception(e)

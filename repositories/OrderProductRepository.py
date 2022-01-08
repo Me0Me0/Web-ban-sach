@@ -67,3 +67,11 @@ class OrderProductRepository():
           raise Exception("Can not find order with given id")
 
        return delete_order.delete_instance()
+
+
+    @classmethod
+    def cancelOrder(cls, order_id: int):
+        pass
+        #query = (Product.update(quantity = Product.quantity + OrderProduct.quantity).from_(OrderProduct).where(
+        #    (OrderProduct.order_id == order_id), (Product.id == OrderProduct.product_id)))
+        #return query.execute()
