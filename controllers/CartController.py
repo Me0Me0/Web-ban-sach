@@ -36,6 +36,10 @@ class CartController:
             if e.args[0] == 404:
                 raise HTTPException(status_code=404, detail=e.args[1])
             raise Exception(e)
-        return CartService.getAll(cart_id)
+        
+        products = CartService.getAll(cart_id)
 
-        #return "./views/cart/index.html"
+        return {
+            'products_count': len(products),
+            'products': products
+        }

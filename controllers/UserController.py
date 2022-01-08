@@ -62,12 +62,12 @@ class UserController:
 
     @staticmethod
     @router.get('', response_model=List[user_schema.User],dependencies=[Depends(configs.db.get_db)])
-    def getAll(limit: int = Query(10, gt=0), skip: int =Query(0, ge=0)):
+    def getAll(limit: int = Query(10, gt=0), skip: int = Query(0, ge=0)):
         return UserService.getAll(skip, limit)
 
 
     @staticmethod
-    @router.get('/details', response_model=user_schema.User,dependencies=[Depends(configs.db.get_db)])#details
+    @router.get('/details', response_model=user_schema.User,dependencies=[Depends(configs.db.get_db)])
     def getDetail(currentUser = Depends(getUser)):
         user = UserService.getById(currentUser['id'])
         if not user:

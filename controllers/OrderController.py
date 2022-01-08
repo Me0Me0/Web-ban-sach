@@ -31,8 +31,7 @@ class OrderController:
     @staticmethod
     @router.get("", response_model=List[order_schema.OrderDetail], dependencies=[Depends(get_db)])
     def getOwnOrders(limit: int = 10, skip: int = 0, user = Depends(getUser)):
-        orders = OrderService.getOwnOrders(user['id'], limit, skip)
-        return orders
+        return OrderService.getOwnOrders(user['id'], limit, skip)
 
 
     @staticmethod
@@ -64,10 +63,10 @@ class OrderController:
     
     @staticmethod
     @router.delete('/{order_id}', dependencies=[Depends(get_db)])
-    def delete(user_type: int, order_id: int):#, user = Depends(getUser)):
+    def cancelOrder(user_type: int, order_id: int, user = Depends(getUser)):
         # Cancel order
         try:
-            OrderService.cancelOrder(user_type, 3, order_id)#user['id'], order_id)
+            OrderService.cancelOrder(user_type, user['id'], order_id)
         except Exception as e:
             if e.args[0] == NOT_FOUND_ERROR or e.args[0] == FORBIDDEN_ERROR:
                 raise HTTPException(e.args[0], detail=e.args[1])

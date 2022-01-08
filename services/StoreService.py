@@ -58,3 +58,16 @@ class StoreService:
         return ProductRepository.getByStore(store_id, skip, limit)
 
 
+    @classmethod
+    def getBestSellCate(cls, store_id):
+        return ProductRepository.getBestSellByCate(store_id)
+
+    
+    @classmethod
+    def getBestSellProducts(cls, store_id):
+        return ProductRepository.getBestSellByStore(store_id)
+
+
+    @classmethod
+    def getTotalIncome(cls, store_id):
+        return StoreRepository.getTotalIncome(store_id)

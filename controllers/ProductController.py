@@ -76,6 +76,15 @@ class ProductController:
         return ProductService.getTopProduct(True, skip, limit)
 
 
+    # Hien thi san pham theo doanh muc
+    @staticmethod
+    @router.post('/category={cate_id}', dependencies=[Depends(configs.db.get_db)])
+    def getProductByCategory(cate_id: int, limit:int = Query(10, gt=0), skip:int = Query(0, ge=0)):
+        return ProductService.getProductByCategory(cate_id, skip, limit)
+
+
+    # ----------------- Đống search -----------------
+    # Hiện chưa xong cái nào
     # Tim san pham theo keyword
     @staticmethod
     @router.post('/search?keyword={keyword}', dependencies=[Depends(configs.db.get_db)])
@@ -98,10 +107,3 @@ class ProductController:
     #@staticmethod
     #@router.post('/sort/{}')
     #def getProductWithPriceInterval
-
-
-    # Hien thi san pham theo doanh muc
-    @staticmethod
-    @router.post('/category={cate_id}', dependencies=[Depends(configs.db.get_db)])
-    def getProductByCategory(cate_id: int, limit:int = Query(10, gt=0), skip:int = Query(0, ge=0)):
-        return ProductService.getProductByCategory(cate_id, skip, limit)

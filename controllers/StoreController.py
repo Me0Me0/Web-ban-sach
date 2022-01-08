@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from typing import List
 from fastapi.exceptions import HTTPException
 from fastapi.params import Depends, Query
 from starlette.responses import FileResponse
@@ -66,7 +67,12 @@ class StoreController:
             if e.args[0] == NOT_FOUND_ERROR:
                 raise HTTPException(status_code=404, detail=e.args[1])
             raise Exception(e)
-        return StoreService.getStoreProduct(skip, limit, store['id'])
+        
+        products = StoreService.getStoreProduct(skip, limit, store['id'])
+        return {
+            'products_count': len(products),
+            'products': products
+        }
 
 
     @staticmethod
@@ -89,7 +95,9 @@ class StoreController:
             raise Exception(e)
 
         return {
-            'data':'success'
+            "data": {
+                "id": id
+            }
         }
         
         
@@ -166,7 +174,56 @@ class StoreController:
                 "success": True
             }
         }
-   
+    
+
+    # Thống kê kinh doanh của store:
+    # Thể loại bán nhiều nhất; Sách bán nhiều nhất; Tổng giao dịch 
+    @staticmethod
+    @router2.get('/business/best-sell-categories', response_model=List[product_schema.ProductBestSellCate], dependencies=[Depends(configs.db.get_db)])
+    def getBestSellCate(user = Depends(getUser)):
+        # Store id
+        try:
+            store = StoreService.getOwnStore(user['id'])
+        except Exception as e:
+            if e.args[0] == 404:
+                raise HTTPException(status_code=404, detail=e.args[1])
+            raise Exception(e)
+        
+        return StoreService.getBestSellCate(store['id'])
+        
+
+    @staticmethod
+    @router2.get('/business/best-sell-products', response_model=List[product_schema.ProductBestSell], dependencies=[Depends(configs.db.get_db)])
+    def getBestSellProducts(user = Depends(getUser)):
+        # Store id
+        try:
+            store = StoreService.getOwnStore(user['id'])
+        except Exception as e:
+            if e.args[0] == 404:
+                raise HTTPException(status_code=404, detail=e.args[1])
+            raise Exception(e)
+        
+        return StoreService.getBestSellProducts(store['id'])
+    
+
+    @staticmethod
+    @router2.get('/business/total-income', dependencies=[Depends(configs.db.get_db)])
+    def getTotalIncome(user = Depends(getUser)):
+        # Store id
+        try:
+            store = StoreService.getOwnStore(user['id'])
+        except Exception as e:
+            if e.args[0] == 404:
+                raise HTTPException(status_code=404, detail=e.args[1])
+            raise Exception(e)
+        
+        totalIncome = StoreService.getTotalIncome(store['id'])
+
+        return {
+            "data":{
+                "total-income": totalIncome
+            }
+        }
 
     # -----------------------------------------------------------------------------
     # Store - View nguoi dung
