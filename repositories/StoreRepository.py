@@ -3,6 +3,7 @@ from peewee import datetime
 from datetime import timedelta
 from models.Store import Store
 from models.User import User
+from models.OrderDetail import OrderDetail
 from repositories.ProductRepository import ProductRepository
 
 
@@ -26,6 +27,16 @@ class StoreRepository():
    @classmethod
    def getByUserId(cls, user_id: int):
       return list(Store.select().where(Store.owner_id == user_id))
+
+
+   @classmethod
+   def getTotalIncome(cls, store_id: int, status: int = 3):
+      query = Store.select(fn.SUM(OrderDetail.total_cost).alias('sum')).join(OrderDetail, JOIN.LEFT_OUTER).where((OrderDetail.status == status) & (Store.id == store_id)).group_by(Store.id).order_by(fn.SUM(OrderDetail.total_cost).desc())
+      total = 0.0
+      for i in query:
+         total = i.sum
+
+      return total
 
 
    @classmethod

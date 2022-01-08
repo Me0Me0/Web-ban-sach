@@ -61,11 +61,23 @@ class ProductRepository():
 
 
    @classmethod
-   def getSortBySell(cls, ascending: bool = False, skip: int = 0, limit: int = 100):
+   def getSortBySell(cls, ascending: bool = False, status: int = 3, skip: int = 0, limit: int = 100):
        if ascending:
-           return list(Product.select(Product, fn.SUM(OrderProduct.quantity).alias('sum')).join(OrderProduct).where(Product.deleted_at.is_null(True)).group_by(OrderProduct.product_id).order_by(fn.SUM(OrderProduct.quantity)).offset(skip).limit(limit))
+           return list(Product.select(Product, fn.SUM(OrderProduct.quantity).alias('sum')).join(OrderProduct, JOIN.LEFT_OUTER).join(OrderDetail).where((OrderDetail.status == status) & Product.deleted_at.is_null(True)).group_by(OrderProduct.product_id).order_by(fn.SUM(OrderProduct.quantity)).offset(skip).limit(limit))
        else:
-           return list(Product.select(Product, fn.SUM(OrderProduct.quantity).alias('sum')).join(OrderProduct).where(Product.deleted_at.is_null(True)).group_by(OrderProduct.product_id).order_by(fn.SUM(OrderProduct.quantity).desc()).offset(skip).limit(limit))
+           return list(Product.select(Product, fn.SUM(OrderProduct.quantity).alias('sum')).join(OrderProduct, JOIN.LEFT_OUTER).join(OrderDetail).where((OrderDetail.status == status) & Product.deleted_at.is_null(True)).group_by(OrderProduct.product_id).order_by(fn.SUM(OrderProduct.quantity).desc()).offset(skip).limit(limit))
+
+
+   @classmethod
+   def getBestSellByStore(cls, store_id: int, status: int = 3, skip: int = 0, limit: int = 10):
+       query = Product.select(Product, fn.SUM(OrderProduct.quantity).alias('sum')).join(OrderProduct, JOIN.LEFT_OUTER).join(OrderDetail).where((OrderDetail.status == status) & (Product.store_id == store_id) & Product.deleted_at.is_null(True)).group_by(OrderProduct.product_id).order_by(fn.SUM(OrderProduct.quantity).desc()).offset(skip).limit(limit)
+       return list(query.execute())
+
+
+   @classmethod
+   def getBestSellByCate(cls, store_id: int, status: int = 3, skip: int = 0, limit: int = 10):
+       query = Product.select(Product, fn.SUM(OrderProduct.quantity).alias('sum')).join(OrderProduct, JOIN.LEFT_OUTER).join(OrderDetail).where((OrderDetail.status == status) & (Product.store_id == store_id) & Product.deleted_at.is_null(True)).group_by(Product.cate_id).order_by(fn.SUM(OrderProduct.quantity).desc()).offset(skip).limit(limit)
+       return list(query.execute())
 
 
    @classmethod

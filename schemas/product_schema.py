@@ -65,6 +65,30 @@ class ProductSell(Product):
     sum: int
 
 
+class ProductBestSell(BaseModel):
+    id: int
+    name: str
+    cate_id: Category = Field(None)
+    author: str
+    publishing_year: date
+    cover_image: str
+    price: float
+    sum: int
+
+    class Config:
+        orm_mode = True
+        getter_dict = PeeweeGetterDict
+
+
+class ProductBestSellCate(BaseModel):
+    cate_id: Category = Field(None)
+    sum: int
+
+    class Config:
+        orm_mode = True
+        getter_dict = PeeweeGetterDict
+
+
 class ProductOrderDisplay(BaseModel):
     id: int
     name: str
