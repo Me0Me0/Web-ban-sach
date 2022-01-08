@@ -91,6 +91,10 @@ def mystore_page():
 def mystore_page():
     return "./views/editStore/index.html"
 
+@mystore_router.get('/statistic', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
+def mystore_page():
+    return "./views/statistic/index.html"
+
 
 view.include_router(mystore_router)
 
