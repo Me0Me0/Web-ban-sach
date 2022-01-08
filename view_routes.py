@@ -15,6 +15,21 @@ def homepage():
 def homepage():
     return "views/homepage/index.html"
 
+# Admin
+admin_router = APIRouter(prefix="/admin")
+
+
+@admin_router.get('/signin', response_class=FileResponse)
+def signin():
+    return "./views/adminSignin/signin.html"
+
+@admin_router.get('/list-users', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
+def signin():
+    return "./views/storeViewCus/index.html"
+
+
+view.include_router(admin_router)
+
 
 # User
 user_router = APIRouter(prefix="/users")
