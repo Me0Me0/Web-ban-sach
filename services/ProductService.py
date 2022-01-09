@@ -95,3 +95,43 @@ class ProductService:
         if not category:
             raise HTTPException(status_code=404, detail="")
         return ProductRepository.getByCate(cate_id, skip, limit)
+
+
+    @classmethod
+    def searchProduct(cls, keyword, category, maxPrice, minPrice, order, sortBy):
+        products_rslt = ProductRepository.searchByName(keyword)
+
+        if len(products_rslt) == 0: # Không có kết quả tìm kiếm ứng với keyword đó
+            return products_rslt
+
+        if category != None:
+            if len(products_rslt) == 1: # Nếu chỉ có 1 kết quả tìm kiếm
+                return products_rslt if products_rslt[0].category_id == category else []
+            products_rslt = [product for product in products_rslt if product.category_id == category]
+        
+        if maxPrice != None:
+            if len(products_rslt) == 1: # Nếu chỉ có 1 kết quả tìm kiếm
+                return products_rslt if products_rslt[0].price <= maxPrice else []
+            products_rslt = [product for product in products_rslt if product.price <= maxPrice]
+        
+        if minPrice != None:
+            if len(products_rslt) == 1: # Nếu chỉ có 1 kết quả tìm kiếm
+                return products_rslt if products_rslt[0].price >= minPrice else []
+            products_rslt = [product for product in products_rslt if products_rslt >= minPrice]
+        
+        
+        # sortBy có 3 giá trị gồm 'time', 'sell', 'price'.
+        # sortBy = time -> sản phẩm mới nhất
+        if sortBy == 'time':
+            products_rslt.sort(key = lambda x: x.publishing_year, reverse = True)
+
+        # sortBy = sell -> sản phẩm mua nhiều nhất
+        if sortBy == 'sell':
+            pass
+        
+        # sortBy = price -> sản phẩm có giá từ thấp đến cao hoặc ngược lại
+        # order có giá trị là 'asc'/'desc' ~ 'tăng/giảm'
+        if sortBy == 'price':
+            products_rslt.sort(key = lambda x: x.price, reverse = (order=='desc'))
+
+        return products_rslt

@@ -38,6 +38,7 @@
 body, html {
 	height: 100%;
 	font-family: 'Josefin Sans', sans-serif;
+  background-color: #aadfff;
 }
 
 /*---------------------------------------------*/
@@ -159,7 +160,7 @@ iframe {
 
 .container-login100 {
   width: 100%;  
-  min-height: 100vh;
+  min-height: 60vh;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
