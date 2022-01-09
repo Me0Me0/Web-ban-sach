@@ -2,6 +2,8 @@ from fastapi import APIRouter
 from repositories.StoreRepository import StoreRepository
 from repositories.UserRepository import UserRepository
 from repositories.ProductRepository import ProductRepository
+from repositories.OrderDetailRepository import OrderDetailRepository
+from repositories.OrderProductRepository import OrderProductRepository
 from schemas import store_schema
 from schemas import product_schema
 from configs.constant import DEFAULT_AVT
@@ -56,6 +58,33 @@ class StoreService:
     @classmethod
     def getStoreProduct(cls, skip, limit, store_id):
         return ProductRepository.getByStore(store_id, skip, limit)
+
+
+    @classmethod
+    def cancelOrder(cls, user_id, order_id):
+        try:
+            store_id = StoreRepository.getByUserId(user_id)
+            eraser_id = OrderDetailRepository.getById(order_id).store_id
+        except Exception as e:
+            raise Exception(404, "Invalid store")
+
+        if store_id[0].id != eraser_id.id:
+            raise Exception(403, "Forbidden")
+        
+        # Set OrderDetail status
+        try:
+            OrderDetailRepository.setStatus(order_id, 4) # 4 ~ Da huy
+        except Exception as e:
+            raise Exception(e)
+        
+        products = OrderProductRepository.getByOrderID(order_id)
+        
+        # Refund quality products
+        try:
+            for product in products:
+                ProductRepository.updateQuantity2(product.product_id, product.quantity)
+        except Exception as e:
+            raise Exception(e)
 
 
     @classmethod

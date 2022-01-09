@@ -38,8 +38,5 @@ class CartController:
             raise Exception(e)
         
         products = CartService.getAll(cart_id)
-
-        return {
-            'products_count': len(products),
-            'products': products
-        }
+        
+        return products

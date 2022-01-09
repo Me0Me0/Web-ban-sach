@@ -10,12 +10,12 @@ from configs.constant import NOT_FOUND_ERROR, DUPLICATION_ERROR, FORBIDDEN_ERROR
 from configs.dependency import getUser
 from schemas import store_schema
 from schemas import product_schema
+from schemas import order_schema
 from fastapi.exceptions import HTTPException
 from fastapi.responses import FileResponse
 
 from services.StoreService import StoreService
-from schemas import store_schema
-from schemas import product_schema
+from services.OrderService import OrderService
 from services.ProductService import ProductService
 
 class StoreController:
@@ -69,10 +69,8 @@ class StoreController:
             raise Exception(e)
         
         products = StoreService.getStoreProduct(skip, limit, store['id'])
-        return {
-            'products_count': len(products),
-            'products': products
-        }
+        
+        return products
 
 
     @staticmethod
@@ -88,16 +86,14 @@ class StoreController:
             
         # Create product
         try:
-            id = StoreService.createProduct(payload, store['id'])
+            product_id = StoreService.createProduct(payload, store['id'])
         except Exception as e:
             if e.args[0] == DUPLICATION_ERROR:
                 raise HTTPException(status_code=409, detail=e.args[1])
             raise Exception(e)
 
         return {
-            "data": {
-                "id": id
-            }
+            "id": product_id
         }
         
         
@@ -175,6 +171,41 @@ class StoreController:
             }
         }
     
+
+    @staticmethod
+    @router2.get('/orders', response_model=List[order_schema.OrderDetail], dependencies=[Depends(configs.db.get_db)])
+    def getStoreOrders(limit: int = 10, skip: int = 0, user = Depends(getUser)):
+        return OrderService.getStoreOrders(user['id'], limit, skip)
+
+
+    @staticmethod
+    @router2.get('/orders/{order_id}', response_model=order_schema.OrderDetail, dependencies=[Depends(configs.db.get_db)])
+    def getDetailOrder(order_id: int, user = Depends(getUser)):
+        order = OrderService.getByOrderID(order_id)
+        store = StoreService.getOwnStore(user['id'])
+
+        if order.store_id.id != store['id']:
+            raise HTTPException(403, "Forbidden")
+        
+        return order
+
+
+    @staticmethod
+    @router2.delete('/orders/{order_id}', dependencies=[Depends(configs.db.get_db)])
+    def cancelOrder(order_id: int, user = Depends(getUser)):
+        try:
+            StoreService.cancelOrder(user['id'], order_id)
+        except Exception as e:
+            if e.args[0] == NOT_FOUND_ERROR or e.args[0] == FORBIDDEN_ERROR:
+                raise HTTPException(e.args[0], detail=e.args[1])
+            raise Exception(e)
+        
+        return {
+            "data":{
+                "success": True
+            }
+        }
+
 
     # Thống kê kinh doanh của store:
     # Thể loại bán nhiều nhất; Sách bán nhiều nhất; Tổng giao dịch 
