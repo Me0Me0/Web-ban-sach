@@ -71,8 +71,7 @@ button {
 }
 
 .productCard_block {
-  position: relative;
-  margin: 100px auto 0;
+  margin: auto;
   max-width: 1000px;
   min-height: 600px;
   box-shadow: 0 5px 21px rgba(0, 0, 0, 0.08);

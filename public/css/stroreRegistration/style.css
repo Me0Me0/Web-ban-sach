@@ -17,6 +17,7 @@ body {
 	-ms-align-items: center;
 	-moz-align-items: center;
 	-webkit-align-items: center;
+	background-color: #aadfff;
 }
 .form-v5-content  {
 	background: #fff;
@@ -66,6 +67,10 @@ body {
 	padding-top: 1px;
 }
 .form-detail .form-row-last {
+	display:inline-block;
+  overflow: auto;
+  white-space: nowrap;
+  margin:0px auto;
 	text-align: center;
 }
 .form-detail label {
@@ -75,6 +80,7 @@ body {
 }
 .form-detail .input-text {
 	margin-bottom: 26px;
+	width: 100%;
 }
 .form-detail .textarea {
 	margin-bottom: 26px;
@@ -124,12 +130,14 @@ body {
 	border: none;
 	margin: 19px 0 40px;
 	cursor: pointer;
+	
 }
 .form-detail .register:hover {
 	background: #193498;
 	color: #fff;
 }
 .form-detail .form-row-last button {
+
 	padding: 14px;
 	color: #000;
 }

@@ -40,6 +40,7 @@
 body, html {
 	height: 100%;
 	font-family: Poppins-Regular, sans-serif;
+  background-color: #aadfff;
 }
 
 /*---------------------------------------------*/
@@ -55,7 +56,7 @@ a:focus {
 	outline: none !important;
 }
 
-a:hover {
+.limiter a:hover {
 	text-decoration: none;
   background-color: #193498;
   color:#fff;
@@ -81,7 +82,7 @@ ul, li {
 
 
 /*---------------------------------------------*/
-input {
+.limiter input {
 	outline: none;
 	border: none;
 }
@@ -91,7 +92,7 @@ textarea {
   border: none;
 }
 
-textarea:focus, input:focus {
+.limiter textarea:focus,.limiter input:focus {
   border-color: transparent !important;
 }
 
@@ -162,7 +163,7 @@ iframe {
 
 .container-login100 {
   width: 100%;
-  min-height: 100vh;
+  min-height: 70vh;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
