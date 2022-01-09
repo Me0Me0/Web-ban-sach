@@ -24,7 +24,9 @@ class OrderController:
             raise e
 
         return {
-            'data': 'success'
+            "data":{
+                "success": True
+            } 
         }
 
 
@@ -35,38 +37,21 @@ class OrderController:
 
 
     @staticmethod
-    @router.get("/products", response_model=List[order_product_schema.OrderProductDisplay], dependencies=[Depends(get_db)])
-    def getProductsOrders(user_type: int, limit: int = 10, skip: int = 0, user = Depends(getUser)):
-        # user_type = 1 nếu là user, 2 nếu là store
-        orders = []
-
-        # User 
-        if user_type == 1:
-            try:
-                orders = OrderService.getOwnOrders(user['id'], limit, skip)
-            except Exception as e:
-                if e.args[0] == NOT_FOUND_ERROR:
-                    raise HTTPException(e.args[0], detail=e.args[1])
-                raise Exception(e)
-
-        # Store
-        elif user_type == 2:
-            try: 
-                orders = OrderService.getStoreOrders(user['id'], limit, skip)
-            except Exception as e:
-                if e.args[0] == NOT_FOUND_ERROR:
-                    raise HTTPException(e.args[0], detail=e.args[1])
-                raise Exception(e)
-
-        return OrderService.getByListOrderID(orders, skip, limit)
+    @router.get("{order_id}", response_model=order_schema.OrderDetail, dependencies=[Depends(get_db)])
+    def getDetailOrder(order_id: int, user = Depends(getUser)):
+        order = OrderService.getByOrderID(order_id)
+        if order.owner_id.id != user['id']:
+            raise HTTPException(403, "Forbidden")
+        
+        return order
 
     
     @staticmethod
-    @router.delete('/{order_id}', dependencies=[Depends(get_db)])
-    def cancelOrder(user_type: int, order_id: int, user = Depends(getUser)):
+    @router.delete("/{order_id}", dependencies=[Depends(get_db)])
+    def cancelOrder(order_id: int, user = Depends(getUser)):
         # Cancel order
         try:
-            OrderService.cancelOrder(user_type, user['id'], order_id)
+            OrderService.cancelOrder(user['id'], order_id)
         except Exception as e:
             if e.args[0] == NOT_FOUND_ERROR or e.args[0] == FORBIDDEN_ERROR:
                 raise HTTPException(e.args[0], detail=e.args[1])

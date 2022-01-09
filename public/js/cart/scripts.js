@@ -22,10 +22,10 @@ async function showCartItems() {
         return;
     }
 
-    const data = await res.json();
+    const products = await res.json();
     const template = document.querySelector('#item-template')
     
-    for (const item of data.products) {
+    for (const item of products) {
         const clone = template.content.cloneNode(true);
 
         clone.querySelector('tr').id = item.product_id;

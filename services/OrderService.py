@@ -101,23 +101,13 @@ class OrderService:
 
 
     @classmethod
-    def cancelOrder(cls, user_type, user_id, order_id):
-        # User
-        if user_type == 1:
-            try:
-                eraser_id = OrderDetailRepository.getById(order_id).owner_id
-            except Exception as e:
-                raise Exception(404, "Invalid user")
-
-        # Store    
-        elif user_type == 2:
-            try:
-                store_id = StoreRepository.getByUserId(user_id)
-                eraser_id = OrderDetailRepository.getById(order_id).store_id
-            except Exception as e:
-                raise Exception(404, "Invalid store")
+    def cancelOrder(cls, user_id, order_id):
+        try:
+            eraser_id = OrderDetailRepository.getById(order_id).owner_id
+        except Exception as e:
+            raise Exception(404, "Invalid user")
                 
-        if (user_type == 1 and user_id != eraser_id.id) or (user_type == 2 and store_id[0].id != eraser_id.id):
+        if user_id != eraser_id.id:
             raise Exception(403, "Forbidden")
         
         # Set OrderDetail status
@@ -126,8 +116,11 @@ class OrderService:
         except Exception as e:
             raise Exception(e)
         
+        products = OrderProductRepository.getByOrderID(order_id)
+        
         # Refund quality products
         try:
-            print(OrderProductRepository.cancelOrder(order_id))
+            for product in products:
+                ProductRepository.updateQuantity2(product.product_id, product.quantity)
         except Exception as e:
             raise Exception(e)
