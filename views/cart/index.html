@@ -307,7 +307,7 @@
                 </td>
                 <td data-th="Price" class="price">1.99</td>
                 <td data-th="Quantity">
-                  <input type="number" class="form-control text-center mt2 quantity" value="1" min="1">
+                  <input data-prev="" type="number" class="form-control text-center mt2 quantity" value="1" min="1">
                 </td>
                 <td data-th="Subtotal" class="text-center subtotal">1.99</td>
                 <td class="actions" data-th="">
@@ -315,52 +315,6 @@
                 </td>
               </tr>
             </template>
-            <!-- <tr>
-              <td data-th="Product">
-                <div class="row">
-                  <input type="checkbox" id="checkbox-2" class="check">
-                  <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive" id="product-image-2"/></div>
-                  <div class="col-sm-8">
-                    <h4 class="nomargin" id="product-name-2">Tên sản phẩm</h4>
-                    <p id="store-name-2">Tên cửa hàng</p>
-                  </div>
-                  <div>
-                    <a class="view-detail" href="/products/iddetails" id="product-detail-2">Chi tiết</a>
-                  </div>
-                </div>
-              </td>
-              <td data-th="Price" id="price-2">1.99</td>
-              <td data-th="Quantity">
-                <input type="number" class="form-control text-center mt2" value="1" min="1" id="quantity-2">
-              </td>
-              <td data-th="Subtotal" class="text-center" id="subtotal-2">1.99</td>
-              <td class="actions" data-th="">
-                <button class="btn_delete btn-danger " id="delete-2"><i class="fa fa-trash-o"></i></button>								
-              </td>
-            </tr>      
-            <tr>
-              <td data-th="Product">
-                <div class="row">
-                  <input type="checkbox" id="checkbox-3" class="check">
-                  <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive" id="product-image-3"/></div>
-                  <div class="col-sm-8">
-                    <h4 class="nomargin" id="product-name-3">Tên sản phẩm</h4>
-                    <p id="store-name-3">Tên cửa hàng</p>
-                  </div>
-                  <div>
-                    <a class="view-detail" href="/products/iddetails" id="product-detail-3">Chi tiết</a>
-                  </div>
-                </div>
-              </td>
-              <td data-th="Price" id="price-3">1.99</td>
-              <td data-th="Quantity">
-                <input type="number" class="form-control text-center mt2" value="1" min="1" id="quantity-3">
-              </td>
-              <td data-th="Subtotal" class="text-center" id="subtotal-3">1.99</td>
-              <td class="actions" data-th="">
-                <button class="btn_delete btn-danger " id="delete-3"><i class="fa fa-trash-o"></i></button>								
-              </td>
-            </tr> -->
           </tbody>
         </table>
         <hr>
@@ -407,33 +361,18 @@
                   <div class="col-25">
                     <h3>Địa chỉ nhận hàng</h3>          
                     <label for="city"> Tỉnh/Thành phố</label>
-                    <select class="form-control" name="Chọn tỉnh/thành phố" required>
-                        <option value="City" id="city-1">Thành phố</option>
-                        <option value="City" id="city-2">Thành phố</option>
-                        <option value="City" id="city-3">Thành phố</option>
-                        <option value="City" id="city-4">Thành phố</option>
-                        <option value="City" id="city-5">Thành phố</option>
-                        <option value="City" id="city-6">Thành phố</option>
+                    <select class="form-control" name="Chọn tỉnh/thành phố" id="province" required>
+                        <option value="" disabled selected>Select your option</option>
                     </select>
         
                     <label for="district"> Quận/Huyện</label>
-                    <select class="form-control" name="Chọn quận/huyện" required>
-                        <option value="district" id="district-1">Thành phố</option>
-                        <option value="district" id="district-2">Thành phố</option>
-                        <option value="district" id="district-3">Thành phố</option>
-                        <option value="district" id="district-4">Thành phố</option>
-                        <option value="district" id="district-5">Thành phố</option>
-                        <option value="district" id="district-6">Thành phố</option>
+                    <select class="form-control" name="Chọn quận/huyện" id="district" required>
+                        <option value="" disabled selected>Select your option</option>
                     </select>
         
                     <label for="village"> Phường/Xã</label>
-                    <select class="form-control" name="Chọn phường/xã" required>
-                        <option value="village" id="village-1">Thành phố</option>
-                        <option value="village" id="village-2">Thành phố</option>
-                        <option value="village" id="village-3">Thành phố</option>
-                        <option value="village" id="village-4">Thành phố</option>
-                        <option value="village" id="village-5">Thành phố</option>
-                        <option value="village" id="village-6">Thành phố</option>
+                    <select class="form-control" name="Chọn phường/xã" id="ward" required>
+                        <option value="" disabled selected>Select your option</option>
                     </select> 
                     
                     <label for="adr"> Địa chỉ cụ thể</label>

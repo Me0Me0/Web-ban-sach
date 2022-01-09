@@ -69,10 +69,18 @@ class OrderDetailRepository():
                             Product.deleted_at == None,
                             Product.quantity >= item.quantity,
                         ).execute()
+                        
                         if nUpdate == 0 or item.quantity <= 0: 
                             raise Exception(422, "Invalid quantity")
                         OrderProduct.create(order_id = order_id, product_id = item.product_id, quantity = item.quantity)      
                         CartProduct.delete().where(CartProduct.cart_id == item.cart_id, CartProduct.product_id == item.product_id).execute()
+                        
+                        # reduce quantity of users' cart product if it's quantity >  product quantity
+                        product = Product.get_by_id(item.product_id)
+                        CartProduct.update(quantity = product.quantity).where(
+                            CartProduct.product_id == item.product_id, 
+                            CartProduct.quantity > product.quantity
+                        ).execute()
 
                 transaction.commit()
                 return True

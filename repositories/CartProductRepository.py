@@ -25,6 +25,7 @@ class CartProductRepository():
          Product.id.alias('product_id'),
          Product.name, 
          Product.price, 
+         Product.quantity.alias('product_quantity'),
          Store.id.alias('store_id'),
          Store.name.alias('store_name'), 
       ).join(CartProduct, on=predicate2).join(Store, on=predicate3).where(Product.deleted_at.is_null(True), predicate1).dicts()
@@ -50,3 +51,12 @@ class CartProductRepository():
    def createMany(cls, product_list):
        with db.atomic():
            CartProduct.insert_many(product_list, fields=[CartProduct.product_id, CartProduct.quantity]).execute()
+
+   @classmethod
+   def delete(cls, cart_id: int, product_id: int):
+      CartProduct.delete().where(CartProduct.cart_id == cart_id, CartProduct.product_id == product_id).execute()
+
+   
+   @classmethod
+   def updateQuantity(cls, cart_id: int, product_id: int, quantity: int):
+      CartProduct.update(quantity=quantity).where(CartProduct.cart_id == cart_id, CartProduct.product_id == product_id).execute()

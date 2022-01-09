@@ -7,6 +7,7 @@ from controllers.UserController import UserController
 from controllers.ProductController import ProductController
 from controllers.StoreController import StoreController
 from controllers.CartController import CartController
+from controllers.AddressController import AddressController
 
 
 api = APIRouter(prefix="/api")
@@ -18,3 +19,4 @@ api.include_router(StoreController.router)
 api.include_router(StoreController.router2)
 api.include_router(OrderController.router)
 api.include_router(CartController.router)
+api.include_router(AddressController.router)

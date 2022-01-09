@@ -30,6 +30,7 @@ class OrderService:
 
     @classmethod
     def createOrder(cls, payload, user_id):
+        # check address
         try:
             ProvinceRepository.getNameByID(payload.province_id)
             DistrictRepository.getByID(payload.district_id)
@@ -42,16 +43,22 @@ class OrderService:
 
         ordersByStore = {}
         for item in payload.products:
+            # check product existance
             try:
                 product = ProductRepository.getById(item.product_id)
             except Exception as e:
                 raise Exception(422, "Invalid product")
 
+            # check item cart existance
             try:
                 cart_id = CartRepository.getCartID(user_id)
                 cartItem = CartProductRepository.get(cart_id, item.product_id)
             except Exception as e:
                 raise Exception(422, "Invalid cart")
+
+            # check cart item quantity
+            if cartItem.quantity != item.quantity:
+                raise Exception(422, "Invalid quantity")
 
             if product.store_id not in ordersByStore:
                 ordersByStore[product.store_id] = {
