@@ -1,3 +1,4 @@
+from fastapi.requests import Request
 from api_routes import api as api_routes
 from view_routes import view as view_routes
 from configs.env import getEnv
@@ -23,6 +24,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# ignore unexpected disk cache for html file 
+@app.middleware("http")
+async def ignoreCache(request: Request, call_next):
+    response = await call_next(request)
+    if response.headers.get('Content-Type') and 'text/html' in response.headers['Content-Type']:
+        response.headers['Cache-Control'] = 'no-cache'
+    return response
 
 
 #static files

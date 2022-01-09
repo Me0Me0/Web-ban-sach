@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from fastapi.params import Depends
 from fastapi.responses import FileResponse
+from configs.dependency import redirectView, AUTH, NOT_AUTH
 import configs
 
 view = APIRouter()
@@ -64,19 +65,19 @@ def resetPassword(token):
 
 @staticmethod
 @user_router.get('/view-profile', response_class=FileResponse)
-def viewProfile():
+def viewProfile(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
     return "./views/viewProfile/view-profile.html"
 
 
 @staticmethod
 @user_router.get('/change-profile', response_class=FileResponse)
-def changeProfile():
+def changeProfile(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
     return "./views/changeProfile/change-profile.html"
 
 
 @staticmethod
 @user_router.get('/change-password', response_class=FileResponse)
-def changePassword():
+def changePassword(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
     return "./views/changePassword/change-password.html"
 
 
@@ -88,31 +89,31 @@ mystore_router = APIRouter(prefix="/mystore")
 
 
 @mystore_router.get('', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-def mystore_page():
+def mystore_page(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
     return "./views/storeViewSeller/index.html"
 
 
 @mystore_router.get('/add-product', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-def mystore_page():
+def mystore_page(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
     return "./views/addProduct/index.html"
 
 
 @mystore_router.get('/register', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-def mystoreRegistration():
+def mystoreRegistration(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
     return "./views/stroreRegistration/index.html"
 
 
 @mystore_router.get('/view-details', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-def mystore_page():
+def mystore_page(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
     return "./views/storeDetails_ViewSeller/index.html"
 
 
 @mystore_router.get('/edit-details', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-def mystore_page():
+def mystore_page(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
     return "./views/editStore/index.html"
 
 @mystore_router.get('/statistic', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-def mystore_page():
+def mystore_page(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
     return "./views/statistic/index.html"
 
 
@@ -166,7 +167,7 @@ def getProductDetailsViewSeller():
 
 
 @product_router.get('/edit-product/{id}', response_class=FileResponse)
-def editProductDetails():
+def editProductDetails(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
     return "./views/editProduct/index.html"
 
 
@@ -183,8 +184,8 @@ cart_router = APIRouter(prefix="/cart")
 
 
 # Add view bellow
-@cart_router.get('/', response_class=FileResponse)
-def getCart():
+@cart_router.get('', response_class=FileResponse)
+def getCart(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
     return "./views/cart/index.html"
 
 
@@ -196,22 +197,22 @@ order_router = APIRouter(prefix="/orders")
 
 
 @order_router.get('/', response_class=FileResponse)
-def getOrders():
+def getOrders(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
     return "./views/listOrder_ViewCus/index.html"
 
 
 @order_router.get('/{id}', response_class=FileResponse) # id cua hoa don
-def getOrderDetails():
+def getOrderDetails(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
     return "./views/orderDetails_ViewCus/index.html"
 
 
 @order_router.get('/mystore-orders/details/{id}', response_class=FileResponse) # id cua don hang
-def getMyStoreOrdersDetails():
+def getMyStoreOrdersDetails(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
     return "./views/orderDetails_ViewSeller/index.html"
 
 
 @order_router.get('/mystore-orders/{id}', response_class=FileResponse) # id cua cua hang
-def getMyStoreOrders():
+def getMyStoreOrders(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
     return "./views/listOrder_ViewSeller/index.html"
 
 
