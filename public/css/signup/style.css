@@ -62,8 +62,11 @@ body {
 .form-detail .form-row {
 	position: relative;
 }
+.form-detail .form-row .input-text {
+	width: 100%;
+}
 .form-detail .form-row i {
-	padding-top: 1px;
+	padding-top: 8px;
 }
 .form-detail .form-row-last {
 	text-align: center;
