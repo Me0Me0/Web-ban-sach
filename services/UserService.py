@@ -7,6 +7,7 @@ from schemas import user_schema
 from fastapi.exceptions import HTTPException
 from configs.constant import DEFAULT_AVT
 from configs.env import getEnv
+from services.CartService import CartService
 
 JWT_SECRET = getEnv().JWT_SECRET
 
@@ -22,7 +23,10 @@ class UserService:
         hashed = bcrypt.hashpw(userDict['password'].encode(), salt)
         userDict['password'] = hashed
 
-        return UserRepository.create(payload.__dict__)
+        id = UserRepository.create(userDict)
+        CartService.createCart(id)
+
+        return id
 
 
     @classmethod

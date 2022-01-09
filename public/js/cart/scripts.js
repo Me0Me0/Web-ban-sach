@@ -22,7 +22,7 @@ async function showCartItems() {
     const items = await getCartItems();
     const template = document.querySelector('#item-template')
     
-    for (const item of items) {
+    for (const item of items.products) {
         const clone = template.content.cloneNode(true);
 
         clone.querySelector('.product-name').textContent = item.name;
