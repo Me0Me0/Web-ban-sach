@@ -12,7 +12,8 @@ const options = {
 fetch(`/api/stores/${id}/details`, options)
 .then(data => data.json())
 .then(data =>  { 
-  console.log(data);
+  console.log(data.__data__);
+  data = data.__data__
   document.getElementById("name").innerHTML = data.name;
   document.getElementById("phone").innerHTML = "0" + data.phone;
   document.getElementById("email").innerHTML = data.email;
