@@ -44,7 +44,7 @@ async function onFormsubmit(e) {
     if (data.error) {
         alert('Tài khoản hoặc mật khẩu không đúng');
     } else if (data.data.success) {
-        //alert('Đăng nhập thành công');
+        alert('Đăng nhập thành công');
         localStorage.setItem('user', user);
         window.location.href = "/";
     } else {

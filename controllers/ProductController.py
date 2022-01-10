@@ -87,6 +87,6 @@ class ProductController:
     # Search
     @staticmethod
     @router.post('/search', dependencies=[Depends(configs.db.get_db)])
-    def searchProduct(keyword:str, category: Optional[int]=None, maxPrice: Optional[int]=None, minPrice: Optional[int]=None, order: Optional[str]='asc', sortBy: Optional[str]=None):
-        return ProductService.searchProduct(keyword, category, maxPrice, minPrice, order, sortBy)
+    def searchProduct(keyword:str, skip: int = 0, limit: int = 10, category: Optional[int]=None, maxPrice: Optional[int]=None, minPrice: Optional[int]=None, order: Optional[str]='asc', sortBy: Optional[str]=None):
+        return ProductService.searchProduct(keyword, category, maxPrice, minPrice, order, sortBy, skip, limit)
     

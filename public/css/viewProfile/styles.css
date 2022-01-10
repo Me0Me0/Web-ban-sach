@@ -13,10 +13,10 @@ body{
 }
 
 .wrapper{
-  position: absolute;
+  position: relative;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translateX(-50%);
   width: 1170px;
   display: flex;
   box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
@@ -119,7 +119,7 @@ body{
 .wrapper .setting_btn ul li a{
   color :#fff;
   display: block;
-  font-size: 18px;
+  font-size: 15px;
   text-decoration: none;
 }
 
@@ -127,6 +127,7 @@ body{
   color: #fff;
   background-color: transparent;
   border: none;
-  padding: 10px 30px;
   cursor: pointer;
+  font-size: 15px;
+  outline: none;
 }

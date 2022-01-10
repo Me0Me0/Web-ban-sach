@@ -98,16 +98,16 @@ class ProductService:
 
 
     @classmethod
-    def searchProduct(cls, keyword, category, maxPrice, minPrice, order, sortBy):
-        products_rslt = ProductRepository.searchByName(keyword)
+    def searchProduct(cls, keyword, category, maxPrice, minPrice, order, sortBy, skip, limit):
+        products_rslt = ProductRepository.searchByName(keyword, skip, limit)
 
         if len(products_rslt) == 0: # Không có kết quả tìm kiếm ứng với keyword đó
             return products_rslt
 
         if category != None:
             if len(products_rslt) == 1: # Nếu chỉ có 1 kết quả tìm kiếm
-                return products_rslt if products_rslt[0].category_id == category else []
-            products_rslt = [product for product in products_rslt if product.category_id == category]
+                return products_rslt if products_rslt[0].cate_id.id == category else []
+            products_rslt = [product for product in products_rslt if product.cate_id.id == category]
         
         if maxPrice != None:
             if len(products_rslt) == 1: # Nếu chỉ có 1 kết quả tìm kiếm

@@ -14,6 +14,13 @@ $(document).ready(function () {
     $("header .actions .menu #logged-in").hide()
   }
 
+  // ======= Search ======= //
+  $(".search form").submit(function (e) {
+    e.preventDefault();
+    let search = $("#search-input").val();
+    location.href = `/products/search-results?q=${search}`;
+  })
+
   // ======= Dropdown actions ======= //
   $(".header-top .dropdown-top").click(function () {
     $(this).next().toggleClass("show-dropdown");
@@ -168,6 +175,7 @@ $(document).ready(function () {
 });
 
 
-
-
-
+// api get category
+// async function showCategory() {
+//   const res = await 
+// }
