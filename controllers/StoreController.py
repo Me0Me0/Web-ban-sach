@@ -271,6 +271,4 @@ class StoreController:
     @router.get('/{store_id}/details',dependencies=[Depends(configs.db.get_db)])
     def getDetail(store_id: int):
         storeDetails = StoreService.getStoreDetail(store_id)
-        return {
-            storeDetails.data
-        }
+        return storeDetails

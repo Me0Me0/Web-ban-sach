@@ -177,5 +177,9 @@ $(document).ready(function () {
 
 // api get category
 // async function showCategory() {
-//   const res = await 
+//   const res = await fetch("/api/products/categories");
+//   const data = await res.json();
+//   console.log(data)
 // }
+
+// showCategory();

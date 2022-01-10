@@ -86,7 +86,7 @@ class ProductController:
 
     # DS doanh muc
     @staticmethod
-    @router.post('/category-list', dependencies=[Depends(configs.db.get_db)])
+    @router.post('/categories', dependencies=[Depends(configs.db.get_db)])
     def getListCategory():
         return ProductService.getListCategory()
 
