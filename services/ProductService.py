@@ -81,7 +81,7 @@ class ProductService:
 
     @classmethod
     def getTopProduct(cls, ascending, skip, limit):
-        return ProductRepository.getSortBySell(ascending, skip, limit)
+        return ProductRepository.getSortBySell(ascending, 3, skip, limit)
 
 
     @classmethod
