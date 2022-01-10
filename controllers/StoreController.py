@@ -265,3 +265,12 @@ class StoreController:
         limit = Query(10, gt=0)
         skip = Query(0, ge=0)
         return StoreService.getAll(skip, limit, store_id)
+
+    
+    @staticmethod
+    @router.get('/{store_id}/details',dependencies=[Depends(configs.db.get_db)])
+    def getDetail(store_id: int):
+        storeDetails = StoreService.getStoreDetail(store_id)
+        return {
+            storeDetails.data
+        }
