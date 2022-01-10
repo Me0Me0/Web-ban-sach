@@ -192,22 +192,24 @@
               <th style="width:15%">Tổng tiền</th>
             </tr>
           </thead>
-          <tbody>         
-            <tr>
-              <td data-th="Order">
-                <div class="row">
-                  <div class="col-sm-10">
-                    <h4 class="nomargin" id="order-id-1">Mã đơn hàng</h4>
-                  </div>
-                  <div>
-                    <a class="view-detail" href="/orders/id" id="order-detail-1">Chi tiết</a>
-                  </div>
-                </div>
-              </td>
-              <td data-th="status" id="status-1">Đang xử lý</td>
-              <td data-th="Subtotal" class="text-left" id="subtotal-1">1.99</td>
-            </tr>  
-            <tr>
+          <tbody id="order-list">
+                <template id="order-template">
+                    <tr>
+                    <td data-th="Order">
+                        <div class="row">
+                        <div class="col-sm-10">
+                            <h4 class="nomargin order-id">Mã đơn hàng</h4>
+                        </div>
+                        <div>
+                            <a class="view-detail" href="/orders/">Chi tiết</a>
+                        </div>
+                        </div>
+                    </td>
+                    <td data-th="status" class="status">Đang xử lý</td>
+                    <td data-th="Subtotal" class="text-left subtotal">1.99</td>
+                    </tr>
+                </template>    
+            <!-- <tr>
               <td data-th="Order">
                 <div class="row">
                   <div class="col-sm-10">
@@ -234,7 +236,7 @@
               </td>
               <td data-th="status" id="status-3">Đang xử lý</td>
               <td data-th="Subtotal" class="text-left" id="subtotal-3">1.99</td>
-            </tr>      
+            </tr>-->
           </tbody>
       </table>
       <hr>

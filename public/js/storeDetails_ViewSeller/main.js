@@ -8,7 +8,7 @@ const options = {
 fetch("/api/mystore", options)
 .then(data => data.json())
 .then(data =>  { 
-  console.log(data);
+  data = data.__data__
   document.getElementById("store-name").innerHTML = data.name;
   document.getElementById("phone").innerHTML = "0" + data.phone;
   document.getElementById("email").innerHTML = data.email;

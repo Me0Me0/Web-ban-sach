@@ -37,7 +37,7 @@ class OrderController:
 
 
     @staticmethod
-    @router.get("{order_id}", response_model=order_schema.OrderDetail, dependencies=[Depends(get_db)])
+    @router.get("/{order_id}", response_model=order_schema.OrderDetail, dependencies=[Depends(get_db)])
     def getDetailOrder(order_id: int, user = Depends(getUser)):
         order = OrderService.getByOrderID(order_id)
         if order.owner_id.id != user['id']:
