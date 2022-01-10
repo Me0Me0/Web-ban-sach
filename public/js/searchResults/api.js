@@ -24,7 +24,7 @@ function searchNotFoundView() {
 }
 
 async function getProducts() {
-    const res = await fetch(`/api/products/search?keyword=${keyword}&limit=${limit * 5}&skip=${skip}`, { method: "POST" });
+    const res = await fetch(`/api/products/search?keyword=${keyword}&limit=${limit * 5}&skip=${skip}`);
     const data = await res.json();
     return data
 }

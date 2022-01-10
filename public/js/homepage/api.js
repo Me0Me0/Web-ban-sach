@@ -1,5 +1,24 @@
+// api get category
+async function showCategory() {
+    const res = await fetch("/api/products/categories");
+    const data = await res.json();
+
+    for (const { __data__: cate} of data) {
+        const template = document.querySelector("#category-template").content;
+        const clone = template.cloneNode(true);
+
+        clone.querySelector("li").dataset.id = cate.id;
+        clone.querySelector(".category-name").textContent = cate.name;
+        clone.querySelector(".category-link").href = "/products/category/" + cate.id;
+
+        document.querySelector(".categories-ul").appendChild(clone);
+    }
+}
+showCategory();
+
+
 async function showNewProduct() {
-    const res = await fetch('/api/products/newest?limit=10', { method: 'POST' });
+    const res = await fetch('/api/products/newest?limit=10');
     const items = await res.json();
 
     console.log(items)

@@ -177,7 +177,7 @@ $(document).ready(function () {
 
 // api get category
 async function showCategory() {
-  const res = await fetch("/api/products/categories", { method: "POST" });
+  const res = await fetch("/api/products/categories");
   const data = await res.json();
   
   for (const { __data__: cate} of data) {

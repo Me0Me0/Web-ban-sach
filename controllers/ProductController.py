@@ -16,33 +16,7 @@ from services.CartService import CartService
 
 class ProductController:
     router = APIRouter(prefix='/products')
-
-    @staticmethod
-    @router.get('/{id}',response_model=product_schema.Product,dependencies=[Depends(configs.db.get_db)])
-    def getById(id: int):
-        product = ProductService.getById(id)
-        if not product:
-            raise HTTPException(404, detail="Product not found!")
-        return product
-      
-      
-    @staticmethod
-    @router.delete('/{id}', dependencies=[Depends(configs.db.get_db)])
-    def delete(id: int, user = Depends(getUser)):
-        try:
-            ProductService.delete(id, user['id'])
-        except Exception as e:
-            if e.args[0] == 'NOT_FOUND' or e.args[0] == FORBIDDEN_ERROR:
-                raise HTTPException(status_code=e.args[0], detail=e.args[1])
-            raise Exception(e)
-            
-        return {
-            "data": {
-                "success": True
-            }
-        }
     
-
     # Them san pham vao gio hang
     @staticmethod
     @router.post('/{product_id}/add-to-cart', dependencies=[Depends(configs.db.get_db)])
@@ -72,35 +46,60 @@ class ProductController:
     
     # DS san pham moi nhat
     @staticmethod
-    @router.post('/newest', dependencies=[Depends(configs.db.get_db)])
+    @router.get('/newest', dependencies=[Depends(configs.db.get_db)])
     def getProductNew(limit:int = Query(10, gt=0), skip:int = Query(0, ge=0)):
         return ProductService.getProductNew(True, skip, limit)
 
 
     # DS san pham ban chay nhat
     @staticmethod
-    @router.post('/top-product', dependencies=[Depends(configs.db.get_db)])
+    @router.get('/top-product', dependencies=[Depends(configs.db.get_db)])
     def getTopProduct(limit:int = Query(10, gt=0), skip:int = Query(0, ge=0)):
         return ProductService.getTopProduct(True, skip, limit)
 
 
     # DS doanh muc
     @staticmethod
-    @router.post('/categories', dependencies=[Depends(configs.db.get_db)])
+    @router.get('/categories', dependencies=[Depends(configs.db.get_db)])
     def getListCategory():
         return ProductService.getListCategory()
 
 
     # Hien thi san pham theo doanh muc
     @staticmethod
-    @router.post('/category', dependencies=[Depends(configs.db.get_db)])
+    @router.get('/category', dependencies=[Depends(configs.db.get_db)])
     def getProductByCategory(cate_id: int, limit:int = Query(10, gt=0), skip:int = Query(0, ge=0)):
         return ProductService.getProductByCategory(cate_id, skip, limit)
 
 
     # Search
     @staticmethod
-    @router.post('/search', dependencies=[Depends(configs.db.get_db)])
+    @router.get('/search', dependencies=[Depends(configs.db.get_db)])
     def searchProduct(keyword:str, skip: int = 0, limit: int = 10, category: Optional[int]=None, maxPrice: Optional[int]=None, minPrice: Optional[int]=None, order: Optional[str]='asc', sortBy: Optional[str]=None):
         return ProductService.searchProduct(keyword, category, maxPrice, minPrice, order, sortBy, skip, limit)
     
+
+    @staticmethod
+    @router.get('/{id}',response_model=product_schema.Product,dependencies=[Depends(configs.db.get_db)])
+    def getById(id: int):
+        product = ProductService.getById(id)
+        if not product:
+            raise HTTPException(404, detail="Product not found!")
+        return product
+      
+      
+    @staticmethod
+    @router.delete('/{id}', dependencies=[Depends(configs.db.get_db)])
+    def delete(id: int, user = Depends(getUser)):
+        try:
+            ProductService.delete(id, user['id'])
+        except Exception as e:
+            if e.args[0] == 'NOT_FOUND' or e.args[0] == FORBIDDEN_ERROR:
+                raise HTTPException(status_code=e.args[0], detail=e.args[1])
+            raise Exception(e)
+            
+        return {
+            "data": {
+                "success": True
+            }
+        }
