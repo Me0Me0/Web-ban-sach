@@ -138,7 +138,7 @@ fetch(`/api/products/${id}`, options)
   console.error(err);
 })
 
-function add_to_cart() {
+async function add_to_cart() {
   var quantity = document.getElementById("quantity-added").value
   const options = {
     method: "POST",
@@ -146,14 +146,17 @@ function add_to_cart() {
         "content-type": "text/plain;charset=UTF-8"
     }
   }
-  fetch(`/api/products/${id}/add-to-cart?quantity=${quantity}`, options)
-  .then(data => data.json())
-  .then(data => {
-    console.log("cc")
-    alert ("Đã thêm sản phẩm vào giỏ hàng")
-  })
-  .catch((err) => {
+  const res = await fetch(`/api/products/${id}/add-to-cart?quantity=${quantity}`, options)
+  const data = await res.json();
+
+  if (data.error) {
+    alert("Thêm sản phẩm vào giỏ hàng thất bại")
+    console.log(data)
+  } else if (data.data.success) {
+    console.log(data);
+    alert ("Sản phẩm đã được thêm vào giỏ hàng")
+  } else {
     alert ("Đã xảy ra lỗi, vui lòng thử lại sau");
-    console.error(err);
-  })
+    console.log(data);
+  }
 }
