@@ -149,8 +149,8 @@ function add_to_cart() {
   fetch(`/api/products/${id}/add-to-cart?quantity=${quantity}`, options)
   .then(data => data.json())
   .then(data => {
-    console.log(data)
-    
+    console.log("cc")
+    alert ("Đã thêm sản phẩm vào giỏ hàng")
   })
   .catch((err) => {
     alert ("Đã xảy ra lỗi, vui lòng thử lại sau");
