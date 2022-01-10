@@ -46,15 +46,22 @@ class ProductController:
     # Them san pham vao gio hang
     @staticmethod
     @router.post('/{product_id}/add-to-cart', dependencies=[Depends(configs.db.get_db)])
-    def addToCart(product_id: int, user = Depends(getUser)):
+    def addToCart(product_id: int, quantity: int = 1, user = Depends(getUser)):
         try:
-            cart_id = CartService.getCartID(user['id'])
+            cart_id = CartService.getOwnCart(user['id'])
         except Exception as e:
             if e.args[0] == 404:
                 raise HTTPException(status_code=404, detail=e.args[1])
             raise Exception(e)
             
-        ProductService.addToCart(cart_id, product_id, 1)  # Số lượng ban đầu là 1
+        if len(cart_id) == 0:
+            CartService.createCart(user['id'])
+
+        try:
+            ProductService.addToCart(cart_id, product_id, quantity)
+        except Exception as e:
+            if e.args[0] == 422:
+                raise HTTPException(e.args[0], detail=e.args[1])
 
         return {
             "data": {
@@ -75,6 +82,13 @@ class ProductController:
     @router.post('/top-product', dependencies=[Depends(configs.db.get_db)])
     def getTopProduct(limit:int = Query(10, gt=0), skip:int = Query(0, ge=0)):
         return ProductService.getTopProduct(True, skip, limit)
+
+
+    # DS doanh muc
+    @staticmethod
+    @router.post('/category-list', dependencies=[Depends(configs.db.get_db)])
+    def getListCategory():
+        return ProductService.getListCategory()
 
 
     # Hien thi san pham theo doanh muc

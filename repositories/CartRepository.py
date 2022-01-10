@@ -11,7 +11,7 @@ class CartRepository():
 
    @classmethod
    def getCartID(cls, owner_id: int):
-      return Cart.get(Cart.owner_id == owner_id).id
+      return Cart.select().where(Cart.owner_id == owner_id)#Cart.get(Cart.owner_id == owner_id).id
 
 
    @classmethod

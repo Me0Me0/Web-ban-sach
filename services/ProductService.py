@@ -71,6 +71,10 @@ class ProductService:
     
     @classmethod
     def addToCart(cls, cart_id, product_id, quantity):
+        product_quantity = ProductRepository.getById(product_id).quantity
+        if product_quantity < quantity:
+            raise Exception(422, "Unprocessable Entity")
+
         return CartProductRepository.create(cart_id, product_id, quantity)
 
 
@@ -87,6 +91,11 @@ class ProductService:
     @classmethod
     def getProductByName(cls, name):
         return ProductRepository.getByName(name)
+
+
+    @classmethod
+    def getListCategory(cls):
+        return CategoryRepository.getAll()
 
 
     @classmethod
