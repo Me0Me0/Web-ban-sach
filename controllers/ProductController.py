@@ -84,6 +84,13 @@ class ProductController:
         return ProductService.getTopProduct(True, skip, limit)
 
 
+    # DS doanh muc
+    @staticmethod
+    @router.post('/category-list', dependencies=[Depends(configs.db.get_db)])
+    def getListCategory():
+        return ProductService.getListCategory()
+
+
     # Hien thi san pham theo doanh muc
     @staticmethod
     @router.post('/category', dependencies=[Depends(configs.db.get_db)])

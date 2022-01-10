@@ -94,6 +94,11 @@ class ProductService:
 
 
     @classmethod
+    def getListCategory(cls):
+        return CategoryRepository.getAll()
+
+
+    @classmethod
     def getProductByCategory(cls, cate_id, skip, limit):
         category = CategoryRepository.getById(cate_id)
         if not category:
