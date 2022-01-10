@@ -137,3 +137,23 @@ fetch(`/api/products/${id}`, options)
   alert ("Đã xảy ra lỗi, vui lòng thử lại sau");
   console.error(err);
 })
+
+function add_to_cart() {
+  var quantity = document.getElementById("quantity-added").value
+  const options = {
+    method: "POST",
+    headers: {
+        "content-type": "text/plain;charset=UTF-8"
+    }
+  }
+  fetch(`/api/products/${id}/add-to-cart?quantity=${quantity}`, options)
+  .then(data => data.json())
+  .then(data => {
+    console.log(data)
+    
+  })
+  .catch((err) => {
+    alert ("Đã xảy ra lỗi, vui lòng thử lại sau");
+    console.error(err);
+  })
+}

@@ -45,7 +45,7 @@ class ProductController:
 
     # Them san pham vao gio hang
     @staticmethod
-    @router.post('/{product_id}/add-to-cart', dependencies=[Depends(configs.db.get_db)])
+    @router.post('/{product_id}/add-to-cart?quantity={quantity}', dependencies=[Depends(configs.db.get_db)])
     def addToCart(product_id: int, quantity: int = 1, user = Depends(getUser)):
         try:
             cart_id = CartService.getOwnCart(user['id'])
