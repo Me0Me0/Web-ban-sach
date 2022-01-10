@@ -8,6 +8,7 @@ from fastapi.exceptions import HTTPException
 from configs.constant import DEFAULT_AVT
 from configs.env import getEnv
 from services.CartService import CartService
+from services.StoreService import StoreService
 
 JWT_SECRET = getEnv().JWT_SECRET
 
@@ -25,6 +26,7 @@ class UserService:
 
         id = UserRepository.create(userDict)
         CartService.createCart(id)
+        StoreService.registerStore(id)
 
         return id
 

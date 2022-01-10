@@ -176,10 +176,20 @@ $(document).ready(function () {
 
 
 // api get category
-// async function showCategory() {
-//   const res = await fetch("/api/products/categories");
-//   const data = await res.json();
-//   console.log(data)
-// }
+async function showCategory() {
+  const res = await fetch("/api/products/categories", { method: "POST" });
+  const data = await res.json();
+  
+  for (const { __data__: cate} of data) {
+    const template = document.querySelector("#category-template").content;
+    const clone = template.cloneNode(true);
 
-// showCategory();
+    clone.querySelector("li").dataset.id = cate.id;
+    clone.querySelector(".category-name").textContent = cate.name;
+    clone.querySelector(".category-link").href = "/products/category/" + cate.id;
+
+    document.querySelector(".categories-ul").appendChild(clone);
+  }
+}
+
+showCategory();

@@ -146,7 +146,7 @@ def getBestSeller():
     return "./views/bestSeller/index.html"
 
 
-@product_router.get('/category', response_class=FileResponse)
+@product_router.get('/category/{id}', response_class=FileResponse)
 def getCategory():
     return "./views/category/index.html"
 
