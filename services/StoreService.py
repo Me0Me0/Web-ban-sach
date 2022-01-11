@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from repositories.ProductImageRepository import ProductImageRepository
 from repositories.StoreRepository import StoreRepository
 from repositories.UserRepository import UserRepository
 from repositories.ProductRepository import ProductRepository
@@ -42,12 +43,19 @@ class StoreService:
     @classmethod
     def createProduct(cls, payload: product_schema.ProductCreate, store_id):
         productDict = payload.__dict__
-        productDict['avt_link'] = DEFAULT_AVT
+        image_links = productDict['image_links']
+        del productDict['image_links']
         # Get category of product
         category = productDict['cate_id']
         # Remove category field from productDict 
         del productDict['cate_id']
-        return ProductRepository.create(store_id, category, productDict)
+        product_id = ProductRepository.create(store_id, category, productDict)
+
+        # create image for product
+        images = list(map(lambda img: (product_id, img), image_links))
+        ProductImageRepository.createMany(images)
+        
+        return product_id
 
     
     @classmethod

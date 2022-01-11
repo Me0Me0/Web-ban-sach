@@ -1,3 +1,4 @@
+from typing import List
 from schemas.schema import PeeweeGetterDict
 from schemas.category_schema import Category
 from schemas.store_schema import Store
@@ -14,7 +15,7 @@ class Product(BaseModel):
     detail: str
     author: str
     number_of_pages: int
-    publishing_year: date
+    publishing_year: int
     publisher: str
     cover_image: str
     store_id: Store = Field(None)
@@ -33,7 +34,9 @@ class ProductCreate(BaseModel):
     detail: str
     author: str
     number_of_pages: int
-    publishing_year: date
+    publishing_year: int
+    image_links: List[str]
+    cover_image: str
     publisher: str
     quantity: int
     price: float
@@ -46,7 +49,7 @@ class ProductUpdate(BaseModel):
     detail: str
     author: str
     number_of_pages: int
-    publishing_year: date
+    publishing_year: int
     publisher: str
     cover_image: str
     quantity: int
@@ -70,7 +73,7 @@ class ProductBestSell(BaseModel):
     name: str
     cate_id: Category = Field(None)
     author: str
-    publishing_year: date
+    publishing_year: int
     cover_image: str
     price: float
     sum: int

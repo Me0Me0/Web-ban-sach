@@ -96,17 +96,10 @@ class StoreController:
         # Store id
         try:
             store = StoreService.getOwnStore(user['id'])
+            product_id = StoreService.createProduct(payload, store['id'])
         except Exception as e:
             if e.args[0] == 404:
                 raise HTTPException(status_code=404, detail=e.args[1])
-            raise Exception(e)
-            
-        # Create product
-        try:
-            product_id = StoreService.createProduct(payload, store['id'])
-        except Exception as e:
-            if e.args[0] == DUPLICATION_ERROR:
-                raise HTTPException(status_code=409, detail=e.args[1])
             raise Exception(e)
 
         return {
