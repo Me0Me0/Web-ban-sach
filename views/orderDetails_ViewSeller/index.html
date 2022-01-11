@@ -182,7 +182,8 @@
   <div class="card">
       <div class="card-header">
           <h2>Mã đơn hàng: <span id="order-id">ma don hang</span></h2>
-          <p>Người đặt hàng: <span id="buyer-name">nguoi mua</span></p>
+          <p>Tình trạng: <span id="status">tình trạng</span></p>
+          <!-- <p>Người đặt hàng: <span id="buyer-name">nguoi mua</span></p> -->
           <p>Người nhận hàng: <span id="recipient-name">nguoi nhan</span></p>
           <p>Số điện thoại nhận hàng: <span id="recipient-phone">so dien thoai</span></p>
           <p>Địa chỉ nhận hàng: <span id="recipient-address">so nha, ten duong</span></p>
@@ -196,22 +197,24 @@
               <th style="width:20%">Số lượng</th>
             </tr>
         </thead>
-        <tbody>         
-          <tr>
-            <td data-th="Product">
-              <div class="row">
-                <div class="col-sm-10">
-                  <h4 class="nomargin" id="product-name-1">Tên sản phẩm</h4>
-                </div>
-                <div>
-                  <a class="view-detail" href="/products/id" id="product-detail-1">Chi tiết</a>
-                </div>
-              </div>
-            </td>
-            <td><span id="price-1">18000</span> VND</td>
-            <td data-th="quantity" id="quantity-1">1</td>
-          </tr>       
-          <tr>
+        <tbody id="order-items">
+            <template id="item-template">
+                <tr>
+                    <td data-th="Product">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <h4 class="nomargin product-name">Tên sản phẩm</h4>
+                        </div>
+                        <div>
+                            <a class="view-detail" href="/products/">Chi tiết</a>
+                        </div>
+                    </div>
+                    </td>
+                    <td data-th="Price" class="price">18000</td>
+                    <td data-th="quantity" class="quantity">1</td>
+                </tr>
+            </template>
+          <!-- <tr>
             <td data-th="Product">
               <div class="row">
                 <div class="col-sm-10">
@@ -224,14 +227,14 @@
             </td>
             <td><span id="price-2">18000</span> VND</td>
             <td data-th="quantity" id="quantity-1">1</td>
-          </tr>   
+          </tr>    -->
         </tbody>
       </table>
       <hr>
-      <p class="right"><strong>Tổng hóa đơn: <span id="total">18000</span> VND</strong></p>
+      <p class="right"><strong>Tổng tiền: <span id="total">18000</span> VND</strong></p>
       <div class="buttons">
         <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" onclick="history.back()">Quay lại</button>
-        <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3 cancel" id="cancel-order">Hủy đơn hàng</button>
+        <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3 cancel" id="cancel-order" onclick="cancel_order()">Hủy đơn hàng</button>
       </div>      
     </div>
   </div>
