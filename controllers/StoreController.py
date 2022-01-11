@@ -277,15 +277,14 @@ class StoreController:
     # Store - View nguoi dung
     
     @staticmethod
-    @router.get('/{store_id}', dependencies=[Depends(configs.db.get_db)])
-    def getAll(store_id: int):
-        limit = Query(10, gt=0)
-        skip = Query(0, ge=0)
-        return StoreService.getAll(skip, limit, store_id)
+    @router.get('/{store_id}/products', dependencies=[Depends(configs.db.get_db)])
+    def getProducts(store_id: int, skip: int = 0, limit: int = 10):
+        products = StoreService.getStoreProduct(skip, limit, store_id)
+        return products
 
     
     @staticmethod
-    @router.get('/{store_id}/details',dependencies=[Depends(configs.db.get_db)])
+    @router.get('/{store_id}',dependencies=[Depends(configs.db.get_db)])
     def getDetail(store_id: int):
         return StoreService.getStoreDetail(store_id)
 
