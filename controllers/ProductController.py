@@ -67,9 +67,16 @@ class ProductController:
 
     # Hien thi san pham theo doanh muc
     @staticmethod
-    @router.get('/category', dependencies=[Depends(configs.db.get_db)])
+    @router.get('/category/{cate_id}', dependencies=[Depends(configs.db.get_db)])
     def getProductByCategory(cate_id: int, limit:int = Query(10, gt=0), skip:int = Query(0, ge=0)):
-        return ProductService.getProductByCategory(cate_id, skip, limit)
+        products = ProductService.getProductByCategory(cate_id, skip, limit)
+        cate = ProductService.getCategoryByID(cate_id)
+        return {
+            "data": {
+                "products": products,
+                "category": cate.name
+            }
+        }
 
 
     # Search
