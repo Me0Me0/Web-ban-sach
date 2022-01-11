@@ -77,16 +77,16 @@ async function showProducts() {
 function sortEvent() {
     const sortSelect = document.querySelector("#sort-option");
     const sortBy = urlSearchParams.get("sortBy");
-    const order = urlSearchParams.get("order") || "asc";
+    const ascending = urlSearchParams.get("ascending") || "true";
     if (sortBy) {
-        sortSelect.value = `${sortBy}-${order}`;
+        sortSelect.value = `${sortBy}-${ascending}`;
     }
 
     sortSelect.addEventListener("change", function (e) {
         const option = e.target.value.split("-");
 
         urlSearchParams.set("sortBy", option[0]);
-        urlSearchParams.set("order", option[1]);
+        urlSearchParams.set("ascending", option[1]);
         window.location.search = urlSearchParams;
     })
 }
