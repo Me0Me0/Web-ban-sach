@@ -58,7 +58,7 @@ class StoreController:
 
 
     @staticmethod
-    @router.put('/details', dependencies=[Depends(configs.db.get_db)])
+    @router2.put('/details', dependencies=[Depends(configs.db.get_db)])
     def update(payload: store_schema.StoreUpdate, currentUser = Depends(getUser)):
         try:
             StoreService.update(currentUser['id'], payload)
