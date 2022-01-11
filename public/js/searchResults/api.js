@@ -11,10 +11,10 @@ const pageNext = document.querySelector(".page-next");
 
 const urlSearchParams = new URLSearchParams(window.location.search);
 const currentPage = Number(urlSearchParams.get("page")) || 1;
-const keyword = urlSearchParams.get("q") || "";
 
 const limit = 20;
 const skip = (currentPage - 1) * limit;
+
 
 function searchNotFoundView() {
     const template = document.querySelector("#search-not-found-template").content;
@@ -24,7 +24,16 @@ function searchNotFoundView() {
 }
 
 async function getProducts() {
-    const res = await fetch(`/api/products/search?keyword=${keyword}&limit=${limit * 5}&skip=${skip}`);
+    const params = new URLSearchParams(window.location.search);
+    const keyword = params.get("q");
+
+    params.set("limit", limit * 5);
+    params.set("skip", skip);
+    params.set("keyword", keyword);
+    params.delete("page");
+    params.delete("q");
+
+    const res = await fetch(`/api/products/search?${params.toString()}`);
     const data = await res.json();
     return data
 }
@@ -34,11 +43,8 @@ async function showProducts() {
     let data = await getProducts();
 
     if (data.length == 0 && currentPage != 1) {
-        const query = new URLSearchParams();
-    
-        query.set("q", urlSearchParams.get("q"));
-        query.set("page", "1");
-        window.location.search = query.toString();
+        urlSearchParams.set("page", 1);
+        window.location.search = urlSearchParams;
     }
     
     if (data.length == 0) {
@@ -52,8 +58,6 @@ async function showProducts() {
 
     let remain = data.splice(limit, data.length - limit);
 
-    // let store = currentPage;
-    // currentPage = 3;
     showPagination(remain.length);
 
     for (const { __data__: product } of data) {
@@ -68,6 +72,25 @@ async function showProducts() {
         document.querySelector("#product-list").appendChild(clone);
     }
 }
+
+
+function sortEvent() {
+    const sortSelect = document.querySelector("#sort-option");
+    const sortBy = urlSearchParams.get("sortBy");
+    const order = urlSearchParams.get("order") || "asc";
+    if (sortBy) {
+        sortSelect.value = `${sortBy}-${order}`;
+    }
+
+    sortSelect.addEventListener("change", function (e) {
+        const option = e.target.value.split("-");
+
+        urlSearchParams.set("sortBy", option[0]);
+        urlSearchParams.set("order", option[1]);
+        window.location.search = urlSearchParams;
+    })
+}
+
 
 function showPagination(remainLen) {
     if (remainLen === 0) {
@@ -101,31 +124,23 @@ function showPagination(remainLen) {
     // page click
     [...pageItems].forEach(page => {
         page.addEventListener("click", function (e) {
-            const query = new URLSearchParams();
-    
-            query.set("q", urlSearchParams.get("q"));
-            query.set("page", e.target.textContent);
-            window.location.search = query.toString();
+            urlSearchParams.set("page", e.target.textContent);
+            window.location.search = urlSearchParams;
         })
     });
     // prev click
     pagePrev.addEventListener("click", function (e) {
-        const query = new URLSearchParams();
-
-        query.set("q", urlSearchParams.get("q"));
-        query.set("page", currentPage - 1);
-        window.location.search = query.toString();
+        urlSearchParams.set("page", currentPage - 1);
+        window.location.search = urlSearchParams;
     });
     // next click
     pageNext.addEventListener("click", function (e) {
-        const query = new URLSearchParams();
-
-        query.set("q", urlSearchParams.get("q"));
-        query.set("page", currentPage + 1);
-        window.location.search = query.toString();
+        urlSearchParams.set("page", currentPage + 1);
+        window.location.search = urlSearchParams;
     });
 }
 
+sortEvent();
 showProducts();
 
 

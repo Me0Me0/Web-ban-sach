@@ -25,6 +25,13 @@ $(document).ready(function () {
     location.href = "/api/users/signout";
   })
 
+  // ======= Search ======= //
+  $(".search form").submit(function (e) {
+    e.preventDefault();
+    let search = $("#search-input").val();
+    location.href = `/products/search-results?q=${search}`;
+  })
+
   // ======= Dropdown actions ======= //
   $(".header-top .dropdown-top").click(function () {
     $(this).next().toggleClass("show-dropdown");

@@ -1,5 +1,5 @@
 from typing import List
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from schemas.schema import PeeweeGetterDict
 from schemas.user_schema import User
 from schemas.address_schema import Province, District, Ward
