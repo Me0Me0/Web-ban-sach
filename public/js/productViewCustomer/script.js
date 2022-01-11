@@ -122,7 +122,7 @@ fetch(`/api/products/${id}`, options)
   document.getElementById("product-name").innerHTML = data.name;
   var store = document.getElementById("store-name");
   store.innerHTML = data.store_id.name;
-  store.onclick = `href='/stores/${id}'`
+  store.setAttribute("onclick", `href='/stores/${data.store_id.id}'`)
   document.getElementById("category-name").innerHTML = data.cate_id.name;
   document.getElementById("author").innerHTML = data.author;
   document.getElementById("number-of-page").innerHTML = data.number_of_pages;
@@ -131,7 +131,7 @@ fetch(`/api/products/${id}`, options)
   document.getElementById("quantity").innerHTML = data.quantity;
   document.getElementById("description").innerHTML = data.description;
   document.getElementById("price").innerHTML = data.price;
-  
+  document.getElementById("details").innerHTML = data.detail;
 })
 .catch((err) => {
   alert ("Đã xảy ra lỗi, vui lòng thử lại sau");

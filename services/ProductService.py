@@ -26,7 +26,7 @@ class ProductService:
 
         # Các order có sản phẩm này và đang trong status 1 hoặc 2
         productsOnOrder = ProductRepository.inOrderWithStatus(id)
-        if len(productsInOrder) > 0:
+        if len(productsOnOrder) > 0:
             raise Exception(403, "Can't delete, products are currently on order")
         
         ProductRepository.deleteById(id)
