@@ -52,7 +52,6 @@ async function onFormsubmit(e) {
     var email = inputEmail.value || inputEmail.placeholder;
     var phone = inputPhonenumber.value || inputPhonenumber.placeholder;
 
-    console.log(name, dob, email, phone)
     if (name == '' && dob == oldDob && email == '' && phone == ''){
       alert('Bạn chưa nhập bất kì thông tin nào cần thay đổi')
     }
@@ -74,11 +73,35 @@ async function onFormsubmit(e) {
             email: email
         })
       }
+      // const res = await fetch("/api/users/details", options);
+      // const data = await res.json();
+
+      // if (data.error == "Duplicated email") {
+      //     alert('Email này đã được sử dụng, vui lòng chọn email khác');
+      //     console.log(data)
+      //     return;
+      // } else if (data.data.success) {
+      //     alert('Thay đổi thông tin thành công');
+      //     console.log(data);
+      //     location.href = "/users/view-profile";
+      //     return;
+      // } else {
+      //     alert('Đã xảy ra lỗi, vui lòng thử lại sau');
+      //     console.log(data);
+      //     return;
+      // }
       fetch("/api/users/details", options)
       .then(data => data.json())
-      .then(data =>  { 
-        alert("Thay đổi thông tin thành công"); 
-        location.href = "/users/view-profile";
+      .then(data =>  {
+        console.log(data)
+        if (data.error == "Duplicated email") {
+          alert('Email này đã được sử dụng, vui lòng chọn email khác');
+          console.log(data)
+        } else if (data.data.success) {
+          alert("Thay đổi thông tin thành công"); 
+          location.href = "/users/view-profile";
+          console.log(data)
+        }
       })
       .catch((err) => {
         alert ("Đã xảy ra lỗi, vui lòng thử lại sau");
