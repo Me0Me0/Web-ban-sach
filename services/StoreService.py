@@ -54,7 +54,7 @@ class StoreService:
     def getAll(cls, skip, limit, store_id):
         return [StoreRepository.getById(store_id), ProductRepository.getByStore(store_id, skip, limit)]
 
-      
+    @classmethod  
     def getStoreDetail(cls, store_id):
         return StoreRepository.getById(store_id)
 
