@@ -108,5 +108,5 @@ class StoreService:
 
     @classmethod
     def update(cls, user_id, payload):
-        return StoreRepository.update(user_id, payload.__dict__)
+        return StoreRepository.updateByUserID(user_id, payload.__dict__)
 
