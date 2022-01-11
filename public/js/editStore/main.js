@@ -45,6 +45,22 @@ async function onFormsubmit(e) {
     }
     else
     {
+      if (name == '')
+      {
+        name = inputStoreName.placeholder;
+      }
+      if (email == '')
+      {
+        email = inputEmail.placeholder;
+      }
+      if (phone == '')
+      {
+        phone = inputPhonenumber.placeholder;
+      }
+      if (description == '')
+      {
+        description = inputDescription.placeholder;
+      }
       const options = {
         method: "PUT",
         headers: {
@@ -62,11 +78,13 @@ async function onFormsubmit(e) {
       .then(data => data.json())
       .then(data =>  {
         console.log(data)
-        if (data.error) {
-          alert("Thay đổi thông tin cửa hàng thất bại");
+        if (data.error == "Duplicated email") {
+          alert("Email này đã được sử dụng, vui lòng chọn email khác");
         } else if (data.data.success) {
           alert("Thay đổi thông tin cửa hàng thành công"); 
           location.href = "/mystore/view-details";
+        } else {
+          alert("Thay đổi thông tin cửa hàng thất bại");
         }
       })
       .catch((err) => {

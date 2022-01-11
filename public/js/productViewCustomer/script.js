@@ -140,6 +140,11 @@ fetch(`/api/products/${id}`, options)
 
 async function add_to_cart() {
   var quantity = document.getElementById("quantity-added").value
+  if (quantity < 1)
+  {
+    alert("Số lượng sản phẩm thêm vào giỏ hàng phải lớn hơn 0");
+    return;
+  }
   const options = {
     method: "POST",
     headers: {
@@ -149,14 +154,14 @@ async function add_to_cart() {
   const res = await fetch(`/api/products/${id}/add-to-cart?quantity=${quantity}`, options)
   const data = await res.json();
 
-  if (data.error) {
-    alert("Thêm sản phẩm vào giỏ hàng thất bại")
+  if (data.error == "Unprocessable Entity") {
+    alert("Số lượng sản phẩm bạn chọn vượt quá số lượng còn lại trong kho")
     console.log(data)
   } else if (data.data.success) {
     console.log(data);
     alert ("Sản phẩm đã được thêm vào giỏ hàng")
   } else {
-    alert ("Đã xảy ra lỗi, vui lòng thử lại sau");
+    alert ("Thêm sản phẩm vào giỏ hàng thất bại");
     console.log(data);
   }
 }

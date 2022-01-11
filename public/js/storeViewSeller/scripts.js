@@ -7,9 +7,11 @@ const options = {
 
 fetch("/api/mystore", options)
 .then(data => data.json())
-.then(data =>  { 
-  document.title = data.__data__.name;
-  document.getElementById("storename").innerHTML = data.__data__.name;
+.then(data =>  {
+  data = data.__data__
+  console.log(data);
+  document.getElementById("storename").innerHTML = data.name;
+  document.getElementById("go-to-order-list").href += data.id;
 })
 .catch((err) => {
   alert ("Đã xảy ra lỗi, vui lòng thử lại sau");

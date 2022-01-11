@@ -25,7 +25,7 @@ fetch("/api/users/details", options)
 .then(data =>  { 
   inputFullname.placeholder = data.name;
   inputDateofbirth.value = data.dob;
-  oldDob = inputDateofbirth.value
+  oldDob = inputDateofbirth.value;
   inputPhonenumber.placeholder = "0" + data.phone;
   inputEmail.placeholder = data.email;
   document.getElementById("avt").src = data.avt_link;
@@ -47,10 +47,10 @@ var loadFile = function(event) {
 
 async function onFormsubmit(e) {
     e.preventDefault();
-    var name = inputFullname.value || inputFullname.placeholder;
+    var name = inputFullname.value;
     var dob = inputDateofbirth.value;
-    var email = inputEmail.value || inputEmail.placeholder;
-    var phone = inputPhonenumber.value || inputPhonenumber.placeholder;
+    var email = inputEmail.value;
+    var phone = inputPhonenumber.value;
 
     if (name == '' && dob == oldDob && email == '' && phone == ''){
       alert('Bạn chưa nhập bất kì thông tin nào cần thay đổi')
@@ -61,6 +61,22 @@ async function onFormsubmit(e) {
     }
     else
     {
+      if (name == '')
+      {
+        name = inputFullname.placeholder;
+      }
+      if (email == '')
+      {
+        email = inputEmail.placeholder;
+      }
+      if (phone == '')
+      {
+        phone = inputPhonenumber.placeholder;
+      }
+      if (dob == '')
+      {
+        dob = oldDob;
+      }
       const options = {
         method: "PUT",
         headers: {
@@ -101,6 +117,8 @@ async function onFormsubmit(e) {
           alert("Thay đổi thông tin thành công"); 
           location.href = "/users/view-profile";
           console.log(data)
+        } else {
+          alert("Thay đổi thông tin thất bại");
         }
       })
       .catch((err) => {
