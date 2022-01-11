@@ -90,9 +90,10 @@ class UserController:
         try:
             UserService.update(currentUser['id'], payload)
         except Exception as e:
-            if e.args[0] == NOT_FOUND_ERROR:
-                raise HTTPException(404, detail=e.args[1])
+            if e.args[0] == NOT_FOUND_ERROR or e.args[0] == 409:
+                raise HTTPException(e.args[0], detail=e.args[1])
             raise Exception(e)
+
             
         return {
             "data": {
