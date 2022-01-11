@@ -17,3 +17,10 @@ class Store(BaseModel):
     class Config:
         orm_mode = True
         getter_dict = PeeweeGetterDict
+
+
+class StoreUpdate(BaseModel):
+    name: str
+    phone: int
+    email: str
+    description: str

@@ -49,5 +49,62 @@ class StoreService:
 
     
     @classmethod
+<<<<<<< Updated upstream
     def getAll(cls, skip, limit, store_id):
         return [StoreRepository.getById(store_id), ProductRepository.getByStore(store_id, skip, limit)]
+=======
+    def getStoreDetail(cls, store_id):
+        return StoreRepository.getById(store_id)
+
+    
+    @classmethod
+    def getStoreProduct(cls, skip, limit, store_id):
+        return ProductRepository.getByStore(store_id, skip, limit)
+
+
+    @classmethod
+    def cancelOrder(cls, user_id, order_id):
+        try:
+            store_id = StoreRepository.getByUserId(user_id)
+            eraser_id = OrderDetailRepository.getById(order_id).store_id
+        except Exception as e:
+            raise Exception(404, "Invalid store")
+
+        if store_id[0].id != eraser_id.id:
+            raise Exception(403, "Forbidden")
+        
+        # Set OrderDetail status
+        try:
+            OrderDetailRepository.setStatus(order_id, 4) # 4 ~ Da huy
+        except Exception as e:
+            raise Exception(e)
+        
+        products = OrderProductRepository.getByOrderID(order_id)
+        
+        # Refund quality products
+        try:
+            for product in products:
+                ProductRepository.updateQuantity2(product.product_id, product.quantity)
+        except Exception as e:
+            raise Exception(e)
+
+
+    @classmethod
+    def getBestSellCate(cls, store_id):
+        return ProductRepository.getBestSellByCate(store_id)
+
+    
+    @classmethod
+    def getBestSellProducts(cls, store_id):
+        return ProductRepository.getBestSellByStore(store_id)
+
+
+    @classmethod
+    def getTotalIncome(cls, store_id):
+        return StoreRepository.getTotalIncome(store_id)
+
+
+    @classmethod
+    def update(cls, user_id, payload):
+        return StoreRepository.update(user_id, payload.__dict__)
+>>>>>>> Stashed changes
