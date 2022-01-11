@@ -61,6 +61,20 @@ class StoreRepository():
        return Store.create(owner_id = user_id, **storeDict).id
 
 
+   @classmethod
+   def updateByUserID(cls, user_id: int, storeDict):
+      try:
+         update_store = Store.get(Store.owner_id == user_id)
+      except:
+         raise Exception("Can not find store with given user id")
+
+      update_store.name = storeDict["name"]
+      update_store.phone = storeDict["phone"]
+      update_store.email = storeDict["email"]
+      update_store.description = storeDict["description"]
+      
+      return update_store.save()
+
 
    @classmethod
    def deleteById(cls, id: int):

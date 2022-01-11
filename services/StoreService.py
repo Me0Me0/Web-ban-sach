@@ -51,6 +51,10 @@ class StoreService:
 
     
     @classmethod
+    def getAll(cls, skip, limit, store_id):
+        return [StoreRepository.getById(store_id), ProductRepository.getByStore(store_id, skip, limit)]
+
+      
     def getStoreDetail(cls, store_id):
         return StoreRepository.getById(store_id)
 
@@ -100,3 +104,9 @@ class StoreService:
     @classmethod
     def getTotalIncome(cls, store_id):
         return StoreRepository.getTotalIncome(store_id)
+
+
+    @classmethod
+    def update(cls, user_id, payload):
+        return StoreRepository.update(user_id, payload.__dict__)
+
