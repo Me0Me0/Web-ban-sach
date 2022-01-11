@@ -11540,12 +11540,14 @@ textarea.form-control-lg {
   text-align: center;
 }
 
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
+.pagination li a {
+  width: 50px;
+  height: 50px;
+  line-height: 33px;
+  background-color: #fff;
+  color: #000;
   text-decoration: none;
-  border: 1px solid #ddd;
+  border-radius: 3px;
 }
 
 .pagination li a {

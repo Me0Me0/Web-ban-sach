@@ -83,7 +83,11 @@ class ProductController:
     @staticmethod
     @router.get('/search', dependencies=[Depends(configs.db.get_db)])
     def searchProduct(keyword:str, sortBy: Optional[str]="", ascending: Optional[bool]=False, skip: int = 0, limit: int = 10):
-        return ProductService.searchProduct(keyword, sortBy, ascending, skip, limit)
+        try:
+            return ProductService.searchProduct(keyword, sortBy, ascending, skip, limit)
+        except Exception as e:
+            if e.args[0] == 422:
+                raise HTTPException(e.args[0], detail=e.args[1])
     
 
     @staticmethod

@@ -11,10 +11,10 @@ const pageNext = document.querySelector(".page-next");
 
 const urlSearchParams = new URLSearchParams(window.location.search);
 const currentPage = Number(urlSearchParams.get("page")) || 1;
+const cateID = location.pathname.split("/")[3];
 
 const limit = 20;
 const skip = (currentPage - 1) * limit;
-
 
 function searchNotFoundView() {
     const template = document.querySelector("#search-not-found-template").content;
@@ -24,16 +24,7 @@ function searchNotFoundView() {
 }
 
 async function getProducts() {
-    const params = new URLSearchParams(window.location.search);
-    const keyword = params.get("q");
-
-    params.set("limit", limit * 5);
-    params.set("skip", skip);
-    params.set("keyword", keyword);
-    params.delete("page");
-    params.delete("q");
-
-    const res = await fetch(`/api/products/search?${params.toString()}`);
+    const res = await fetch(`/api/products/top-product?limit=${limit * 5}&skip=${skip}`);
     const data = await res.json();
     return data
 }
@@ -43,8 +34,10 @@ async function showProducts() {
     let data = await getProducts();
 
     if (data.length == 0 && currentPage != 1) {
-        urlSearchParams.set("page", 1);
-        window.location.search = urlSearchParams;
+        const query = new URLSearchParams();
+    
+        query.set("page", "1");
+        window.location.search = query.toString();
     }
     
     if (data.length == 0) {
@@ -58,6 +51,8 @@ async function showProducts() {
 
     let remain = data.splice(limit, data.length - limit);
 
+    // let store = currentPage;
+    // currentPage = 3;
     showPagination(remain.length);
 
     for (const { __data__: product } of data) {
@@ -72,25 +67,6 @@ async function showProducts() {
         document.querySelector("#product-list").appendChild(clone);
     }
 }
-
-
-function sortEvent() {
-    const sortSelect = document.querySelector("#sort-option");
-    const sortBy = urlSearchParams.get("sortBy");
-    const ascending = urlSearchParams.get("ascending") || "true";
-    if (sortBy) {
-        sortSelect.value = `${sortBy}-${ascending}`;
-    }
-
-    sortSelect.addEventListener("change", function (e) {
-        const option = e.target.value.split("-");
-
-        urlSearchParams.set("sortBy", option[0]);
-        urlSearchParams.set("ascending", option[1]);
-        window.location.search = urlSearchParams;
-    })
-}
-
 
 function showPagination(remainLen) {
     if (remainLen === 0) {
@@ -124,23 +100,28 @@ function showPagination(remainLen) {
     // page click
     [...pageItems].forEach(page => {
         page.addEventListener("click", function (e) {
-            urlSearchParams.set("page", e.target.textContent);
-            window.location.search = urlSearchParams;
+            const query = new URLSearchParams();
+    
+            query.set("page", e.target.textContent);
+            window.location.search = query.toString();
         })
     });
     // prev click
     pagePrev.addEventListener("click", function (e) {
-        urlSearchParams.set("page", currentPage - 1);
-        window.location.search = urlSearchParams;
+        const query = new URLSearchParams();
+
+        query.set("page", currentPage - 1);
+        window.location.search = query.toString();
     });
     // next click
     pageNext.addEventListener("click", function (e) {
-        urlSearchParams.set("page", currentPage + 1);
-        window.location.search = urlSearchParams;
+        const query = new URLSearchParams();
+
+        query.set("page", currentPage + 1);
+        window.location.search = query.toString();
     });
 }
 
-sortEvent();
 showProducts();
 
 

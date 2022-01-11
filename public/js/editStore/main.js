@@ -1,15 +1,15 @@
-var changeProfileForm = document.getElementById('edit-profile-form');
+var changeDetailForm = document.getElementById('edit-detail-form');
 
-var inputFullname = document.getElementById('name');
+var inputStoreName = document.getElementById('name');
 var inputEmail = document.getElementById('email');
 var inputPhonenumber = document.getElementById('phone');
-var inputDes = document.getElementById('des');
+var inputDescription = document.getElementById('description');
 
 
-if (changeProfileForm.attachEvent) {
-  changeProfileForm.attachEvent('submit', onFormsubmit);
+if (changeDetailForm.attachEvent) {
+  changeDetailForm.attachEvent('submit', onFormsubmit);
 } else {
-  changeProfileForm.addEventListener('submit', onFormsubmit);
+  changeDetailForm.addEventListener('submit', onFormsubmit);
 }
 
 const options = {
@@ -19,38 +19,28 @@ const options = {
   }
 }
 
-fetch("/api/mystore/edit", options)
+fetch("/api/mystore", options)
 .then(data => data.json())
 .then(data =>  { 
-  inputFullname.value = data.name;
-  inputPhonenumber.value = "0" + data.phone;
-  inputEmail.value = data.email;
-  inputDes.value = data.des;
+  data = data.__data__
+  inputStoreName.setAttribute("placeholder", data.name);
+  inputPhonenumber.setAttribute("placeholder", "0" + data.phone);
+  inputEmail.setAttribute("placeholder", data.email);
+  inputDescription.setAttribute("placeholder", data.description);
 })
 .catch((err) => {
   alert ("Đã xảy ra lỗi, vui lòng thử lại sau");
   console.error(err);
 })
 
-// var loadFile = function(event) {
-//   var reader = new FileReader();
-//   reader.onload = function(){
-//     var output = document.getElementById('avt');
-//     output.src = reader.result;
-//     console.log(output.src)
-//   };
-//   reader.readAsDataURL(event.target.files[0]);
-// };
-
 async function onFormsubmit(e) {
     e.preventDefault();
-    var name = inputFullname.value;
+    var name = inputStoreName.value;
     var email = inputEmail.value;
     var phone = inputPhonenumber.value;
-    var des = inputDes.value;
+    var description = inputDescription.value;
 
-    console.log(name, dob, email, phone)
-    if (name == '' && dob == oldDob && email == '' && phone == ''){
+    if (name == '' && email == '' && phone == '' && description == ''){
       alert('Bạn chưa nhập bất kì thông tin nào cần thay đổi')
     }
     else
@@ -64,14 +54,20 @@ async function onFormsubmit(e) {
             name: name,
             phone: phone,
             email: email,
-            des: des
+            description: description
         })
       }
-      fetch("/api/mystore/edit", options)
+      console.log(name, phone, email, description)
+      fetch("/api/mystore/details", options)
       .then(data => data.json())
-      .then(data =>  { 
-        alert("Thay đổi thông tin cửa hàng thành công"); 
-        location.href = "/users/view-profile";
+      .then(data =>  {
+        console.log(data)
+        if (data.error) {
+          alert("Thay đổi thông tin cửa hàng thất bại");
+        } else if (data.data.success) {
+          alert("Thay đổi thông tin cửa hàng thành công"); 
+          location.href = "/mystore/view-details";
+        }
       })
       .catch((err) => {
         alert ("Đã xảy ra lỗi, vui lòng thử lại sau");

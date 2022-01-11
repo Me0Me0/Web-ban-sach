@@ -206,9 +206,16 @@ async function orderSubmit(e) {
         return;
     }
 
+    
+    const phone = document.querySelector('#phone').value;
+    if (isNaN(Number(phone)) || phone.length != 10) {
+        alert('Số điện thoại không hợp lệ');
+        return;
+    }
+
     const payload = {
         recipient_name: document.querySelector('#name').value,
-        recipient_phone: Number(document.querySelector('#phone').value),
+        recipient_phone: Number(phone),
         recipient_address: document.querySelector('#address').value,
         province_id: Number(document.querySelector('#province').value),
         district_id: Number(document.querySelector('#district').value),
