@@ -10,7 +10,7 @@ fetch("/api/mystore", options)
 .then(data =>  {
   data = data.__data__
   console.log(data);
-  document.getElementById("store-name").innerHTML = data.name;
+  document.getElementById("storename").innerHTML = data.name;
   document.getElementById("go-to-order-list").href += data.id;
 })
 .catch((err) => {
