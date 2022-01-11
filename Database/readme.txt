@@ -56,7 +56,7 @@ name: họ và tên của quản trị viên
 order_detail(id, owner, status, toast_cost, recipient_name, recipient_phone, recipient_address, province_id, district_id, ward_id): bảng này lưu thông tin của đơn hàng
 id: id của mỗi đơn hàng, là duy nhất
 owner: chủ sở hữu của đơn hàng
-status: trạng thái đơn hàng (đang chờ cửa hàng xác nhận/đang giao hàng/đã giao thành công/đã hủy… được quy định bằng các số nguyên)
+status: trạng thái đơn hàng (đang xử lý/đang giao hàng/đã hoàn thành giao hàng/đã hủy được quy định bằng các số nguyên)
 toast_cost: tổng tiền của đơn hàng
 recipient_name, recipient_phone, recipient_address lần lượt là họ tên, số điện thoại, địa chỉ của người nhận hàng
 province_id, district_id, ward_id lần lượt là mã tỉnh/thành phố, mã thành phố/quận/huyện, mã xã/phường của người nhận hàng
