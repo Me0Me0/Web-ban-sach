@@ -47,5 +47,5 @@ async function delete_account() {
       return;
   }
   alert("Xóa tài khoản thành công, bạn sẽ được đưa về trang chủ");
-  window.location.href = '/';
+  window.location.href = '/api/users/signout';
 }

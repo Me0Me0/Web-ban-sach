@@ -58,13 +58,13 @@ class StoreController:
 
 
     @staticmethod
-    @router.put('/details', dependencies=[Depends(configs.db.get_db)])
+    @router2.put('/details', dependencies=[Depends(configs.db.get_db)])
     def update(payload: store_schema.StoreUpdate, currentUser = Depends(getUser)):
         try:
             StoreService.update(currentUser['id'], payload)
         except Exception as e:
-            if e.args[0] == NOT_FOUND_ERROR:
-                raise HTTPException(404, detail=e.args[1])
+            if e.args[0] == NOT_FOUND_ERROR or e.args[0] == 409:
+                raise HTTPException(e.args[0], detail=e.args[1])
             raise Exception(e)
             
         return {

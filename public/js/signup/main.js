@@ -79,14 +79,16 @@ async function onFormsubmit(e) {
     .then(data => data.json())
     .then(data =>  { 
       console.log(data);
-      if(data.data&&data.data.id)
-      {
+      if(data.data&&data.data.id) {
         alert("Tạo tài khoản thành công, đăng nhập để tiếp tục"); 
         location.href = "/users/signin"
-      } 
-      else
-      {
+      } else if (data.error.field == "email") {
+        alert("Email này đã được sử dụng, vui lòng chọn email khác");
+      }
+      else if (data.error.field == "username") {
         alert("Tên tài khoản đã tồn tại, vui lòng thử lại với tên khác");
+      } else {
+        alert ("Đã xảy ra lỗi, vui lòng thử lại sau");
       }
     })
     .catch((err) => {

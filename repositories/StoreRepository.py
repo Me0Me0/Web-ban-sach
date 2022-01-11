@@ -72,8 +72,11 @@ class StoreRepository():
       update_store.phone = storeDict["phone"]
       update_store.email = storeDict["email"]
       update_store.description = storeDict["description"]
-      
-      return update_store.save()
+
+      try:
+         return update_store.save()
+      except:
+         raise Exception("Duplicated email")
 
 
    @classmethod
