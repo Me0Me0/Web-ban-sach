@@ -116,3 +116,8 @@ class UserService:
         hashed = bcrypt.hashpw(new_password.encode(), salt)
 
         return UserRepository.updatePassword(user_id, hashed)
+
+
+    @classmethod
+    def deleteUser(cls, id: int):
+        return UserRepository.deleteById(id)
