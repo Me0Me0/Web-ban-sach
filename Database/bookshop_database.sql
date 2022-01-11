@@ -194,7 +194,7 @@ CREATE TABLE `store` (
   `name` varchar(200) NOT NULL,
   `owner_id` int NOT NULL,
   `phone` int NOT NULL,
-  `email` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL UNIQUE,
   `rating` float UNSIGNED DEFAULT 0,
   `description` text NOT NULL,
   `deleted_at` date DEFAULT NULL

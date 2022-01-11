@@ -108,5 +108,12 @@ class StoreService:
 
     @classmethod
     def update(cls, user_id, payload):
+<<<<<<< Updated upstream
         return StoreRepository.update(user_id, payload.__dict__)
+=======
+        try:
+            return StoreRepository.updateByUserID(user_id, payload.__dict__)
+        except Exception as e:
+            raise Exception(409, "Duplicated email")
+>>>>>>> Stashed changes
 
