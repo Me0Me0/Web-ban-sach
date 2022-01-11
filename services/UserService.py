@@ -63,7 +63,11 @@ class UserService:
     
     @classmethod
     def update(cls, id, payload):
-        return UserRepository.update(id, payload.__dict__)
+        try:
+            return UserRepository.update(id, payload.__dict__)
+        except Exception as e:
+            raise Exception(409, "Duplicated email")
+        
 
 
     @classmethod

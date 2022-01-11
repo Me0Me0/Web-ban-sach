@@ -106,8 +106,11 @@ class UserRepository():
       update_user.email = userDict["email"]
       update_user.dob = userDict["dob"]
       update_user.phone = userDict["phone"]
-      
-      return update_user.save()
+
+      try:
+          return update_user.save()
+      except:
+         raise Exception("Duplicated email")
 
 
    # @classmethod
