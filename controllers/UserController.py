@@ -45,6 +45,23 @@ class UserController:
 
 
     @staticmethod
+    @router.delete('', dependencies=[Depends(configs.db.get_db)])
+    def deleteUser(currentUser = Depends(getUser)):
+        try:
+            id = UserService.deleteUser(currentUser['id'])
+        except Exception as e:
+            if e.args[0] == NOT_FOUND_ERROR:
+                raise HTTPException(404, detail=e.args[1])
+            raise Exception(e)
+
+        return { 
+            "data": {
+                "success": True
+            }
+        }
+
+
+    @staticmethod
     @router.post('/signin', dependencies=[Depends(configs.db.get_db)])
     def signin(payload: user_schema.UserLogin, response: Response):
         token = UserService.signin(payload)
