@@ -53,7 +53,7 @@ class ProductRepository():
 
 
    @classmethod
-   def getSortByDate(cls, ascending: bool = True, skip: int = 0, limit: int = 100):
+   def getSortByDate(cls, ascending: bool = False, skip: int = 0, limit: int = 100):
        if ascending:
            return list(Product.select().where(Product.deleted_at.is_null(True)).order_by(Product.publishing_year).offset(skip).limit(limit))
        else:
@@ -81,14 +81,24 @@ class ProductRepository():
 
 
    @classmethod
-   def searchByName(cls, name: str, skip: int = 0, limit: int = 100):
+   def searchByName(cls, name: str, field: str = "", ascending: bool = False, skip: int = 0, limit: int = 100):
        tokens = name.split()
        search_name = ""
        for i in tokens:
            search_name = search_name + "%" + i + "%"
 
-       query = Product.select().where((Product.name ** search_name) & (Product.deleted_at.is_null(True))).offset(skip).limit(limit)
-       return list(query.execute())
+       if(field == ""):
+           query = Product.select().where((Product.name ** search_name) & (Product.deleted_at.is_null(True))).offset(skip).limit(limit)
+       else:
+           if ascending:
+                query = Product.select().where((Product.name ** search_name) & (Product.deleted_at.is_null(True))).order_by(SQL(field)).offset(skip).limit(limit)
+           else:
+                query = Product.select().where((Product.name ** search_name) & (Product.deleted_at.is_null(True))).order_by(SQL(field).desc()).offset(skip).limit(limit)
+
+       try:     
+           return list(query.execute())
+       except:
+           raise Exception("Invalid field")
 
 
    @classmethod
