@@ -22,7 +22,22 @@ async function showOrders() {
         clone.querySelector('tr').id = order.id;
         clone.querySelector('.order-id').textContent = order.id;
         clone.querySelector('.view-detail').href += order.id;
-        clone.querySelector('.status').textContent = order.status;
+        switch(order.status) {
+            case 1:
+                clone.querySelector('.status').textContent = "Đang xử lý";
+                break;
+            case 2:
+                clone.querySelector('.status').textContent = "Đang giao";
+                break;
+            case 3:
+                clone.querySelector('.status').textContent = "Đã hoàn thành";
+                break;
+            case 4:
+                clone.querySelector('.status').textContent = "Đã hủy";
+                break;
+            default:
+                clone.querySelector('.status').textContent = "Không xác định";
+        }
         clone.querySelector('.subtotal').textContent = order.total_cost;
         document.querySelector('#order-list').appendChild(clone);
     }
