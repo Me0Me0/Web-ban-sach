@@ -1,3 +1,7 @@
+url = window.location.href;
+id = url.substring(url.lastIndexOf('/stores/') + ('/stores/').length)
+id = id.substring(0, id.lastIndexOf('/'))
+
 const options = {
   method: "GET", 
   headers: {
@@ -5,14 +9,15 @@ const options = {
   }
 }
 
-fetch("/mystore/details", options)
+fetch(`/api/stores/${id}/details`, options)
 .then(data => data.json())
 .then(data =>  { 
-  console.log(data);
+  console.log(data.__data__);
+  data = data.__data__
   document.getElementById("name").innerHTML = data.name;
   document.getElementById("phone").innerHTML = "0" + data.phone;
   document.getElementById("email").innerHTML = data.email;
-  document.getElementById("des").innerHTML = data.des;
+  document.getElementById("description").innerHTML = data.description;
 })
 .catch((err) => {
   alert ("Đã xảy ra lỗi, vui lòng thử lại sau");

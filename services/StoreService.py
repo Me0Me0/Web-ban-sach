@@ -2,6 +2,8 @@ from fastapi import APIRouter
 from repositories.StoreRepository import StoreRepository
 from repositories.UserRepository import UserRepository
 from repositories.ProductRepository import ProductRepository
+from repositories.OrderDetailRepository import OrderDetailRepository
+from repositories.OrderProductRepository import OrderProductRepository
 from schemas import store_schema
 from schemas import product_schema
 from configs.constant import DEFAULT_AVT
@@ -49,10 +51,10 @@ class StoreService:
 
     
     @classmethod
-<<<<<<< Updated upstream
     def getAll(cls, skip, limit, store_id):
         return [StoreRepository.getById(store_id), ProductRepository.getByStore(store_id, skip, limit)]
-=======
+
+      
     def getStoreDetail(cls, store_id):
         return StoreRepository.getById(store_id)
 
@@ -107,4 +109,4 @@ class StoreService:
     @classmethod
     def update(cls, user_id, payload):
         return StoreRepository.update(user_id, payload.__dict__)
->>>>>>> Stashed changes
+

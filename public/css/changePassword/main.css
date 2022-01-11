@@ -40,6 +40,7 @@
 body, html {
 	height: 100%;
 	font-family: Poppins-Regular, sans-serif;
+  background-color: #aadfff;
 }
 
 /*---------------------------------------------*/
@@ -49,19 +50,16 @@ a {
 	line-height: 1.7;
 	color: #000;
 	margin: 0px;
-	transition: all 0.4s;
-	-webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
 }
 
 a:focus {
 	outline: none !important;
 }
 
-a:hover {
+.limiter a:hover {
 	text-decoration: none;
-  color: #193498;
+  background-color: #193498;
+  color:#fff;
 }
 
 /*---------------------------------------------*/
@@ -84,7 +82,7 @@ ul, li {
 
 
 /*---------------------------------------------*/
-input {
+.limiter input {
 	outline: none;
 	border: none;
 }
@@ -94,7 +92,7 @@ textarea {
   border: none;
 }
 
-textarea:focus, input:focus {
+.limiter textarea:focus,.limiter input:focus {
   border-color: transparent !important;
 }
 
@@ -165,7 +163,7 @@ iframe {
 
 .container-login100 {
   width: 100%;
-  min-height: 100vh;
+  min-height: 70vh;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -335,7 +333,7 @@ iframe {
 .login100-form-bgbtn {
   position: absolute;
   z-index: -1;
-  width: 300%;
+  font-size: 16px;
   height: 100%;
   background: #aadfff;
   top: 0;

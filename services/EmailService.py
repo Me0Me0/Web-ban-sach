@@ -15,7 +15,7 @@ class EmailService:
     def sendEmail(cls, toEmail, name, validated_link):
         url_youtube = "www.youtube.com"
         message = Mail(
-            from_email='tiendat101001@gmail.com',
+            from_email='Me0Me0.grp08@gmail.com',
             to_emails=toEmail,
             subject="Forget Password",
             html_content="""

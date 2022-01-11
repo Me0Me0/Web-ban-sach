@@ -20,7 +20,7 @@ const options = {
   }
 }
 
-fetch("/users/details", options)
+fetch("/api/users/details", options)
 .then(data => data.json())
 .then(data =>  { 
   inputFullname.placeholder = data.name;
@@ -47,10 +47,10 @@ var loadFile = function(event) {
 
 async function onFormsubmit(e) {
     e.preventDefault();
-    var name = inputFullname.value;
+    var name = inputFullname.value || inputFullname.placeholder;
     var dob = inputDateofbirth.value;
-    var email = inputEmail.value;
-    var phone = inputPhonenumber.value;
+    var email = inputEmail.value || inputEmail.placeholder;
+    var phone = inputPhonenumber.value || inputPhonenumber.placeholder;
 
     console.log(name, dob, email, phone)
     if (name == '' && dob == oldDob && email == '' && phone == ''){
@@ -74,7 +74,7 @@ async function onFormsubmit(e) {
             email: email
         })
       }
-      fetch("/users/details", options)
+      fetch("/api/users/details", options)
       .then(data => data.json())
       .then(data =>  { 
         alert("Thay đổi thông tin thành công"); 

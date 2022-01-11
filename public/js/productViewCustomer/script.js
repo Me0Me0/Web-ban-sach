@@ -2,10 +2,7 @@
 I want to thank Paul Rudnitskiy for his idea.
 If you need full work version you can download it here  https://github.com/BlackStar1991/CardProduct
 */
-
-
-
-window.onload = function () {
+//window.onload = function () {
 
     //// SLIDER
     // var slider = document.getElementsByClassName("sliderBlock_items");
@@ -107,4 +104,59 @@ window.onload = function () {
     // }
 
 
-};
+//};
+url = window.location.href;
+id = url.substring(url.lastIndexOf('/') + ('/').length)
+
+const options = {
+    method: "GET",
+    headers: {
+        "content-type": "text/plain;charset=UTF-8"
+    }
+}
+
+fetch(`/api/products/${id}`, options)
+.then(data => data.json())
+.then(data =>  { 
+  console.log(data);
+  document.getElementById("product-name").innerHTML = data.name;
+  var store = document.getElementById("store-name");
+  store.innerHTML = data.store_id.name;
+  store.onclick = `href='/stores/${id}'`
+  document.getElementById("category-name").innerHTML = data.cate_id.name;
+  document.getElementById("author").innerHTML = data.author;
+  document.getElementById("number-of-page").innerHTML = data.number_of_pages;
+  document.getElementById("publishing-year").innerHTML = data.publishing_year;
+  document.getElementById("publisher").innerHTML = data.publisher;
+  document.getElementById("quantity").innerHTML = data.quantity;
+  document.getElementById("description").innerHTML = data.description;
+  document.getElementById("price").innerHTML = data.price;
+  
+})
+.catch((err) => {
+  alert ("Đã xảy ra lỗi, vui lòng thử lại sau");
+  console.error(err);
+})
+
+async function add_to_cart() {
+  var quantity = document.getElementById("quantity-added").value
+  const options = {
+    method: "POST",
+    headers: {
+        "content-type": "text/plain;charset=UTF-8"
+    }
+  }
+  const res = await fetch(`/api/products/${id}/add-to-cart?quantity=${quantity}`, options)
+  const data = await res.json();
+
+  if (data.error) {
+    alert("Thêm sản phẩm vào giỏ hàng thất bại")
+    console.log(data)
+  } else if (data.data.success) {
+    console.log(data);
+    alert ("Sản phẩm đã được thêm vào giỏ hàng")
+  } else {
+    alert ("Đã xảy ra lỗi, vui lòng thử lại sau");
+    console.log(data);
+  }
+}

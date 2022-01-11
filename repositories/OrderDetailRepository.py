@@ -1,4 +1,5 @@
 from peewee import *
+from models.CartProduct import CartProduct
 from models.OrderDetail import OrderDetail
 from models.OrderProduct import OrderProduct
 from models.User import User
@@ -22,8 +23,18 @@ class OrderDetailRepository():
 
 
     @classmethod
+    def getByStoreId(cls, store_id, skip: int = 0, limit: int = 100):
+        return list(OrderDetail.select().where(OrderDetail.store_id == store_id).offset(skip).limit(limit))
+    
+    
+    @classmethod
     def getByIdList(cls, id_list):
         return list(OrderDetail.select().where(OrderDetail.id.in_(id_list)))
+
+
+    @classmethod
+    def getById(cls, id_order: int):
+        return OrderDetail.get_by_id(id_order)
 
 
     @classmethod
@@ -58,9 +69,18 @@ class OrderDetailRepository():
                             Product.deleted_at == None,
                             Product.quantity >= item.quantity,
                         ).execute()
+                        
                         if nUpdate == 0 or item.quantity <= 0: 
                             raise Exception(422, "Invalid quantity")
                         OrderProduct.create(order_id = order_id, product_id = item.product_id, quantity = item.quantity)      
+                        CartProduct.delete().where(CartProduct.cart_id == item.cart_id, CartProduct.product_id == item.product_id).execute()
+                        
+                        # reduce quantity of users' cart product if it's quantity >  product quantity
+                        product = Product.get_by_id(item.product_id)
+                        CartProduct.update(quantity = product.quantity).where(
+                            CartProduct.product_id == item.product_id, 
+                            CartProduct.quantity > product.quantity
+                        ).execute()
 
                 transaction.commit()
                 return True
@@ -106,3 +126,13 @@ class OrderDetailRepository():
           raise Exception("Can not find order with given id")
 
        return delete_order.delete_instance()
+
+    
+    @classmethod
+    def setStatus(cls, id: int, status: int):
+        try:
+            update_order = OrderDetail.get_by_id(id)
+        except:
+            raise Exception("Can not find order with given id")
+        update_order.status = status
+        return update_order.save()

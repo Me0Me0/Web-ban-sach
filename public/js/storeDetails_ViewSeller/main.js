@@ -5,14 +5,14 @@ const options = {
   }
 }
 
-fetch("/mystore/details", options)
+fetch("/api/mystore", options)
 .then(data => data.json())
 .then(data =>  { 
-  console.log(data);
-  document.getElementById("name").innerHTML = data.name;
+  data = data.__data__
+  document.getElementById("store-name").innerHTML = data.name;
   document.getElementById("phone").innerHTML = "0" + data.phone;
   document.getElementById("email").innerHTML = data.email;
-  document.getElementById("des").innerHTML = data.des;
+  document.getElementById("description").innerHTML = data.description;
 })
 .catch((err) => {
   alert ("Đã xảy ra lỗi, vui lòng thử lại sau");

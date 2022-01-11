@@ -14,6 +14,17 @@ $(document).ready(function () {
     $("header .actions .menu #logged-in").hide()
   }
 
+  // ======= Logout ======= //
+  $("#logout").click(function () {
+    const isAgree = confirm("Bạn có chắc chắn muốn đăng xuất?");
+    if (!isAgree) {
+      return;
+    }
+
+    alert("Đăng xuất thành công!");
+    location.href = "/api/users/signout";
+  })
+
   // ======= Dropdown actions ======= //
   $(".header-top .dropdown-top").click(function () {
     $(this).next().toggleClass("show-dropdown");

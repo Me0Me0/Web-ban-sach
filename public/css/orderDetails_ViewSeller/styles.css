@@ -1,5 +1,4 @@
 body{
-  margin-top:20px;
   background:#aadfff;
 }
 .ui-w-40 {
@@ -210,4 +209,16 @@ table#cart tbody td:before {
 
 .col-sm-8 {
   width: 60% !important;
+}
+
+.mt-2 {
+  margin-right: 0 !important;
+}
+
+.cancel {
+  background-color: #981919;
+}
+
+.cancel:hover {
+  background-color: #ffaaaa;
 }

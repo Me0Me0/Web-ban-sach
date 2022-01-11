@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from typing import List
 from fastapi.exceptions import HTTPException
 from fastapi.params import Depends, Query
 from starlette.responses import FileResponse
@@ -9,12 +10,12 @@ from configs.constant import NOT_FOUND_ERROR, DUPLICATION_ERROR, FORBIDDEN_ERROR
 from configs.dependency import getUser
 from schemas import store_schema
 from schemas import product_schema
+from schemas import order_schema
 from fastapi.exceptions import HTTPException
 from fastapi.responses import FileResponse
 
 from services.StoreService import StoreService
-from schemas import store_schema
-from schemas import product_schema
+from services.OrderService import OrderService
 from services.ProductService import ProductService
 
 class StoreController:
@@ -27,33 +28,6 @@ class StoreController:
 
     # -----------------------------------------------------------------------------
     # Mystore - View nguoi ban
-
-    
-    @staticmethod
-    @router2.get('', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-    def mystore_page():
-        return "./views/storeViewSeller/index.html"
-
-    @staticmethod
-    @router2.get('/add-product', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-    def mystore_page():
-        return "./views/addProduct/index.html"
-
-    @staticmethod
-    @router2.get('/register', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-    def mystoreRegistration():
-        return "./views/stroreRegistration/index.html"
-
-    @staticmethod
-    @router2.get('/view-details', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-    def mystore_page():
-        return "./views/storeDetails_ViewSeller/index.html"
-
-    @staticmethod
-    @router2.get('/edit-details', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-    def mystore_page():
-        return "./views/editStore/index.html"
-
       
     @staticmethod
     @router2.post('/register')
@@ -71,10 +45,8 @@ class StoreController:
      
 
     @staticmethod
-    @router2.get('/details', dependencies=[Depends(configs.db.get_db)])
-    def storeDetail(limit:int = Query(10, gt=0), skip:int = Query(0, ge=0), user = Depends(getUser)):
-        """Return: 
-           [store_info_dict, list(product_info_dict)]"""
+    @router2.get('', dependencies=[Depends(configs.db.get_db)])
+    def getStoreDetail(user = Depends(getUser)):
         # Store id
         try:
             store = StoreService.getOwnStore(user['id'])
@@ -82,9 +54,6 @@ class StoreController:
             if e.args[0] == NOT_FOUND_ERROR:
                 raise HTTPException(status_code=404, detail=e.args[1])
             raise Exception(e)
-<<<<<<< Updated upstream
-        return StoreService.getAll(skip, limit, store['id'])
-=======
         return StoreService.getStoreDetail(store['id'])
 
 
@@ -103,9 +72,24 @@ class StoreController:
                 "success": True
             }
         }
->>>>>>> Stashed changes
        
+    
+    @staticmethod
+    @router2.get('/products', dependencies=[Depends(configs.db.get_db)])
+    def getStoreProduct(limit:int = Query(10, gt=0), skip:int = Query(0, ge=0), user = Depends(getUser)):
+        # Store id
+        try:
+            store = StoreService.getOwnStore(user['id'])
+        except Exception as e:
+            if e.args[0] == NOT_FOUND_ERROR:
+                raise HTTPException(status_code=404, detail=e.args[1])
+            raise Exception(e)
         
+        products = StoreService.getStoreProduct(skip, limit, store['id'])
+        
+        return products
+
+
     @staticmethod
     @router2.post('/products/new', dependencies=[Depends(configs.db.get_db)])
     def createProduct(payload: product_schema.ProductCreate, user = Depends(getUser)):
@@ -119,14 +103,14 @@ class StoreController:
             
         # Create product
         try:
-            id = StoreService.createProduct(payload, store['id'])
+            product_id = StoreService.createProduct(payload, store['id'])
         except Exception as e:
             if e.args[0] == DUPLICATION_ERROR:
                 raise HTTPException(status_code=409, detail=e.args[1])
             raise Exception(e)
 
         return {
-            'data':'success'
+            "id": product_id
         }
         
         
@@ -203,19 +187,94 @@ class StoreController:
                 "success": True
             }
         }
-   
+    
+
+    @staticmethod
+    @router2.get('/orders', response_model=List[order_schema.OrderDetail], dependencies=[Depends(configs.db.get_db)])
+    def getStoreOrders(limit: int = 10, skip: int = 0, user = Depends(getUser)):
+        return OrderService.getStoreOrders(user['id'], limit, skip)
+
+
+    @staticmethod
+    @router2.get('/orders/{order_id}', response_model=order_schema.OrderDetail, dependencies=[Depends(configs.db.get_db)])
+    def getDetailOrder(order_id: int, user = Depends(getUser)):
+        order = OrderService.getByOrderID(order_id)
+        store = StoreService.getOwnStore(user['id'])
+
+        if order.store_id.id != store['id']:
+            raise HTTPException(403, "Forbidden")
+        
+        return order
+
+
+    @staticmethod
+    @router2.delete('/orders/{order_id}', dependencies=[Depends(configs.db.get_db)])
+    def cancelOrder(order_id: int, user = Depends(getUser)):
+        try:
+            StoreService.cancelOrder(user['id'], order_id)
+        except Exception as e:
+            if e.args[0] == NOT_FOUND_ERROR or e.args[0] == FORBIDDEN_ERROR:
+                raise HTTPException(e.args[0], detail=e.args[1])
+            raise Exception(e)
+        
+        return {
+            "data":{
+                "success": True
+            }
+        }
+
+
+    # Thống kê kinh doanh của store:
+    # Thể loại bán nhiều nhất; Sách bán nhiều nhất; Tổng giao dịch 
+    @staticmethod
+    @router2.get('/business/best-sell-categories', response_model=List[product_schema.ProductBestSellCate], dependencies=[Depends(configs.db.get_db)])
+    def getBestSellCate(user = Depends(getUser)):
+        # Store id
+        try:
+            store = StoreService.getOwnStore(user['id'])
+        except Exception as e:
+            if e.args[0] == 404:
+                raise HTTPException(status_code=404, detail=e.args[1])
+            raise Exception(e)
+        
+        return StoreService.getBestSellCate(store['id'])
+        
+
+    @staticmethod
+    @router2.get('/business/best-sell-products', response_model=List[product_schema.ProductBestSell], dependencies=[Depends(configs.db.get_db)])
+    def getBestSellProducts(user = Depends(getUser)):
+        # Store id
+        try:
+            store = StoreService.getOwnStore(user['id'])
+        except Exception as e:
+            if e.args[0] == 404:
+                raise HTTPException(status_code=404, detail=e.args[1])
+            raise Exception(e)
+        
+        return StoreService.getBestSellProducts(store['id'])
+    
+
+    @staticmethod
+    @router2.get('/business/total-income', dependencies=[Depends(configs.db.get_db)])
+    def getTotalIncome(user = Depends(getUser)):
+        # Store id
+        try:
+            store = StoreService.getOwnStore(user['id'])
+        except Exception as e:
+            if e.args[0] == 404:
+                raise HTTPException(status_code=404, detail=e.args[1])
+            raise Exception(e)
+        
+        totalIncome = StoreService.getTotalIncome(store['id'])
+
+        return {
+            "data":{
+                "total-income": totalIncome
+            }
+        }
+
     # -----------------------------------------------------------------------------
     # Store - View nguoi dung
-
-    @staticmethod
-    @router.get('/{store_id}', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-    def storePage():
-        return "./views/storeViewCus/index.html"
-
-    @staticmethod
-    @router.get('/{store_id}/details', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
-    def storeDetails():
-        return "./views/storeDetails_ViewCus/index.html"
     
     @staticmethod
     @router.get('/{store_id}', dependencies=[Depends(configs.db.get_db)])
@@ -223,3 +282,10 @@ class StoreController:
         limit = Query(10, gt=0)
         skip = Query(0, ge=0)
         return StoreService.getAll(skip, limit, store_id)
+
+    
+    @staticmethod
+    @router.get('/{store_id}/details',dependencies=[Depends(configs.db.get_db)])
+    def getDetail(store_id: int):
+        return StoreService.getStoreDetail(store_id)
+

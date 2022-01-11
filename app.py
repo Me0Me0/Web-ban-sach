@@ -1,19 +1,10 @@
-from controllers.OrderController import OrderController
-from controllers.ProductController import ProductController
-from controllers.StoreController import StoreController
-from controllers.UserController import UserController
-from controllers.ProductController import ProductController
-from controllers.StoreController import StoreController
-from controllers.CartController import CartController
-from repositories.UserRepository import UserRepository
-from fastapi.responses import FileResponse
-from schemas import user_schema
+from fastapi.requests import Request
+from api_routes import api as api_routes
+from view_routes import view as view_routes
 from configs.env import getEnv
-from configs.db import get_db
 
 from typing import List
 from fastapi import Depends, FastAPI, HTTPException
-from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.exceptions import HTTPException as StarletteHTTPException
@@ -34,26 +25,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# ignore unexpected disk cache for html file 
+@app.middleware("http")
+async def ignoreCache(request: Request, call_next):
+    response = await call_next(request)
+    if response.headers.get('Content-Type') and 'text/html' in response.headers['Content-Type']:
+        response.headers['Cache-Control'] = 'no-cache'
+    return response
+
 
 #static files
 app.mount("/public", StaticFiles(directory="public"))
 
 # include controller
-app.include_router(UserController.router)
-app.include_router(ProductController.router)
-app.include_router(StoreController.router)
-app.include_router(StoreController.router2)
-app.include_router(OrderController.router)
-app.include_router(CartController.router)
+app.include_router(api_routes)
+app.include_router(view_routes)
 
-
-@app.get("/",response_class=FileResponse)
-def homepage():
-    return "views/homepage/index.html"
-
-@app.get("/home",response_class=FileResponse)
-def homepage():
-    return "views/homepage/index.html"
 
 @app.exception_handler(StarletteHTTPException)
 async def http_exception_handler(request, exc):
@@ -61,10 +48,6 @@ async def http_exception_handler(request, exc):
         'error': exc.detail
     }, status_code=exc.status_code)
 
-
-# @app.exception_handler(RequestValidationError)
-# async def validation_exception_handler(request, exc):
-#     return PlainTextResponse(str(exc), status_code=400)
 
 @app.on_event("startup")
 async def startup_event():

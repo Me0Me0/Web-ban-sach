@@ -75,7 +75,7 @@ async function onFormsubmit(e) {
           email: email
       })
     }
-    fetch("/users/signup", options)
+    fetch("/api/users/signup", options)
     .then(data => data.json())
     .then(data =>  { 
       console.log(data);

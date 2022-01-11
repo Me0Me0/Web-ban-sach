@@ -15,7 +15,7 @@ class ProductService:
     def getById(cls, id):
         return ProductRepository.getById(id)
 
-      
+    
     @classmethod
     def delete(cls, id, user_id):
         stores = StoreRepository.getByUserId(user_id)
@@ -24,6 +24,11 @@ class ProductService:
         if len(stores) == 0 or product.store_id != stores[0]:
             raise Exception(403, "forbidden")
 
+        # Các order có sản phẩm này và đang trong status 1 hoặc 2
+        productsOnOrder = ProductRepository.inOrderWithStatus(id)
+        if len(productsInOrder) > 0:
+            raise Exception(403, "Can't delete, products are currently on order")
+        
         ProductRepository.deleteById(id)
         
 
@@ -66,6 +71,10 @@ class ProductService:
     
     @classmethod
     def addToCart(cls, cart_id, product_id, quantity):
+        product_quantity = ProductRepository.getById(product_id).quantity
+        if product_quantity < quantity:
+            raise Exception(422, "Unprocessable Entity")
+
         return CartProductRepository.create(cart_id, product_id, quantity)
 
 
@@ -76,7 +85,7 @@ class ProductService:
 
     @classmethod
     def getTopProduct(cls, ascending, skip, limit):
-        return ProductRepository.getSortBySell(ascending, skip, limit)
+        return ProductRepository.getSortBySell(ascending, 3, skip, limit)
 
 
     @classmethod
@@ -85,8 +94,53 @@ class ProductService:
 
 
     @classmethod
+    def getListCategory(cls):
+        return CategoryRepository.getAll()
+
+
+    @classmethod
     def getProductByCategory(cls, cate_id, skip, limit):
         category = CategoryRepository.getById(cate_id)
         if not category:
             raise HTTPException(status_code=404, detail="")
         return ProductRepository.getByCate(cate_id, skip, limit)
+
+
+    @classmethod
+    def searchProduct(cls, keyword, category, maxPrice, minPrice, order, sortBy, skip, limit):
+        products_rslt = ProductRepository.searchByName(keyword, skip, limit)
+
+        if len(products_rslt) == 0: # Không có kết quả tìm kiếm ứng với keyword đó
+            return products_rslt
+
+        if category != None:
+            if len(products_rslt) == 1: # Nếu chỉ có 1 kết quả tìm kiếm
+                return products_rslt if products_rslt[0].cate_id.id == category else []
+            products_rslt = [product for product in products_rslt if product.cate_id.id == category]
+        
+        if maxPrice != None:
+            if len(products_rslt) == 1: # Nếu chỉ có 1 kết quả tìm kiếm
+                return products_rslt if products_rslt[0].price <= maxPrice else []
+            products_rslt = [product for product in products_rslt if product.price <= maxPrice]
+        
+        if minPrice != None:
+            if len(products_rslt) == 1: # Nếu chỉ có 1 kết quả tìm kiếm
+                return products_rslt if products_rslt[0].price >= minPrice else []
+            products_rslt = [product for product in products_rslt if products_rslt >= minPrice]
+        
+        
+        # sortBy có 3 giá trị gồm 'time', 'sell', 'price'.
+        # sortBy = time -> sản phẩm mới nhất
+        if sortBy == 'time':
+            products_rslt.sort(key = lambda x: x.publishing_year, reverse = True)
+
+        # sortBy = sell -> sản phẩm mua nhiều nhất
+        if sortBy == 'sell':
+            pass
+        
+        # sortBy = price -> sản phẩm có giá từ thấp đến cao hoặc ngược lại
+        # order có giá trị là 'asc'/'desc' ~ 'tăng/giảm'
+        if sortBy == 'price':
+            products_rslt.sort(key = lambda x: x.price, reverse = (order=='desc'))
+
+        return products_rslt

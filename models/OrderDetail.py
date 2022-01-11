@@ -1,6 +1,7 @@
 from peewee import *
 from models.BModel import BModel
 from models.User import User
+from models.Store import Store
 from models.Province import Province
 from models.District import District
 from models.Ward import Ward
@@ -8,6 +9,7 @@ from models.Ward import Ward
 class OrderDetail(BModel):
    id=AutoField()
    owner_id=ForeignKeyField(User)
+   store_id=ForeignKeyField(Store)
 
    status=IntegerField()
    total_cost=FloatField()

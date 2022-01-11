@@ -12,188 +12,300 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
   <!-- Core theme CSS (includes Bootstrap)-->
   <link rel="stylesheet" href="/public/css/cart/styles.css">
+  <!-- flaticon.css -->
+  <link rel="stylesheet" href="/public/css/homepage/flaticon.css">
+  <!-- google-fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap">
+  <!-- style.css -->
+  <link rel="stylesheet" href="/public/css/header/table_page/style.css">
 </head>
 <body>
-<div class="container px-3 my-5 clearfix">
-  <!-- Shopping cart table -->
-  <div class="card">
-      <div class="card-header">
-          <h2>Giỏ hàng</h2>
-      </div>
-      <div class="card-body">
-        <table id="cart" class="table table-hover table-condensed">
-          <thead>
-            <tr>
-              <th style="width:67%">Sản phẩm</th>
-              <th style="width:10%">Đơn giá</th>
-              <th style="width:10%">Số lượng</th>
-              <th style="width:10%">Tổng cộng</th>
-              <th style="width:8%"></th>
-            </tr>
-        </thead>
-        <tbody>         
-          <tr>
-            <td data-th="Product">
-              <div class="row">
-                <input type="checkbox" id="checkbox-1" class="check">
-                <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive" id="product-image-1"/></div>
-                <div class="col-sm-8">
-                  <h4 class="nomargin" id="product-name-1">Tên sản phẩm</h4>
-                  <p id="store-name-1">Tên cửa hàng</p>
+  <header>
+    <!-- ===== header-middle ===== -->
+    <div class="header-middle">
+        <div class="header-middle-wrapper">
+            <div class="container">
+                <div class="header-middle-content d-flex justify-content-between align-items-center">
+                    <!-- ===== brand ===== -->
+                    <div class="brand">
+                        <a href="/home">
+                            <img src="/public/images/homepage/logo/logo2.png" style="width: 220px;height:70px;">
+                        </a>
+                    </div>
+                    <!-- ===== search ===== -->
+                    <div class="search">
+                        <div class="search-close-btn d-none">✕</div>
+                        <form action="javascript:void(0)" class="searchbox">
+                            <button type="submit" class="text-muted">
+                                <img src="/public/images/homepage/logo/001-loupe.png" style="width: 25px;height:25px;">
+                            </button>
+                            <input type="text" id="search-input" spellcheck="false" placeholder="Tìm kiếm sản phẩm ...">
+                        </form>
+                    </div>
+                    <!-- ===== actions ===== -->
+                    <div class="actions">
+                        <ul class="d-flex justify-content-between align-items-center">
+                            <li>
+                                <a href="">
+                                    <img src="/public/images/homepage/logo/002-question.png" style="width: 25px;height:25px;">
+                                </a>
+                                <div class="action-tooltip">
+                                    Trợ giúp
+                                </div>
+                            </li>
+                            <li>
+                                <a href="/mystore">
+                                    <img src="/public/images/homepage/logo/001-store.png" style="width: 25px;height:25px;">
+                                </a>
+                                <!-- <sup class="primary-color">0</sup> -->
+                                <div class="action-tooltip">
+                                    Cửa hàng của tôi
+                                </div>
+                            </li>
+                            <li>
+                                <a href="/cart" class="cart-btn">
+                                    <img src="/public/images/homepage/logo/005-shopping-cart-empty-side-view.png" style="width: 25px;height:25px;">
+                                </a>
+                                <!-- <sup class="primary-color cart-sup">0</sup> -->
+                                <div class="action-tooltip">
+                                    Giỏ hàng
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#loginModal">
+                                    <img src="/public/images/homepage/logo/006-user.png" style="width: 25px;height:25px;">
+                                </a>
+                                <div class="menu">
+                                    <ul id="logged-in">
+                                        <li>
+                                            <a href="/users/view-profile">Thông tin tài khoản</a>
+                                        </li>
+                                        <li>
+                                            <a href="/orders/">Đơn hàng của tôi</a>
+                                        </li>
+                                        <li>
+                                            <a href="/users/change-password">Đổi mật khẩu</a>
+                                        </li>
+                                        <li>
+                                            <a href="/api/users/signout">Đăng xuất</a>
+                                        </li>
+                                    </ul>
+                                    <ul id="not-logged-in">
+                                        <li>
+                                            <a href="/users/signup">Đăng ký</a>
+                                        </li>
+                                        <li>
+                                            <a href="/users/signin">Đăng nhập</a>
+                                        </li>
+                                    </ul>
+                                </div>                                   
+                            </li> 
+                        </ul>
+                    </div>
                 </div>
-                <div>
-                  <a class="view-detail" href="/products/details" id="product-detail-1">Chi tiết</a>
-                </div>
-              </div>
-            </td>
-            <td data-th="Price" id="price-1">1.99</td>
-            <td data-th="Quantity">
-              <input type="number" class="form-control text-center mt2" value="1" min="1" id="quantity-1">
-            </td>
-            <td data-th="Subtotal" class="text-center" id="subtotal-1">1.99</td>
-            <td class="actions" data-th="">
-              <button class="btn_delete btn-danger " id="delete-1"><i class="fa fa-trash-o"></i></button>								
-            </td>
-          </tr>       
-          <tr>
-            <td data-th="Product">
-              <div class="row">
-                <input type="checkbox" id="checkbox-2" class="check">
-                <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive" id="product-image-2"/></div>
-                <div class="col-sm-8">
-                  <h4 class="nomargin" id="product-name-2">Tên sản phẩm</h4>
-                  <p id="store-name-2">Tên cửa hàng</p>
-                </div>
-                <div>
-                  <a class="view-detail" href="/products/details" id="product-detail-2">Chi tiết</a>
-                </div>
-              </div>
-            </td>
-            <td data-th="Price" id="price-2">1.99</td>
-            <td data-th="Quantity">
-              <input type="number" class="form-control text-center mt2" value="1" min="1" id="quantity-2">
-            </td>
-            <td data-th="Subtotal" class="text-center" id="subtotal-2">1.99</td>
-            <td class="actions" data-th="">
-              <button class="btn_delete btn-danger " id="delete-2"><i class="fa fa-trash-o"></i></button>								
-            </td>
-          </tr>      
-          <tr>
-            <td data-th="Product">
-              <div class="row">
-                <input type="checkbox" id="checkbox-3" class="check">
-                <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive" id="product-image-3"/></div>
-                <div class="col-sm-8">
-                  <h4 class="nomargin" id="product-name-3">Tên sản phẩm</h4>
-                  <p id="store-name-3">Tên cửa hàng</p>
-                </div>
-                <div>
-                  <a class="view-detail" href="/products/details" id="product-detail-3">Chi tiết</a>
-                </div>
-              </div>
-            </td>
-            <td data-th="Price" id="price-3">1.99</td>
-            <td data-th="Quantity">
-              <input type="number" class="form-control text-center mt2" value="1" min="1" id="quantity-3">
-            </td>
-            <td data-th="Subtotal" class="text-center" id="subtotal-3">1.99</td>
-            <td class="actions" data-th="">
-              <button class="btn_delete btn-danger " id="delete-3"><i class="fa fa-trash-o"></i></button>								
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <hr>
-      <p class="right"><strong>Tổng hóa đơn: <span id="total">18000</span> VND</strong></p>
-      <div class="buttons">
-        <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" onclick="location.href='/'">Tiếp tục mua hàng</button>
-        <button type="button" class="btn btn-lg btn-primary mt-2" onclick="location.href='#payment'">Tiến hành thanh toán</button>
-      </div>       
+            </div>
+        </div>
     </div>
-  </div>
-
-  <section id="payment">
-    <div class="card ma50">
-      <div class="card-header">
-          <h2>Điền thông tin đơn hàng</h2>
-      </div>
-      <div class="card-body">
-        <div class="col-75">
-          <div class="container">
-            <form action="/action_page.php" id="order-details-form">
-            
-              <div class="row">
-                <div class="col-25">
-                  <h3>Thông tin người nhận</h3>
-                  <label for="name"><i class="fa fa-user"></i>  Họ và tên</label>
-                  <input type="text" id="name" name="firstname" placeholder="Họ và tên người nhận hàng" required>
-      
-                  <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                  <input type="text" id="email" name="email" placeholder="Email người nhận hàng" required>
-      
-                  <label for="phone"><i class="fa fa-phone"></i>  Số điện thoại</label>
-                  <input type="tel" id="phone" name="phone" placeholder="Số điện thoại người nhận hàng">
-
-      
-                  <!-- <label for="methos"><i class="fa fa-money"></i> Phương thức thanh toán</label>
-                  <select class="form-control" required>
-                      <option value="">--Chọn thành phố--</option>
-                      <option value="City">Thành phố</option>
-                  </select> -->
-      
-                
+    <!-- ===== header-bottom ===== -->
+    <div class="header-bottom">
+        <div class="header-bottom-wrapper">
+            <div class="container">
+                <div class="header-bottom-content d-flex justify-content-between align-items-center">
+                    <!-- ===== brand-and-categories ===== -->
+                    <div class="brand-and-categories d-flex">
+                        <!-- ===== brand ===== -->
+                        <div class="brand">
+                            <a href="/home">
+                                <img src="/public/images/homepage/logo/logo.png" style="width: 70px;height:70px;margin-left: 50px;">
+                            </a>
+                        </div>
+                        <!-- ===== categories ===== -->
+                        <div class="categories position-relative dropdownn">
+                            <!-- categories-top -->
+                            <div
+                                class="categories-top-content dropdown-top d-flex justify-content-between align-items-center">
+                                <i class="flaticon-menu"></i>
+                                <p>Danh mục</p>
+                                <i class="flaticon-down-arrow"></i>
+                            </div>
+                            <!-- categories-dropdown -->
+                            <div class="categories-dropdown">
+                                <ul class="categories-ul">
+                                    <template id="category-template">
+                                     <!-- li-content --> 
+                                        <li>                                                                                     
+                                            <div class="li-content d-flex">
+                                                <a class="category-link" href="/products/category">
+                                                    <div class="left-content d-flex">                                                    
+                                                        <img src="/public/images/homepage/logo/006-user.png" style="width: 25px;height:25px;">
+                                                        <p class="category-name">Thể loại</p>                                                                                                 
+                                                    </div>
+                                                </a>                                                   
+                                            </div>     
+                                        </li>      
+                                    </template>                                                           
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ===== nav-links ===== -->
+                    <div class="nav-links">
+                        <div class="nav-menu-header sidebar-menu-header">
+                            <button type="button" class="d-flex align-items-center">
+                                <span class="mr-2">✖</span>
+                                <p>Close</p>
+                            </button>
+                        </div>
+                        <ul class="d-flex">
+                            <li>
+                                <a href="/products/best-seller">Sách bán chạy</a>
+                            </li>
+                            <li>
+                                <a href="/products/new-product">Sách mới</a>
+                            </li>
+                            <!-- <li>
+                                <a href="#">Sách đang hạ giá</a>
+                            </li>
+                            <li>
+                                <a href="#">Số lượng có hạn</a>
+                            </li> -->
+                        </ul>
+                    </div>
                 </div>
-      
-                <div class="col-25">
-                  <h3>Địa chỉ nhận hàng</h3>          
-                  <label for="city"> Tỉnh/Thành phố</label>
-                  <select class="form-control" name="Chọn tỉnh/thành phố" required>
-                      <option value="City" id="city-1">Thành phố</option>
-                      <option value="City" id="city-2">Thành phố</option>
-                      <option value="City" id="city-3">Thành phố</option>
-                      <option value="City" id="city-4">Thành phố</option>
-                      <option value="City" id="city-5">Thành phố</option>
-                      <option value="City" id="city-6">Thành phố</option>
-                  </select>
-      
-                  <label for="district"> Quận/Huyện</label>
-                  <select class="form-control" name="Chọn quận/huyện" required>
-                      <option value="district" id="district-1">Thành phố</option>
-                      <option value="district" id="district-2">Thành phố</option>
-                      <option value="district" id="district-3">Thành phố</option>
-                      <option value="district" id="district-4">Thành phố</option>
-                      <option value="district" id="district-5">Thành phố</option>
-                      <option value="district" id="district-6">Thành phố</option>
-                  </select>
-      
-                  <label for="village"> Phường/Xã</label>
-                  <select class="form-control" name="Chọn phường/xã" required>
-                      <option value="village" id="village-1">Thành phố</option>
-                      <option value="village" id="village-2">Thành phố</option>
-                      <option value="village" id="village-3">Thành phố</option>
-                      <option value="village" id="village-4">Thành phố</option>
-                      <option value="village" id="village-5">Thành phố</option>
-                      <option value="village" id="village-6">Thành phố</option>
-                  </select> 
-                  
-                  <label for="adr"> Địa chỉ cụ thể</label>
-                  <input type="text" id="address" name="address" placeholder="Số nhà, tên đường..." required>
-                </div>         
-              </div>
-              <div class="button_center">
-                <input type="submit" value="Xác nhận mua hàng" id="confirm-payment" class="btn center">
-              </div>              
-            </form>
-          </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ======= HEADER - End ======= -->
+<div class = "body_content">
+  <div class="container px-3 my-5 clearfix">
+    <!-- Shopping cart table -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Giỏ hàng</h2>
+        </div>
+        <div class="card-body">
+          <table id="cart" class="table table-hover table-condensed">
+            <thead>
+              <tr>
+                <th style="width:67%">Sản phẩm</th>
+                <th style="width:10%">Đơn giá</th>
+                <th style="width:10%">Số lượng</th>
+                <th style="width:10%">Tổng cộng</th>
+                <th style="width:8%"></th>
+              </tr>
+          </thead>
+          <tbody id="cart-items"> 
+            <template id="item-template">     
+              <tr>
+                <td data-th="Product">
+                  <div class="row">
+                    <input type="checkbox" class="checkbox" class="check">
+                    <div class="col-sm-2 hidden-xs product-image"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div>
+                    <div class="col-sm-8">
+                      <h4 class="nomargin product-name">Tên sản phẩm</h4>
+                      <p class="store-name">Tên cửa hàng</p>
+                    </div>
+                    <div>
+                      <a class="view-detail" href="/products/">Chi tiết</a>
+                    </div>
+                  </div>
+                </td>
+                <td data-th="Price" class="price">1.99</td>
+                <td data-th="Quantity">
+                  <input data-prev="" type="number" class="form-control text-center mt2 quantity" value="1" min="1">
+                </td>
+                <td data-th="Subtotal" class="text-center subtotal">1.99</td>
+                <td class="actions" data-th="">
+                  <button class="btn_delete btn-danger delete"><i class="fa fa-trash-o"></i></button>								
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+        <hr>
+        <p class="right"><strong>Tổng hóa đơn: <span id="total">0</span> VND</strong></p>
+        <div class="buttons">
+          <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" onclick="location.href='/'">Tiếp tục mua hàng</button>
+          <button type="button" class="btn btn-lg btn-primary mt-2" onclick="location.href='#payment'">Tiến hành thanh toán</button>
         </div>       
       </div>
-    </div>  
-  </section>
+    </div>
+  
+    <section id="payment">
+      <div class="card ma50">
+        <div class="card-header">
+            <h2>Điền thông tin đơn hàng</h2>
+        </div>
+        <div class="card-body">
+          <div class="col-75">
+            <div class="container">
+              <form action="/action_page.php" id="order-details-form">
+              
+                <div class="row">
+                  <div class="col-25">
+                    <h3>Thông tin người nhận</h3>
+                    <label for="name"><i class="fa fa-user"></i>  Họ và tên</label>
+                    <input type="text" id="name" name="firstname" placeholder="Họ và tên người nhận hàng" required>
+        
+                    <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                    <input type="text" id="email" name="email" placeholder="Email người nhận hàng" required>
+        
+                    <label for="phone"><i class="fa fa-phone"></i>  Số điện thoại</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Số điện thoại người nhận hàng">
+  
+        
+                    <!-- <label for="methos"><i class="fa fa-money"></i> Phương thức thanh toán</label>
+                    <select class="form-control" required>
+                        <option value="">--Chọn thành phố--</option>
+                        <option value="City">Thành phố</option>
+                    </select> -->
+        
+                  
+                  </div>
+        
+                  <div class="col-25">
+                    <h3>Địa chỉ nhận hàng</h3>          
+                    <label for="city"> Tỉnh/Thành phố</label>
+                    <select class="form-control" name="Chọn tỉnh/thành phố" id="province" required>
+                        <option value="" disabled selected>Select your option</option>
+                    </select>
+        
+                    <label for="district"> Quận/Huyện</label>
+                    <select class="form-control" name="Chọn quận/huyện" id="district" required>
+                        <option value="" disabled selected>Select your option</option>
+                    </select>
+        
+                    <label for="village"> Phường/Xã</label>
+                    <select class="form-control" name="Chọn phường/xã" id="ward" required>
+                        <option value="" disabled selected>Select your option</option>
+                    </select> 
+                    
+                    <label for="adr"> Địa chỉ cụ thể</label>
+                    <input type="text" id="address" name="address" placeholder="Số nhà, tên đường..." required>
+                  </div>         
+                </div>
+                <div class="button_center">
+                  <input type="submit" value="Xác nhận mua hàng" id="confirm-payment" class="btn center">
+                </div>              
+              </form>
+            </div>
+          </div>       
+        </div>
+      </div>  
+    </section>
+  </div>
 </div>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://use.fontawesome.com/a93c29b7d5.js"></script>
 <script src="/public/js/cart/scripts.js"></script>
+<!-- bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+<!-- main.js -->
+<script src="/public/js/header/main.js"></script>
 </body>
 </html>

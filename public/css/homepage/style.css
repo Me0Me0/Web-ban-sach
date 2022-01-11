@@ -866,6 +866,10 @@ header .actions .menu #logged-in{
   color: #fff;
 }
 
+#best-seller .item .detail {
+  text-decoration: none;
+}
+
 #best-seller .item-top .actions .action-wrapper {
   position: relative;
 }

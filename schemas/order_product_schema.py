@@ -1,3 +1,4 @@
+from typing import List
 from pydantic import BaseModel, Field
 from schemas.schema import PeeweeGetterDict
 from schemas.order_schema import OrderDetail

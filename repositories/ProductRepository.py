@@ -196,6 +196,17 @@ class ProductRepository():
 
 
    @classmethod
+   def updateQuantity2(cls, product_id: int, quantity_diff: int):
+       try:
+         update_product = Product.get_by_id(product_id)
+       except:
+         raise Exception("Can not find product with given id")
+
+       update_product.quantity = update_product.quantity + quantity_diff
+
+       return update_product.save()
+
+   @classmethod
    def updateImage(cls, product_id: int, image_link: str):
        try:
          update_product = Product.get_by_id(product_id)

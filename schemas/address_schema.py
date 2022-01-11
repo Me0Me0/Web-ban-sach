@@ -6,8 +6,8 @@ from schemas.user_schema import User
 
 class Province(BaseModel):
     id: int
-    name: str = Field('_name')
-    code: str = Field('_code')
+    name: str = Field(alias="_name")
+    code: str = Field(alias="_code")
 
     class Config:
         orm_mode = True
@@ -27,7 +27,7 @@ class District(BaseModel):
 
 class Ward(BaseModel):
     id: int
-    name: str = Field('_name')
+    name: str = Field(alias="_name")
     prefix: str = Field(alias="_prefix")
     province_id: int = Field(alias="_province_id")
     district_id: int = Field(alias="_district_id")

@@ -13,3 +13,7 @@ class CartProduct(BaseModel):
     class Config:
         orm_mode = True
         getter_dict = PeeweeGetterDict
+
+
+class CartProductQuantityUpdate(BaseModel):
+    quantity: int = Field(..., gt=0)

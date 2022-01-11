@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Đăng Nhập</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="/public/images/signin/favicon.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/public/css/adminSignin/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/public/css/adminSignin/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/public/css/adminSignin/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="/public/css/adminSignin/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/public/css/adminSignin/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/public/css/adminSignin/util.css">
+	<link rel="stylesheet" type="text/css" href="/public/css/adminSignin/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="/public/images/signin/img-01.png" alt="IMG">
+				</div>
+
+				<form class="login100-form validate-form" id="loginform">
+					<span class="login100-form-title">
+						Đăng Nhập Cho Admin
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Tài khoản không được bỏ trống">
+						<input class="input100" type="text" name="username" id="loginusername" placeholder="Tài khoản">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Mật khẩu không được bỏ trống">
+						<input class="input100" type="password" name="pass" id="loginpassword" placeholder="Mật khẩu">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+					
+					<div class="container-login100-form-btn">
+						<input type="submit" class="login100-form-btn" value="Đăng nhập">
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	
+
+	
+<!--===============================================================================================-->	
+	<script src="/public/js/signin/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/public/js/signin/popper.js"></script>
+	<script src="/public/js/signin/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/public/js/signin/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/public/js/signin/tilt.jquery.min.js"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="/public/js/AdminSignin/main.js"></script>
+
+</body>
+</html>

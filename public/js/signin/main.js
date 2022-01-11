@@ -38,13 +38,13 @@ async function onFormsubmit(e) {
         })
     }
 
-    const res = await fetch("/users/signin", options);
+    const res = await fetch("/api/users/signin", options);
     const data = await res.json();
 
     if (data.error) {
         alert('Tài khoản hoặc mật khẩu không đúng');
     } else if (data.data.success) {
-        //alert('Đăng nhập thành công');
+        alert('Đăng nhập thành công');
         localStorage.setItem('user', user);
         window.location.href = "/";
     } else {

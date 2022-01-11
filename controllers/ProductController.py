@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from fastapi.params import Depends, Query
 from fastapi.responses import Response
+from typing import Optional
 import configs
 
 from configs.constant import DUPLICATION_ERROR, NOT_FOUND_ERROR, FORBIDDEN_ERROR
@@ -15,36 +16,68 @@ from services.CartService import CartService
 
 class ProductController:
     router = APIRouter(prefix='/products')
-
+    
+    # Them san pham vao gio hang
     @staticmethod
-    @router.get('/best-seller', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
-    def getBestSeller():
-        return "./views/bestSeller/index.html"
+    @router.post('/{product_id}/add-to-cart', dependencies=[Depends(configs.db.get_db)])
+    def addToCart(product_id: int, quantity: int = 1, user = Depends(getUser)):
+        try:
+            cart_id = CartService.getOwnCart(user['id'])
+        except Exception as e:
+            if e.args[0] == 404:
+                raise HTTPException(status_code=404, detail=e.args[1])
+            raise Exception(e)
+            
+        if len(cart_id) == 0:
+            CartService.createCart(user['id'])
 
-    @staticmethod
-    @router.get('/category', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
-    def getCategory():
-        return "./views/category/index.html"
+        try:
+            ProductService.addToCart(cart_id, product_id, quantity)
+        except Exception as e:
+            if e.args[0] == 422:
+                raise HTTPException(e.args[0], detail=e.args[1])
 
-    @staticmethod
-    @router.get('/new-product', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
-    def getNewProduct():
-        return "./views/newProduct/index.html"
+        return {
+            "data": {
+                "success": True
+            }
+        }
 
+    
+    # DS san pham moi nhat
     @staticmethod
-    @router.get('/details', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
-    def getProductDetails():
-        return "./views/productViewCustomer/index.html"
+    @router.get('/newest', dependencies=[Depends(configs.db.get_db)])
+    def getProductNew(limit:int = Query(10, gt=0), skip:int = Query(0, ge=0)):
+        return ProductService.getProductNew(True, skip, limit)
 
-    @staticmethod
-    @router.get('/details-view-seller', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
-    def getProductDetailsViewSeller():
-        return "./views/productViewSeller/index.html"
 
+    # DS san pham ban chay nhat
     @staticmethod
-    @router.get('/edit-product', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
-    def getProductDetails():
-        return "./views/editProduct/index.html"
+    @router.get('/top-product', dependencies=[Depends(configs.db.get_db)])
+    def getTopProduct(limit:int = Query(10, gt=0), skip:int = Query(0, ge=0)):
+        return ProductService.getTopProduct(True, skip, limit)
+
+
+    # DS doanh muc
+    @staticmethod
+    @router.get('/categories', dependencies=[Depends(configs.db.get_db)])
+    def getListCategory():
+        return ProductService.getListCategory()
+
+
+    # Hien thi san pham theo doanh muc
+    @staticmethod
+    @router.get('/category', dependencies=[Depends(configs.db.get_db)])
+    def getProductByCategory(cate_id: int, limit:int = Query(10, gt=0), skip:int = Query(0, ge=0)):
+        return ProductService.getProductByCategory(cate_id, skip, limit)
+
+
+    # Search
+    @staticmethod
+    @router.get('/search', dependencies=[Depends(configs.db.get_db)])
+    def searchProduct(keyword:str, skip: int = 0, limit: int = 10, category: Optional[int]=None, maxPrice: Optional[int]=None, minPrice: Optional[int]=None, order: Optional[str]='asc', sortBy: Optional[str]=None):
+        return ProductService.searchProduct(keyword, category, maxPrice, minPrice, order, sortBy, skip, limit)
+    
 
     @staticmethod
     @router.get('/{id}',response_model=product_schema.Product,dependencies=[Depends(configs.db.get_db)])
@@ -70,68 +103,3 @@ class ProductController:
                 "success": True
             }
         }
-    
-
-    # Them san pham vao gio hang
-    @staticmethod
-    @router.post('/{product_id}/add-to-cart', dependencies=[Depends(configs.db.get_db)])
-    def addToCart(product_id: int, user = Depends(getUser)):
-        try:
-            cart_id = CartService.getCartID(user['id'])
-        except Exception as e:
-            if e.args[0] == 404:
-                raise HTTPException(status_code=404, detail=e.args[1])
-            raise Exception(e)
-            
-        ProductService.addToCart(cart_id, product_id, 1)  # Số lượng ban đầu là 1
-
-        return {
-            "data": {
-                "success": True
-            }
-        }
-
-    
-    # DS san pham moi nhat
-    @staticmethod
-    @router.post('/newest', dependencies=[Depends(configs.db.get_db)])
-    def getProductNew(limit:int = Query(10, gt=0), skip:int = Query(0, ge=0)):
-        return ProductService.getProductNew(True, skip, limit)
-
-
-    # DS san pham ban chay nhat
-    @staticmethod
-    @router.post('/top-product', dependencies=[Depends(configs.db.get_db)])
-    def getTopProduct(limit:int = Query(10, gt=0), skip:int = Query(0, ge=0)):
-        return ProductService.getTopProduct(True, skip, limit)
-
-
-    # Tim san pham theo keyword
-    @staticmethod
-    @router.post('/search?keyword={keyword}', dependencies=[Depends(configs.db.get_db)])
-    def getProductByName(keyword: str):
-        pass
-    
-    
-    # Tim san pham theo keyword + khung gia?
-    # 1 method duoi nay``
-
-    
-    # Tim cua hang theo keyword
-    @staticmethod
-    @router.post('/search_store?keyword={keyword}', dependencies=[Depends(configs.db.get_db)])
-    def getStoreByName(keyword: str):
-        pass
-
-
-    # Sap xep san pham theo khung gia 
-    #@staticmethod
-    #@router.post('/sort/{}')
-    #def getProductWithPriceInterval
-
-
-    # Hien thi san pham theo doanh muc
-    @staticmethod
-    @router.post('/category={cate_id}', dependencies=[Depends(configs.db.get_db)])
-    def getProductByCategory(cate_id: int, limit:int = Query(10, gt=0), skip:int = Query(0, ge=0)):
-        return ProductService.getProductByCategory(cate_id, skip, limit)

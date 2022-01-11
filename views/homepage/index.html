@@ -44,12 +44,11 @@
                         <!-- ===== search ===== -->
                         <div class="search">
                             <div class="search-close-btn d-none">✕</div>
-                            <form action="javascript:void(0)">
+                            <form id="search-form">
                                 <button type="submit" class="text-muted">
                                     <img src="/public/images/homepage/logo/001-loupe.png" style="width: 25px;height:25px;">
                                 </button>
-                                <input type="text" id="search-input" spellcheck="false"
-                                    placeholder="Tìm kiếm sản phẩm ...">
+                                <input type="text" id="search-input" spellcheck="false" placeholder="Tìm kiếm sản phẩm ...">
                             </form>
                         </div>
                         <!-- ===== actions ===== -->
@@ -73,7 +72,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <a href="/carts" class="cart-btn">
+                                    <a href="/cart" class="cart-btn">
                                         <img src="/public/images/homepage/logo/005-shopping-cart-empty-side-view.png" style="width: 25px;height:25px;">
                                     </a>
                                     <!-- <sup class="primary-color cart-sup">0</sup> -->
@@ -91,10 +90,13 @@
                                                 <a href="/users/view-profile">Thông tin tài khoản</a>
                                             </li>
                                             <li>
+                                                <a href="/orders/">Đơn hàng của tôi</a>
+                                            </li>
+                                            <li>
                                                 <a href="/users/change-password">Đổi mật khẩu</a>
                                             </li>
                                             <li>
-                                                <a href="/users/signout">Đăng xuất</a>
+                                                <a id="logout" style="cursor: pointer">Đăng xuất</a>
                                             </li>
                                         </ul>
                                         <ul id="not-logged-in">
@@ -107,40 +109,6 @@
                                         </ul>
                                     </div>                                   
                                 </li> 
-
-                                <!-- <li>
-                                    <a href="#">
-                                        <img src="logo/002-question.png" style="width: 25px;height:25px;">
-                                    </a>
-                                    <div class="action-tooltip">
-                                        Trợ giúp
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="logo/002-question.png" style="width: 25px;height:25px;">
-                                    </a>
-                                    <div class="action-tooltip">
-                                        1 cái gì đó sẽ thêm sau
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="signup.html">
-                                        <img src="logo/004-writing.png" style="width: 25px;height:25px;">
-                                    </a>
-                                    <div class="action-tooltip">
-                                        Đăng ký
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="signin.html">
-                                        <img src="logo/003-sign-in.png" style="width: 25px;height:25px;">
-                                    </a>
-                                    <div class="action-tooltip">
-                                        Đăng nhập
-                                    </div>
-                                </li> -->
-
                             </ul>
                         </div>
                     </div>
@@ -172,114 +140,20 @@
                                 <!-- categories-dropdown -->
                                 <div class="categories-dropdown">
                                     <ul class="categories-ul">
-                                         <!-- li-content --> 
-                                         <li>                                                                                     
-                                             <div class="li-content d-flex">
-                                                 <a href="/products/category">
-                                                     <div class="left-content d-flex">                                                    
-                                                         <img src="/public/images/homepage/logo/006-user.png" style="width: 25px;height:25px;">
-                                                         <p>Thể loại</p>                                                                                                 
-                                                     </div>
-                                                 </a>                                                   
-                                             </div>     
-                                         </li>      
-                                          <!-- li-content --> 
-                                        <hr>
+                                    <template id="category-template">
+                                     <!-- li-content --> 
                                         <li>                                                                                     
                                             <div class="li-content d-flex">
-                                                <a href="/products/category">
+                                                <a class="category-link" href="/products/category">
                                                     <div class="left-content d-flex">                                                    
                                                         <img src="/public/images/homepage/logo/006-user.png" style="width: 25px;height:25px;">
-                                                        <p>Thể loại</p>                                                                                                 
-                                                    </div>
-                                                </a>                                                   
-                                            </div>     
-                                        </li>       
-                                         <!-- li-content --> 
-                                         <hr>
-                                         <li>                                                                                     
-                                             <div class="li-content d-flex">
-                                                 <a href="/products/category">
-                                                     <div class="left-content d-flex">                                                    
-                                                         <img src="/public/images/homepage/logo/006-user.png" style="width: 25px;height:25px;">
-                                                         <p>Thể loại</p>                                                                                                 
-                                                     </div>
-                                                 </a>                                                   
-                                             </div>     
-                                         </li>      
-                                          <!-- li-content --> 
-                                        <hr>
-                                        <li>                                                                                     
-                                            <div class="li-content d-flex">
-                                                <a href="/products/category">
-                                                    <div class="left-content d-flex">                                                    
-                                                        <img src="/public/images/homepage/logo/006-user.png" style="width: 25px;height:25px;">
-                                                        <p>Thể loại</p>                                                                                                 
+                                                        <p class="category-name">Thể loại</p>                                                                                                 
                                                     </div>
                                                 </a>                                                   
                                             </div>     
                                         </li>      
-                                         <!-- li-content --> 
-                                         <hr>
-                                         <li>                                                                                     
-                                             <div class="li-content d-flex">
-                                                 <a href="/products/category">
-                                                     <div class="left-content d-flex">                                                    
-                                                         <img src="/public/images/homepage/logo/006-user.png" style="width: 25px;height:25px;">
-                                                         <p>Thể loại</p>                                                                                                 
-                                                     </div>
-                                                 </a>                                                   
-                                             </div>     
-                                         </li>      
-                                          <!-- li-content --> 
-                                        <hr>
-                                        <li>                                                                                     
-                                            <div class="li-content d-flex">
-                                                <a href="/products/category">
-                                                    <div class="left-content d-flex">                                                    
-                                                        <img src="/public/images/homepage/logo/006-user.png" style="width: 25px;height:25px;">
-                                                        <p>Thể loại</p>                                                                                                 
-                                                    </div>
-                                                </a>                                                   
-                                            </div>     
-                                        </li>     
-                                         <!-- li-content --> 
-                                         <hr>
-                                         <li>                                                                                     
-                                             <div class="li-content d-flex">
-                                                 <a href="/products/category">
-                                                     <div class="left-content d-flex">                                                    
-                                                         <img src="/public/images/homepage/logo/006-user.png" style="width: 25px;height:25px;">
-                                                         <p>Thể loại</p>                                                                                                 
-                                                     </div>
-                                                 </a>                                                   
-                                             </div>     
-                                         </li>     
-                                          <!-- li-content --> 
-                                        <hr>
-                                        <li>                                                                                     
-                                            <div class="li-content d-flex">
-                                                <a href="/products/category">
-                                                    <div class="left-content d-flex">                                                    
-                                                        <img src="/public/images/homepage/logo/006-user.png" style="width: 25px;height:25px;">
-                                                        <p>Thể loại</p>                                                                                                 
-                                                    </div>
-                                                </a>                                                   
-                                            </div>     
-                                        </li>      
-                                         <!-- li-content --> 
-                                         <hr>
-                                         <li>                                                                                     
-                                             <div class="li-content d-flex">
-                                                 <a href="/products/category">
-                                                     <div class="left-content d-flex">                                                    
-                                                         <img src="/public/images/homepage/logo/006-user.png" style="width: 25px;height:25px;">
-                                                         <p>Thể loại</p>                                                                                                 
-                                                     </div>
-                                                 </a>                                                   
-                                             </div>     
-                                         </li>                                                                    
-                                    </ul>
+                                    </template>                                                           
+                                </ul>
                                 </div>
                             </div>
                         </div>
@@ -306,78 +180,6 @@
                                 </li> -->
                             </ul>
                         </div>
-                        <!-- ===== actions ===== -->
-                        <!-- <div class="actions">
-                            <ul class="d-flex justify-content-between align-items-center">
-                                <li>
-                                    <a href="#">
-                                        <img src="/public/images/homepage/logo/002-question.png" style="width: 25px;height:25px;">
-                                    </a>
-                                    <div class="action-tooltip">
-                                        Trợ giúp
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="/public/images/homepage/logo/001-store.png" style="width: 25px;height:25px;">
-                                    </a>
-                                    <sup class="primary-color">0</sup>
-                                    <div class="action-tooltip">
-                                        Cửa hàng
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="#" class="cart-btn">
-                                        <img src="/public/images/homepage/logo/005-shopping-cart-empty-side-view.png" style="width: 25px;height:25px;">
-                                    </a>
-                                    <sup class="primary-color cart-sup">0</sup>
-                                    <div class="action-tooltip">
-                                        Giỏ hàng
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="#" data-toggle="modal" data-target="#loginModal">
-                                        <img src="/public/images/homepage/logo/006-user.png" style="width: 25px;height:25px;">
-                                    </a>
-                                    <div class="action-tooltip">
-                                        Tài khoản
-                                    </div>
-                                </li> -->
-
-                                <!-- <li>
-                                    <a href="#">
-                                        <img src="logo/002-question.png" style="width: 25px;height:25px;">
-                                    </a>
-                                    <div class="action-tooltip">
-                                        Trợ giúp
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="logo/002-question.png" style="width: 25px;height:25px;">
-                                    </a>
-                                    <div class="action-tooltip">
-                                        1 cái gì đó sẽ thêm sau
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="logo/004-writing.png" style="width: 25px;height:25px;">
-                                    </a>
-                                    <div class="action-tooltip">
-                                        Đăng ký
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="logo/003-sign-in.png" style="width: 25px;height:25px;">
-                                    </a>
-                                    <div class="action-tooltip">
-                                        Đăng nhập
-                                    </div>
-                                </li> -->
-                            <!-- </ul>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -449,56 +251,6 @@
                             </a>
                         </div>
                     </div>
-                    <!-- <div class="grid-item-2">
-                        <div class="content">
-                            <a href="#">
-                                <div class="img">
-                                    <img src="/public/images/homepage/logo/005-cook-book.png">
-                                </div> 
-                                Nấu ăn        
-                            </a>
-                        </div>
-                    </div>
-                    <div class="grid-item-1">
-                        <div class="content">
-                            <a href="#">
-                                <div class="img">
-                                    <img src="/public/images/homepage/logo/medicine.png">
-                                </div> 
-                                Sức khỏe         
-                            </a>
-                        </div>
-                    </div> 
-                    <div class="grid-item-2">
-                        <div class="content">
-                            <a href="#">
-                                <div class="img">
-                                    <img src="/public/images/homepage/logo/008-economy.png">
-                                </div> 
-                                Lịch sử         
-                            </a>
-                        </div>
-                    </div> 
-                    <div class="grid-item-1">
-                        <div class="content">
-                            <a href="#">
-                                <div class="img">
-                                    <img src="/public/images/homepage/logo/009-art.png">
-                                </div> 
-                                Hội họa        
-                            </a>
-                        </div>
-                    </div>
-                    <div class="grid-item-2">
-                        <div class="content">
-                            <a href="#">
-                                <div class="img">
-                                    <img src="/public/images/homepage/logo/010-space.png">
-                                </div> 
-                                Thiên văn       
-                            </a>
-                        </div>
-                    </div>  -->
                 </div>               
             </div>
         </section>
@@ -524,295 +276,69 @@
                     </div>
                 </div>
                 <!-- ===== Owl-carousel ===== -->
-                <div class="owl-carousel owl-theme best-seller-carousel">                   
+                <div class="owl-carousel owl-theme best-seller-carousel item-list">                   
                     <!-- ===== item ===== -->
-                    <div class="item" data-id="2">
-                        <!-- item-top -->
-                        <div class="item-top">
-                            <!-- <div class="label">
-                                <p class="primary-color">20% off</p>
-                            </div> -->
-                            <div class="item-img img1">
-                                <img src="/public/images/homepage/item/laptop1.jpg" alt="product">
-                            </div>
-                            <!-- <div class="item-img img2">
-                                <img src="/public/images/homepage/item/laptop2.jpg" alt="product">
-                            </div> -->
-                            <!-- actions -->
-                            <!-- <div class="actions">
-                               quick-view
-                                <div class="quick-view action-wrapper">
-                                    <button data-toggle="modal" data-target="#quickViewModal">
-                                        <i class="flaticon-photo"></i>
-                                    </button>
-                                    <div class="action-tooltip">
-                                        Quick View
-                                    </div>
-                                </div>                 
-                            </div> -->
-                        </div>
-                        <!-- item-bottom -->
-                        <div class="item-bottom">
-                            <!-- <div class="countdown-wrapper d-flex justify-content-center">
-                                <div class="countdown-active d-flex"></div>
-                            </div> -->
-                            <div class="item-content">
-                                <!-- <div class="rating">
-                                    <span class="d-flex justify-content-between align-items-center">
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star"></i>
-                                    </span>
+                    <template id="best-seller-item-template">
+                        <div class="item" data-id="2">
+                            <!-- item-top -->
+                            <div class="item-top">
+                                <!-- <div class="label">
+                                    <p class="primary-color">20% off</p>
                                 </div> -->
-                                <div class="title">
-                                    <a href="#">Lược sử thời gian</a>
+                                <div class="item-img img1">
+                                    <img src="/public/images/homepage/item/laptop1.jpg" alt="product">
                                 </div>
-                                <div class="price d-flex">
-                                    <p>1500.00</p>
-                                    <span>VND</span>
-                                    <!-- <del>$1700.00</del> -->
-                                </div>
-                                <div class="add-to-cart-btn add-to-cart">
-                                    <button type="button" class="d-flex primary-color">
-                                        
-                                        <p>Xem chi tiết</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>  
-                    <!-- ===== item ===== -->
-                    <div class="item" data-id="2">
-                        <!-- item-top -->
-                        <div class="item-top">
-                            <!-- <div class="label">
-                                <p class="primary-color">20% off</p>
-                            </div> -->
-                            <div class="item-img img1">
-                                <img src="/public/images/homepage/item/laptop1.jpg" alt="product">
-                            </div>
-                            <!-- <div class="item-img img2">
-                                <img src="/public/images/homepage/item/laptop2.jpg" alt="product">
-                            </div> -->
-                            <!-- actions -->
-                            <!-- <div class="actions">
-                               quick-view
-                                <div class="quick-view action-wrapper">
-                                    <button data-toggle="modal" data-target="#quickViewModal">
-                                        <i class="flaticon-photo"></i>
-                                    </button>
-                                    <div class="action-tooltip">
-                                        Quick View
-                                    </div>
-                                </div>                 
-                            </div> -->
-                        </div>
-                        <!-- item-bottom -->
-                        <div class="item-bottom">
-                            <!-- <div class="countdown-wrapper d-flex justify-content-center">
-                                <div class="countdown-active d-flex"></div>
-                            </div> -->
-                            <div class="item-content">
-                                <!-- <div class="rating">
-                                    <span class="d-flex justify-content-between align-items-center">
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star"></i>
-                                    </span>
+                                <!-- <div class="item-img img2">
+                                    <img src="/public/images/homepage/item/laptop2.jpg" alt="product">
                                 </div> -->
-                                <div class="title">
-                                    <a href="#">Lược sử thời gian</a>
-                                </div>
-                                <div class="price d-flex">
-                                    <p>1500.00</p>
-                                    <span>VND</span>
-                                    <!-- <del>$1700.00</del> -->
-                                </div>
-                                <div class="add-to-cart-btn add-to-cart">
-                                    <button type="button" class="d-flex primary-color">
-                                        
-                                        <p>Xem chi tiết</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- ===== item ===== -->
-                    <div class="item" data-id="2">
-                        <!-- item-top -->
-                        <div class="item-top">
-                            <!-- <div class="label">
-                                <p class="primary-color">20% off</p>
-                            </div> -->
-                            <div class="item-img img1">
-                                <img src="/public/images/homepage/item/laptop1.jpg" alt="product">
-                            </div>
-                            <!-- <div class="item-img img2">
-                                <img src="/public/images/homepage/item/laptop2.jpg" alt="product">
-                            </div> -->
-                            <!-- actions -->
-                            <!-- <div class="actions">
-                               quick-view
-                                <div class="quick-view action-wrapper">
-                                    <button data-toggle="modal" data-target="#quickViewModal">
-                                        <i class="flaticon-photo"></i>
-                                    </button>
-                                    <div class="action-tooltip">
-                                        Quick View
-                                    </div>
-                                </div>                 
-                            </div> -->
-                        </div>
-                        <!-- item-bottom -->
-                        <div class="item-bottom">
-                            <!-- <div class="countdown-wrapper d-flex justify-content-center">
-                                <div class="countdown-active d-flex"></div>
-                            </div> -->
-                            <div class="item-content">
-                                <!-- <div class="rating">
-                                    <span class="d-flex justify-content-between align-items-center">
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star"></i>
-                                    </span>
+                                <!-- actions -->
+                                <!-- <div class="actions">
+                                quick-view
+                                    <div class="quick-view action-wrapper">
+                                        <button data-toggle="modal" data-target="#quickViewModal">
+                                            <i class="flaticon-photo"></i>
+                                        </button>
+                                        <div class="action-tooltip">
+                                            Quick View
+                                        </div>
+                                    </div>                 
                                 </div> -->
-                                <div class="title">
-                                    <a href="#">Lược sử thời gian</a>
-                                </div>
-                                <div class="price d-flex">
-                                    <p>1500.00</p>
-                                    <span>VND</span>
-                                    <!-- <del>$1700.00</del> -->
-                                </div>
-                                <div class="add-to-cart-btn add-to-cart">
-                                    <button type="button" class="d-flex primary-color">
-                                        
-                                        <p>Xem chi tiết</p>
-                                    </button>
-                                </div>
                             </div>
-                        </div>
-                    </div> <!-- ===== item ===== -->
-                    <div class="item" data-id="2">
-                        <!-- item-top -->
-                        <div class="item-top">
-                            <!-- <div class="label">
-                                <p class="primary-color">20% off</p>
-                            </div> -->
-                            <div class="item-img img1">
-                                <img src="/public/images/homepage/item/laptop1.jpg" alt="product">
-                            </div>
-                            <!-- <div class="item-img img2">
-                                <img src="/public/images/homepage/item/laptop2.jpg" alt="product">
-                            </div> -->
-                            <!-- actions -->
-                            <!-- <div class="actions">
-                               quick-view
-                                <div class="quick-view action-wrapper">
-                                    <button data-toggle="modal" data-target="#quickViewModal">
-                                        <i class="flaticon-photo"></i>
-                                    </button>
-                                    <div class="action-tooltip">
-                                        Quick View
-                                    </div>
-                                </div>                 
-                            </div> -->
-                        </div>
-                        <!-- item-bottom -->
-                        <div class="item-bottom">
-                            <!-- <div class="countdown-wrapper d-flex justify-content-center">
-                                <div class="countdown-active d-flex"></div>
-                            </div> -->
-                            <div class="item-content">
-                                <!-- <div class="rating">
-                                    <span class="d-flex justify-content-between align-items-center">
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star"></i>
-                                    </span>
+                            <!-- item-bottom -->
+                            <div class="item-bottom">
+                                <!-- <div class="countdown-wrapper d-flex justify-content-center">
+                                    <div class="countdown-active d-flex"></div>
                                 </div> -->
-                                <div class="title">
-                                    <a href="#">Lược sử thời gian</a>
-                                </div>
-                                <div class="price d-flex">
-                                    <p>1500.00</p>
-                                    <span>VND</span>
-                                    <!-- <del>$1700.00</del> -->
-                                </div>
-                                <div class="add-to-cart-btn add-to-cart">
-                                    <button type="button" class="d-flex primary-color">
-                                        
-                                        <p>Xem chi tiết</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- ===== item ===== -->
-                    <div class="item" data-id="2">
-                        <!-- item-top -->
-                        <div class="item-top">
-                            <!-- <div class="label">
-                                <p class="primary-color">20% off</p>
-                            </div> -->
-                            <div class="item-img img1">
-                                <img src="/public/images/homepage/item/laptop1.jpg" alt="product">
-                            </div>
-                            <!-- <div class="item-img img2">
-                                <img src="/public/images/homepage/item/laptop2.jpg" alt="product">
-                            </div> -->
-                            <!-- actions -->
-                            <!-- <div class="actions">
-                               quick-view
-                                <div class="quick-view action-wrapper">
-                                    <button data-toggle="modal" data-target="#quickViewModal">
-                                        <i class="flaticon-photo"></i>
-                                    </button>
-                                    <div class="action-tooltip">
-                                        Quick View
+                                <div class="item-content">
+                                    <!-- <div class="rating">
+                                        <span class="d-flex justify-content-between align-items-center">
+                                            <i class="flaticon-star-1"></i>
+                                            <i class="flaticon-star-1"></i>
+                                            <i class="flaticon-star-1"></i>
+                                            <i class="flaticon-star-1"></i>
+                                            <i class="flaticon-star"></i>
+                                        </span>
+                                    </div> -->
+                                    <div class="title">
+                                        <a href="#">Lược sử thời gian</a>
                                     </div>
-                                </div>                 
-                            </div> -->
-                        </div>
-                        <!-- item-bottom -->
-                        <div class="item-bottom">
-                            <!-- <div class="countdown-wrapper d-flex justify-content-center">
-                                <div class="countdown-active d-flex"></div>
-                            </div> -->
-                            <div class="item-content">
-                                <!-- <div class="rating">
-                                    <span class="d-flex justify-content-between align-items-center">
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star"></i>
-                                    </span>
-                                </div> -->
-                                <div class="title">
-                                    <a href="#">Lược sử thời gian</a>
-                                </div>
-                                <div class="price d-flex">
-                                    <p>1500.00</p>
-                                    <span>VND</span>
-                                    <!-- <del>$1700.00</del> -->
-                                </div>
-                                <div class="add-to-cart-btn add-to-cart">
-                                    <button type="button" class="d-flex primary-color">
-                                        
-                                        <p>Xem chi tiết</p>
-                                    </button>
+                                    <div class="price d-flex">
+                                        <p>1500.00</p>
+                                        <span>VND</span>
+                                        <!-- <del>$1700.00</del> -->
+                                    </div>
+                                    <div class="add-to-cart-btn add-to-cart">
+                                        <a class="detail">
+                                            <button type="button" class="d-flex primary-color">
+                                                
+                                                <p>Xem chi tiết</p>
+                                            </button>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>                  
+                    </template>          
                 </div>
             </div>
         </section>
@@ -843,238 +369,69 @@
                     </div>
                 </div>
                 <!-- ===== Owl-carousel ===== -->
-                <div class="new-arrivals">                   
+                <div class="new-arrivals item-list">                   
                     <!-- ===== item ===== -->
-                    <div class="item" data-id="2">
-                        <!-- item-top -->
-                        <div class="item-top">
-                            <!-- <div class="label">
-                                <p class="primary-color">20% off</p>
-                            </div> -->
-                            <div class="item-img img1">
-                                <img src="/public/images/homepage/item/laptop1.jpg" alt="product">
-                            </div>
-                            <!-- <div class="item-img img2">
-                                <img src="/public/images/homepage/item/laptop2.jpg" alt="product">
-                            </div> -->
-                            <!-- actions -->
-                            <!-- <div class="actions">
-                               quick-view
-                                <div class="quick-view action-wrapper">
-                                    <button data-toggle="modal" data-target="#quickViewModal">
-                                        <i class="flaticon-photo"></i>
-                                    </button>
-                                    <div class="action-tooltip">
-                                        Quick View
-                                    </div>
-                                </div>                 
-                            </div> -->
-                        </div>
-                        <!-- item-bottom -->
-                        <div class="item-bottom">
-                            <!-- <div class="countdown-wrapper d-flex justify-content-center">
-                                <div class="countdown-active d-flex"></div>
-                            </div> -->
-                            <div class="item-content">
-                                <!-- <div class="rating">
-                                    <span class="d-flex justify-content-between align-items-center">
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star"></i>
-                                    </span>
+                    <template id="new-arrivals-item-template">
+                        <div class="item" data-id="2">
+                            <!-- item-top -->
+                            <div class="item-top">
+                                <!-- <div class="label">
+                                    <p class="primary-color">20% off</p>
                                 </div> -->
-                                <div class="title">
-                                    <a href="#">Lược sử thời gian</a>
+                                <div class="item-img img1">
+                                    <img src="/public/images/homepage/item/laptop1.jpg" alt="product">
                                 </div>
-                                <div class="price d-flex">
-                                    <p>1500.00</p>
-                                    <span>VND</span>
-                                    <!-- <del>$1700.00</del> -->
-                                </div>
-                                <div class="add-to-cart-btn add-to-cart">
-                                    <button type="button" class="d-flex primary-color">
-                                        
-                                        <p>Xem chi tiết</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>  
-                    <!-- ===== item ===== -->
-                    <div class="item" data-id="2">
-                        <!-- item-top -->
-                        <div class="item-top">
-                            <!-- <div class="label">
-                                <p class="primary-color">20% off</p>
-                            </div> -->
-                            <div class="item-img img1">
-                                <img src="/public/images/homepage/item/laptop1.jpg" alt="product">
-                            </div>
-                            <!-- <div class="item-img img2">
-                                <img src="/public/images/homepage/item/laptop2.jpg" alt="product">
-                            </div> -->
-                            <!-- actions -->
-                            <!-- <div class="actions">
-                               quick-view
-                                <div class="quick-view action-wrapper">
-                                    <button data-toggle="modal" data-target="#quickViewModal">
-                                        <i class="flaticon-photo"></i>
-                                    </button>
-                                    <div class="action-tooltip">
-                                        Quick View
-                                    </div>
-                                </div>                 
-                            </div> -->
-                        </div>
-                        <!-- item-bottom -->
-                        <div class="item-bottom">
-                            <!-- <div class="countdown-wrapper d-flex justify-content-center">
-                                <div class="countdown-active d-flex"></div>
-                            </div> -->
-                            <div class="item-content">
-                                <!-- <div class="rating">
-                                    <span class="d-flex justify-content-between align-items-center">
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star"></i>
-                                    </span>
+                                <!-- <div class="item-img img2">
+                                    <img src="/public/images/homepage/item/laptop2.jpg" alt="product">
                                 </div> -->
-                                <div class="title">
-                                    <a href="#">Lược sử thời gian</a>
-                                </div>
-                                <div class="price d-flex">
-                                    <p>1500.00</p>
-                                    <span>VND</span>
-                                    <!-- <del>$1700.00</del> -->
-                                </div>
-                                <div class="add-to-cart-btn add-to-cart">
-                                    <button type="button" class="d-flex primary-color">
-                                        
-                                        <p>Xem chi tiết</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- ===== item ===== -->
-                    <div class="item" data-id="2">
-                        <!-- item-top -->
-                        <div class="item-top">
-                            <!-- <div class="label">
-                                <p class="primary-color">20% off</p>
-                            </div> -->
-                            <div class="item-img img1">
-                                <img src="/public/images/homepage/item/laptop1.jpg" alt="product">
-                            </div>
-                            <!-- <div class="item-img img2">
-                                <img src="/public/images/homepage/item/laptop2.jpg" alt="product">
-                            </div> -->
-                            <!-- actions -->
-                            <!-- <div class="actions">
-                               quick-view
-                                <div class="quick-view action-wrapper">
-                                    <button data-toggle="modal" data-target="#quickViewModal">
-                                        <i class="flaticon-photo"></i>
-                                    </button>
-                                    <div class="action-tooltip">
-                                        Quick View
-                                    </div>
-                                </div>                 
-                            </div> -->
-                        </div>
-                        <!-- item-bottom -->
-                        <div class="item-bottom">
-                            <!-- <div class="countdown-wrapper d-flex justify-content-center">
-                                <div class="countdown-active d-flex"></div>
-                            </div> -->
-                            <div class="item-content">
-                                <!-- <div class="rating">
-                                    <span class="d-flex justify-content-between align-items-center">
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star"></i>
-                                    </span>
+                                <!-- actions -->
+                                <!-- <div class="actions">
+                                quick-view
+                                    <div class="quick-view action-wrapper">
+                                        <button data-toggle="modal" data-target="#quickViewModal">
+                                            <i class="flaticon-photo"></i>
+                                        </button>
+                                        <div class="action-tooltip">
+                                            Quick View
+                                        </div>
+                                    </div>                 
                                 </div> -->
-                                <div class="title">
-                                    <a href="#">Lược sử thời gian</a>
-                                </div>
-                                <div class="price d-flex">
-                                    <p>1500.00</p>
-                                    <span>VND</span>
-                                    <!-- <del>$1700.00</del> -->
-                                </div>
-                                <div class="add-to-cart-btn add-to-cart">
-                                    <button type="button" class="d-flex primary-color">
-                                        
-                                        <p>Xem chi tiết</p>
-                                    </button>
-                                </div>
                             </div>
-                        </div>
-                    </div> <!-- ===== item ===== -->
-                    <div class="item" data-id="2">
-                        <!-- item-top -->
-                        <div class="item-top">
-                            <!-- <div class="label">
-                                <p class="primary-color">20% off</p>
-                            </div> -->
-                            <div class="item-img img1">
-                                <img src="/public/images/homepage/item/laptop1.jpg" alt="product">
-                            </div>
-                            <!-- <div class="item-img img2">
-                                <img src="/public/images/homepage/item/laptop2.jpg" alt="product">
-                            </div> -->
-                            <!-- actions -->
-                            <!-- <div class="actions">
-                               quick-view
-                                <div class="quick-view action-wrapper">
-                                    <button data-toggle="modal" data-target="#quickViewModal">
-                                        <i class="flaticon-photo"></i>
-                                    </button>
-                                    <div class="action-tooltip">
-                                        Quick View
-                                    </div>
-                                </div>                 
-                            </div> -->
-                        </div>
-                        <!-- item-bottom -->
-                        <div class="item-bottom">
-                            <!-- <div class="countdown-wrapper d-flex justify-content-center">
-                                <div class="countdown-active d-flex"></div>
-                            </div> -->
-                            <div class="item-content">
-                                <!-- <div class="rating">
-                                    <span class="d-flex justify-content-between align-items-center">
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star-1"></i>
-                                        <i class="flaticon-star"></i>
-                                    </span>
+                            <!-- item-bottom -->
+                            <div class="item-bottom">
+                                <!-- <div class="countdown-wrapper d-flex justify-content-center">
+                                    <div class="countdown-active d-flex"></div>
                                 </div> -->
-                                <div class="title">
-                                    <a href="#">Lược sử thời gian</a>
-                                </div>
-                                <div class="price d-flex">
-                                    <p>1500.00</p>
-                                    <span>VND</span>
-                                    <!-- <del>$1700.00</del> -->
-                                </div>
-                                <div class="add-to-cart-btn add-to-cart">
-                                    <button type="button" class="d-flex primary-color">
-                                        
-                                        <p>Xem chi tiết</p>
-                                    </button>
+                                <div class="item-content">
+                                    <!-- <div class="rating">
+                                        <span class="d-flex justify-content-between align-items-center">
+                                            <i class="flaticon-star-1"></i>
+                                            <i class="flaticon-star-1"></i>
+                                            <i class="flaticon-star-1"></i>
+                                            <i class="flaticon-star-1"></i>
+                                            <i class="flaticon-star"></i>
+                                        </span>
+                                    </div> -->
+                                    <div class="title">
+                                        <a href="#">Lược sử thời gian</a>
+                                    </div>
+                                    <div class="price d-flex">
+                                        <p>1500.00</p>
+                                        <span>VND</span>
+                                        <!-- <del>$1700.00</del> -->
+                                    </div>
+                                    <div class="add-to-cart-btn add-to-cart">
+                                        <a class="detail">
+                                            <button type="button" class="d-flex primary-color" onclick="href='/products/id'">
+                                                
+                                                <p>Xem chi tiết</p>
+                                            </button>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>       
+                        </div>  
+                    </template>    
                 </div>
             </div>
         </section>
@@ -1277,7 +634,7 @@
                                             <button type="button" class="plus-btn">+</button>
                                         </div>
                                         <div class="quickView-add-to-cart-btn">
-                                            <button type="submit" class="d-flex primary-color">
+                                            <button type="submit" class="d-flex primary-color" onclick="href='/products/id'">
                                                 <i class="flaticon-shopping-bag mr-2"></i>
                                                 <p>Add To Cart</p>
                                             </button>
@@ -1390,6 +747,7 @@
     <script src="/public/js/homepage/jquery.countdown.min.js"></script>
     <!-- main.js -->
     <script src="/public/js/homepage/main.js"></script>
+    <script src="/public/js/homepage/api.js"></script>
 </body>
 
 </html>

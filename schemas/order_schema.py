@@ -22,7 +22,7 @@ class OrderDetail(BaseModel):
     total_cost: float
 
     recipient_name: str
-    recipient_phone: str
+    recipient_phone: int
     recipient_address: str
     
     province_id: Province
@@ -43,7 +43,7 @@ class OrderCreationProduct(BaseModel):
 
 class OrderCreation(BaseModel):
     recipient_name: str
-    recipient_phone: str
+    recipient_phone: int
     recipient_address: str
     province_id: int
     district_id: int

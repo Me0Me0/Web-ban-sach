@@ -18,18 +18,7 @@ class UserController:
     router = APIRouter(prefix='/users')
 
     @staticmethod
-    @router.get('/signin', response_class=FileResponse,dependencies=[Depends(configs.db.get_db)])
-    def signin():
-        return "./views/signin/signin.html"
-
-
-    @staticmethod
-    @router.get('/signup', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)]) 
-    def signup():
-        return "./views/signup/signup.html"
-
-    @staticmethod
-    @router.get('/signout', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)]) 
+    @router.get('/signout', dependencies=[Depends(configs.db.get_db)]) 
     def signout(response: Response):
         response.set_cookie('token', '', expires=0)
         response.set_cookie('loggedin', '', expires=0)
@@ -37,35 +26,6 @@ class UserController:
         response.status_code = 307
         return response
 
-    @staticmethod
-    @router.get('/forgot-password', response_class=FileResponse) 
-    def forgotPassword():
-        return "./views/forgotPassword/forgot-password.html"
-
-    @staticmethod
-    @router.get('/reset-password/{token}',response_class=FileResponse)
-    def resetPassword(token):
-        return "./views/forgotPassword/forgot-password-2.html"
-
-    @staticmethod
-    @router.get('/home', response_class=FileResponse)
-    def index():
-        return "./views/homepage/index.html"
-
-    @staticmethod
-    @router.get('/view-profile', response_class=FileResponse)
-    def viewProfile():
-        return "./views/viewProfile/view-profile.html"
-
-    @staticmethod
-    @router.get('/change-profile', response_class=FileResponse)
-    def changeProfile():
-        return "./views/changeProfile/change-profile.html"
-
-    @staticmethod
-    @router.get('/change-password', response_class=FileResponse)
-    def changePassword():
-        return "./views/changePassword/change-password.html"
 
     @staticmethod
     @router.post('/signup', dependencies=[Depends(configs.db.get_db)])
@@ -102,12 +62,12 @@ class UserController:
 
     @staticmethod
     @router.get('', response_model=List[user_schema.User],dependencies=[Depends(configs.db.get_db)])
-    def getAll(limit: int = Query(10, gt=0), skip: int =Query(0, ge=0)):
+    def getAll(limit: int = Query(10, gt=0), skip: int = Query(0, ge=0)):
         return UserService.getAll(skip, limit)
 
 
     @staticmethod
-    @router.get('/details', response_model=user_schema.User,dependencies=[Depends(configs.db.get_db)])#details
+    @router.get('/details', response_model=user_schema.User,dependencies=[Depends(configs.db.get_db)])
     def getDetail(currentUser = Depends(getUser)):
         user = UserService.getById(currentUser['id'])
         if not user:
