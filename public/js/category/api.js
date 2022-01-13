@@ -34,6 +34,7 @@ async function showProducts() {
     let { data: { products: data, category } } = await getProducts();
     document.querySelector("#category-name").textContent = category;
     document.querySelector("#category-detail").textContent = category;
+    document.getElementById("title").innerHTML = category;
 
     if (data.length == 0 && currentPage != 1) {
         const query = new URLSearchParams();
