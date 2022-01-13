@@ -246,7 +246,7 @@
                   <div class="col-25">
                     <h3>Thông tin người nhận</h3>
                     <label for="name"><i class="fa fa-user"></i>  Họ và tên</label>
-                    <input type="text" id="name" name="firstname" placeholder="Họ và tên người nhận hàng" required>
+                    <input type="text" id="name" name="firstname" pattern="^[^\s].*[^\s]" placeholder="Họ và tên người nhận hàng" required>
         
                     <!-- <label for="email"><i class="fa fa-envelope"></i> Email</label>
                     <input type="text" id="email" name="email" placeholder="Email người nhận hàng" required> -->
@@ -282,7 +282,7 @@
                     </select> 
                     
                     <label for="adr"> Địa chỉ cụ thể</label>
-                    <input type="text" id="address" name="address" placeholder="Số nhà, tên đường..." required>
+                    <input type="text" id="address" pattern="^[^\s].*[^\s]" name="address" placeholder="Số nhà, tên đường..." required>
                   </div>         
                 </div>
                 <div class="button_center">

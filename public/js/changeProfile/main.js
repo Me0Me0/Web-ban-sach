@@ -47,17 +47,24 @@ var loadFile = function(event) {
 
 async function onFormsubmit(e) {
     e.preventDefault();
-    var name = inputFullname.value;
+    var name = inputFullname.value.trim();
     var dob = inputDateofbirth.value;
     var email = inputEmail.value;
     var phone = inputPhonenumber.value;
 
     if (name == '' && dob == oldDob && email == '' && phone == ''){
-      alert('Bạn chưa nhập bất kì thông tin nào cần thay đổi')
+      alert('Bạn chưa nhập bất kì thông tin nào cần thay đổi');
+      return;
     }
     else if(!letters.test(name) && name != '')
     {
       alert('Họ và tên không bao gồm ký tự đặc biệt và số');
+      return;
+    }
+    else if (isNaN(Number(phone)) || phone.length != 10)
+    {
+      alert('Số điện thoại không hợp lệ');
+      return;
     }
     else
     {

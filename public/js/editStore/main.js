@@ -41,7 +41,13 @@ async function onFormsubmit(e) {
     var description = inputDescription.value;
 
     if (name == '' && email == '' && phone == '' && description == ''){
-      alert('Bạn chưa nhập bất kì thông tin nào cần thay đổi')
+      alert('Bạn chưa nhập bất kì thông tin nào cần thay đổi');
+      return;
+    }
+    else if (isNaN(Number(phone)) || phone.length != 10)
+    {
+      alert('Số điện thoại không hợp lệ');
+      return;
     }
     else
     {
