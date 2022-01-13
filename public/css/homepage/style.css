@@ -845,7 +845,7 @@ header .actions .menu #logged-in{
 
 #best-seller .item {
   width: 218px;
-  height: 350px;
+  height: 380px;
 }
 
 /* #best-seller .item:hover .actions {
@@ -874,7 +874,6 @@ header .actions .menu #logged-in{
 
 #best-seller .item .detail {
   text-decoration: none;
-  justify-content: center;
 }
 
 #best-seller .item-top .actions .action-wrapper {
@@ -981,10 +980,12 @@ header .actions .menu #logged-in{
 
 #best-seller .title a {
   color: #193498;
-  font-size: 13px;
-  text-decoration: none;
+  font-size: 18px;
   transition: all 0.3s ease;
   font-weight: 600;
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #best-seller .title a:hover {
@@ -998,14 +999,16 @@ header .actions .menu #logged-in{
 #best-seller .price p,
 span {
   font-weight: 600;
-}
-
-#best-seller .price span {
-  line-height: 20px;
+  font-size: 16px;
 }
 
 #best-seller .price p {
   margin-right: 5px;
+}
+#best-seller .add-to-cart-btn.add-to-cart{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #best-seller .add-to-cart-btn button {
@@ -2059,9 +2062,6 @@ span {
   }
 
   /* ======= BEST SELLER ======= */
-  #best-seller .item {
-    height: 470px;
-  }
 
   /* #best-seller .item:hover .item-bottom {
     transform: translateY(-5px);
@@ -2260,9 +2260,7 @@ span {
   }
 
   /* ======= BEST SELLER ======= */
-  #best-seller .item {
-    height: 675px;
-  }
+
 
   #best-seller .item .item-img {
     height: 420px;

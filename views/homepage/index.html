@@ -422,7 +422,7 @@
                                     </div>
                                     <div class="add-to-cart-btn add-to-cart">
                                         <a class="detail">
-                                            <button type="button" class="d-flex primary-color" onclick="href='/products/id'">
+                                            <button type="button" class="primary-color" onclick="href='/products/id'">
                                                 
                                                 <p>Xem chi tiết</p>
                                             </button>
@@ -463,7 +463,11 @@
                             <!-- description -->
                             <div class="description">
                                 <p>
-                                    Chỗ này nói sơ qua về đồ án
+                                    Nhằm tạo cơ hội để những người yêu sách có 
+                                    được một cách để tiếp cận với những cuốn sách
+                                    mình yêu quý, những người bán sách cần bán đi 
+                                    những cuốn sách của họ. Đó là lý do chính tạo
+                                    nên trang web Bán Sách Me0Me0 này.
                                 </p>
                             </div>
                         </div>
@@ -526,190 +530,6 @@
         </div>
     </footer>
     <!-- ======= FOOTER - End ======= --> 
-
-    <!-- ======= QUICK VIEW (MODAL) - Start ======= -->
-    <div class="modal fade" id="quickViewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-        <div class="modal-dialog-centered modal-dialog">
-            <div class="modal-content">
-                <!-- ===== modal-header ===== -->
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <!-- ===== modal-body ===== -->
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-5 col-md-5 col-sm-5">
-                            <!-- ===== Image-gallery carousel ===== -->
-                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                <!-- slides -->
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active first-img">
-                                        <img src="/public/images/homepage/best-seller/man1.jpg" class="d-block w-100" alt="man-1">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="/public/images/homepage/best-seller/man2.jpg" class="d-block w-100" alt="man-2">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="/public/images/homepage/best-seller/man3.jpg" class="d-block w-100" alt="man-3">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="/public/images/homepage/best-seller/man4.jpg" class="d-block w-100" alt="man-4">
-                                    </div>
-                                </div>
-                                <!-- indicators -->
-                                <ol class="carousel-indicators position-relative">
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">
-                                        <div class="data-slide-img">
-                                            <img src="/public/images/homepage/best-seller/man1.jpg" alt="man-1">
-                                        </div>
-                                    </li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="1">
-                                        <div class="data-slide-img">
-                                            <img src="/public/images/homepage/best-seller/man2.jpg" alt="man-2">
-                                        </div>
-                                    </li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="2">
-                                        <div class="data-slide-img">
-                                            <img src="/public/images/homepage/best-seller/man3.jpg" alt="man-3">
-                                        </div>
-                                    </li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="3">
-                                        <div class="data-slide-img">
-                                            <img src="/public/images/homepage/best-seller/man4.jpg" alt="man-4">
-                                        </div>
-                                    </li>
-                                </ol>
-                                <!-- nav buttons -->
-                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
-                                    data-slide="prev">
-                                    <i class="flaticon-left-arrow-1 text-dark"></i>
-                                </a>
-                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
-                                    data-slide="next">
-                                    <i class="flaticon-right-arrow-angle text-dark"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-7 col-md-7 col-sm-7">
-                            <!-- ===== Product info ===== -->
-                            <div class="product-info item" data-id="1">
-                                <!-- top-info -->
-                                <div class="top-info">
-                                    <ul>
-                                        <li><span>SKU:</span> 001</li>
-                                        <li><span>Availability:</span> 40 in Stock</li>
-                                    </ul>
-                                </div>
-                                <!-- primary-info -->
-                                <div class="primary-info">
-                                    <h3 class="title">Ocean Wash Linen Sport Shirt</h3>
-                                    <div class="price d-flex">
-                                        <span>$</span>
-                                        <p>220.00</p>
-                                    </div>
-                                    <div class="rating d-flex justify-content-between align-items-center">
-                                        <i class="flaticon-star"></i>
-                                        <i class="flaticon-star"></i>
-                                        <i class="flaticon-star"></i>
-                                        <i class="flaticon-star"></i>
-                                        <i class="flaticon-star-1"></i>
-                                    </div>
-                                    <p class="text-muted description">
-                                        Lorem ipsum dolor sit amet conse ctetur adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        Ut enim ad minim veniam.
-                                    </p>
-                                </div>
-                                <!-- add-to-cart -->
-                                <div class="add-to-cart d-flex">
-                                    <form id="quantity-input-form" class="d-flex w-100">
-                                        <div class="quantity-area d-flex align-items-center">
-                                            <button type="button" class="minus-btn" disabled>−</button>
-                                            <div class="quantity-input-wrapper d-flex flex-column position-relative">
-                                                <input type="text" name="quantityValue" class="quantity-value" size="2"
-                                                    value="1" />
-                                            </div>
-                                            <button type="button" class="plus-btn">+</button>
-                                        </div>
-                                        <div class="quickView-add-to-cart-btn">
-                                            <button type="submit" class="d-flex primary-color" onclick="href='/products/id'">
-                                                <i class="flaticon-shopping-bag mr-2"></i>
-                                                <p>Add To Cart</p>
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ======= QUICK VIEW (MODAL) - End ======= -->
-
-    <!-- ======= SIDEBAR CART - Start ======= -->
-    <div id="sidebar-cart">
-        <div class="sidebar-cart-wrapper h-100">
-            <div class="sidebar-cart-area d-flex flex-column justify-content-between">
-                <!-- ===== Cart header ===== -->
-                <div class="cart-header d-flex justify-content-between">
-                    <div class="item-count d-flex">
-                        <i class="flaticon-shopping-bag mr-2"></i>
-                        <p><span class="product-count">0</span> item</p>
-                    </div>
-                    <div class="close-btn">
-                        <button type="button" class="text-danger">Close</button>
-                    </div>
-                </div>
-                <!-- ===== Cart body ===== -->
-                <div class="cart-body">
-                </div>
-                <!-- ===== Cart footer ===== -->
-                <div class="cart-footer">
-                    <button type="button"
-                        class="checkout-btn d-flex justify-content-center primary-color text-white btn-block">
-                        <p class="mr-2">Checkout Now</p>
-                        <span class="cart-total"></span>
-                    </button>
-                    <button type="button" class="view-cart-btn mt-3 btn-block">View Cart</button>
-                </div>
-                <!-- ===== No product ===== -->
-                <div class="no-product-wrapper h-100">
-                    <div class="no-product-content h-100 d-flex flex-column justify-content-center align-items-center">
-                        <div class="no-product-img">
-                            <img src="/public/images/homepage/shopping-bag/shopping-bag.svg" alt="shopping-bag">
-                        </div>
-                        <p class="text-center mt-3">Your shopping cart is empty. Start shopping</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ======= SIDEBAR CART - End ======= -->
-
-    <!-- ======= Navigation list ======= -->
-    <div id="navigation-list">
-        <div class="navigation-list-content d-flex justify-content-between align-items-center">
-            <!-- menu -->
-            <button type="button" class="nav-menu-btn d-flex flex-column align-items-center">
-                <i class="flaticon-menu-1"></i>
-                <p>Menu</p>
-            </button>
-            <!-- categories -->
-            <button type="button" class="sidebar-categories-btn d-flex flex-column align-items-center">
-                <i class="flaticon-menu-2"></i>
-                <p>Categories</p>
-            </button>
-            <!-- search -->
-            <button type="button" class="show-search-btn d-flex flex-column align-items-center">
-                <i class="flaticon-loupe"></i>
-                <p>Search</p>
-            </button>
-        </div>
-    </div>
 
     <!-- ======= Loader ======= -->
     <div class="loader-wrapper">
