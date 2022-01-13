@@ -29,8 +29,8 @@ app.add_middleware(
 @app.middleware("http")
 async def ignoreCache(request: Request, call_next):
     response = await call_next(request)
-    if response.headers.get('Content-Type') and 'text/html' in response.headers['Content-Type']:
-        response.headers['Cache-Control'] = 'no-cache'
+    # if response.headers.get('Content-Type') and 'text/html' in response.headers['Content-Type']:
+    response.headers['Cache-Control'] = 'no-cache'
     return response
 
 
