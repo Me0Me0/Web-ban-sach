@@ -29,6 +29,7 @@ async function get_order_details(order_id) {
             break;
         case 4:
             document.getElementById("status").innerHTML = "Đã hủy";
+            document.getElementById("cancel-order").style.display = "none";
             break;
         default:
             document.getElementById("status").innerHTML = "Không xác định";
@@ -86,7 +87,7 @@ async function cancel_order(order_id) {
     console.log(data);
     if (data.data.success) {
         alert("Hủy đơn hàng thành công");
-        location.href = "history.back()";
+        location.href = "/orders";
     } else {
         alert("Hủy đơn hàng thất bại");
     }

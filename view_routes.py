@@ -117,6 +117,16 @@ def mystore_page(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
     return "./views/statistic/index.html"
 
 
+@mystore_router.get('/orders', response_class=FileResponse)
+def getMyStoreOrders(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
+    return "./views/listOrder_ViewSeller/index.html"
+
+
+@mystore_router.get('/orders/{id}', response_class=FileResponse) # id cua don hang
+def getMyStoreOrdersDetails(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
+    return "./views/orderDetails_ViewSeller/index.html"
+
+
 view.include_router(mystore_router)
 
 
@@ -204,16 +214,6 @@ def getOrders(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
 @order_router.get('/{id}', response_class=FileResponse) # id cua hoa don
 def getOrderDetails(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
     return "./views/orderDetails_ViewCus/index.html"
-
-
-@order_router.get('/mystore-orders/details/{id}', response_class=FileResponse) # id cua don hang
-def getMyStoreOrdersDetails(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
-    return "./views/orderDetails_ViewSeller/index.html"
-
-
-@order_router.get('/mystore-orders/{id}', response_class=FileResponse) # id cua cua hang
-def getMyStoreOrders(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
-    return "./views/listOrder_ViewSeller/index.html"
 
 
 view.include_router(order_router)
