@@ -18,7 +18,7 @@
   <form class="form" id="product-form">
     <div class="product-price">
       <p class="text">Tên sản phẩm:</p>
-      <input name="product-name" type="text" id="product-name" pattern="^[^\s].*[^\s]" placeholder="Nhập tên sản phẩm" required>
+      <input name="product-name" type="text" id="product-name" placeholder="Nhập tên sản phẩm" required pattern="^[^\s].*[^\s]">
       <p class="text">Thể loại:</p>
       <select name="category" class="form-control" id="category" required>
           <option value="" disabled selected>Chọn thể loại</option>
@@ -27,11 +27,11 @@
           </template>
       </select>
       <p class="text">Tác giả:</p>
-      <input name="author" type="text" id="author" pattern="^[^\s].*[^\s]" placeholder="Nhập tên tác giả" required>
+      <input name="author" type="text" id="author" placeholder="Nhập tên tác giả" required pattern="^[^\s].*[^\s]">
       <p class="text">Số trang:</p>
       <input name="page-number" type="number" id="page-number" placeholder="Nhập số trang" min="1" required>
       <p class="text">Nhà xuất bản:</p>
-      <input name="publisher" type="text" id="publisher" pattern="^[^\s].*[^\s]" placeholder="Nhập tên nhà xuất bản" required>
+      <input name="publisher" type="text" id="publisher" placeholder="Nhập tên nhà xuất bản" required pattern="^[^\s].*[^\s]">
       <p class="text">Năm xuất bản:</p>
       <input name="publishing-year" type="number" id="publishing-year" min="1900" max="2099" step="1" placeholder="Nhập năm xuất bản" required/>
       <p class="text">Số lượng sản phẩm:</p>
@@ -39,7 +39,7 @@
       <p class="text">Giá bán:</p>
       <input name="price" type="number" id="price" min="0" placeholder="Nhập giá bán theo đơn vị VNĐ" required>
       <p class="text">Mô tả tình trạng:</p>
-      <input name="text" type="text" id="description" pattern="^[^\s].*[^\s]" placeholder="Nhập mô tả tình trạng của sản phẩm" required>
+      <input name="text" type="text" id="description" placeholder="Nhập mô tả tình trạng của sản phẩm" required pattern="^[^\s].*[^\s]">
     </div>
 
 
@@ -68,7 +68,7 @@
         </div>
         <div class="select-sizes">
             <p class="text">Mô tả chi tiết</p>
-            <textarea name="detail" id="detail" placeholder="Nhập mô tả chi tiết về sản phẩm" required></textarea>
+            <textarea name="detail" id="detail" placeholder="Nhập mô tả chi tiết về sản phẩm" required pattern="^[^\s].*[^\s]"></textarea>
         </div>
     </div>
       <hr>
