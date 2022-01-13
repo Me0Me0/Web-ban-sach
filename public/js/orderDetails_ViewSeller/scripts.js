@@ -20,16 +20,19 @@ async function get_order_details(order_id) {
     switch(data.status) {
         case 1:
             document.getElementById("status").innerHTML = "Đang xử lý";
+            document.getElementById("submit-order").style.display = "inline-block";
+            document.getElementById("cancel-order").style.display = "inline-block";
             break;
         case 2:
             document.getElementById("status").innerHTML = "Đang giao";
+            document.getElementById("finish-order").style.display = "inline-block";
+            document.getElementById("cancel-order").style.display = "inline-block";
             break;
         case 3:
             document.getElementById("status").innerHTML = "Đã hoàn thành";
             break;
         case 4:
             document.getElementById("status").innerHTML = "Đã hủy";
-            document.getElementById("cancel-order").style.display = "none";
             break;
         default:
             document.getElementById("status").innerHTML = "Không xác định";
@@ -92,5 +95,57 @@ async function cancel_order(order_id) {
         alert("Hủy đơn hàng thất bại");
     }
 }
+
+async function submitOrder() {
+    const isSubmit = confirm('Bạn có chắc chắn muốn xác nhận đơn hàng?');
+    if (isSubmit == false) {
+        return;
+    }
+
+    const options = {
+        method: "POST",
+    }
+
+    const res = await fetch(`/api/mystore/orders/${order_id}`, options);
+    if (res.status != 200) {
+        alert("Đã xảy ra lỗi, vui lòng thử lại sau");
+        return;
+    }
+    const data = await res.json();
+
+    console.log(data);
+    if (data.data.success) {
+        alert("Xác nhận đơn hàng thành công");
+        location.reload();
+    } else {
+        alert("Xác nhận đơn hàng thất bại");
+    }
+} 
+
+async function finishOrder() {
+    const isSubmit = confirm('Bạn có chắc chắn đơn hàng đã hoàn tất ?');
+    if (isSubmit == false) {
+        return;
+    }
+
+    const options = {
+        method: "POST",
+    }
+
+    const res = await fetch(`/api/mystore/orders/${order_id}`, options);
+    if (res.status != 200) {
+        alert("Đã xảy ra lỗi, vui lòng thử lại sau");
+        return;
+    }
+    const data = await res.json();
+
+    console.log(data);
+    if (data.data.success) {
+        alert("Hoàn tất đơn hàng.");
+        location.reload();
+    } else {
+        alert("Không thể hoàn tất đơn hàng");
+    }
+} 
 
 get_order_details(order_id);

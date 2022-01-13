@@ -222,3 +222,8 @@ table#cart tbody td:before {
 .cancel:hover {
   background-color: #ffaaaa;
 }
+
+#submit-order, #cancel-order, #finish-order {
+  display: none;
+}
+
