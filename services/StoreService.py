@@ -73,16 +73,61 @@ class StoreService:
 
 
     @classmethod
-    def cancelOrder(cls, user_id, order_id):
+    def confirmOrder(cls, user_id, order_id):
         try:
-            store_id = StoreRepository.getByUserId(user_id)
-            eraser_id = OrderDetailRepository.getById(order_id).store_id
-        except Exception as e:
-            raise Exception(404, "Invalid store")
+            store = StoreRepository.getByUserId(user_id)
+            order = OrderDetailRepository.getById(order_id)
+        except Exception:
+            raise Exception(404, "Not found order")
 
-        if store_id[0].id != eraser_id.id:
+        if order.status != 1:
             raise Exception(403, "Forbidden")
+
+        if store[0].id != order.store_id.id:
+            raise Exception(403, "Forbidden")
+
+        # Set OrderDetail status
+        try:
+            OrderDetailRepository.setStatus(order_id, 2) # 2 ~ Dang giao hang
+        except Exception as e:
+            raise Exception(e)
+
+
+    @classmethod
+    def completeOrder(cls, user_id, order_id):
+        try:
+            store = StoreRepository.getByUserId(user_id)
+            order = OrderDetailRepository.getById(order_id)
+        except Exception:
+            raise Exception(404, "Not found order")
+
+        if order.status != 1:
+            raise Exception(403, "Forbidden")
+
+        if store[0].id != order.store_id.id:
+            raise Exception(403, "Forbidden")
+
+        # Set OrderDetail status
+        try:
+            OrderDetailRepository.setStatus(order_id, 3) # 3 ~ Giao hang thanh cong
+        except Exception as e:
+            raise Exception(e)
+
+
+    @classmethod
+    def cancelOrder(cls, user_id, order_id):        
+        try:
+            store = StoreRepository.getByUserId(user_id)
+            order = OrderDetailRepository.getById(order_id)
+        except Exception:
+            raise Exception(404, "Not found order")
         
+        if order.status != 1:
+            raise Exception(403, "Forbidden")
+
+        if store[0].id != order.store_id.id:
+            raise Exception(403, "Forbidden")
+
         # Set OrderDetail status
         try:
             OrderDetailRepository.setStatus(order_id, 4) # 4 ~ Da huy

@@ -19,10 +19,10 @@ if (signUpForm.attachEvent) {
 
 async function onFormsubmit(e) {
   e.preventDefault();
-  var user = inputUsername.value;
+  var user = inputUsername.value.trim();
   var pass = inputPassword.value;
   var repass = inputRePassword.value;
-  var name = inputFullname.value;
+  var name = inputFullname.value.trim();
   var dob = inputDateofbirth.value;
   var email = inputEmail.value;
   var phone = inputPhonenumber.value;
@@ -58,6 +58,11 @@ async function onFormsubmit(e) {
   }
   else if(phone==''){
     alert('Vui lòng nhập số điện thoại');
+  }
+  else if (isNaN(Number(phone)) || phone.length != 10)
+  {
+    alert('Số điện thoại không hợp lệ');
+    return;
   }
   else
   {

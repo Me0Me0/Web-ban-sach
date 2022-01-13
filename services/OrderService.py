@@ -103,11 +103,14 @@ class OrderService:
     @classmethod
     def cancelOrder(cls, user_id, order_id):
         try:
-            eraser_id = OrderDetailRepository.getById(order_id).owner_id
-        except Exception as e:
-            raise Exception(404, "Invalid user")
-                
-        if user_id != eraser_id.id:
+            order = OrderDetailRepository.getById(order_id)
+        except Exception:
+            raise Exception(404, "Not found order")
+        
+        if order.status != 1:
+            raise Exception(403, "Forbidden")
+
+        if user_id != order.owner_id.id:
             raise Exception(403, "Forbidden")
         
         # Set OrderDetail status

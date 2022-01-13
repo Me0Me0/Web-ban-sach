@@ -45,7 +45,7 @@ class OrderController:
         
         return order
 
-    
+
     @staticmethod
     @router.delete("/{order_id}", dependencies=[Depends(get_db)])
     def cancelOrder(order_id: int, user = Depends(getUser)):

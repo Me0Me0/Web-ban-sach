@@ -200,6 +200,40 @@ class StoreController:
         return order
 
 
+    @staticmethod 
+    @router2.post("/orders/{order_id}/confirm", dependencies=[Depends(configs.db.get_db)])
+    def confirmOrder(order_id: int, user = Depends(getUser)):
+        try:
+            StoreService.confirmOrder(user['id'], order_id)
+        except Exception as e:
+            if e.args[0] == NOT_FOUND_ERROR or e.args[0] == FORBIDDEN_ERROR:
+                raise HTTPException(e.args[0], detail=e.args[1])
+            raise Exception(e)
+
+        return {
+            "data":{
+                "success": True
+            }
+        }
+
+    
+    @staticmethod
+    @router2.post("/orders/{order_id}/complete", dependencies=[Depends(configs.db.get_db)])
+    def completeOrder(order_id: int, user = Depends(getUser)):
+        try:
+            StoreService.completeOrder(user['id'], order_id)
+        except Exception as e:
+            if e.args[0] == NOT_FOUND_ERROR or e.args[0] == FORBIDDEN_ERROR:
+                raise HTTPException(e.args[0], detail=e.args[1])
+            raise Exception(e)
+
+        return {
+            "data":{
+                "success": True
+            }
+        }
+        
+
     @staticmethod
     @router2.delete('/orders/{order_id}', dependencies=[Depends(configs.db.get_db)])
     def cancelOrder(order_id: int, user = Depends(getUser)):
