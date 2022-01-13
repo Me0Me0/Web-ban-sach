@@ -818,7 +818,7 @@ header .actions .menu #logged-in{
   -webkit-transform: translate3d(0,0,0);
   width: 1110px;
   display: flex;
-  justify-content: space-between;
+  justify-content: unset;
 }
 /* new-arrivals */
 /* #best-seller .item:hover .img2 {
