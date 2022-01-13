@@ -68,12 +68,22 @@ class ProductRepository():
            return list(Product.select(Product, fn.SUM(OrderProduct.quantity).alias('sum')).join(OrderProduct, JOIN.LEFT_OUTER).join(OrderDetail).where((OrderDetail.status == status) & Product.deleted_at.is_null(True)).group_by(OrderProduct.product_id).order_by(fn.SUM(OrderProduct.quantity).desc()).offset(skip).limit(limit))
 
 
+    # Lấy danh sách danh mục bán chạy nhất trên hệ thống
+   @classmethod
+   def getTopCate(cls, status: int = 3, skip: int = 0, limit: int = 10):
+       subquery = Product.select(Product.cate_id).join(OrderProduct, JOIN.LEFT_OUTER).join(OrderDetail).where((OrderDetail.status == status) & Product.deleted_at.is_null(True)).group_by(Product.cate_id).order_by(fn.SUM(OrderProduct.quantity).desc())
+       query = Category.select().where(Category.id.in_(subquery)).offset(skip).limit(limit)
+       return list(query.execute())
+
+
+    # Lấy danh sách sản phẩm bán chạy nhất của một cửa hàng
    @classmethod
    def getBestSellByStore(cls, store_id: int, status: int = 3, skip: int = 0, limit: int = 10):
        query = Product.select(Product, fn.SUM(OrderProduct.quantity).alias('sum')).join(OrderProduct, JOIN.LEFT_OUTER).join(OrderDetail).where((OrderDetail.status == status) & (Product.store_id == store_id) & Product.deleted_at.is_null(True)).group_by(OrderProduct.product_id).order_by(fn.SUM(OrderProduct.quantity).desc()).offset(skip).limit(limit)
        return list(query.execute())
 
 
+    # Lấy danh sách danh mục bán chạy nhất của một cửa hàng
    @classmethod
    def getBestSellByCate(cls, store_id: int, status: int = 3, skip: int = 0, limit: int = 10):
        query = Product.select(Product, fn.SUM(OrderProduct.quantity).alias('sum')).join(OrderProduct, JOIN.LEFT_OUTER).join(OrderDetail).where((OrderDetail.status == status) & (Product.store_id == store_id) & Product.deleted_at.is_null(True)).group_by(Product.cate_id).order_by(fn.SUM(OrderProduct.quantity).desc()).offset(skip).limit(limit)

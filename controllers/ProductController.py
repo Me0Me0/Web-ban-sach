@@ -58,6 +58,13 @@ class ProductController:
         return ProductService.getTopProduct(True, skip, limit)
 
 
+    # DS danh mục ban chay nhat
+    @staticmethod
+    @router.get('/top-cate', dependencies=[Depends(configs.db.get_db)])
+    def getTopCate(limit:int = Query(10, gt=0), skip:int = Query(0, ge=0)):
+        return ProductService.getTopCategory(skip, limit)
+
+
     # DS doanh muc
     @staticmethod
     @router.get('/categories', dependencies=[Depends(configs.db.get_db)])
