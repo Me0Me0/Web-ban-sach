@@ -842,6 +842,11 @@ header .actions .menu #logged-in{
   transition: all 0.3s ease;
 }
 
+#best-seller .item {
+  width: 218px;
+  height: 350px;
+}
+
 /* #best-seller .item:hover .actions {
   opacity: 1;
   visibility: visible;
@@ -868,6 +873,7 @@ header .actions .menu #logged-in{
 
 #best-seller .item .detail {
   text-decoration: none;
+  justify-content: center;
 }
 
 #best-seller .item-top .actions .action-wrapper {
