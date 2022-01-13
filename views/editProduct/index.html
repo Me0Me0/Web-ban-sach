@@ -18,7 +18,7 @@
   <form class="form">
     <div class="product-price">
       <p class="text">Tên sản phẩm:</p>
-      <input type="text" id="product-name" placeholder="Nhập tên sản phẩm" required>
+      <input type="text" id="product-name" pattern="^[^\s].*[^\s]" placeholder="Nhập tên sản phẩm" required>
       <p class="text">Thể loại:</p>
       <select class="form-control" id="category" required>
           <option value="City">Thành phố</option>
@@ -29,11 +29,11 @@
           <option value="City">Thành phố</option>
       </select>
       <p class="text">Tác giả:</p>
-      <input type="text" id="author" placeholder="Nhập tên tác giả" required>
+      <input type="text" id="author" pattern="^[^\s].*[^\s]" placeholder="Nhập tên tác giả" required>
       <p class="text">Số trang:</p>
       <input type="number" id="page-number" placeholder="Nhập số trang" required>
       <p class="text">Nhà xuất bản:</p>
-      <input type="text" id="publisher" placeholder="Nhập tên nhà xuất bản" required>
+      <input type="text" id="publisher" pattern="^[^\s].*[^\s]" placeholder="Nhập tên nhà xuất bản" required>
       <p class="text">Năm xuất bản:</p>
       <input type="number" min="1900" max="2099" step="1" placeholder="Nhập năm xuất bản" required/>
       <p class="text">Số lượng sản phẩm:</p>
@@ -41,7 +41,7 @@
       <p class="text">Giá bán:</p>
       <input type="number" id="price" placeholder="Nhập giá bán theo đơn vị VNĐ" required>
       <p class="text">Thông tin cơ bản:</p>
-      <input type="text" id="detail" placeholder="Nhập thông tin cơ bản của sản phẩm" required>
+      <input type="text" id="detail" pattern="^[^\s].*[^\s]" placeholder="Nhập thông tin cơ bản của sản phẩm" required>
     </div>
 
 
@@ -65,7 +65,7 @@
                 <input type="file" class="fileupload" id="sixth-file-upload-btn" hidden>
                 <label for="sixth-file-upload-btn" class="upload-image"></label>  
                 <input type="file" class="fileupload" id="seventh-file-upload-btn" hidden>
-                <label for="sseventh-file-upload-btn" class="upload-image"></label>           
+                <label for="seventh-file-upload-btn" class="upload-image"></label>           
             </div>
         </div>
         <div class="select-sizes">

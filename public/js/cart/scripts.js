@@ -214,9 +214,9 @@ async function orderSubmit(e) {
     }
 
     const payload = {
-        recipient_name: document.querySelector('#name').value,
+        recipient_name: document.querySelector('#name').value.trim(),
         recipient_phone: Number(phone),
-        recipient_address: document.querySelector('#address').value,
+        recipient_address: document.querySelector('#address').value.trim(),
         province_id: Number(document.querySelector('#province').value),
         district_id: Number(document.querySelector('#district').value),
         ward_id: Number(document.querySelector('#ward').value),
