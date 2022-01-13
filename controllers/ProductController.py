@@ -112,7 +112,7 @@ class ProductController:
         try:
             ProductService.delete(id, user['id'])
         except Exception as e:
-            if e.args[0] == 'NOT_FOUND' or e.args[0] == FORBIDDEN_ERROR:
+            if e.args[0] == NOT_FOUND_ERROR or e.args[0] == FORBIDDEN_ERROR:
                 raise HTTPException(status_code=e.args[0], detail=e.args[1])
             raise Exception(e)
             

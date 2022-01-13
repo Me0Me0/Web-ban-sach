@@ -9,7 +9,8 @@ const options = {
   }
 }
 
-fetch(`/api/stores/${id}/details`, options)
+
+fetch(`/api/stores/${id}`, options)
 .then(data => data.json())
 .then(data =>  { 
   console.log(data.__data__);
@@ -18,6 +19,7 @@ fetch(`/api/stores/${id}/details`, options)
   document.getElementById("phone").innerHTML = "0" + data.phone;
   document.getElementById("email").innerHTML = data.email;
   document.getElementById("description").innerHTML = data.description;
+  document.getElementById("back").href += data.id;
 })
 .catch((err) => {
   alert ("Đã xảy ra lỗi, vui lòng thử lại sau");

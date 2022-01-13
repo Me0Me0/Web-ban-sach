@@ -18,7 +18,7 @@ vui lòng kiểm tra hoặc reload lại trang.",
 async function showCartItems() {
     const res = await fetch('/api/cart');
     if (res.status != 200) {
-        console.log("Đã xảy ra lỗi, vui lòng thử lại sau");
+        alert("Đã xảy ra lỗi, vui lòng thử lại sau");
         return;
     }
 
