@@ -97,6 +97,7 @@ function checkNumberInput(field) {
     return true;
 }
 
+
 // create product
 document.querySelector("#product-form").addEventListener('submit', async (e) => {
     e.preventDefault();
