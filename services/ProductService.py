@@ -90,7 +90,7 @@ class ProductService:
 
     @classmethod
     def getTopCategory(cls, skip, limit):
-        return ProductRepository.getTopCate(skip, limit)
+        return ProductRepository.getTopCate(1, skip, limit)
 
 
     @classmethod

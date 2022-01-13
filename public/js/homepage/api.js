@@ -16,6 +16,27 @@ async function showCategory() {
 }
 showCategory();
 
+async function showTopCategory() {
+    var res = await fetch("api/products/top-cate?limit=5");
+    var categories = await res.json();
+
+    console.log(categories);
+
+
+    if (categories.length == 0)
+    {
+        res = await fetch("/api/products/categories");
+        categories = await res.json();
+        categories = categories.slice(0, 5);
+    }
+    let i = 1
+    for (let { __data__: category } of categories) {
+        content = document.querySelector(`#cate-${i}`);
+        content.textContent = category.name;
+        content.href += category.id;
+        i += 1;
+    }
+}
 
 async function showNewProduct() {
     const res = await fetch('/api/products/newest?limit=5');
@@ -63,5 +84,6 @@ async function showBestSeller() {
     }
 }
 
+showTopCategory()
 showBestSeller()
 showNewProduct()
