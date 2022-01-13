@@ -7459,6 +7459,7 @@ textarea.form-control-lg {
 }
 
 .py-0 {
+  margin-top: 55px;
   padding-top: 1px;
   padding-bottom: 0 !important;
   background-color: #aadfff;
@@ -11434,12 +11435,12 @@ textarea.form-control-lg {
 .mt-5 .function a {
   float: right;
   width: fit-content;
-  height: 35px;
+  height: auto;
   background-color: #193498;
   color: #fff;
   text-decoration: none;
   border-radius: 3px;
-  padding: 0 10px 0 10px;
+  padding: 10px;
   margin-left: 10px;
 }
 
