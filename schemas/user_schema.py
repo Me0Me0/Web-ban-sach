@@ -24,6 +24,7 @@ class UserUpdate(BaseModel):
     dob: date
     phone: int
     email: EmailStr
+    avt_link: str
 
 
 class User(BaseModel):

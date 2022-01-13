@@ -4,7 +4,9 @@ var inputFullname = document.getElementById('name');
 var inputDateofbirth = document.getElementById('dob');
 var inputEmail = document.getElementById('email');
 var inputPhonenumber = document.getElementById('phone');
+var avt = document.getElementById("avt");
 var oldDob
+var oldAvt
 var letters = /^[A-Za-zàáâãèéêìíòóôõùúýỳỹỷỵựửữừứưụủũợởỡờớơộổỗồốọỏịỉĩệểễềếẹẻẽặẳẵằắăậẩẫầấạảđÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝỲỸỶỴỰỬỮỪỨƯỤỦŨỢỞỠỜỚƠỘỔỖỒỐỌỎỊỈĨỆỂỄỀẾẸẺẼẶẲẴẰẮĂẬẨẪẦẤẠẢĐ\s]+$/;
 
 if (changeProfileForm.attachEvent) {
@@ -28,21 +30,28 @@ fetch("/api/users/details", options)
   oldDob = inputDateofbirth.value;
   inputPhonenumber.placeholder = "0" + data.phone;
   inputEmail.placeholder = data.email;
-  document.getElementById("avt").src = data.avt_link;
+  avt.src = data.avt_link;
+  oldAvt = data.avt_link;
 })
 .catch((err) => {
   alert ("Đã xảy ra lỗi, vui lòng thử lại sau");
   console.error(err);
 })
 
-var loadFile = function(event) {
-  var reader = new FileReader();
-  reader.onload = function(){
-    var output = document.getElementById('avt');
-    output.src = reader.result;
-    console.log(output.src)
-  };
-  reader.readAsDataURL(event.target.files[0]);
+var loadFile = async function(event) {
+  avt.src = "https://media0.giphy.com/media/6036p0cTnjUrNFpAlr/giphy.gif";
+  var formData = new FormData();
+  formData.append("file", event.target.files[0]);
+
+  const options = {
+    method: "POST",
+    body: formData
+  }
+
+  const res = await fetch("/api/images/upload", options);
+  const data = await res.json();
+
+  avt.src = data.url;
 };
 
 async function onFormsubmit(e) {
@@ -51,8 +60,9 @@ async function onFormsubmit(e) {
     var dob = inputDateofbirth.value;
     var email = inputEmail.value;
     var phone = inputPhonenumber.value;
+    var avt_link = avt.src; 
 
-    if (name == '' && dob == oldDob && email == '' && phone == ''){
+    if (name == '' && dob == oldDob && email == '' && phone == '' && avt_link == '' && avt_link == oldAvt) {
       alert('Bạn chưa nhập bất kì thông tin nào cần thay đổi');
       return;
     }
@@ -61,7 +71,7 @@ async function onFormsubmit(e) {
       alert('Họ và tên không bao gồm ký tự đặc biệt và số');
       return;
     }
-    else if (isNaN(Number(phone)) || phone.length != 10)
+    else if (phone && (isNaN(Number(phone)) || phone.length != 10))
     {
       alert('Số điện thoại không hợp lệ');
       return;
@@ -93,7 +103,8 @@ async function onFormsubmit(e) {
             name: name,
             dob: dob,
             phone: phone,
-            email: email
+            email: email,
+            avt_link: avt_link
         })
       }
       // const res = await fetch("/api/users/details", options);
@@ -134,3 +145,5 @@ async function onFormsubmit(e) {
       })
     }
 }
+
+

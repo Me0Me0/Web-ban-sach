@@ -106,6 +106,7 @@ class UserRepository():
       update_user.email = userDict["email"]
       update_user.dob = userDict["dob"]
       update_user.phone = userDict["phone"]
+      update_user.avt_link = userDict["avt_link"]
 
       try:
           return update_user.save()
