@@ -63,9 +63,10 @@ body{
 .wrapper .right .info_data .data input{
   margin: 20px 0 20px 0;
   padding: 10px 0 10px 10px;
-  width: 565px;
+  width: 100%;
   height: auto;
   font-size: 15px;
+  border-color: #e5e9ec;
 }
 
 .wrapper .right .info_data .data input::placeholder,

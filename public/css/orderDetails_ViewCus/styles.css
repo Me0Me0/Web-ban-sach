@@ -151,6 +151,10 @@ hr {
   border: 1px solid lightgrey;
 }
 
+span.mdh{
+  font-size: 30px;
+}
+
 span.price {
   float: right;
   color: grey;
