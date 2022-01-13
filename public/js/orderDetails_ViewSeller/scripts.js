@@ -106,7 +106,7 @@ async function submitOrder() {
         method: "POST",
     }
 
-    const res = await fetch(`/api/mystore/orders/${order_id}`, options);
+    const res = await fetch(`/api/mystore/orders/${order_id}/confirm`, options);
     if (res.status != 200) {
         alert("Đã xảy ra lỗi, vui lòng thử lại sau");
         return;
@@ -132,7 +132,7 @@ async function finishOrder() {
         method: "POST",
     }
 
-    const res = await fetch(`/api/mystore/orders/${order_id}`, options);
+    const res = await fetch(`/api/mystore/orders/${order_id}/complete`, options);
     if (res.status != 200) {
         alert("Đã xảy ra lỗi, vui lòng thử lại sau");
         return;
