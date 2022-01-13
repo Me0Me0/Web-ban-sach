@@ -14,9 +14,10 @@ body{
 
 .wrapper{
   position: relative;
+  top: 10%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 900px;
+  transform: translate(-50%);
+  width: 1170px;
   display: flex;
   box-shadow: 0 1px 20px 0 rgba(69,90,100,.08);
 }
@@ -88,7 +89,7 @@ body{
 
 .wrapper .right .info_data .data,
 .wrapper .right .projects_data .data{
-  width: 95%;
+  width: 100%;
 }
 
 .wrapper .right .info_data .data h4,
@@ -100,7 +101,7 @@ body{
 .wrapper .right .info_data .data input{
   margin: 10px 0 10px 0;
   padding: 5px 0 5px 0;
-  width: 440px;
+  width: 100%;
 }
 
 .wrapper .right .info_data .data input::placeholder,

@@ -1,7 +1,5 @@
 body{
   display: block;
-  padding-left: 10vmax;
-  padding-right: 10vmax;
   background-color: #aadfff;
 }
 
@@ -26,6 +24,8 @@ textarea{
 .form{
   margin-left: 50px;
   margin-right: 50px;
+  padding-left: 10vmax;
+  padding-right: 10vmax;
 }
 
 .product-info{
