@@ -810,7 +810,8 @@ header .actions .menu #logged-in{
 }
 
 /* new-arrivals */
-#best-seller .new-arrivals {
+#best-seller .new-arrivals,
+#best-seller .best-seller {
   padding: 10px 0;
   position: relative;
   overflow: hidden;
