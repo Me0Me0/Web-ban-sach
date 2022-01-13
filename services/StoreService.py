@@ -122,7 +122,7 @@ class StoreService:
         except Exception:
             raise Exception(404, "Not found order")
         
-        if order.status != 1:
+        if order.status != 1 and order.status != 2:
             raise Exception(403, "Forbidden")
 
         if store[0].id != order.store_id.id:
