@@ -47,6 +47,7 @@ textarea{
   border-radius: 10px;
   grid-row: span 2;
   text-shadow: 0 0 10px #fff;
+  border: 2px;
 }
 
 .text{

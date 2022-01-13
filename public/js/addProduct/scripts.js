@@ -58,9 +58,11 @@ async function uploadImageHandler() {
                 // means user uploaded an image
                 const imageUrl = await uploadImage(file);
                 labels[index].style.backgroundImage = `url(${imageUrl})`;
+                document.getElementById("cover-image").style.backgroundImage = `url(${imageUrl})`;
+                document.getElementById("text_img").innerHTML ="";
                 imagePaths[index] = imageUrl;
             } else{
-                showAlert('upload image only');
+                showAlert('Chỉ upload được ảnh');
             }
         })
     })
