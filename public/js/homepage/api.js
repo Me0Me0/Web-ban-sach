@@ -21,20 +21,28 @@ async function showTopCategory() {
     var categories = await res.json();
 
     console.log(categories);
-
-
-    if (categories.length == 0)
-    {
-        res = await fetch("/api/products/categories");
-        categories = await res.json();
-        categories = categories.slice(0, 5);
-    }
+    
     let i = 1
     for (let { __data__: category } of categories) {
         content = document.querySelector(`#cate-${i}`);
         content.textContent = category.name;
         content.href += category.id;
         i += 1;
+    }
+
+    res = await fetch("/api/products/categories");
+    totalCategories = await res.json();
+
+    for (let { __data__: category } of totalCategories) {
+        if (i > 5) break;
+
+        const found = categories.find(cate => cate.__data__.id == category.id);
+        if (!found) {
+            content = document.querySelector(`#cate-${i}`);
+            content.textContent = category.name;
+            content.href += category.id;
+            i += 1;
+        }
     }
 }
 

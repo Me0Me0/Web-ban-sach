@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Any
 from schemas.schema import PeeweeGetterDict
 from schemas.category_schema import Category
 from schemas.store_schema import Store
@@ -21,6 +21,7 @@ class Product(BaseModel):
     store_id: Store = Field(None)
     quantity: int
     price: float
+    product_images: List[Any] = []
 
     class Config:
         orm_mode = True
@@ -60,8 +61,13 @@ class ProductUpdateCoverImage(BaseModel):
     image_link: str
 
 
+class ProductUpdateImage(BaseModel):
+    id: int
+    image_link: str
+
+
 class ProductUpdateImages(BaseModel):
-    list_image_link: list
+    list_image_link: List[ProductUpdateImage]
 
 
 class ProductSell(Product):

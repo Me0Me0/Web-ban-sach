@@ -158,7 +158,7 @@ class StoreController:
 
     
     @staticmethod
-    @router2.post('/products/{product_id}/images', dependencies=[Depends(configs.db.get_db)])
+    @router2.put('/products/{product_id}/images', dependencies=[Depends(configs.db.get_db)])
     def updateProductImage(product_id: int, payload: product_schema.ProductUpdateImages, user = Depends(getUser)):
         # Store id
         try:

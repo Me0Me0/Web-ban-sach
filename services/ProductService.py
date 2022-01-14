@@ -1,4 +1,5 @@
 from datetime import datetime
+from tkinter import Image
 from repositories.ProductRepository import ProductRepository
 from repositories.ProductImageRepository import ProductImageRepository
 from repositories.StoreRepository import StoreRepository
@@ -62,11 +63,11 @@ class ProductService:
         if len(stores) == 0 or product.store_id != stores[0]:
             raise Exception(403, "forbidden")
         
-        image_list = []
-        for image_link in range(len(list_image_link)):
-            image_list.append((product_id, image_link))
-        
-        return ProductImageRepository.createMany(image_list)
+        for image in list_image_link:
+            if image.id == -1:
+                ProductImageRepository.create(product_id, image.image_link)
+            else:
+                ProductImageRepository.updateImage(image.id, image.image_link)
         
     
     @classmethod

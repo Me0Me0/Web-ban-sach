@@ -178,62 +178,60 @@
 <div class="bodycontent">
     <p class="text center">Chỉnh sửa sản phẩm</p>
     <hr>
-  <form class="form">
-    <div class="product-price">
-      <p class="text">Tên sản phẩm:</p>
-      <input type="text" id="product-name" pattern="^[^\s].*[^\s]" placeholder="Nhập tên sản phẩm" required>
-      <p class="text">Thể loại:</p>
-      <select class="form-control" id="category" required>
-          <option value="City">Thành phố</option>
-          <option value="City">Thành phố</option>
-          <option value="City">Thành phố</option>
-          <option value="City">Thành phố</option>
-          <option value="City">Thành phố</option>
-          <option value="City">Thành phố</option>
-      </select>
-      <p class="text">Tác giả:</p>
-      <input type="text" id="author" pattern="^[^\s].*[^\s]" placeholder="Nhập tên tác giả" required>
-      <p class="text">Số trang:</p>
-      <input type="number" id="page-number" placeholder="Nhập số trang" required>
-      <p class="text">Nhà xuất bản:</p>
-      <input type="text" id="publisher" pattern="^[^\s].*[^\s]" placeholder="Nhập tên nhà xuất bản" required>
-      <p class="text">Năm xuất bản:</p>
-      <input type="number" min="1900" max="2099" step="1" placeholder="Nhập năm xuất bản" required/>
-      <p class="text">Số lượng sản phẩm:</p>
-      <input type="number" id="quantity" placeholder="Nhập số lượng sản phẩm" required>
-      <p class="text">Giá bán:</p>
-      <input type="number" id="price" placeholder="Nhập giá bán theo đơn vị VNĐ" required>
-      <p class="text">Thông tin cơ bản:</p>
-      <input type="text" id="detail" pattern="^[^\s].*[^\s]" placeholder="Nhập thông tin cơ bản của sản phẩm" required>
-    </div>
+    <form class="form" id="product-form">
+        <div class="product-price">
+          <p class="text">Tên sản phẩm:</p>
+          <input name="product-name" type="text" id="product-name" placeholder="Nhập tên sản phẩm" required pattern="^[^\s].*[^\s]">
+          <p class="text">Thể loại:</p>
+          <select name="category" class="form-control" id="category" required>
+              <option value="" disabled selected>Chọn thể loại</option>
+              <template id="category-template-select">
+                <option>Thể loại</option>
+              </template>
+          </select>
+          <p class="text">Tác giả:</p>
+          <input name="author" type="text" id="author" placeholder="Nhập tên tác giả" required pattern="^[^\s].*[^\s]">
+          <p class="text">Số trang:</p>
+          <input name="page-number" type="number" id="page-number" placeholder="Nhập số trang" min="1" required>
+          <p class="text">Nhà xuất bản:</p>
+          <input name="publisher" type="text" id="publisher" placeholder="Nhập tên nhà xuất bản" required pattern="^[^\s].*[^\s]">
+          <p class="text">Năm xuất bản:</p>
+          <input name="publishing-year" type="number" id="publishing-year" min="1900" max="2099" step="1" placeholder="Nhập năm xuất bản" required/>
+          <p class="text">Số lượng sản phẩm:</p>
+          <input name="quantity" type="number" id="quantity" min="1" placeholder="Nhập số lượng sản phẩm" required>
+          <p class="text">Giá bán:</p>
+          <input name="price" type="number" id="price" min="0" placeholder="Nhập giá bán theo đơn vị VNĐ" required>
+          <p class="text">Mô tả tình trạng:</p>
+          <input name="text" type="text" id="description" placeholder="Nhập mô tả tình trạng của sản phẩm" required pattern="^[^\s].*[^\s]">
+        </div>
 
 
     <!-- product image -->
     <div class="product-info">
-        <div class="product-image" id="cover-image"><p class="text" id="text_img"> Ảnh sản phẩm</p></div>
+        <div class="product-image" id="cover-image"><p class="text" id="text_img">Ảnh sản phẩm</p></div><!--Trước mắt thì lấy ảnh đầu tiên được up lên làm ảnh bìa-->
         <div class="upload-image-sec">
             <!-- upload inputs -->
             <p class="text"><i class="fa fa-camera-retro"></i> Tải ảnh lên</p>
             <div class="upload-catalouge">
-                <input type="file" class="fileupload" id="first-file-upload-btn" hidden required>
+                <input name="image1" type="file" class="fileupload" id="first-file-upload-btn" hidden accept="image/*">
                 <label for="first-file-upload-btn" class="upload-image"></label>
-                <input type="file" class="fileupload" id="second-file-upload-btn" hidden required> 
+                <input name="image2" type="file" class="fileupload" id="second-file-upload-btn" hidden accept="image/*"> 
                 <label for="second-file-upload-btn" class="upload-image"></label>
-                <input type="file" class="fileupload" id="third-file-upload-btn" hidden>
+                <input name="image3" type="file" class="fileupload" id="third-file-upload-btn" hidden accept="image/*">
                 <label for="third-file-upload-btn" class="upload-image"></label>
-                <input type="file" class="fileupload" id="fourth-file-upload-btn" hidden>
+                <input name="image4" type="file" class="fileupload" id="fourth-file-upload-btn" hidden accept="image/*">
                 <label for="fourth-file-upload-btn" class="upload-image"></label>
-                <input type="file" class="fileupload" id="fifth-file-upload-btn" hidden>
+                <input name="image5" type="file" class="fileupload" id="fifth-file-upload-btn" hidden accept="image/*">
                 <label for="fifth-file-upload-btn" class="upload-image"></label>    
-                <input type="file" class="fileupload" id="sixth-file-upload-btn" hidden>
+                <input name="image6" type="file" class="fileupload" id="sixth-file-upload-btn" hidden accept="image/*">
                 <label for="sixth-file-upload-btn" class="upload-image"></label>  
-                <input type="file" class="fileupload" id="seventh-file-upload-btn" hidden>
+                <input name="image7" type="file" class="fileupload" id="seventh-file-upload-btn" hidden accept="image/*">
                 <label for="seventh-file-upload-btn" class="upload-image"></label>           
             </div>
         </div>
         <div class="select-sizes">
             <p class="text">Mô tả chi tiết</p>
-            <textarea id="description" placeholder="Nhập mô tả chi tiết về sản phẩm" required></textarea>
+            <textarea name="detail" id="detail" placeholder="Nhập mô tả chi tiết về sản phẩm" required pattern="^[^\s].*[^\s]"></textarea>
         </div>
     </div>
     <hr>

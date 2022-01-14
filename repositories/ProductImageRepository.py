@@ -32,4 +32,4 @@ class ProductImageRepository():
 
    @classmethod
    def updateImage(cls, id: int, newImage: str):
-       return ProductImage.update(image_link = newImage).where(ProductImage.id == id)
+       return ProductImage.update(image_link = newImage).where(ProductImage.id == id).execute()
