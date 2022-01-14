@@ -1,3 +1,5 @@
+const userID = location.pathname.split('/')[3];
+
 const options = {
   method: "GET", 
   headers: {
@@ -5,7 +7,7 @@ const options = {
   }
 }
 
-fetch("/api/users/details", options)
+fetch("/api/admin/users/" + userID, options)
 .then(data => data.json())
 .then(data =>  { 
   console.log(data);
@@ -16,6 +18,10 @@ fetch("/api/users/details", options)
   document.getElementById("username").innerHTML = data.username;
   document.getElementById("avt").src = data.avt_link;
   document.getElementById("status").innerHTML = data.deleted_at == null ? "Đang hoạt động" : "Đã xóa";
+
+  if (data.deleted_at == null) {
+    document.getElementById("btn-delete").style.display = "block";
+  }
 })
 .catch((err) => {
   alert ("Đã xảy ra lỗi, vui lòng thử lại sau");
@@ -37,7 +43,7 @@ async function delete_account() {
       method: 'DELETE',
   }
 
-  const res = await fetch('/api/users', options);
+  const res = await fetch('/api/admin/users/' + userID, options);
   const data = await res.json();
   if (res.status != 200) {
       if (res.status == 404) {
@@ -48,6 +54,6 @@ async function delete_account() {
       }
       return;
   }
-  alert("Xóa tài khoản thành công, bạn sẽ được đưa về trang chủ");
-  window.location.href = '/api/users/signout';
+  alert("Xóa tài khoản thành công");
+  window.location.reload();
 }

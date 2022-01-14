@@ -44,4 +44,4 @@ class AdminService:
 
     @classmethod
     def deleteUser(cls, id: int):
-        return UserService.deleteById(id)
+        return UserService.deleteUser(id)

@@ -24,9 +24,13 @@ class UserRepository():
          #result = record
 
       if include_deleted:
-         return list(User.select().where(User.id == id))
+         users = list(User.select().where(User.id == id))
       else:
-         return list(User.select().where(User.id == id, User.deleted_at.is_null(True)))
+         users = list(User.select().where(User.id == id, User.deleted_at.is_null(True)))
+
+      if len(users) == 0:
+         return None
+      return users[0]
    
 
    @classmethod

@@ -7,6 +7,18 @@ from configs.env import getEnv
 def getUser(req: Request):
     try:
         currentUser = jwt.decode(req.cookies.get('token', ''), getEnv().JWT_SECRET, algorithms=['HS256'])
+        if currentUser['role'] != 'member':
+            raise Exception()
+    except:
+        raise HTTPException(status_code=401, detail='Unauthorized')
+    return currentUser
+
+
+def getAdmin(req: Request):
+    try:
+        currentUser = jwt.decode(req.cookies.get('token', ''), getEnv().JWT_SECRET, algorithms=['HS256'])
+        if currentUser['role'] != 'admin':
+            raise Exception()
     except:
         raise HTTPException(status_code=401, detail='Unauthorized')
     return currentUser

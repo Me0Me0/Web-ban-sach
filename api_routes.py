@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-
+from controllers.AdminController import AdminController
 from controllers.OrderController import OrderController
 from controllers.ProductController import ProductController
 from controllers.StoreController import StoreController
@@ -22,3 +22,4 @@ api.include_router(OrderController.router)
 api.include_router(CartController.router)
 api.include_router(AddressController.router)
 api.include_router(ImageController.router)
+api.include_router(AdminController.router)

@@ -15,6 +15,7 @@ if (formLogin.attachEvent) {
 
 async function onFormsubmit(e) {
     e.preventDefault();
+
     var user = inputUsername.value;
     var pass = inputPassword.value;
 
@@ -38,15 +39,14 @@ async function onFormsubmit(e) {
         })
     }
 
-    const res = await fetch("/api/users/signin", options);
-    const data = await res.json();
+    const res = await fetch("/api/admin/signin", options);
 
-    if (data.error) {
+    if (res.status == 401) {
         alert('Tài khoản hoặc mật khẩu không đúng');
-    } else if (data.data.success) {
-        //alert('Đăng nhập thành công');
+    } else if (res.status == 200) {
+        alert('Đăng nhập thành công');
         localStorage.setItem('user', user);
-        window.location.href = "/admin/list-users";
+        window.location.href = "/admin";
     } else {
         alert('Đã xảy ra lỗi, vui lòng thử lại sau');
     }

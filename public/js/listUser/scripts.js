@@ -5,7 +5,7 @@ const pageNext = document.querySelector(".page-next");
 const urlSearchParams = new URLSearchParams(window.location.search);
 const currentPage = Number(urlSearchParams.get("page")) || 1;
 
-const limit = 5;
+const limit = 10;
 const skip = (currentPage - 1) * limit;
 
 
@@ -23,7 +23,7 @@ async function getUsers() {
     params.set("skip", skip);
     params.delete("page");
 
-    const res = await fetch(`/api/users?${params.toString()}`);
+    const res = await fetch(`/api/admin/users?${params.toString()}`);
     const data = await res.json();
     return data
 }

@@ -9,6 +9,7 @@ from schemas.admin_schema import AdminLogin
 from schemas.user_schema import User
 from services.AdminService import AdminService
 from services.UserService import UserService
+from configs.dependency import getAdmin
 
 class AdminController:
     router = APIRouter(prefix='/admin')
@@ -32,17 +33,17 @@ class AdminController:
 
     @staticmethod
     @router.get('/signout', dependencies=[Depends(configs.db.get_db)]) 
-    def signout(response: Response):
+    def signout(response: Response, _ = Depends(getAdmin)):
         response.set_cookie('token', '', expires=0)
         response.set_cookie('loggedin', '', expires=0)
-        response.headers['Location'] = '/'
+        response.headers['Location'] = '/admin/signin'
         response.status_code = 307
         return response
 
 
     @staticmethod
     @router.get('/users/{id}', response_model=User,dependencies=[Depends(configs.db.get_db)])
-    def getDetail(id: int):
+    def getDetail(id: int, _ = Depends(getAdmin)):
         user = AdminService.getUserDetail(id)
         if not user:
             raise HTTPException(404, detail="User not found")
@@ -51,13 +52,13 @@ class AdminController:
 
     @staticmethod
     @router.get('/users', response_model=List[User],dependencies=[Depends(configs.db.get_db)])
-    def getAll(limit: int = Query(10, gt=0), skip: int = Query(0, ge=0)):
+    def getAll(limit: int = Query(10, gt=0), skip: int = Query(0, ge=0), _ = Depends(getAdmin)):
         return UserService.getAll(skip, limit)
 
 
     @staticmethod
     @router.delete('/users/{id}', dependencies=[Depends(configs.db.get_db)])
-    def deleteUser(id: int):
+    def deleteUser(id: int, _ = Depends(getAdmin)):
         try:
             id = AdminService.deleteUser(id)
         except Exception as e:

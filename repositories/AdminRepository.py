@@ -13,8 +13,11 @@ class AdminRepository():
 
    @classmethod
    def getByName(cls, name: str):
-      query = Admin.select().where(Admin.username == name).get()
-      return model_to_dict(query)
+      try:
+         query = Admin.select().where(Admin.username == name).get()
+         return model_to_dict(query)
+      except:
+         return None
 
    
    @classmethod

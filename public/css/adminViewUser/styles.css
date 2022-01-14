@@ -136,3 +136,7 @@ body{
   padding: 10px 30px;
   cursor: pointer;
 }
+
+#btn-delete {
+  display: none;
+}

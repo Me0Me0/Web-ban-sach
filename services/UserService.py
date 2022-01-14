@@ -59,7 +59,7 @@ class UserService:
 
     @classmethod
     def getById(cls, id, include_deleted: bool = False):
-        return UserRepository.getById(id)
+        return UserRepository.getById(id, include_deleted)
 
     
     @classmethod
