@@ -39,7 +39,7 @@ class AdminService:
 
     @classmethod
     def getUserDetail(cls, id):
-        return UserService.getById(id)
+        return UserService.getById(id,True)
 
 
     @classmethod

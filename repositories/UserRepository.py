@@ -18,12 +18,15 @@ class UserRepository():
 
 
    @classmethod
-   def getById(cls, id: int):
-      result = None
-      for record in User.select().where(User.id == id, User.deleted_at.is_null(True)):
-         result = record
+   def getById(cls, id: int, include_deleted: bool = False):
+      #result = None
+      #for record in User.select().where(User.id == id, User.deleted_at.is_null(True)):
+         #result = record
 
-      return result
+      if include_deleted:
+         return list(User.select().where(User.id == id))
+      else:
+         return list(User.select().where(User.id == id, User.deleted_at.is_null(True)))
    
 
    @classmethod
