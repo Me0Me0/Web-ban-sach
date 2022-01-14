@@ -44,6 +44,7 @@ class UserService:
         jwtPayload = {
             "id": user.id,
             "username": user.username,
+            "role": "member",
             "exp": int(datetime.now().timestamp()) + 24 * 60 * 60
         }
         token = jwt.encode(jwtPayload, JWT_SECRET)
@@ -52,7 +53,7 @@ class UserService:
 
 
     @classmethod
-    def getAll(cls, skip, limit):
+    def getAll(cls, skip: int = 0, limit: int = 100):
         return UserRepository.getAll(skip, limit)
 
 
