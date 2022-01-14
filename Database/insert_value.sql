@@ -1,4 +1,15 @@
 USE BOOKSTORE;
+
+--
+-- Đang đổ dữ liệu cho bảng `admin`
+--
+
+
+-- password: Mochi12&24
+INSERT INTO `admin` (`id`, `username`, `password`, `name`) VALUES
+	('1', 'BookAdmin', '$2a$10$i3OceigCfxQhu716TFndgOUMFe2BDeHZtV8gxA.y2MOMRhJ8tDIBq', 'Quản trị viên 1');
+    
+    
 --
 -- Đang đổ dữ liệu cho bảng `user`
 --

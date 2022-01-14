@@ -33,7 +33,7 @@ USE `BOOKSTORE`;
 CREATE TABLE `admin` (
   `id` int NOT NULL,
   `username` varchar(200) NOT NULL,
-  `pass` varchar(200) NOT NULL,
+  `password` varchar(200) NOT NULL,
   `name` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

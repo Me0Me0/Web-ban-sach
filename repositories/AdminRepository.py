@@ -1,4 +1,5 @@
 from peewee import *
+from playhouse.shortcuts import model_to_dict
 from models.Admin import Admin
 
 class AdminRepository():
@@ -6,7 +7,14 @@ class AdminRepository():
 
    @classmethod
    def getById(cls, id: int):
-      return list(Admin.select().where(Admin.id == id))
+      query = Admin.select().where(Admin.id == id).get()
+      return model_to_dict(query)
+
+
+   @classmethod
+   def getByName(cls, name: str):
+      query = Admin.select().where(Admin.username == name).get()
+      return model_to_dict(query)
 
    
    @classmethod
