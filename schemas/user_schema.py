@@ -1,3 +1,4 @@
+from typing import Optional
 from schemas.schema import PeeweeGetterDict
 
 from pydantic import BaseModel
@@ -35,6 +36,7 @@ class User(BaseModel):
     phone: int
     email: str
     avt_link: str
+    deleted_at: Optional[date]
     
     class Config:
         orm_mode = True

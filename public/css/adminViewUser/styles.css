@@ -114,6 +114,7 @@ body{
 .wrapper .setting_btn ul li:last-child{
   width: 195px;
   height: 45px;
+  font-size: 16px;
   background: #981919;
   border-radius: 5px;
   text-align: center;
@@ -124,7 +125,7 @@ body{
 .wrapper .setting_btn ul li a{
   color :#fff;
   display: block;
-  font-size: 18px;
+  font-size: 16px;
   text-decoration: none;
 }
 

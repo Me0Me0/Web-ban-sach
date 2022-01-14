@@ -24,12 +24,12 @@ admin_router = APIRouter(prefix="/admin")
 def signin():
     return "./views/adminSignin/signin.html"
 
-@admin_router.get('/list-users', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
+@admin_router.get('', response_class=FileResponse)
 def viewUserList():
     return "./views/listUser/index.html"
 
 
-@admin_router.get('/list-users/{id}', response_class=FileResponse, dependencies=[Depends(configs.db.get_db)])
+@admin_router.get('/users/{id}', response_class=FileResponse)
 def viewUserDetails():
     return "./views/adminViewUser/index.html"
 
