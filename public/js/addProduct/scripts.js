@@ -52,17 +52,22 @@ async function uploadImage(file) {
 async function uploadImageHandler() {    
     uploadImages.forEach((fileupload, index) => {
         fileupload.addEventListener('change', async () => {
-            const file = fileupload.files[0];
-            
-            if(file.type.includes('image')){
+            const file = fileupload.files[0];            
+            const acceptedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
+
+            if(acceptedTypes.includes(file.type)) {
                 // means user uploaded an image
+                // loading
+                labels[index].style.backgroundImage = `url(https://gocchiase.net/wp-content/uploads/2021/10/tai-anh-dang-loading-messenger-trinh-duyet-anh-dong-gif-4.gif)`;
+
                 const imageUrl = await uploadImage(file);
                 labels[index].style.backgroundImage = `url(${imageUrl})`;
-                document.getElementById("cover-image").style.backgroundImage = `url(${imageUrl})`;
-                document.getElementById("text_img").innerHTML ="";
                 imagePaths[index] = imageUrl;
+
+                document.getElementById("cover-image").style.backgroundImage = `url(${imagePaths[0]})`;
+                document.getElementById("text_img").innerHTML ="";
             } else{
-                showAlert('Chỉ upload được ảnh');
+                alert('Vui lòng tải ảnh có định dạng: png, jpg, jpeg, gif');
             }
         })
     })
@@ -77,7 +82,7 @@ async function showCategory() {
     const data = await res.json();
     
     for (const { __data__: cate} of data) {
-      const template = document.querySelector("#category-template").content;
+      const template = document.querySelector("#category-template-select").content;
       const clone = template.cloneNode(true);
   
       clone.querySelector("option").value = cate.id;
@@ -117,6 +122,15 @@ document.querySelector("#product-form").addEventListener('submit', async (e) => 
         return;
     }
 
+    // Xử lý ảnh
+    const cover_image = imagePaths[0];
+    if (!cover_image) {
+        alert("Vui lòng tải lên ảnh bìa.");
+        return;
+    }
+    const imgArr = Object.values(imagePaths);
+    const images = imgArr.slice(1);
+
     const product = {
         name: document.querySelector('#product-name').value,
         cate_id: document.querySelector('#category').value,
@@ -128,8 +142,8 @@ document.querySelector("#product-form").addEventListener('submit', async (e) => 
         publisher: document.querySelector('#publisher').value,
         quantity: document.querySelector('#quantity').value,
         price: document.querySelector('#price').value,
-        cover_image: "http://smartmobilestudio.com/wp-content/uploads/2012/06/leather-book-preview.png",
-        image_links: Object.values(imagePaths)
+        cover_image: cover_image,
+        image_links: images
     }
 
     const options = {

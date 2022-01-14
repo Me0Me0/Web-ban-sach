@@ -120,6 +120,9 @@ textarea{
   background-size: cover;
 }
 
+label[for="first-file-upload-btn"]{
+  background-image: url(https://i.imgur.com/oRQbL9x.png);
+}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button{
@@ -167,3 +170,4 @@ input::-webkit-inner-spin-button{
   border: none;
   outline: none;
 }
+
