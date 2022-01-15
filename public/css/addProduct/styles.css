@@ -32,7 +32,6 @@ textarea{
   width: 100%;
   height: 500px;
   display: grid;
-  grid-template-columns: .75fr 1.25fr;
   grid-template-rows: repeat(2, 1fr);
   grid-gap: 20px;
   margin-bottom: 20px;
@@ -103,7 +102,7 @@ textarea{
   margin: 10px 0;
   display: grid;
   grid-template-columns: repeat(7, 100px);
-  grid-gap: 10px;
+  grid-gap: 30px;
   justify-content: center;
 }
 
