@@ -429,6 +429,12 @@
   
   header .actions .menu #logged-in{
     display: none;
+    margin-left: 0px;
+  }
+
+  header .actions .menu #not-logged-in{
+    display: none;
+    margin-left: 0px;
   }
   
   /* ======= Header-Bottom ======= */
