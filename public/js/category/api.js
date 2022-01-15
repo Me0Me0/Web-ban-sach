@@ -64,7 +64,7 @@ async function showProducts() {
 
         clone.querySelector("div").id = product.id;
         clone.querySelector(".product-name").textContent = product.name;
-        clone.querySelector(".product-price").textContent = product.price;
+        clone.querySelector(".product-price").textContent = product.price + " VND";
         clone.querySelector(".product-image").src = "https://st.quantrimang.com/photos/image/2018/09/08/meo-instagram-story-14.jpg";
         clone.querySelector("#product-detail").href = '/products/' + product.id;
 
