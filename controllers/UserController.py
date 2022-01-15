@@ -21,7 +21,7 @@ class UserController:
     @router.get('/signout', dependencies=[Depends(configs.db.get_db)]) 
     def signout(response: Response):
         response.set_cookie('token', '', expires=0)
-        response.set_cookie('loggedin', '', expires=0)
+        response.set_cookie('loggedin_member', '', expires=0)
         response.headers['Location'] = '/'
         response.status_code = 307
         return response
@@ -69,7 +69,7 @@ class UserController:
             raise HTTPException(401, detail="Unauthorized")
 
         response.set_cookie(key="token", value=token, max_age=24*60*60, httponly=True)
-        response.set_cookie(key="loggedin", value="true", max_age=24*60*60, httponly=False)
+        response.set_cookie(key="loggedin_member", value="true", max_age=24*60*60, httponly=False)
         return {
             "data": {
                 "success": True

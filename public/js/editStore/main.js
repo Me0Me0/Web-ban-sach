@@ -44,7 +44,7 @@ async function onFormsubmit(e) {
       alert('Bạn chưa nhập bất kì thông tin nào cần thay đổi');
       return;
     }
-    else if (isNaN(Number(phone)) || phone.length != 10)
+    else if (phone && (isNaN(Number(phone)) || phone.length != 10))
     {
       alert('Số điện thoại không hợp lệ');
       return;
