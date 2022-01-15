@@ -223,3 +223,15 @@ def getOrderDetails(_ = Depends(redirectView("/users/signin", NOT_AUTH))):
 
 
 view.include_router(order_router)
+
+
+# help
+help_router = APIRouter(prefix="/help")
+
+
+@help_router.get('/signin&up', response_class=FileResponse)
+def get():
+    return "./views/help/signin&up/index.html"
+
+view.include_router(help_router)
+
