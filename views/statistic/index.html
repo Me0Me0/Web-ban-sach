@@ -19,9 +19,9 @@
   <div class="card">
       <div class="card-header">
           <h2>Thống kê tình hình kinh doanh của cửa hàng</h2>
-          <p>Tổng số đơn hàng: <span id="number-of-order">so luong</span></p>
+          <!-- <p>Tổng số đơn hàng: <span id="number-of-order">so luong</span></p> -->
           <p>Tổng doanh thu: <span id="turnover">doanh so</span></p>
-          <p>Thể loại sách được mua nhiều nhất: <span id="most-bought-category">the loai</span></p>
+          <p>Thể loại sách được mua nhiều nhất: <span id="most-bought-category"></span></p>
           <p>Những đầu sách bán chạy nhất:</p>
       </div>
       <div class="card-body">
@@ -33,54 +33,56 @@
               <th style="width:20%;">Đơn giá</th>
               <th style="width:20%">Số lượng đã bán</th>
             </tr>
-        </thead>
-        <tbody>         
-          <tr>
-            <td>1</td>
-            <td data-th="Product">
-              <div class="row">
-                <div class="col-sm-10">
-                  <h4 class="nomargin" id="product-name-1">Tên sản phẩm</h4>
+          </thead>
+          <tbody id="product-list">
+            <template id="product-template">
+              <tr>
+                <td class="rank">1</td>
+                <td data-th="Product">
+                  <div class="row">
+                    <div class="col-sm-10">
+                      <h4 class="nomargin product-name">Tên sản phẩm</h4>
+                    </div>
+                    <div>
+                      <a class="view-detail" href="/products/view-seller/">Chi tiết</a>
+                    </div>
+                  </div>
+                </td>
+                <td class="price">18000</td>
+                <td data-th="quantity" class="quantity">1</td>
+              </tr>
+            </template>
+            <!-- <tr>
+              <td>2</td>
+              <td data-th="Product">
+                <div class="row">
+                  <div class="col-sm-10">
+                    <h4 class="nomargin" id="product-name-2">Tên sản phẩm</h4>
+                  </div>
+                  <div>
+                    <a class="view-detail" href="/products/id" id="product-detail-2">Chi tiết</a>
+                  </div>
                 </div>
-                <div>
-                  <a class="view-detail" href="/products/id" id="product-detail-1">Chi tiết</a>
+              </td>
+              <td><span id="price-2">18000</span> VND</td>
+              <td data-th="quantity" id="quantity-2">1</td>
+            </tr> 
+            <tr>
+              <td>3</td>
+              <td data-th="Product">
+                <div class="row">
+                  <div class="col-sm-10">
+                    <h4 class="nomargin" id="product-name-3">Tên sản phẩm</h4>
+                  </div>
+                  <div>
+                    <a class="view-detail" href="/products/id" id="product-detail-3">Chi tiết</a>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td><span id="price-1">18000</span> VND</td>
-            <td data-th="quantity" id="quantity-1">1</td>
-          </tr>  
-          <tr>
-            <td>2</td>
-            <td data-th="Product">
-              <div class="row">
-                <div class="col-sm-10">
-                  <h4 class="nomargin" id="product-name-2">Tên sản phẩm</h4>
-                </div>
-                <div>
-                  <a class="view-detail" href="/products/id" id="product-detail-2">Chi tiết</a>
-                </div>
-              </div>
-            </td>
-            <td><span id="price-2">18000</span> VND</td>
-            <td data-th="quantity" id="quantity-2">1</td>
-          </tr> 
-          <tr>
-            <td>3</td>
-            <td data-th="Product">
-              <div class="row">
-                <div class="col-sm-10">
-                  <h4 class="nomargin" id="product-name-3">Tên sản phẩm</h4>
-                </div>
-                <div>
-                  <a class="view-detail" href="/products/id" id="product-detail-3">Chi tiết</a>
-                </div>
-              </div>
-            </td>
-            <td><span id="price-3">18000</span> VND</td>
-            <td data-th="quantity" id="quantity-3">1</td>
-          </tr>                      
-        </tbody>
+              </td>
+              <td><span id="price-3">18000</span> VND</td>
+              <td data-th="quantity" id="quantity-3">1</td>
+            </tr>-->
+          </tbody>
       </table>
       <hr>
       <div class="buttons">

@@ -123,7 +123,7 @@ class UserController:
     @router.post('/forgot-password')
     def forgetPassword(payload: user_schema.forgetPassword):
         try:
-            user_email,user_name,token = UserService.forgetPassword(payload)
+            user_email, user_name, token = UserService.forgetPassword(payload)
         except Exception as e:
             if e.args[0] == NOT_FOUND_ERROR:
                 raise HTTPException(404, detail=e.args[1])

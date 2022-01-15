@@ -76,8 +76,8 @@ async function showProducts() {
 
         clone.querySelector("div").id = product.id;
         clone.querySelector(".product-name").textContent = product.name;
-        clone.querySelector(".product-price").textContent = product.price;
         clone.querySelector(".product-image").src = product.cover_image;
+        clone.querySelector(".product-price").textContent = product.price + " VND";
         clone.querySelector("#product-detail").href = '/products/' + product.id;
 
         document.querySelector("#product-list").appendChild(clone);

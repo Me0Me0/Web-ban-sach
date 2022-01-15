@@ -53,7 +53,8 @@ button {
   position: relative;
   width: 100%;
   min-width: 320px;
-  min-height: 1000px;
+  min-height: 850px;
+  height: 100%;
   padding: 0;
   margin: 0 !important;
   background: #aadfff;
@@ -277,7 +278,7 @@ button {
 .block_name__mainName {
   padding: 0;
   font-size: 29px;
-  margin-bottom: 14px;
+  margin-bottom: 50px;
 }
 .block_name__addName {
   margin: 0;
@@ -288,9 +289,10 @@ button {
 .block_product {
   position: relative;
   width: 100%;
+  height: 100%;
 }
 .block_product__advantagesProduct {
-  width: 271px;
+  width: 100%;
   height: 17px;
   margin-top: 0px;
   color: #646b6f;
@@ -439,7 +441,7 @@ input[type=checkbox] + label, input[type=radio] + label {
 }
 
 .block_price {
-  margin-top: 29px;
+  margin-top: 50%;
   width: 100%;
 }
 .block_price__currency {
@@ -447,7 +449,7 @@ input[type=checkbox] + label, input[type=radio] + label {
   margin: 0;
   vertical-align: top;
   color: #f1425d;
-  font-size: 26px;
+  font-size: 21px;
   font-weight: 600;
 }
 .block_price__shipping {
@@ -580,7 +582,7 @@ input[type=checkbox] + label, input[type=radio] + label {
 .button.button_addToCard {
   width: 200px;
   height: 46px;
-  margin-top: 117px;
+  margin-top: 90%;
   margin-bottom: 0;
   padding: 0;
   color: #fff;
@@ -597,7 +599,7 @@ input[type=checkbox] + label, input[type=radio] + label {
 .button.button_delCard {
   width: 200px;
   height: 46px;
-  margin-top: 47px;
+  margin-top: 23%;
   margin-bottom: 0;
   padding: 0;
   color: #fff;
@@ -637,6 +639,14 @@ input[type=number] {
 
 .details {
   margin-left: 70px;
+}
+
+.details h4{
+  padding-left: 20px;
+}
+
+.details p {
+  padding: 0 30px 0 30px;
 }
 
 .back {

@@ -81,15 +81,15 @@ class UserService:
         # check username existence
         user = UserRepository.getByUsername(payload.username)
         if not user:
-            return None
+            raise Exception(404, "not found")
 
         # generate jwt token
         jwtPayload = {
             "id": user.id,
-            "exp": int(datetime.now().timestamp()) + 60
+            "exp": int(datetime.now().timestamp()) + 300
         }
         token = jwt.encode(jwtPayload, JWT_SECRET)
-        return [user.email,user.name,token]
+        return user.email, user.name, token
 
 
     @classmethod
