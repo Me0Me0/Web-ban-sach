@@ -24,14 +24,20 @@ admin_router = APIRouter(prefix="/admin")
 def signin():
     return "./views/adminSignin/signin.html"
 
-@admin_router.get('', response_class=FileResponse)
-def viewUserList():
+
+@admin_router.get('/users', response_class=FileResponse)
+def viewUserList(_ = Depends(redirectView("/admin/signin", NOT_AUTH, 'admin'))):
     return "./views/listUser/index.html"
 
 
 @admin_router.get('/users/{id}', response_class=FileResponse)
-def viewUserDetails():
+def viewUserDetails(_ = Depends(redirectView("/admin/signin", NOT_AUTH, 'admin'))):
     return "./views/adminViewUser/index.html"
+
+
+@admin_router.get('', response_class=FileResponse)
+def viewUserList(_ = Depends(redirectView("/admin/signin", NOT_AUTH, 'admin'))):
+    return "./views/adminPage/index.html"
 
 
 view.include_router(admin_router)

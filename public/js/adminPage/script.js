@@ -1,0 +1,1 @@
+document.querySelector("#admin-username").textContent = localStorage.getItem("user");

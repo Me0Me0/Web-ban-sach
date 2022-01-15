@@ -1,3 +1,4 @@
+document.querySelector("#admin-username").textContent = localStorage.getItem("user");
 const pageItems = document.querySelectorAll(".page-item");
 const pagePrev = document.querySelector(".page-prev");
 const pageNext = document.querySelector(".page-next");

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link href="/public/css/adminPage/style.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <header>
+            <nav>
+                <img id="nav-logo" src="/public/images/homepage/logo/logo2.png">
+                <div id="nav-admin">
+                    <span id="admin-username"></span>
+                    <a href="/api/admin/signout"><button id="admin-logout">Đăng xuất</button></a>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div id="container">
+            <h1 id="title">Chức năng</h1>
+            <div class="feature">
+                <a href="/admin/users" class="feature-card">
+                    <img class="feature-logo" src="/public/images/adminPage/user-feature.svg"/>
+                    <p class="feature-name">Quản lý người dùng</p>
+                </a>
+            </div>
+            </div>
+        </main>
+        
+        <script src="/public/js/adminPage/script.js"></script>
+    </body>
+</html>
