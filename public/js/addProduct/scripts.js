@@ -64,8 +64,6 @@ async function uploadImageHandler() {
                 labels[index].style.backgroundImage = `url(${imageUrl})`;
                 imagePaths[index] = imageUrl;
 
-                document.getElementById("cover-image").style.backgroundImage = `url(${imagePaths[0]})`;
-                document.getElementById("text_img").innerHTML ="";
             } else{
                 alert('Vui lòng tải ảnh có định dạng: png, jpg, jpeg, gif');
             }
