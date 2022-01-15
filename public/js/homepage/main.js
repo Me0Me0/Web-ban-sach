@@ -6,7 +6,7 @@ window.addEventListener("load", function () {
 
 $(document).ready(function () {
   // ======= Check login ======= //
-  if (document.cookie.indexOf("loggedin=true") > -1) {
+  if (document.cookie.indexOf("loggedin_member=true") > -1) {
     $("header .actions .menu #logged-in").show()
     $("header .actions .menu #not-logged-in").hide()
   } else {

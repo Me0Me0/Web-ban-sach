@@ -62,7 +62,7 @@ async function onFormsubmit(e) {
     var phone = inputPhonenumber.value;
     var avt_link = avt.src; 
 
-    if (name == '' && dob == oldDob && email == '' && phone == '' && avt_link == '' && avt_link == oldAvt) {
+    if (name == '' && dob == oldDob && email == '' && phone == '' && avt_link == oldAvt) {
       alert('Bạn chưa nhập bất kì thông tin nào cần thay đổi');
       return;
     }

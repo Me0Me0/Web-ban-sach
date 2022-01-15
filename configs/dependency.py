@@ -26,14 +26,14 @@ def getAdmin(req: Request):
 
 NOT_AUTH = 1
 AUTH = 2
-def redirectView(path, when):
+def redirectView(path, when, role='member'):
     def anonymous(req: Request, res: Response):
         try:
             currentUser = jwt.decode(req.cookies.get('token', ''), getEnv().JWT_SECRET, algorithms=['HS256'])
         except:
             currentUser = None
 
-        if (when == NOT_AUTH and currentUser is None) or (when == AUTH and currentUser is not None):
+        if (when == NOT_AUTH and (currentUser is None or currentUser['role'] != role)) or (when == AUTH and currentUser is not None and currentUser['role'] == role):
             res.headers['Location'] = path
             res.status_code = 307
             return res

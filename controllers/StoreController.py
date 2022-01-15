@@ -296,7 +296,7 @@ class StoreController:
 
         return {
             "data":{
-                "total-income": totalIncome
+                "total_income": totalIncome
             }
         }
 
