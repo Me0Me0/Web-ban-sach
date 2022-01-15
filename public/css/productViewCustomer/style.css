@@ -224,7 +224,7 @@ button {
   position: relative;
   padding-top: 34px;
   padding-left: 27px;
-  padding-right: 40px;
+  padding-right: 27px;
   width: 100%;
   min-height: 600px;
 }
@@ -293,7 +293,7 @@ button {
   width: 100%;
 }
 .block_product__advantagesProduct {
-  width: 271px;
+  width: 100%;
   height: 17px;
   margin-top: 0px;
   color: #646b6f;
@@ -450,7 +450,7 @@ input[type=checkbox] + label, input[type=radio] + label {
   margin: 0;
   vertical-align: top;
   color: #f1425d;
-  font-size: 23px;
+  font-size: 21px;
   font-weight: 600;
 }
 .block_price__shipping {
@@ -508,7 +508,7 @@ input[type=checkbox] + label, input[type=radio] + label {
 .block_quantity {
   position: relative;
   height: 46px;
-  margin-top: 20%;
+  margin-top: 23%;
 }
 .block_quantity span {
   display: inline-block;
