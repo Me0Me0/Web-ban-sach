@@ -133,7 +133,7 @@ document.querySelector("#product-form").addEventListener('submit', async (e) => 
         name: document.querySelector('#product-name').value,
         cate_id: document.querySelector('#category').value,
         description: document.querySelector('#description').value,
-        detail: document.querySelector('#detail').value,
+        detail: document.querySelector('#detail').value.replace(/\n/g, '<br>'),
         author: document.querySelector('#author').value,
         number_of_pages: document.querySelector('#page-number').value,
         publishing_year: document.querySelector('#publishing-year').value,
