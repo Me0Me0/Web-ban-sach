@@ -110,19 +110,11 @@ class StoreController:
     @staticmethod
     @router2.put('/products/{product_id}', dependencies=[Depends(configs.db.get_db)])
     def updateProduct(product_id: int, payload: product_schema.ProductUpdate, user = Depends(getUser)):
-        # Store id
         try:
-            store = StoreService.getOwnStore(user['id'])
+            ProductService.update(user['id'], product_id, payload)
         except Exception as e:
-            if e.args[0] == NOT_FOUND_ERROR:
-                raise HTTPException(status_code=404, detail=e.args[1])
-            raise Exception(e)
-
-        try:
-            ProductService.update(store['id'], product_id, payload)
-        except Exception as e:
-            if e.args[0] == FORBIDDEN_ERROR:
-                raise HTTPException(status_code=403, detail=e.args[1])
+            if e.args[0] == FORBIDDEN_ERROR or e.args[0] == NOT_FOUND_ERROR:
+                raise HTTPException(status_code=e.args[0], detail=e.args[1])
             raise Exception(e) 
         
         return {
@@ -135,16 +127,8 @@ class StoreController:
     @staticmethod
     @router2.put('/products/{product_id}/cover-images', dependencies=[Depends(configs.db.get_db)])
     def updateProductCoverImage(product_id: int, payload: product_schema.ProductUpdateCoverImage, user = Depends(getUser)):
-        # Store id
         try:
-            store = StoreService.getOwnStore(user['id'])
-        except Exception as e:
-            if e.args[0] == 404:
-                raise HTTPException(status_code=404, detail=e.args[1])
-            raise Exception(e)
-
-        try:
-            ProductService.updateCoverImage(store['id'], product_id, payload.image_link)
+            ProductService.updateCoverImage(user['id'], product_id, payload.image_link)
         except Exception as e:
             if e.args[0] == FORBIDDEN_ERROR or e.args[0] == NOT_FOUND_ERROR:
                 raise HTTPException(status_code=e.args[0], detail=e.args[1])
@@ -160,16 +144,8 @@ class StoreController:
     @staticmethod
     @router2.put('/products/{product_id}/images', dependencies=[Depends(configs.db.get_db)])
     def updateProductImage(product_id: int, payload: product_schema.ProductUpdateImages, user = Depends(getUser)):
-        # Store id
         try:
-            store = StoreService.getOwnStore(user['id'])
-        except Exception as e:
-            if e.args[0] == 404:
-                raise HTTPException(status_code=404, detail=e.args[1])
-            raise Exception(e)
-
-        try:
-            ProductService.updateImage(store['id'], product_id, payload.list_image_link)
+            ProductService.updateImage(user['id'], product_id, payload.list_image_link)
         except Exception as e:
             if e.args[0] == FORBIDDEN_ERROR:
                 raise HTTPException(status_code=403, detail=e.args[1])
