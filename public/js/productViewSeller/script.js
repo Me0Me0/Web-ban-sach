@@ -133,6 +133,33 @@ async function check_valid_user(store_id, product_id) {
     window.location.href = `/products/${product_id}`;
 }
 
+function show_product_image(cover_image, product_images) {
+    const template = document.querySelector("#product-image-template");
+
+    let i = 1;
+    if (cover_image != '') {
+        const clone = template.content.cloneNode(true);
+
+        clone.querySelector(".product-image").id += i;
+        clone.querySelector(".product-image").src = cover_image;
+        clone.querySelector(".product-image").style.display = "none";
+        document.querySelector("#product-images").appendChild(clone);
+        i += 1;
+    }
+
+    for (const { __data__: image } of product_images) {
+        const clone = template.content.cloneNode(true);
+
+        clone.querySelector("li").id = image.id;
+        clone.querySelector(".product-image").id += i;
+        clone.querySelector(".product-image").src = image.image_link;
+        clone.querySelector(".product-image").style.display = "none";
+        document.querySelector("#product-images").appendChild(clone);
+        i += 1;
+    }
+    return i - 1;
+}
+
 async function show_product(id) {
     const options = {
         method: "GET",
@@ -154,7 +181,8 @@ async function show_product(id) {
         return;
     }
     check_valid_user(data.store_id.id, data.id);
-    console.log(data);
+    //console.log(data);
+    var number_of_image = show_product_image(data.cover_image, data.product_images);
     document.getElementById("product-name").innerHTML = data.name;
     document.getElementById("category-name").innerHTML = data.cate_id.name;
     document.getElementById("author").innerHTML = data.author;
@@ -167,6 +195,7 @@ async function show_product(id) {
     document.getElementById("details").innerHTML = data.detail;
     document.getElementById("edit-product").setAttribute("onclick", `window.location.href = '/products/edit-product/${id}'`);
     document.getElementById("delete-product").setAttribute("onclick", `delete_product(${id})`);
+    return number_of_image;
 }
 
 async function delete_product(id) {
@@ -184,7 +213,7 @@ async function delete_product(id) {
   
     const res = await fetch(`/api/products/${id}`, options);
     const data = await res.json();
-    console.log(res);
+    //console.log(res);
     if (res.status != 200) {
         if (res.status == 404) {
             alert("Xóa sản phẩm thất bại");
@@ -202,4 +231,37 @@ async function delete_product(id) {
     window.location.href = '/mystore';
 }
 
-show_product(id);
+var number_of_image = show_product(id)
+.then(number_of_image => {
+    if (number_of_image != 0) {
+        document.getElementById("image-1").style.display = "unset";
+        document.getElementById("image-1").setAttribute("class", "show");
+    }
+})
+
+function showPreviousImage() {
+    current_image = document.querySelector(".show");
+    displayed_image_id = Number(current_image.id.substring(current_image.id.lastIndexOf('-') + ('-').length)) - 1;
+    if (displayed_image_id < 1)
+    {
+        return;
+    }
+    current_image.setAttribute("class", "hide");
+    current_image.style.display = "none";
+    document.getElementById(`image-${displayed_image_id}`).style.display = "unset";
+    document.getElementById(`image-${displayed_image_id}`).setAttribute("class", "show");
+}
+function showNextImage() {
+    number_of_image = document.querySelectorAll("#product-images img").length;
+    console.log(number_of_image);
+    current_image = document.querySelector(".show");
+    displayed_image_id = Number(current_image.id.substring(current_image.id.lastIndexOf('-') + ('-').length)) + 1;
+    if (displayed_image_id > number_of_image)
+    {
+        return;
+    }
+    current_image.setAttribute("class", "hide");
+    current_image.style.display = "none";
+    document.getElementById(`image-${displayed_image_id}`).style.display = "unset";
+    document.getElementById(`image-${displayed_image_id}`).setAttribute("class", "show");
+}

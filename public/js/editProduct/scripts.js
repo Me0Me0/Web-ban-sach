@@ -1,4 +1,5 @@
 const productID = location.pathname.split('/')[3];
+document.getElementById("back-btn").setAttribute("onclick", `window.location.href = '/products/view-seller/${productID}'`);
 // buttons
 const addProductBtn = document.querySelector('#add-btn');
 const backBtn = document.querySelector('#back');

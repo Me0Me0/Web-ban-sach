@@ -189,11 +189,13 @@
                                 <div class="productCard_leftSide clearfix">
 
                                     <div class="sliderBlock">
-                                        <ul class="sliderBlock_items">
-                                            <li class="sliderBlock_items__itemPhoto sliderBlock_items__showing">
-                                                <img src="https://github.com/BlackStar1991/CardProduct/blob/master/app/img/goods/item1/phones1.png?raw=true" alt="product-image" id="image-1">
-                                            </li>
-                                            <li class="sliderBlock_items__itemPhoto">
+                                        <ul class="sliderBlock_items" id="product-images">
+                                            <template id="product-image-template">
+                                                <li class="sliderBlock_items__itemPhoto sliderBlock_items__showing">
+                                                    <img src="https://github.com/BlackStar1991/CardProduct/blob/master/app/img/goods/item1/phones1.png?raw=true" alt="product-image" class="product-image" id="image-">
+                                                </li>
+                                            </template>
+                                            <!-- <li class="sliderBlock_items__itemPhoto">
                                                 <img src="https://github.com/BlackStar1991/CardProduct/blob/master/app/img/goods/item1/phones2.png?raw=true"  alt="product-image" id="image-2">
                                             </li>
                                             <li class="sliderBlock_items__itemPhoto">
@@ -204,17 +206,17 @@
                                             </li>
                                             <li class="sliderBlock_items__itemPhoto">
                                                 <img src="https://github.com/BlackStar1991/CardProduct/blob/master/app/img/goods/item1/phones5.png?raw=true"  alt="product-image" id="image-5">
-                                            </li>
+                                            </li> -->
                                         </ul>
 
                                         
                                         <div class="sliderBlock_controls">
                                             <div class="sliderBlock_controls__navigatin">
                                                 <div class="sliderBlock_controls__wrapper">
-                                                    <div class="sliderBlock_controls__arrow sliderBlock_controls__arrowBackward" id="prev-image">
+                                                    <div class="sliderBlock_controls__arrow sliderBlock_controls__arrowBackward" id="prev-image" onclick="showPreviousImage()">
                                                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                                                     </div>
-                                                    <div class="sliderBlock_controls__arrow sliderBlock_controls__arrowForward" id="next-image">
+                                                    <div class="sliderBlock_controls__arrow sliderBlock_controls__arrowForward" id="next-image" onclick="showNextImage()">
                                                         <i class="fa fa-angle-right" aria-hidden="true"></i>
                                                     </div>
                                                 </div>
