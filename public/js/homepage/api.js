@@ -58,7 +58,7 @@ async function showNewProduct() {
 
         clone.querySelector(".item").dataset.id = item.id;
         clone.querySelector(".item-img > img").src = item.cover_image;
-        clone.querySelector(".price > p").textContent = item.price;
+        clone.querySelector(".price > p").textContent = item.price + " VND";
         clone.querySelector(".title > a").textContent = item.name;
         clone.querySelector(".detail").href = `/products/${item.id}`;
         clone.querySelector(".title > a").href = `/products/${item.id}`;
@@ -84,7 +84,7 @@ async function showBestSeller() {
 
         clone.querySelector(".item").dataset.id = item.id;
         clone.querySelector(".item-img > img").src = item.cover_image;
-        clone.querySelector(".price > p").textContent = item.price;
+        clone.querySelector(".price > p").textContent = item.price + " VND";
         clone.querySelector(".title > a").textContent = item.name;
         clone.querySelector(".detail").href = `/products/${item.id}`;
         clone.querySelector(".title > a").href = `/products/${item.id}`;
