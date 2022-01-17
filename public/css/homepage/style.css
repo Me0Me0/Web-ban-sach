@@ -978,14 +978,17 @@ header .actions .menu #logged-in{
   width: 90px;
 }
 
-#best-seller .title a {
+#best-seller .title{
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#best-seller .title a{
   color: #193498;
   font-size: 18px;
   transition: all 0.3s ease;
   font-weight: 600;
-  overflow: hidden; 
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 #best-seller .title a:hover {
@@ -994,12 +997,14 @@ header .actions .menu #logged-in{
 
 #best-seller .price {
   padding: 5px 0 20px;
+  text-align: center;
 }
 
 #best-seller .price p,
 span {
   font-weight: 600;
   font-size: 16px;
+  text-align: center;
 }
 
 #best-seller .price p {
