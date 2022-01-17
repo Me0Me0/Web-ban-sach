@@ -147,6 +147,7 @@ h4, .h4 {
 
 h5, .h5 {
   font-size: 1.25rem;
+  height: 21px;
 }
 
 h6, .h6 {
@@ -7641,6 +7642,12 @@ textarea.form-control-lg {
 
 .fw-bolder {
   font-weight: bolder !important;
+}
+
+.fw-bolder.product-name{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .lh-1 {

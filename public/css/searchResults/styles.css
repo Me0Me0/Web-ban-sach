@@ -7643,6 +7643,12 @@ textarea.form-control-lg {
   font-weight: bolder !important;
 }
 
+.fw-bolder.product-name{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .lh-1 {
   line-height: 1 !important;
 }
