@@ -48,7 +48,7 @@ class ProductController:
     @staticmethod
     @router.get('/newest', dependencies=[Depends(configs.db.get_db)])
     def getProductNew(limit:int = Query(10, gt=0), skip:int = Query(0, ge=0)):
-        return ProductService.getProductNew(True, skip, limit)
+        return ProductService.getProductNew(False, skip, limit)
 
 
     # DS san pham ban chay nhat
