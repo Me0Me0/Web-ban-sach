@@ -22,7 +22,7 @@ class AdminController:
         if not token:
             raise HTTPException(401, detail="Unauthorized")
 
-        response.set_cookie(key="token", value=token, max_age=24*60*60, httponly=True)
+        response.set_cookie(key="token_admin", value=token, max_age=24*60*60, httponly=True)
         response.set_cookie(key="loggedin_admin", value="true", max_age=24*60*60, httponly=False)
         return {
             "data": {
@@ -34,7 +34,7 @@ class AdminController:
     @staticmethod
     @router.get('/signout', dependencies=[Depends(configs.db.get_db)]) 
     def signout(response: Response, _ = Depends(getAdmin)):
-        response.set_cookie('token', '', expires=0)
+        response.set_cookie('token_admin', '', expires=0)
         response.set_cookie('loggedin_admin', '', expires=0)
         response.headers['Location'] = '/admin/signin'
         response.status_code = 307

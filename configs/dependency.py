@@ -16,7 +16,7 @@ def getUser(req: Request):
 
 def getAdmin(req: Request):
     try:
-        currentUser = jwt.decode(req.cookies.get('token', ''), getEnv().JWT_SECRET, algorithms=['HS256'])
+        currentUser = jwt.decode(req.cookies.get('token_admin', ''), getEnv().JWT_SECRET, algorithms=['HS256'])
         if currentUser['role'] != 'admin':
             raise Exception()
     except:
@@ -29,7 +29,11 @@ AUTH = 2
 def redirectView(path, when, role='member'):
     def anonymous(req: Request, res: Response):
         try:
-            currentUser = jwt.decode(req.cookies.get('token', ''), getEnv().JWT_SECRET, algorithms=['HS256'])
+            if role == 'member':
+                cookie = req.cookies.get('token', '')
+            else:
+                cookie = req.cookies.get('token_admin', '')
+            currentUser = jwt.decode(cookie, getEnv().JWT_SECRET, algorithms=['HS256'])
         except:
             currentUser = None
 
