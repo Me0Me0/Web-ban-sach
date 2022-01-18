@@ -29,29 +29,29 @@ class Product(BaseModel):
 
 
 class ProductCreate(BaseModel):
-    name: str
+    name: str = Field(..., max_length=75)
     cate_id: int
-    description: str
+    description: str = Field(..., max_length=30)
     detail: str
-    author: str
+    author: str = Field(..., max_length=30)
     number_of_pages: int
     publishing_year: int
     image_links: List[str]
     cover_image: str
-    publisher: str
+    publisher: str = Field(..., max_length=30)
     quantity: int
     price: float
 
 
 class ProductUpdate(BaseModel):
-    name: str
+    name: str = Field(..., max_length=75)
     cate_id: int
-    description: str
+    description: str = Field(..., max_length=30)
     detail: str
-    author: str
+    author: str = Field(..., max_length=30)
     number_of_pages: int
     publishing_year: int
-    publisher: str
+    publisher: str = Field(..., max_length=30)
     cover_image: str
     quantity: int
     price: float

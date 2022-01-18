@@ -279,6 +279,7 @@ button {
   padding: 0;
   font-size: 29px;
   margin-bottom: 50px;
+  overflow-wrap: break-word;
 }
 .block_name__addName {
   margin: 0;
