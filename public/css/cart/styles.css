@@ -101,8 +101,6 @@ input[type=tel] {
 }
 
 
-
-
 label {
   margin-bottom: 10px;
   display: block;
@@ -213,4 +211,13 @@ table#cart tbody td:before {
 
 .col-sm-8 {
   width: 60% !important;
+}
+
+.product-image > img{
+  width: 70px;
+  height: 75px;
+}
+
+h4 {
+  max-width: 500px;
 }

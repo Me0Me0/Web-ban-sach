@@ -25,6 +25,7 @@ class CartProductRepository():
          Product.id.alias('product_id'),
          Product.name, 
          Product.price, 
+         Product.cover_image,
          Product.quantity.alias('product_quantity'),
          Store.id.alias('store_id'),
          Store.name.alias('store_name'), 

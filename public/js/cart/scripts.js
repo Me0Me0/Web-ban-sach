@@ -37,6 +37,7 @@ async function showCartItems() {
         clone.querySelector('.quantity').dataset.prev = item.quantity;
         clone.querySelector('.quantity').max = item.product_quantity;
         clone.querySelector('.subtotal').textContent = item.price * item.quantity;
+        clone.querySelector('.product-image > img').src = item.cover_image;
         document.querySelector('#cart-items').appendChild(clone);
     }
 
